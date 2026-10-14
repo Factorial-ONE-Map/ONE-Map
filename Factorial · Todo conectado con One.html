@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Factorial · Todo conectado con One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#FF355E; --red-dark:#C60F35; --tangerine:#FF9153; --midnight:#25253D;
+  --bg:#FFFFFF; --bg-alt:#F6F6F8; --ink:#25253D; --ink-2:#6C6C7D; --ink-3:#AEAEB8;
+  --line:#E6E6EC; --accent-weak:#FFE3EA; --panel:#FFFFFF; --bubble:#F6F6F8;
+  --font:'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1B2C; --bg-alt:#23233A; --ink:#F1F1F5; --ink-2:#B4B4C3; --ink-3:#7C7C90;
+    --line:#34344C; --accent-weak:#3A2030; --panel:#20203A; --bubble:#2B2B45; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1B2C; --bg-alt:#23233A; --ink:#F1F1F5; --ink-2:#B4B4C3; --ink-3:#7C7C90;
+  --line:#34344C; --accent-weak:#3A2030; --panel:#20203A; --bubble:#2B2B45; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:2px}
+.light :focus-visible, .panel :focus-visible, section :focus-visible{outline-color:rgba(255,53,94,.55)}
+
+/* ---------- HERO / MAP ---------- */
+.hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;
+  background:
+    radial-gradient(60% 55% at 12% 0%, rgba(255,193,85,.55) 0%, rgba(255,193,85,0) 70%),
+    radial-gradient(50% 60% at 100% 100%, rgba(150,70,170,.35) 0%, rgba(150,70,170,0) 70%),
+    linear-gradient(135deg, var(--tangerine) 0%, var(--red) 42%, var(--red-dark) 100%);
+}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 0px;transition:grid-template-columns .25s var(--ease);min-height:100vh}
+.hero.open .hero-inner{grid-template-columns:minmax(0,1fr) min(440px,40vw)}
+.mapcol{display:flex;flex-direction:column;padding:28px clamp(20px,4vw,56px) 28px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.top small{font-size:13px;font-weight:400;opacity:.9}
+.logo{height:20px;width:auto;color:#fff;opacity:.9}
+h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spacing:-0.04em;margin:14px 0 10px}
+.sub{max-width:62ch;font-size:clamp(15px,1.2vw,17px);opacity:.92;margin:0 0 4px}
+.hint{font-size:14px;opacity:.85;margin:0}
+
+.stage{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(10px,2vw,40px);padding:18px 0 4px;min-height:540px}
+.stage svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.wires path{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.3;transition:opacity .2s var(--ease)}
+.wires .flow{stroke:#fff;stroke-width:2;opacity:1}
+.stage.focus .wires .base{opacity:.22}
+.col{display:flex;flex-direction:column;gap:clamp(12px,2.4vh,30px);position:relative;z-index:1}
+.group{display:flex;align-items:center;gap:clamp(14px,2.2vw,40px)}
+.col.left .group{justify-content:flex-end}
+.col.right .group{flex-direction:row-reverse;justify-content:flex-end}
+.mods{display:flex;flex-direction:column;gap:5px}
+.col.left .mods{align-items:flex-end}
+.col.right .mods{align-items:flex-start}
+
+.pill{appearance:none;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:3px 11px 3px 9px;font-size:clamp(12px,.92vw,13.5px);line-height:1.3;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease),border-color .2s var(--ease)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75;flex:none}
+.pill:hover{background:rgba(255,255,255,.22)}
+.pill.special{border-width:1.5px}
+.hubbtn{appearance:none;border:0;background:#fff;color:var(--midnight);border-radius:999px;padding:7px 16px 7px 8px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:9px;cursor:pointer;box-shadow:0 8px 24px rgba(120,10,40,.18);white-space:nowrap;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.hubbtn .ic{width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
+.hubbtn .ic svg{width:14px;height:14px}
+.stage.focus .pill:not(.active):not(.linked){opacity:.38}
+.stage.focus .hubbtn:not(.active):not(.linked){opacity:.55}
+.pill.linked{background:#fff;color:var(--red-dark);border-color:#fff;opacity:1}
+.pill.active{background:var(--midnight);color:#fff;border-color:var(--midnight)}
+.hubbtn.active{background:var(--midnight);color:#fff}
+
+.core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
+.onebtn{appearance:none;border:0;cursor:pointer;width:clamp(120px,12vw,168px);aspect-ratio:1;border-radius:50%;padding:0;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.28) 0 54%, rgba(255,255,255,.12) 55% 70%, rgba(255,255,255,.06) 71%);transition:transform .2s var(--ease)}
+.onebtn .disc{width:62%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(120,10,40,.25)}
+.onebtn .disc svg{width:58%;height:auto;color:var(--red)}
+.onebtn:hover{transform:scale(1.03)}
+.onebtn.active .disc{background:var(--midnight)}
+.onebtn.active .disc svg{color:#fff}
+.core span{font-size:14px;font-weight:500}
+
+@media (prefers-reduced-motion: no-preference){
+  .wires .flow{stroke-dasharray:6 6;animation:flow 1.2s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-24}}
+  .onebtn .disc{animation:pulse 3.2s var(--ease) infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(120,10,40,.25),0 0 0 0 rgba(255,255,255,.35)}50%{box-shadow:0 10px 30px rgba(120,10,40,.25),0 0 0 14px rgba(255,255,255,0)}}
+}
+
+/* ---------- PANEL ---------- */
+.panel{position:relative;background:var(--panel);color:var(--ink);overflow:hidden;min-width:0}
+.panel-in{position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 28px 40px;width:min(440px,40vw)}
+.panel[hidden]{display:block}
+.hero:not(.open) .panel-in{visibility:hidden}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.p-cat{font-size:13px;color:var(--ink-2);margin:0 0 6px}
+.p-cat b{color:var(--red);font-weight:500}
+.panel h2{font-size:30px;font-weight:500;letter-spacing:-0.035em;line-height:1.02;margin:0}
+.close{appearance:none;border:1px solid var(--line);background:transparent;width:36px;height:36px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
+.close:hover{background:var(--bg-alt)}
+.lead{font-size:17px;line-height:1.4;margin:14px 0 22px;color:var(--ink)}
+.panel h3{font-size:13px;font-weight:500;color:var(--ink-2);margin:26px 0 10px;letter-spacing:0}
+.vals{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.vals li{position:relative;padding-left:20px;font-size:15px;line-height:1.42}
+.vals li::before{content:"";position:absolute;left:0;top:.48em;width:9px;height:9px;border-radius:50%;border:2px solid var(--red)}
+.tag{display:inline-block;margin-top:12px;font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-weak);color:var(--red-dark)}
+:root[data-theme="dark"] .tag{color:#FF8FA6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag{color:#FF8FA6}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.stat{border-top:2px solid var(--red);padding-top:8px}
+.stat b{display:block;font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
+.stat span{font-size:13px;color:var(--ink-2);line-height:1.35;display:block;margin-top:4px}
+
+.chat{display:grid;gap:8px;margin-bottom:12px}
+.msg{max-width:92%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.4}
+.msg.u{justify-self:end;background:var(--midnight);color:#fff;border-bottom-right-radius:4px}
+:root[data-theme="dark"] .msg.u{background:#3A3A5C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .msg.u{background:#3A3A5C}}
+.msg.o{justify-self:start;background:var(--bubble);border-bottom-left-radius:4px}
+.msg.o .who{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--red);margin-bottom:3px}
+.msg.o .who svg{width:13px;height:13px}
+.note{font-size:14.5px;line-height:1.45;background:var(--bubble);border-radius:12px;padding:12px 14px;margin:0}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{appearance:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 11px;font-size:13.5px;cursor:pointer;transition:background .15s var(--ease),border-color .15s var(--ease)}
+.chip:hover{background:var(--accent-weak);border-color:var(--red)}
+.why{font-size:14.5px;color:var(--ink-2);margin:10px 0 0}
+.soon{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.soon li{font-size:14px;padding-left:14px;border-left:2px solid var(--ink-3);color:var(--ink)}
+.disc-note{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+
+/* analytics bits */
+.dash{display:grid;gap:12px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px 10px}
+.card .ct{font-size:14px;font-weight:500;margin:0 0 2px}
+.card .cs{font-size:12px;color:var(--ink-2);margin:0 0 8px}
+.card svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:12px;font-size:11.5px;color:var(--ink-2);margin-top:4px}
+.legend i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.rt{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.rt li{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
+.rt li:first-child{border-top:0}
+.rt .when{color:var(--red);font-weight:500;font-size:13px}
+.rt .src{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
+
+/* ---------- SECTIONS ---------- */
+section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;margin:0 auto}
+section + section{padding-top:0}
+section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.98;letter-spacing:-0.04em;margin:0 0 14px;max-width:18ch}
+section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.story{background:var(--bg-alt);border-radius:20px;padding:22px}
+.story h3{font-size:20px;font-weight:500;letter-spacing:-0.02em;margin:0 0 4px}
+.story p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px}
+.chain{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.chain li{position:relative;padding:0 0 12px 30px;counter-increment:s}
+.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:500}
+.chain li::after{content:"";position:absolute;left:9.5px;top:24px;bottom:2px;width:1px;background:var(--ink-3)}
+.chain li:last-child{padding-bottom:0}
+.chain li:last-child::after{display:none}
+.chain small{display:block;font-size:13px;color:var(--ink-2);line-height:1.35;margin-top:2px}
+.chain button{appearance:none;border:0;background:none;padding:0;font-size:15px;cursor:pointer;text-align:left;color:var(--ink);border-bottom:1px solid transparent}
+.chain button:hover{border-bottom-color:var(--red)}
+
+.cmp{width:100%;border-collapse:collapse;font-size:15px}
+.cmpwrap{overflow-x:auto}
+.cmp th,.cmp td{text-align:left;padding:14px 16px;border-top:1px solid var(--line);vertical-align:top}
+.cmp thead th{border-top:0;font-size:13px;font-weight:500;color:var(--ink-2)}
+.cmp thead th:last-child{color:var(--red)}
+.cmp td:first-child{font-weight:500;width:18%}
+.cmp td:nth-child(2){color:var(--ink-2);width:36%}
+
+.road{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.road div{border-top:2px solid var(--ink);padding-top:12px}
+.road b{display:block;font-weight:500;font-size:16px;margin-bottom:4px}
+.road span{font-size:12.5px;color:var(--red);display:block;margin-bottom:6px}
+.road p{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+.cta{background:var(--red);color:#fff;border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
+.cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
+.cta p{margin:0;font-size:17px}
+footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:var(--ink-3)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1100px){
+  .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) 0px}
+  .panel{position:fixed;inset:0 0 0 auto;width:min(460px,100vw);z-index:20;transform:translateX(100%);transition:transform .25s var(--ease);box-shadow:-20px 0 40px rgba(37,37,61,.25)}
+  .hero.open .panel{transform:none}
+  .panel-in{width:100%}
+  .scrim{position:fixed;inset:0;background:rgba(37,37,61,.5);z-index:19;opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+  .hero.open .scrim{opacity:1;pointer-events:auto}
+}
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr;gap:28px}
+  .stage svg.wires{display:none}
+  .core{order:-1;flex-direction:row;justify-content:flex-start}
+  .onebtn{width:96px}
+  .col{gap:24px}
+  .group,.col.right .group{flex-direction:column;align-items:flex-start;gap:10px}
+  .col.left .group{flex-direction:column-reverse}
+  .mods,.col.left .mods,.col.right .mods{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+  .cta{grid-template-columns:1fr}
+}
+@media (min-width:1101px){ .scrim{display:none} }
+</style>
+</head>
+<body>
+<div class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="mapcol">
+      <div class="top">
+        <small>All in One</small>
+        <span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path>
+<path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path>
+<path d="M3410.72 587.677H3322.85V98.8616H3410.72V587.677Z" fill="currentColor"></path>
+<path d="M3164.94 296.832V258.138H3251.45V587.677H3164.94V539.233C3140.94 570.115 3106.48 585.556 3063.02 585.556C3021.64 585.556 2978.84 569.48 2949.04 537.329C2919.65 504.755 2905.43 465.458 2905.43 418.501C2905.43 371.967 2919.65 331.944 2949.04 299.37C2978.84 266.796 3019.55 252.646 3060.94 252.646C3104.4 252.646 3140.94 265.95 3164.94 296.832ZM3016.46 482.757C3032.6 499.256 3053.09 507.505 3077.92 507.505C3102.76 507.505 3123.24 499.256 3139.38 482.757C3155.94 465.836 3164.94 444.261 3164.94 418.032C3164.94 391.804 3155.94 370.44 3139.38 353.942C3123.24 337.02 3102.76 328.56 3077.92 328.56C3053.09 328.56 3032.6 337.02 3016.46 353.942C3000.32 370.44 2991.93 391.804 2991.93 418.032C2991.93 444.261 3000.32 465.836 3016.46 482.757Z" fill="currentColor"></path>
+<path d="M2613.98 258.138V316.555C2621.12 296.23 2638.94 277.333 2649.06 270.5C2658.43 264.176 2679.93 252.646 2702.22 252.646V341.701C2677.41 338.242 2659.38 349.333 2641.5 363.26C2622.54 378.021 2614.34 398.936 2614.34 430.073V587.677H2526.46V258.138H2613.98Z" fill="currentColor"></path>
+<path d="M1725.72 587.677C1677.86 587.677 1637.84 571.602 1605.66 539.453C1573.89 507.303 1554.32 468.608 1554.32 421.23C1554.32 373.852 1573.89 333.02 1605.66 300.87C1637.84 268.721 1677.86 252.646 1725.72 252.646C1756.64 252.646 1784.8 260.049 1810.21 274.855C1835.62 289.66 1858.48 309.542 1871.61 334.5L1797.51 375.745C1791.15 362.631 1781.41 352.267 1768.28 344.653C1755.58 337.038 1741.18 333.231 1725.09 333.231C1700.52 333.231 1680.19 341.48 1664.1 357.978C1648.01 374.052 1638.45 394.78 1638.45 420.161C1638.45 444.697 1648.01 465.424 1664.1 482.345C1680.19 498.42 1700.52 506.457 1725.09 506.457C1741.6 506.457 1756.21 502.862 1768.92 495.67C1782.05 488.056 1795.37 477.692 1801.73 464.578L1872.88 505.188C1858.9 530.569 1839 550.663 1813.16 565.468C1787.75 580.274 1756.21 587.677 1725.72 587.677Z" fill="currentColor"></path>
+<path d="M1411.52 297.113V258.138H1499.4V587.676H1411.52V541.059C1387.14 572.138 1352.13 587.677 1307.99 587.677C1265.94 587.677 1222.46 571.499 1192.19 539.143C1162.34 506.362 1147.89 466.814 1147.89 419.558C1147.89 372.727 1162.34 332.449 1192.19 299.668C1222.46 266.886 1263.83 252.646 1305.87 252.646C1350.02 252.646 1387.14 266.035 1411.52 297.113ZM1260.69 484.223C1277.08 500.827 1297.9 509.129 1323.12 509.129C1348.35 509.129 1369.16 500.827 1385.56 484.223C1402.38 467.194 1411.52 445.482 1411.52 419.086C1411.52 392.691 1402.38 371.191 1385.56 354.587C1369.16 337.558 1348.35 329.043 1323.12 329.043C1297.9 329.043 1277.08 337.558 1260.69 354.587C1244.29 371.191 1235.77 392.691 1235.77 419.086C1235.77 445.482 1244.29 467.194 1260.69 484.223Z" fill="currentColor"></path>
+<path d="M1109.45 99.1553V188.027C1064.88 185.008 1043.79 210.216 1043.79 249.9V258.138H1109.45V347.255H1043.54V587.677H955.662V347.255H911.723V258.138H955.662V249.9C955.662 203.745 974.836 163.858 999.642 140.565C1024.87 116.841 1060.67 96.1359 1109.45 99.1553Z" fill="currentColor"></path>
+<path d="M2856 587.677H2768.12V258.138H2856V587.677Z" fill="currentColor"></path>
+<path d="M2861.49 148.292C2861.49 175.592 2839.36 197.723 2812.06 197.723C2784.76 197.723 2762.63 175.592 2762.63 148.292C2762.63 120.992 2784.76 98.8616 2812.06 98.8616C2839.36 98.8616 2861.49 120.992 2861.49 148.292Z" fill="currentColor"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2312.26 587.677C2403.26 587.677 2477.03 513.907 2477.03 422.908C2477.03 331.908 2403.26 258.138 2312.26 258.138C2221.26 258.138 2147.49 331.908 2147.49 422.908C2147.49 513.907 2221.26 587.677 2312.26 587.677ZM2312.26 508.038C2359.28 508.038 2397.39 469.924 2397.39 422.908C2397.39 375.891 2359.28 337.777 2312.26 337.777C2265.25 337.777 2227.13 375.891 2227.13 422.908C2227.13 469.924 2265.25 508.038 2312.26 508.038Z" fill="currentColor"></path>
+<path d="M1916.82 450.492V203.823L2008.43 175.754V258.66H2098.9V345.113H2008.43C2008.43 375.054 2007.28 424.895 2007.28 448.249C2007.28 485.301 2030.06 500.6 2052.92 500.6C2075.77 500.6 2096.2 487.049 2096.2 487.049L2125.52 564.326C2125.52 564.326 2061.04 604.823 1996.89 579.154C1932.73 553.485 1916.82 504.277 1916.82 450.492Z" fill="currentColor"></path>
+</svg></span>
+      </div>
+      <h1>One ya conoce tu empresa</h1>
+      <p class="sub">Todos los módulos de Factorial comparten el mismo dato. One trabaja encima de todos ellos, con tus permisos y tus políticas.</p>
+      <p class="hint">Toca cualquier burbuja para ver qué aporta, qué hace One con ella y con qué se conecta.</p>
+      <div class="stage" id="stage">
+        <svg class="wires" id="wires" aria-hidden="true"></svg>
+        <div class="col left" id="colL"></div>
+        <div class="core">
+          <button class="onebtn" id="oneBtn" aria-label="Ver qué es One"><span class="disc"><svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg></span></button>
+          <span>One</span>
+        </div>
+        <div class="col right" id="colR"></div>
+      </div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite" aria-label="Detalle del módulo">
+      <div class="panel-in" id="panelIn"></div>
+    </aside>
+  </div>
+  <div class="scrim" id="scrim"></div>
+</div>
+
+<section>
+  <h2 class="st">El mismo dato, de principio a fin</h2>
+  <p class="sl">Cuando cada módulo vive en una herramienta distinta, cada decisión empieza de cero. En Factorial, lo que se captura una vez lo usa el siguiente paso. Toca cualquier paso para abrirlo en el mapa.</p>
+  <div class="stories" id="stories"></div>
+</section>
+
+<section>
+  <h2 class="st">Tus equipos ya usan IA. Que sea la tuya.</h2>
+  <p class="sl">Lo que cambia no es la tecnología, es el contexto. Y con datos de personas, la confianza no es negociable.</p>
+  <div class="cmpwrap">
+  <table class="cmp">
+    <thead><tr><th></th><th>IA genérica</th><th>One</th></tr></thead>
+    <tbody>
+      <tr><td>Contexto</td><td>Empieza en blanco cada vez. El contexto lo pegas tú.</td><td>Conectado a tus datos de Factorial y a las herramientas que conectes desde el primer mensaje.</td></tr>
+      <tr><td>Permisos</td><td>No sabe quién debe ver qué.</td><td>Cada persona solo ve lo que su rol le permite. Mismos roles, nada nuevo expuesto.</td></tr>
+      <tr><td>Cumplimiento</td><td>Sin garantías en la UE.</td><td>Conforme con el RGPD y el Reglamento de IA de la UE, alojado en la UE.</td></tr>
+      <tr><td>Fiabilidad</td><td>Se inventa respuestas sin avisar.</td><td>Responde con tus datos y muestra la fuente. Si no lo sabe, lo dice.</td></tr>
+      <tr><td>Control</td><td>Coste y acciones opacos.</td><td>Tú decides qué agentes se ejecutan y ves cada acción y lo que ha costado.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2 class="st">Lo que viene</h2>
+  <p class="sl">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
+  <div class="road">
+    <div><span>Beta</span><b>1:1 con IA</b><p>One prepara y guía cada 1:1 con el historial completo de la persona.</p></div>
+    <div><span>Próximamente</span><b>Cursos gamificados</b><p>Mecánicas de juego dentro de los cursos del LMS.</p></div>
+    <div><span>Próximamente</span><b>Objetivos vía MCP</b><p>Factorial se conecta a tus herramientas y actualiza los objetivos con sus datos.</p></div>
+    <div><span>Próximamente</span><b>Plantilla: aprobaciones y presupuesto</b><p>Flujos de aprobación estructurados y comparativa de previsto frente a real.</p></div>
+    <div><span>Prototipo · Q4 2026</span><b>Talent pool sugerido</b><p>Antes de publicar, ves quién de tu base de candidatos ya encaja.</p></div>
+    <div><span>Concepto · Q4 2026</span><b>WhatsApp en Recruitment</b><p>Mensajes, aviso previo a la llamada de IA y documentos por WhatsApp.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta">
+    <h2>¿Vemos tu ciclo completo con tus propios datos?</h2>
+    <p>Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
+  </div>
+</section>
+<footer>Los ejemplos de informes y conversaciones son ilustrativos y usan datos ficticios. Algunas funcionalidades dependen del plan contratado y de las credenciales de One. Factorial · octubre 2026.</footer>
+
+<script>
+const HUBS = {
+  talento: { name: "Talento", side: "left", lead: "Del puesto que planificas a la subida que defiendes. Cada decisión de talento parte de la anterior, no de cero.", one: "Cuantos más productos de talento tienes, más contexto tiene One: lee evaluaciones, candidaturas, cursos y encuestas a la vez." },
+  tiempo: { name: "Tiempo", side: "left", lead: "Fichajes, turnos y ausencias sobre el mismo calendario, y cada hora lista para nómina y proyectos.", one: "One cubre turnos, responde saldos y vigila incidencias de fichaje mientras aún son pequeñas." },
+  finanzas: { name: "Finanzas", side: "left", lead: "RR. HH. y Finanzas trabajan con los mismos números: plantilla, gastos, compras, proyectos y presupuesto.", one: "One aprueba lo que cumple la política y te deja solo las excepciones." },
+  core: { name: "Core HR", side: "right", lead: "La base de todo: personas, documentos, políticas y la app de cada empleado. Lo que se captura aquí lo usan todos los módulos.", one: "One conoce tus políticas, responde con la fuente y resuelve solicitudes antes de que lleguen a una persona." },
+  it: { name: "IT", side: "right", lead: "Dispositivos, software e inventario ligados a la persona que los usa, desde el primer día hasta el último.", one: "One investiga el ticket, comprueba el stock y prepara la compra para que una persona solo tenga que aprobar." },
+  nomina: { name: "Nómina", side: "right", lead: "Cada cambio que afecta al sueldo llega a nómina validado, desde el fichaje hasta la subida salarial.", one: "One detecta variables pendientes y lo que no cuadra antes de que se calcule la nómina." }
+};
+
+const ORDER = {
+  talento: ["desempeno", "formacion", "engagement", "comunicacion", "ats", "canal"],
+  tiempo: ["control", "turnos", "ausencias"],
+  finanzas: ["plantilla", "proyectos", "fpa", "gastos", "compras", "revision"],
+  core: ["politicas", "portal", "onoff", "documentos", "firma", "analiticas", "tickets", "rutinas"],
+  it: ["mdm", "inventario", "software", "marketplace"],
+  nomina: ["beneficios", "compensacion", "integraciones", "anticipo"]
+};
+
+const M = {
+  desempeno: {
+    name: "Desempeño", hub: "talento",
+    lead: "Evaluaciones, objetivos y feedback durante todo el año, no solo en la revisión anual.",
+    value: [
+      "Evaluaciones 180° y 360° con ciclos, recordatorios y acuerdos descargables automatizados.",
+      "Objetivos y OKRs individuales y de equipo, con feedback continuo para llegar a la evaluación con datos.",
+      "9-box y analíticas de talento para ver quién tiene más potencial y quién necesita apoyo."
+    ],
+    one: [{ q: "¿Quién de mi equipo muestra señales de riesgo?", a: "Analiza autoevaluaciones y feedback, resume cada caso y explica por qué lo marca." }],
+    why: "Cada resultado alimenta la formación que asignas y la subida que propones. Selección usa la última evaluación para medir qué fuentes traen a la gente que se queda y rinde.",
+    links: ["formacion", "revision", "engagement", "ats", "analiticas"],
+    soon: ["Objetivos conectados vía MCP: Factorial actualiza los objetivos con datos de tus otras herramientas."]
+  },
+  formacion: {
+    name: "Formación y LMS", hub: "talento",
+    lead: "Formaciones registradas y cursos interactivos dentro de Factorial, ligados al desempeño.",
+    value: [
+      "Catálogo, sesiones y asistencia; formación obligatoria con trazabilidad lista para auditoría.",
+      "LMS: cursos con vídeos, cuestionarios y tests, progreso automático y certificados al terminar.",
+      "Coste salarial de cada formación calculado automáticamente."
+    ],
+    one: [{ q: "Crea un curso de onboarding para el equipo de tienda.", a: "Un curso estructurado con módulos y cuestionarios, en minutos. Tú lo revisas y lo publicas." }],
+    why: "Desde la evaluación, en un clic: asignas la formación que cierra cada carencia de competencias y mides su impacto en el siguiente ciclo.",
+    links: ["desempeno", "onoff", "compensacion", "analiticas", "rutinas"],
+    stat: { n: "94%", t: "de las personas se quedaría más tiempo en una empresa que invierte en su desarrollo (LinkedIn Workplace Learning Report, 2023)" },
+    soon: ["Cursos gamificados: mecánicas de juego dentro de los cursos."]
+  },
+  engagement: {
+    name: "Engagement", hub: "talento",
+    lead: "Escucha a tu equipo sin enviar otro formulario: pulso diario, encuestas, eNPS y 1:1 con IA.",
+    value: [
+      "Pulso de equipo al fichar: check-ins sin fatiga de encuestas y alertas al manager adecuado.",
+      "Encuestas y eNPS automatizados en el onboarding, en las salidas y en cada hito.",
+      "Reuniones 1:1 con IA: One prepara cada 1:1 con objetivos, desempeño y estado de ánimo."
+    ],
+    one: [{ q: "Prepárame el 1:1 con Laura de mañana.", a: "Reúne sus objetivos, la última evaluación, el pulso reciente y lo hablado en 1:1 anteriores." }],
+    why: "Un buen desempeño no siempre significa compromiso. Con el pulso ligado al fichaje y el contexto de desempeño, One ve el cuadro completo de cada persona.",
+    links: ["control", "desempeno", "onoff", "analiticas"],
+    stat: { n: "40–60%", t: "menos administración manual con evaluaciones, 1:1 y encuestas automatizadas" },
+    tag: "1:1 con IA en beta"
+  },
+  comunicacion: {
+    name: "Comunicación", hub: "talento",
+    lead: "Comunicados para toda la empresa o para equipos concretos, donde tu gente ya trabaja cada día.",
+    value: [
+      "Publica para toda la empresa o para equipos y centros concretos.",
+      "Llega desde la app a todo el equipo, también a quien no se sienta frente a un ordenador.",
+      "Los comunicados conviven con las políticas y documentos a los que hacen referencia."
+    ],
+    one: [{ q: "Redacta el comunicado del nuevo horario de verano en español e inglés.", a: "Lo redacta a partir de tu política de horario y lo traduce, listo para revisar." }],
+    why: "La segmentación sale de los mismos datos de equipos, centros y roles que usa el resto de Factorial.",
+    links: ["portal", "politicas", "engagement"],
+    check: true
+  },
+  ats: {
+    name: "ATS y selección", hub: "talento",
+    lead: "Un ATS que planifica, criba y decide contigo, desde la posición aprobada hasta la oferta firmada.",
+    value: [
+      "Hiring Plan: cada posición aprobada en la planificación de plantilla llega como vacante con responsable, plazo y estado.",
+      "Informe de IA por candidato y llamadas de IA en su idioma, con transcripción y resultado verde, ámbar o rojo.",
+      "Jobs ilimitados, permisos por fase, entrevistas por vídeo con One y analíticas de permanencia a un año."
+    ],
+    one: [
+      { q: "Llama a cada candidato que llegue a la fase de screening.", a: "Llamada en su idioma, comunicada, con consentimiento y grabada. Devuelve transcripción, informe y siguiente paso sugerido. Una persona decide." },
+      { q: "Crea la oferta para un Senior Product Designer en Barcelona.", a: "Redacta el anuncio desde la conversación y lo publica en tu página de empleo y en más de 250 portales." }
+    ],
+    why: "La vacante nace aprobada y con presupuesto; quien firma entra con todos sus datos, sin volver a teclear nada; y la analítica cruza la fuente de contratación con la evaluación de desempeño.",
+    links: ["plantilla", "onoff", "firma", "desempeno", "analiticas"],
+    stats: [{ n: "70%", t: "menos time-to-hire con una primera criba con IA" }, { n: "+25%", t: "de crecimiento de plantilla con el mismo equipo de selección" }],
+    soon: ["Candidatos sugeridos del talent pool (prototipo, Q4 2026).", "WhatsApp en Recruitment y Company Pages por sociedad (concepto, Q4 2026 – Q1 2027).", "Cultural assessment (concepto, Q4 2026)."]
+  },
+  canal: {
+    name: "Canal seguro", hub: "talento",
+    lead: "Un canal para que cualquiera pueda informar de una irregularidad de forma confidencial, también anónima.",
+    value: [
+      "Comunicaciones confidenciales, con opción de anonimato.",
+      "Seguimiento de cada caso con acceso restringido a quien lo gestiona.",
+      "Ayuda a cumplir la normativa de protección del informante."
+    ],
+    oneNote: "One sigue exactamente los permisos de Factorial: los casos solo los ven las personas que los gestionan, nadie más.",
+    why: "Vive en la misma app que el resto de herramientas del empleado, así que nadie tiene que buscar dónde informar.",
+    links: ["politicas", "documentos", "portal"],
+    check: true
+  },
+  control: {
+    name: "Control horario", hub: "tiempo",
+    lead: "Fichajes desde el móvil o el ordenador, con el registro de jornada al día.",
+    value: [
+      "Fichaje desde la app o la web, con horas extra y saldos calculados.",
+      "Incidencias visibles para el manager antes de que lleguen a nómina.",
+      "Las horas imputadas a proyectos alimentan el coste real de cada proyecto."
+    ],
+    one: [{ q: "Envíame de lunes a viernes a las 18:00 quién tiene menos de 4 fichajes hoy.", a: "Crea una rutina que revisa los fichajes cada día y te lo manda por email." }],
+    why: "El mismo fichaje sirve para nómina, para el coste de proyectos y para recoger el pulso del equipo, sin capturarlo dos veces.",
+    links: ["turnos", "ausencias", "proyectos", "compensacion", "engagement", "rutinas"]
+  },
+  turnos: {
+    name: "Turnos", hub: "tiempo",
+    lead: "Cuadrantes que respetan tus reglas y huecos que se cubren sin una lista de llamadas.",
+    value: [
+      "Planificación por centro, puesto y habilidades.",
+      "Días de descanso, horarios y centros de trabajo se respetan al planificar.",
+      "Los turnos reales llegan a nómina, sin turnos desactualizados en el cálculo."
+    ],
+    one: [{ q: "Encuentra a alguien para cubrir el turno de María de hoy.", a: "Revisa descansos, puestos, habilidades, horario y centro, llama a los candidatos uno a uno y avisa al responsable cuando el turno queda cubierto." }],
+    why: "Una ausencia abre el hueco, One lo cubre y el turno nuevo llega a fichajes y variables de nómina. Todas las reglas respetadas y todas las llamadas registradas.",
+    links: ["ausencias", "control", "compensacion", "analiticas"]
+  },
+  ausencias: {
+    name: "Ausencias", hub: "tiempo",
+    lead: "Vacaciones, bajas y permisos con saldos al día y aprobación en dos clics.",
+    value: [
+      "Políticas de ausencia por equipo, centro o convenio.",
+      "Calendario compartido para ver quién está antes de aprobar.",
+      "Ausencias e ITs sincronizadas con nómina (con a3innuva, en España)."
+    ],
+    one: [{ q: "¿Cuántos días de vacaciones me quedan?", a: "Responde con el saldo de esa persona y la política que aplica. Cada uno ve solo lo suyo." }],
+    why: "Una baja no se queda en el calendario: abre un hueco en Turnos, ajusta el fichaje y llega a nómina como variable.",
+    links: ["turnos", "control", "compensacion", "politicas", "analiticas"]
+  },
+  plantilla: {
+    name: "Planificación de plantilla", hub: "finanzas",
+    lead: "RR. HH. y Finanzas ven los mismos números desde el primer día. Se acabaron las cinco versiones del Excel.",
+    value: [
+      "Los managers proponen posiciones con rol, nivel, banda salarial y fecha, ligadas al catálogo de puestos.",
+      "RR. HH. y Finanzas revisan una única versión, con registro de quién decidió qué y cuándo.",
+      "Las posiciones aprobadas se abren solas en Selección: el plan y la ejecución siempre coinciden."
+    ],
+    one: [{ q: "Prepara nuestro plan de plantilla 2027 con nuestras directrices.", a: "Propone roles, niveles y costes para que los revises." }],
+    why: "La posición que apruebas es la vacante que publicas, y cada subida salarial finalizada actualiza la previsión de coste del siguiente plan.",
+    links: ["ats", "revision", "fpa", "compensacion", "analiticas"],
+    soon: ["Flujos de aprobación estructurados y vínculo con presupuesto.", "Comparativa de contrataciones previstas frente a reales."]
+  },
+  proyectos: {
+    name: "Gestión de proyectos", hub: "finanzas",
+    lead: "Sabe si cada proyecto es rentable mientras está en marcha, no al cerrarlo.",
+    value: [
+      "Horas imputadas desde el widget de fichaje, sin hojas paralelas.",
+      "Coste laboral, costes fijos y gastos frente a presupuesto, en tiempo real.",
+      "Del presupuesto al proyecto y del proyecto a la factura, con los datos del cliente ya cargados."
+    ],
+    one: [{ q: "¿Qué proyectos van por encima de presupuesto este mes?", a: "Cruza horas imputadas, coste laboral y gastos, y te explica dónde se desvía cada uno." }],
+    why: "El coste de una hora sale del salario real de la persona y la hora sale del fichaje: nadie copia datos entre herramientas.",
+    links: ["control", "gastos", "compensacion", "fpa", "analiticas"]
+  },
+  fpa: {
+    name: "Planificación y análisis", hub: "finanzas",
+    lead: "Presupuestos y previsiones con los costes reales que ya viven en Factorial.",
+    value: [
+      "Presupuestos por departamento o centro de coste.",
+      "Real frente a previsto con datos de plantilla, nómina, gastos, compras y proyectos.",
+      "Una sola fuente de verdad para RR. HH., Finanzas y dirección."
+    ],
+    one: [{ q: "¿Cómo vamos frente al presupuesto de personal este trimestre?", a: "Compara el coste real de nómina con lo previsto en el plan y señala las desviaciones." }],
+    why: "El presupuesto se alimenta solo: cada contratación, subida, gasto o compra ya está registrada en su módulo.",
+    links: ["plantilla", "compensacion", "gastos", "compras", "proyectos", "analiticas"],
+    check: true
+  },
+  gastos: {
+    name: "Gastos", hub: "finanzas",
+    lead: "De un montón de recibos a las cuentas cerradas, con un solo mensaje.",
+    value: [
+      "Sube los tickets y los campos se rellenan solos.",
+      "Cada gasto se comprueba con la política: los que cumplen se aprueban al momento.",
+      "Conciliación con la tarjeta y datos limpios para el cierre de mes."
+    ],
+    one: [{ q: "Aquí tienes los recibos de mi viaje de trabajo. (sube 5 de golpe)", a: "Lee cada recibo, prepara los gastos, concilia la tarjeta y comprueba política y permisos. Solo las excepciones esperan a una persona." }],
+    why: "El gasto aprobado llega a nómina si hay que reembolsarlo y al proyecto si es imputable.",
+    links: ["politicas", "compensacion", "proyectos", "fpa", "analiticas"]
+  },
+  compras: {
+    name: "Compras", hub: "finanzas",
+    lead: "Solicitudes de compra, aprobaciones y proveedores en un mismo flujo.",
+    value: [
+      "Solicitudes con aprobación según importe y equipo.",
+      "Cada compra ligada a su presupuesto y a quien la pidió.",
+      "Conectado con inventario y software para saber qué se compra y para quién."
+    ],
+    one: [{ q: "Se me ha estropeado el portátil. Necesito uno nuevo.", a: "Abre el ticket, comprueba que no hay stock, encuentra uno en el marketplace y lo compra cuando una persona lo aprueba." }],
+    why: "La compra empieza en un ticket, pasa por el presupuesto y termina en el inventario de la persona.",
+    links: ["tickets", "inventario", "marketplace", "software", "fpa"],
+    check: true
+  },
+  revision: {
+    name: "Revisión salarial", hub: "finanzas",
+    lead: "Cada subida, justificada, presupuestada y defendible.",
+    value: [
+      "Directrices una sola vez: elegibilidad, rangos y aprobadores. Cada propuesta se contrasta sola.",
+      "Cada manager ve solo su equipo, con lo que está fuera de política ya señalado, y el presupuesto se reparte en tiempo real.",
+      "La subida aprobada pasa al contrato y a la previsión de plantilla, sin teclear nada."
+    ],
+    one: [{ q: "Propón subidas para mi equipo según nuestra política.", a: "Cifras y justificación, ya contrastadas con el presupuesto. Tú apruebas." }],
+    why: "Tú decides cuántos ciclos de evaluación cuentan para la elegibilidad: la subida refleja una tendencia, no una nota puntual. Y llega a nómina como variable validada.",
+    links: ["desempeno", "compensacion", "plantilla", "documentos", "analiticas"]
+  },
+  politicas: {
+    name: "Políticas", hub: "core",
+    lead: "Tus normas, escritas una vez y aplicadas en cada módulo.",
+    value: [
+      "Políticas de ausencias, gastos, horario y más, aplicadas por los módulos que las usan.",
+      "Handbook: las personas preguntan y One responde con la fuente.",
+      "Si One no lo sabe, lo dice."
+    ],
+    one: [{ q: "¿Puedo trabajar dos semanas en remoto desde otro país?", a: "Responde a partir de tu política, muestra la fuente y solo enseña lo que esa persona puede ver." }],
+    why: "Las preguntas rutinarias nunca llegan a la bandeja del responsable, y los mismos criterios aprueban gastos o ausencias.",
+    links: ["ausencias", "gastos", "control", "portal", "tickets"]
+  },
+  portal: {
+    name: "Portal de empleado", hub: "core",
+    lead: "La app donde cada persona ve lo suyo y pide lo que necesita.",
+    value: [
+      "Datos personales, nóminas, documentos y saldos en una sola app.",
+      "Ausencias, gastos y tickets desde el móvil.",
+      "One integrado para preguntar, pedir y seguir cada solicitud."
+    ],
+    oneNote: "One está incluido para toda la plantilla, sin necesidad de formación. Cada persona pregunta lo que necesita y ve solo lo que su rol le permite.",
+    why: "Todo lo que el empleado hace aquí entra directamente en el módulo correspondiente, sin formularios ni correos intermedios.",
+    links: ["ausencias", "gastos", "tickets", "documentos", "beneficios", "comunicacion"]
+  },
+  onoff: {
+    name: "On/Offboarding", hub: "core",
+    lead: "Incorporaciones y salidas como un flujo, con tareas para RR. HH., IT y el manager.",
+    value: [
+      "La persona contratada llega desde Selección con todos sus datos.",
+      "Documentos, firma, dispositivo, accesos y formación de bienvenida en el mismo flujo.",
+      "En la salida, accesos y equipos se recuperan sin depender de la memoria de nadie."
+    ],
+    one: [{ q: "Prepara la incorporación de Marta para el lunes.", a: "Lanza las tareas, prepara los documentos para firma, pide su portátil y le asigna el curso de bienvenida." }],
+    why: "Es el punto donde más módulos se tocan: si el dato está centralizado, el primer día funciona solo.",
+    links: ["ats", "documentos", "firma", "inventario", "mdm", "software", "formacion"]
+  },
+  documentos: {
+    name: "Gestión de documentos", hub: "core",
+    lead: "Contratos, nóminas y certificados de cada persona, con permisos y plantillas.",
+    value: [
+      "Carpetas por persona y por empresa, con permisos por rol.",
+      "Plantillas que se rellenan con los datos del empleado.",
+      "One lee cualquier archivo y extrae lo que importa."
+    ],
+    one: [{ q: "¿Qué contratos temporales vencen este trimestre?", a: "Lo cruza con los datos contractuales y te devuelve la lista con fechas y responsables." }],
+    why: "Un cambio salarial aprobado actualiza el contrato; una contratación genera sus documentos. Nadie los vuelve a montar.",
+    links: ["firma", "onoff", "revision", "compensacion", "canal"]
+  },
+  firma: {
+    name: "Firma electrónica", hub: "core",
+    lead: "Envía a firmar sin salir de Factorial y guarda el resultado donde toca.",
+    value: [
+      "Firma de contratos, anexos y políticas desde cualquier dispositivo.",
+      "Ofertas de Selección firmadas desde cualquier sitio, y sabes al momento cuándo se firman.",
+      "El documento firmado queda en el perfil de la persona."
+    ],
+    oneNote: "One prepara los documentos a partir de tus plantillas para que solo tengas que revisarlos y enviarlos a firmar.",
+    why: "Cero datos que volver a teclear cuando alguien firma: el estado llega al proceso que lo pidió.",
+    links: ["documentos", "ats", "onoff", "revision"]
+  },
+  analiticas: {
+    name: "Analíticas", hub: "core", special: "analytics",
+    lead: "Todos los datos de Factorial en un mismo sitio, y One para preguntarlos en lenguaje natural.",
+    value: [
+      "Informes que cruzan módulos sobre el mismo dato: personas, tiempo, talento, nómina y finanzas.",
+      "Pídele a One que cree un informe, añada widgets, filtre o te explique una tendencia, y guárdalo.",
+      "Cada persona ve solo lo que sus permisos le dejan ver."
+    ],
+    one: [{ q: "Envíame la rotación por departamento cada lunes.", a: "Crea el informe, lo programa como rutina y te explica la tendencia en cada envío." }],
+    why: "Como todo el dato vive en Factorial, un informe no se construye: se pregunta. Sin exportar, sin cruzar Excels y sin esperar a Finanzas.",
+    links: ["desempeno", "engagement", "ats", "control", "ausencias", "turnos", "plantilla", "compensacion", "revision", "gastos", "proyectos", "rutinas"]
+  },
+  tickets: {
+    name: "Tickets", hub: "core",
+    lead: "Solicitudes que llegan medio resueltas antes de que las toque una persona.",
+    value: [
+      "Se abren chateando con One y se siguen en Factorial.",
+      "Se encaminan solos al equipo correcto: IT, RR. HH., Finanzas.",
+      "One investiga y traduce cada mensaje en los dos sentidos."
+    ],
+    one: [{ q: "Oye One, se me acaba de estropear el portátil. Necesito uno nuevo.", a: "Crea el ticket, lo encamina a IT, lee el contexto, ve que no hay portátil en stock, encuentra uno en el marketplace y redacta el plan. Una persona aprueba, se compra e IT lo entrega." }],
+    why: "One investiga entre contratos, activos de IT y perfiles de empleado: la resolución se redacta con tus políticas y quien resuelve solo aprueba.",
+    links: ["inventario", "marketplace", "compras", "politicas", "portal"]
+  },
+  rutinas: {
+    name: "Rutinas", hub: "core", special: "routines",
+    lead: "Configura una pregunta una vez y One te trae la respuesta cuando toca.",
+    value: [
+      "Peticiones de datos diarias, semanales o mensuales, enviadas a tiempo.",
+      "Cualquier informe de Analíticas se programa como rutina desde el propio chat.",
+      "Detectan los problemas mientras aún son pequeños, no cuando ya son caros."
+    ],
+    one: [{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }],
+    why: "Una rutina solo es útil si los datos están al día y conectados: por eso aquí puede cruzar fichajes, ausencias, nómina o selección en el mismo envío.",
+    links: ["analiticas", "control", "compensacion", "formacion", "ats"]
+  },
+  mdm: {
+    name: "Gestión de dispositivos móviles", hub: "it",
+    lead: "Configura y protege los dispositivos de la empresa desde el mismo sitio donde gestionas a las personas.",
+    value: [
+      "Cada dispositivo ligado a la persona que lo usa.",
+      "Alta y baja de dispositivos dentro del onboarding y el offboarding.",
+      "Estado de seguridad de la flota visible para IT."
+    ],
+    oneNote: "One te mantiene en cumplimiento: comprueba con las políticas, corrige incoherencias y hace seguimiento de accesos y riesgos.",
+    why: "Cuando alguien entra o sale, IT no depende de un correo de RR. HH.: el cambio ya está en Factorial.",
+    links: ["inventario", "onoff", "software"],
+    check: true
+  },
+  inventario: {
+    name: "Inventario", hub: "it",
+    lead: "Qué equipo tiene cada persona, con su histórico.",
+    value: [
+      "Asignación y devolución de equipos por persona.",
+      "Integrado en el onboarding y el offboarding.",
+      "Stock visible antes de comprar."
+    ],
+    oneNote: "Cuando llega un ticket, One comprueba el inventario antes de proponer una compra.",
+    why: "El inventario sabe quién es quién porque comparte el dato de personas con Core HR.",
+    links: ["tickets", "compras", "marketplace", "mdm", "onoff"]
+  },
+  software: {
+    name: "Gestión de software", hub: "it",
+    lead: "Qué herramientas usa la empresa, quién tiene acceso y cuánto cuestan.",
+    value: [
+      "Inventario de aplicaciones y licencias.",
+      "Accesos que se dan y se retiran con la entrada y salida de personas.",
+      "Gasto en licencias visible para Finanzas."
+    ],
+    oneNote: "One cruza licencias y personas activas para detectar accesos que ya no deberían existir.",
+    why: "Licencias, personas y presupuesto en el mismo sitio: nadie paga por una cuenta de alguien que ya se fue.",
+    links: ["onoff", "compras", "fpa", "mdm"],
+    check: true
+  },
+  marketplace: {
+    name: "Marketplace", hub: "it",
+    lead: "Un catálogo para pedir dispositivos y equipos sin buscar proveedor.",
+    value: [
+      "Catálogo de dispositivos listo para pedir.",
+      "Compras con aprobación y entrega a quien lo necesita.",
+      "Conectado a tickets e inventario."
+    ],
+    oneNote: "Si no hay stock, One encuentra el dispositivo en el marketplace y deja la compra preparada para aprobar.",
+    why: "Del ticket a la entrega sin cambiar de herramienta.",
+    links: ["tickets", "compras", "inventario"],
+    check: true
+  },
+  beneficios: {
+    name: "Beneficios", hub: "nomina",
+    lead: "Retribución flexible que tu equipo usa con una tarjeta y RR. HH. gestiona sin papeleo.",
+    value: [
+      "Comida, transporte, guardería, seguro de salud, formación y Wellhub.",
+      "Tarjeta Visa en el wallet del móvil, con saldo y movimientos en la app.",
+      "Presupuestos por categoría, cumplimiento fiscal y exportación directa a nómina."
+    ],
+    one: [{ q: "¿Cuánto me queda de saldo de comida este mes?", a: "Responde con el saldo de esa persona, dentro de sus permisos." }],
+    why: "Lo que cada persona usa llega a nómina como concepto, sin que nadie lo recopile a mano.",
+    links: ["compensacion", "portal", "integraciones"]
+  },
+  compensacion: {
+    name: "Compensación", hub: "nomina",
+    lead: "Cada cambio llega a nómina ya validado.",
+    value: [
+      "Bonus, cambios de contrato y ausencias que afectan a nómina, visibles al instante.",
+      "Alertas antes del cálculo: variables pendientes, bonus sin aprobar o turnos desactualizados.",
+      "Cada nómina comparada con variables y contratos aprobados, y coste real frente a previsto."
+    ],
+    one: [{ q: "¿Qué falta antes de cerrar la nómina de este mes?", a: "Revisa variables pendientes y lo que no cuadra, y te dice quién tiene que actuar." }],
+    why: "Aquí desemboca todo: fichajes, turnos, ausencias, gastos, beneficios y subidas. Si nacen conectados, llegan validados.",
+    links: ["revision", "control", "turnos", "ausencias", "gastos", "beneficios", "integraciones"],
+    stat: { n: "40 h", t: "al mes que puedes ahorrar sincronizando altas, bajas, cambios salariales, ausencias y variables con tu proveedor de nómina (integración a3innuva, España)" }
+  },
+  integraciones: {
+    name: "Integraciones", hub: "nomina",
+    lead: "Factorial conectado con tu proveedor de nómina y con el resto de tus herramientas.",
+    value: [
+      "a3innuva (España): altas, bajas, cambios contractuales y salariales, ausencias, ITs y variables.",
+      "Compatible con otros software de nómina y con Factorial Professionals para asesorías.",
+      "API para conectar con tu ERP."
+    ],
+    oneNote: "Si el dato vive en Factorial o en algo que conectas, puedes preguntar, delegar o automatizar con One.",
+    why: "Integrar no es copiar: el cambio se registra una vez y se sincroniza.",
+    links: ["compensacion", "beneficios", "ausencias", "proyectos"]
+  },
+  anticipo: {
+    name: "Anticipo de nómina", hub: "nomina",
+    lead: "Tu equipo puede pedir parte del salario ya generado antes de fin de mes.",
+    value: [
+      "Solicitud desde la app, sin papeleo.",
+      "Reglas y límites que defines tú.",
+      "El anticipo se refleja en la nómina sin ajustes a mano."
+    ],
+    oneNote: "Las personas preguntan a One cuánto pueden pedir y cómo funciona, según tu política.",
+    why: "Como el salario y los días trabajados ya están en Factorial, el importe disponible no se calcula a mano.",
+    links: ["compensacion", "portal", "integraciones"],
+    check: true
+  }
+};
+
+const STORIES = [
+  { t: "Una nueva incorporación", d: "La posición se aprueba una vez y el resto se encadena solo.", steps: [
+    ["plantilla","Se aprueba la posición con su banda salarial."],["ats","Se abre sola como vacante; One criba y llama."],["firma","La oferta se firma desde el móvil."],["onoff","Entra con todos sus datos, sin volver a teclear."],["inventario","Su portátil ya está asignado."],["formacion","Recibe el curso de bienvenida."],["compensacion","Su alta llega validada a nómina."]] },
+  { t: "Una baja de última hora", d: "Del aviso a la nómina sin que nadie copie un dato.", steps: [
+    ["ausencias","Alguien avisa de que está enfermo."],["turnos","One encuentra quién puede cubrir y le llama."],["control","El nuevo turno se ficha como cualquier otro."],["compensacion","La baja y el cambio de turno llegan como variables."],["analiticas","El absentismo por centro se actualiza solo."]] },
+  { t: "Un ciclo de revisión", d: "La subida sale de la evaluación y vuelve al plan.", steps: [
+    ["desempeno","La evaluación marca resultados y carencias."],["formacion","La formación se asigna en un clic."],["revision","One propone la subida dentro de política."],["compensacion","La subida llega validada a nómina."],["plantilla","La previsión de coste se actualiza para el próximo plan."]] },
+  { t: "Un portátil roto", d: "Un mensaje a One y una aprobación.", steps: [
+    ["tickets","Se lo cuentas a One y abre el ticket."],["inventario","One comprueba que no hay stock."],["marketplace","Encuentra uno que cumple la política."],["compras","Una persona aprueba, se compra e IT lo entrega."]] }
+];
+
+const ISO = `<svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg>`;
+const HUB_ICONS = {
+  talento:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
+  tiempo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  finanzas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19V11M10 19V5M16 19v-6M22 19H2"/></svg>',
+  core:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>',
+  it:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8 20h8M12 16.5V20"/></svg>',
+  nomina:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14.5h2"/></svg>'
+};
+const LEFT = ["talento","tiempo","finanzas"], RIGHT = ["core","it","nomina"];
+const $ = s => document.querySelector(s);
+const hero = $('#hero'), stage = $('#stage'), wires = $('#wires'), panelIn = $('#panelIn');
+let current = null;
+
+function el(tag, attrs={}, html=''){ const e=document.createElement(tag); for(const k in attrs) e.setAttribute(k, attrs[k]); if(html) e.innerHTML=html; return e; }
+
+function buildMap(){
+  for (const [side, list] of [["#colL", LEFT], ["#colR", RIGHT]]) {
+    const col = $(side);
+    for (const h of list) {
+      const g = el('div', {class:'group', 'data-hub':h});
+      const mods = el('div', {class:'mods'});
+      for (const id of ORDER[h]) {
+        const m = M[id];
+        const b = el('button', {class:'pill' + (m.special ? ' special':''), 'data-id':id, type:'button'}, m.name);
+        b.addEventListener('click', () => select(id));
+        mods.appendChild(b);
+      }
+      const hb = el('button', {class:'hubbtn', 'data-hub-btn':h, type:'button'}, `<span class="ic">${HUB_ICONS[h]}</span>${HUBS[h].name}`);
+      hb.addEventListener('click', () => select('hub:'+h));
+      g.appendChild(mods); g.appendChild(hb);
+      col.appendChild(g);
+    }
+  }
+  $('#oneBtn').addEventListener('click', () => select('one'));
+}
+
+function rel(node){
+  const r = node.getBoundingClientRect(), s = stage.getBoundingClientRect();
+  return { l:r.left-s.left, r:r.right-s.left, t:r.top-s.top, b:r.bottom-s.top, cx:(r.left+r.right)/2-s.left, cy:(r.top+r.bottom)/2-s.top, w:r.width };
+}
+function curve(x1,y1,x2,y2){ const dx=(x2-x1)*0.5; return `M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`; }
+function pillAnchor(id){
+  const n = stage.querySelector(`.pill[data-id="${id}"]`); const p = rel(n);
+  const left = HUBS[M[id].hub].side === 'left';
+  return { x: left ? p.r : p.l, y: p.cy };
+}
+function drawWires(){
+  if (getComputedStyle(wires).display === 'none') return;
+  const s = stage.getBoundingClientRect();
+  wires.setAttribute('viewBox', `0 0 ${s.width} ${s.height}`);
+  const one = rel($('#oneBtn')); const R = one.w/2;
+  let d = '';
+  for (const h of [...LEFT, ...RIGHT]) {
+    const left = HUBS[h].side === 'left';
+    const hb = rel(stage.querySelector(`[data-hub-btn="${h}"]`));
+    const hx = left ? hb.l : hb.r, hy = hb.cy;
+    for (const id of ORDER[h]) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hx,hy)}"/>`; }
+    const ex = left ? hb.r : hb.l;
+    const ang = Math.atan2(hy-one.cy, ex-one.cx);
+    d += `<path class="base" d="${curve(ex,hy, one.cx+Math.cos(ang)*R*0.82, one.cy+Math.sin(ang)*R*0.82)}"/>`;
+  }
+  if (current && M[current]) {
+    const src = pillAnchor(current);
+    d += `<path class="flow" d="${curve(src.x,src.y, one.cx, one.cy)}"/>`;
+    for (const l of M[current].links) { const a = pillAnchor(l); d += `<path class="flow" d="${curve(one.cx,one.cy,a.x,a.y)}"/>`; }
+  }
+  wires.innerHTML = d;
+}
+
+function chatHTML(list){
+  return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
+}
+function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${M[i].name}</button>`).join('')}</div>`; }
+
+/* mini charts (ficticios) */
+function bars(vals, labels, line){
+  const W=360,H=130,P=22,bw=(W-P*2)/vals.length; const mx=Math.max(...vals)*1.15;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  s+=`<line x1="${P}" x2="${W-P}" y1="${H-22}" y2="${H-22}" stroke="var(--line)"/>`;
+  vals.forEach((v,i)=>{const h=(v/mx)*(H-40); s+=`<rect x="${P+i*bw+bw*0.22}" y="${H-22-h}" width="${bw*0.56}" height="${h}" rx="3" fill="var(--red)"/><text x="${P+i*bw+bw/2}" y="${H-7}" font-size="10.5" text-anchor="middle" fill="var(--ink-2)">${labels[i]}</text>`;});
+  if(line){const lm=Math.max(...line)*1.15; const pts=line.map((v,i)=>`${P+i*bw+bw/2},${H-22-(v/lm)*(H-40)}`).join(' ');
+    s+=`<polyline points="${pts}" fill="none" stroke="var(--ink)" stroke-width="2"/>`; line.forEach((v,i)=>{s+=`<circle cx="${P+i*bw+bw/2}" cy="${H-22-(v/lm)*(H-40)}" r="3" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>`;});}
+  return s+'</svg>';
+}
+function lines(a,b,labels){
+  const W=360,H=130,P=22; const all=[...a,...b]; const mn=Math.min(...all)*0.95, mx=Math.max(...all)*1.03; const step=(W-P*2)/(a.length-1);
+  const y=v=>H-22-((v-mn)/(mx-mn))*(H-40); const pts=arr=>arr.map((v,i)=>`${P+i*step},${y(v)}`).join(' ');
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"><line x1="${P}" x2="${W-P}" y1="${H-22}" y2="${H-22}" stroke="var(--line)"/>`;
+  s+=`<polyline points="${pts(b)}" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="4 4"/>`;
+  s+=`<polyline points="${pts(a)}" fill="none" stroke="var(--red)" stroke-width="2.4"/>`;
+  labels.forEach((l,i)=>{s+=`<text x="${P+i*step}" y="${H-7}" font-size="10.5" text-anchor="middle" fill="var(--ink-2)">${l}</text>`;});
+  return s+'</svg>';
+}
+function analyticsExtra(){
+  return `<h3>Ejemplos de informes ya conectados</h3>
+  <div class="dash">
+    <div class="card"><p class="ct">Rotación y compromiso por departamento</p><p class="cs">Core HR + Engagement · rotación (barras) y eNPS (línea)</p>${bars([14,9,6,11,4],["Tiendas","Ops","Ventas","Soporte","Tech"],[12,31,40,22,46])}</div>
+    <div class="card"><p class="ct">Calidad de contratación por fuente</p><p class="cs">Selección + Desempeño · permanencia a 1 año</p>${bars([88,81,72,64],["Referidos","LinkedIn","Web empleo","Portales"])}</div>
+    <div class="card"><p class="ct">Coste de plantilla: real frente a previsto</p><p class="cs">Plantilla + Revisión salarial + Compensación</p>${lines([402,408,419,431,436,452],[400,410,420,425,430,440],["E","F","M","A","M","J"])}<div class="legend"><span><i style="background:var(--red)"></i>Real</span><span><i style="background:var(--ink-3)"></i>Previsto</span></div></div>
+    <div class="card"><p class="ct">Absentismo y horas extra por centro</p><p class="cs">Ausencias + Control horario + Turnos</p>${bars([5.8,3.1,4.4,2.2],["Madrid","Barcelona","Valencia","Sevilla"],[38,12,26,9])}<div class="legend"><span><i style="background:var(--red)"></i>Absentismo %</span><span><i style="background:var(--ink)"></i>Horas extra</span></div></div>
+  </div>
+  <p class="disc-note">Datos ficticios, solo para ilustrar qué se puede cruzar.</p>
+  ${routinesList()}
+  <h3>Tareas que One ya hace solo</h3>
+  <ul class="vals">
+    <li>Aprueba los gastos que cumplen la política y te deja solo las excepciones.</li>
+    <li>Cubre turnos llamando a quien puede hacerlos según tus reglas.</li>
+    <li>Llama a los candidatos que llegan a screening y te deja el informe.</li>
+    <li>Resuelve tickets a medias para que quien los gestiona solo apruebe.</li>
+  </ul>`;
+}
+function routinesList(){
+  return `<h3>Rutinas con información siempre al día</h3>
+  <ul class="rt">
+    <li><span class="when">Lunes, 9:00</span><span>Rotación por departamento, con la tendencia explicada<span class="src">Core HR · Analíticas</span></span></li>
+    <li><span class="when">Laborables, 18:00</span><span>Personas con menos de 4 fichajes hoy<span class="src">Control horario</span></span></li>
+    <li><span class="when">Día 25</span><span>Variables de nómina pendientes antes del cierre<span class="src">Compensación · Turnos · Gastos</span></span></li>
+    <li><span class="when">Primer día del mes</span><span>Formaciones obligatorias pendientes por centro<span class="src">Formación y LMS</span></span></li>
+    <li><span class="when">Viernes, 12:00</span><span>Candidatos en screening sin feedback del hiring team<span class="src">ATS y selección</span></span></li>
+  </ul>
+  <p class="disc-note">Cualquier informe de Analíticas se puede programar como rutina desde el chat de One. Las rutinas consumen créditos de One.</p>`;
+}
+
+function render(key){
+  let h='';
+  const close = `<button class="close" type="button" id="closeBtn" aria-label="Cerrar"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button>`;
+  if (key === 'one') {
+    h = `<div class="p-head"><div><p class="p-cat"><b>El centro</b></p><h2>One</h2></div>${close}</div>
+    <p class="lead">Tu agente de IA personal en el trabajo. Conoce tu contexto, actúa en todo Factorial y te ayuda a decidir, sin exponer tus datos.</p>
+    <h3>Tres formas de usarlo</h3>
+    <ul class="vals"><li><b>Pregunta.</b> Cualquier persona pregunta lo que necesita: políticas, saldos, datos del equipo. One responde con la fuente y solo con lo que su rol permite.</li>
+    <li><b>Delega.</b> Dentro de cada producto, One hace el trabajo: redacta la oferta, llama al candidato, prepara la propuesta de subida.</li>
+    <li><b>Automatiza.</b> Configuras una rutina una vez y One detecta, decide y actúa. Tú apruebas las excepciones.</li></ul>
+    <h3>Cómo trabaja</h3>
+    <p class="note">Detecta los desencadenantes en tus datos en tiempo real, los compara con tus políticas e historial, elige la acción o escala a una persona, hace el trabajo dentro de Factorial y registra lo que ha hecho. Cada paso queda visible y revisable.</p>
+    <h3>Por qué el dato centralizado lo cambia todo</h3>
+    <p class="why" style="color:var(--ink)">Cuantos más módulos conectas, más contexto tiene One. Una IA genérica empieza en blanco; One ya sabe quién es quién, qué dice tu política y qué pasó en el último ciclo.</p>
+    <div class="stats"><div class="stat"><b>RGPD</b><span>y Reglamento de IA de la UE, alojado en la UE</span></div><div class="stat"><b>Tus permisos</b><span>mismos roles de Factorial, nada nuevo expuesto</span></div></div>`;
+  } else if (key.startsWith('hub:')) {
+    const k = key.slice(4), hub = HUBS[k];
+    h = `<div class="p-head"><div><p class="p-cat"><b>Área</b></p><h2>${hub.name}</h2></div>${close}</div>
+    <p class="lead">${hub.lead}</p>
+    <h3>Con One</h3><p class="note">${hub.one}</p>
+    <h3>Módulos</h3>${chipsHTML(ORDER[k])}`;
+  } else {
+    const m = M[key], hub = HUBS[m.hub];
+    h = `<div class="p-head"><div><p class="p-cat"><b>${hub.name}</b></p><h2>${m.name}</h2>${m.tag?`<span class="tag">${m.tag}</span>`:''}</div>${close}</div>
+    <p class="lead">${m.lead}</p>
+    <h3>Lo que aporta</h3><ul class="vals">${m.value.map(v=>`<li>${v}</li>`).join('')}</ul>`;
+    const st = m.stats || (m.stat ? [m.stat] : null);
+    if (st) h += `<div class="stats">${st.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.t}</span></div>`).join('')}</div>`;
+    h += `<h3>Con One</h3>` + (m.one ? chatHTML(m.one) : '') + (m.oneNote ? `<p class="note">${m.oneNote}</p>` : '');
+    if (m.special === 'analytics') h += analyticsExtra();
+    if (m.special === 'routines') h += routinesList();
+    h += `<h3>Conectado con</h3>${chipsHTML(m.links)}<p class="why">${m.why}</p>`;
+    if (m.soon) h += `<h3>Lo que viene</h3><ul class="soon">${m.soon.map(s=>`<li>${s}</li>`).join('')}</ul><p class="disc-note">El alcance y las fechas pueden cambiar.</p>`;
+  }
+  panelIn.innerHTML = h;
+  panelIn.scrollTop = 0;
+  $('#closeBtn').addEventListener('click', closePanel);
+  panelIn.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => select(b.dataset.go)));
+}
+
+function mark(key){
+  stage.querySelectorAll('.active,.linked').forEach(n => n.classList.remove('active','linked'));
+  $('#oneBtn').classList.remove('active');
+  stage.classList.toggle('focus', !!key);
+  if (!key) return;
+  if (key === 'one') { $('#oneBtn').classList.add('active'); stage.classList.remove('focus'); return; }
+  if (key.startsWith('hub:')) {
+    const k = key.slice(4);
+    stage.querySelector(`[data-hub-btn="${k}"]`).classList.add('active');
+    ORDER[k].forEach(i => stage.querySelector(`.pill[data-id="${i}"]`).classList.add('linked'));
+    return;
+  }
+  stage.querySelector(`.pill[data-id="${key}"]`).classList.add('active');
+  M[key].links.forEach(i => stage.querySelector(`.pill[data-id="${i}"]`).classList.add('linked'));
+}
+
+let lastFocus = null;
+function select(key){
+  lastFocus = document.activeElement;
+  current = key;
+  render(key); mark(key);
+  hero.classList.add('open');
+  history.replaceState(null,'','#'+encodeURIComponent(key));
+  if (window.scrollY > hero.offsetHeight*0.6) hero.scrollIntoView({behavior:'smooth'});
+  requestAnimationFrame(drawWires);
+  setTimeout(drawWires, 280);
+  setTimeout(() => $('#closeBtn') && $('#closeBtn').focus({preventScroll:true}), 60);
+}
+function closePanel(){
+  current = null; hero.classList.remove('open'); mark(null);
+  history.replaceState(null,'',location.pathname + location.search);
+  requestAnimationFrame(drawWires); setTimeout(drawWires, 280);
+  if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+}
+
+function buildStories(){
+  const wrap = $('#stories');
+  STORIES.forEach(s => {
+    const d = el('div', {class:'story'}, `<h3>${s.t}</h3><p>${s.d}</p>`);
+    const ol = el('ol', {class:'chain'});
+    s.steps.forEach(([id,txt]) => { const li = el('li'); const b = el('button', {type:'button'}, M[id].name); b.addEventListener('click', () => select(id)); li.appendChild(b); li.appendChild(el('small',{},txt)); ol.appendChild(li); });
+    d.appendChild(ol); wrap.appendChild(d);
+  });
+}
+
+buildMap(); buildStories();
+$('#scrim').addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && hero.classList.contains('open')) closePanel(); });
+new ResizeObserver(() => drawWires()).observe(stage);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawWires);
+window.addEventListener('load', () => {
+  drawWires();
+  const k = decodeURIComponent(location.hash.slice(1));
+  if (k && (k === 'one' || M[k] || (k.startsWith('hub:') && HUBS[k.slice(4)]))) select(k);
+});
+</script>
+</body>
+</html>
