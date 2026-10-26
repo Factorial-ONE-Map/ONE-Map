@@ -199,24 +199,32 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .road .more{border-top-style:dashed}
 .road .more b{font-size:22px;letter-spacing:-0.02em}
 
-.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.tier{border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:14px}
-.tier.max{background:var(--midnight);color:#fff;--ink:#fff;--ink-2:rgba(255,255,255,.72)}
-.tier .tn{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.eyebrow{font-size:15px;font-weight:300;margin:0 0 12px;opacity:.95}
+.tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:980px){ .tiers{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:560px){ .tiers{grid-template-columns:1fr} }
+.tier{border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.tier.fav{background:var(--midnight);color:#fff;--ink:#fff;--ink-2:rgba(255,255,255,.72)}
+.tier .tn{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .tier .tn b{font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
-.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:#F6F6F8;color:var(--midnight)}
-.tier.max .tn span{background:var(--red);color:#fff}
-.tier .tl{margin:0;font-size:15px;color:var(--ink-2)}
-.tier h4{margin:4px 0 0;font-size:12.5px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--red);color:#fff}
+.tier .usage{margin:0 0 4px;font-size:14px;line-height:1.4;color:var(--ink-2)}
+.tier .usage b{color:var(--ink);font-weight:500}
+.tier h4{margin:6px 0 0;font-size:12px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
 .who{display:flex;flex-wrap:wrap;gap:6px}
-.who i{font-style:normal;font-size:13.5px;font-weight:500;padding:4px 11px;border-radius:999px;border:1px solid currentColor}
+.who i{font-style:normal;font-size:13px;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid currentColor}
 .tier .who i{color:var(--red)}
-.tier.max .who i{color:#fff}
+.tier.fav .who i{color:#fff}
 .tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.tier li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.4}
-.tier li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;border:2px solid currentColor;opacity:.8}
-.tier.max li::before{border-color:var(--red);opacity:1}
-.tiernote{font-size:13.5px;color:var(--ink-2);margin:20px 0 0;max-width:80ch}
+.tier li{position:relative;padding-left:18px;font-size:14px;line-height:1.4}
+.tier li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;border:2px solid var(--red)}
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px 40px;margin-top:36px}
+.prop{display:flex;gap:14px;align-items:flex-start}
+.prop .pic{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center}
+.prop b{display:block;font-size:18px;font-weight:500;letter-spacing:-0.02em;margin:2px 0 4px}
+.prop p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.flexmix{margin:28px 0 0;background:#fff;color:var(--midnight);border-radius:20px;padding:18px 22px;font-size:15.5px;line-height:1.45}
+.flexmix b{color:var(--red);font-weight:500}
 
 .cta{background:#fff;color:var(--midnight);border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
 .cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
@@ -314,20 +322,20 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 </section>
 
 <section>
-  <h2 class="st" data-i18n="s4t">One: capacidad personal</h2>
-  <p class="sl" data-i18n="s4d">Cada persona tiene su propia capacidad de One para preguntar, delegar y automatizar. Elige Basic, Plus o Max según cuánto trabajo le pide a One cada perfil.</p>
+  <p class="eyebrow" data-i18n="s4e">One · Capacidad personal</p>
+  <h2 class="st" data-i18n="s4t">IA para todo el equipo, sin perder el control</h2>
+  <p class="sl" data-i18n="s4d">Cada persona tiene su propio uso diario de IA, dentro de los permisos en los que ya confías. Elige una combinación de planes personales según el tipo de usuario.</p>
   <div class="tiers" data-i18n="tiers">
-    <div class="tier"><div class="tn"><b>Basic</b><span>Día a día</span></div><p class="tl">Para que toda la plantilla resuelva lo suyo sin esperar a nadie.</p>
-      <h4>Para quién</h4><div class="who"><i>Empleados</i></div>
-      <h4>Qué hace con One</h4><ul><li>Pregunta por políticas, saldos, nóminas y documentos, y recibe la respuesta con la fuente.</li><li>Pide ausencias, gastos y tickets chateando.</li><li>Sigue cada solicitud desde la app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Gestión de equipo</span></div><p class="tl">Para quien lidera personas y necesita el contexto de su equipo a mano.</p>
-      <h4>Para quién</h4><div class="who"><i>Managers</i></div>
-      <h4>Qué hace con One</h4><ul><li>Todo lo de Basic, con más capacidad diaria.</li><li>Prepara 1:1 y consulta las analíticas de su equipo.</li><li>Aprueba ausencias, gastos y turnos con el contexto ya reunido.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Máxima capacidad</span></div><p class="tl">Para los perfiles que más trabajo delegan en One cada día.</p>
-      <h4>Para quién</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>Qué hace con One</h4><ul><li>Todo lo de Plus, con la mayor capacidad diaria.</li><li>Crea cursos completos, procesa lotes de gastos y construye informes y rutinas.</li><li>Pensado para un uso intensivo de One en su área.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluido en todos los bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Empleados</i></div><h4>Qué hace con One</h4><ul><li>Pregunta por políticas, saldos, nóminas y documentos, con la fuente.</li><li>Pide ausencias, gastos y tickets chateando.</li><li>Sigue cada solicitud desde la app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de uso vs Free</b><br>Para uso habitual.</p><h4>Recomendado para</h4><div class="who"><i>Empleados</i><i>Team leaders</i></div><h4>Qué hace con One</h4><ul><li>Todo lo de Free, con el doble de uso diario.</li><li>Para quien usa One a diario en su trabajo.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorito</span></div><p class="usage"><b>x10 de uso vs Basic</b><br>Para flujos de trabajo exigentes.</p><h4>Recomendado para</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>Qué hace con One</h4><ul><li>Prepara 1:1 y consulta las analíticas de su equipo.</li><li>Aprueba ausencias, gastos y turnos con el contexto ya reunido.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 de uso vs Basic</b><br>Para power users.</p><h4>Recomendado para</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Qué hace con One</h4><ul><li>Crea cursos completos, procesa lotes de gastos y construye informes y rutinas.</li><li>Pensado para un uso intensivo de One en su área.</li></ul></div>
   </div>
-  <p class="tiernote" data-i18n="tierNote">Los agentes que trabajan para toda la empresa (cubrir turnos, llamar a candidatos, aprobar gastos) usan una capacidad de empresa aparte, no la personal. La capacidad exacta de cada nivel depende de tu plan.</p>
+  <div class="props">
+    <div class="prop"><span class="pic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2"/></svg></span><div data-i18n="p1"><b>Tus datos, bajo control</b><p>Cada persona solo ve lo que ya podía ver. One sigue exactamente tus permisos de Factorial: mismos roles, mismo acceso, nada nuevo expuesto.</p></div></div>
+    <div class="prop"><span class="pic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.9-2.8 2.1 0 2.8 5.8 1.4 5.8 4.2 0 1.2-1.3 2.1-3 2.1-1.3 0-2.4-.6-2.9-1.5M12 6v1.8M12 16.2V18"/></svg></span><div data-i18n="p2"><b>Nadie se pasa del presupuesto</b><p>Cada persona tiene un uso diario según su plan personal. Si lo alcanza, One se pausa hasta el día siguiente. Sin recargas ni costes descontrolados.</p></div></div>
+  </div>
+  <p class="flexmix" data-i18n="flex"><b>Tú eliges qué plan personal encaja con cada persona.</b> Ejemplo con 100 usuarios: 5 Max + 15 Plus + 30 Basic + 50 Free.</p>
 </section>
 
 <section>
@@ -984,18 +992,16 @@ const EN = {
       <tr><td>Compliance</td><td>No guarantees in the EU.</td><td>Compliant with GDPR and the EU AI Act, hosted in the EU.</td></tr>
       <tr><td>Reliability</td><td>Makes up answers without warning.</td><td>Answers with your data and shows the source. If it doesn't know, it says so.</td></tr>
       <tr><td>Control</td><td>Opaque cost and actions.</td><td>You decide which agents run and see every action and what it cost.</td></tr>`,
-    s4t: "One: personal capacity",
-    s4d: "Each person has their own One capacity to ask, delegate and automate. Choose Basic, Plus or Max based on how much work each profile hands to One.",
-    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Everyday</span></div><p class="tl">So the whole workforce sorts out their own requests without waiting on anyone.</p>
-      <h4>Who it's for</h4><div class="who"><i>Employees</i></div>
-      <h4>What they do with One</h4><ul><li>Ask about policies, balances, payslips and documents, and get the answer with the source.</li><li>Request time off, expenses and tickets by chatting.</li><li>Track every request from the app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Team management</span></div><p class="tl">For people who lead teams and need their team's context at hand.</p>
-      <h4>Who it's for</h4><div class="who"><i>Managers</i></div>
-      <h4>What they do with One</h4><ul><li>Everything in Basic, with more daily capacity.</li><li>Prepare 1:1s and check their team's analytics.</li><li>Approve time off, expenses and shifts with the context already gathered.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Maximum capacity</span></div><p class="tl">For the profiles that delegate the most work to One every day.</p>
-      <h4>Who it's for</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>What they do with One</h4><ul><li>Everything in Plus, with the highest daily capacity.</li><li>Build full courses, process batches of expenses and create reports and routines.</li><li>Designed for intensive use of One in their area.</li></ul></div>`,
-    tierNote: "Agents that work for the whole company (covering shifts, calling candidates, approving expenses) use a separate company capacity, not the personal one. The exact capacity of each tier depends on your plan.",
+    s4e: "One · Personal capacity",
+    s4t: "Give everyone AI without giving up control",
+    s4d: "Every person gets their own daily AI usage, inside the permissions you already trust. Choose a mix of personal plans based on the type of user.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Included in every bundle.</b></p><h4>Recommended for</h4><div class="who"><i>Employees</i></div><h4>What they do with One</h4><ul><li>Ask about policies, balances, payslips and documents, with the source.</li><li>Request time off, expenses and tickets by chatting.</li><li>Track every request from the app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 usage vs Free</b><br>For regular use.</p><h4>Recommended for</h4><div class="who"><i>Employees</i><i>Team leaders</i></div><h4>What they do with One</h4><ul><li>Everything in Free, with twice the daily usage.</li><li>For people who use One every day in their work.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Favourite</span></div><p class="usage"><b>x10 usage vs Basic</b><br>For demanding workflows.</p><h4>Recommended for</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>What they do with One</h4><ul><li>Prepare 1:1s and check their team's analytics.</li><li>Approve time off, expenses and shifts with the context already gathered.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 usage vs Basic</b><br>For power users.</p><h4>Recommended for</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>What they do with One</h4><ul><li>Build full courses, process batches of expenses and create reports and routines.</li><li>Designed for intensive use of One in their area.</li></ul></div>`,
+    p1: "<b>Your data stays in control</b><p>Everyone only sees what they already could. One follows your exact Factorial permissions: same roles, same access, nothing new exposed.</p>",
+    p2: "<b>Nobody can overspend</b><p>Everyone gets a daily allowance based on their personal plan. Reach it, and One simply pauses until tomorrow. No top-ups, no runaway costs.</p>",
+    flex: "<b>You choose which personal plan fits each person.</b> Example with 100 seats: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "What's next",
     s3d: "Every product is becoming an AI product. Scope and dates may change; we'll keep you posted.",
     road: `<div><span>Coming soon</span><b>AI 1:1s</b><p>One prepares and guides every 1:1 with the person's full history.</p></div>
@@ -1284,18 +1290,16 @@ const DE = {
       <tr><td>Compliance</td><td>Keine Garantien in der EU.</td><td>Konform mit DSGVO und EU-KI-Verordnung, gehostet in der EU.</td></tr>
       <tr><td>Verlässlichkeit</td><td>Erfindet Antworten, ohne zu warnen.</td><td>Antwortet mit deinen Daten und zeigt die Quelle. Wenn es etwas nicht weiß, sagt es das.</td></tr>
       <tr><td>Kontrolle</td><td>Intransparente Kosten und Aktionen.</td><td>Du entscheidest, welche Agenten laufen, und siehst jede Aktion und was sie gekostet hat.</td></tr>`,
-    s4t: "One: persönliche Kapazität",
-    s4d: "Jede Person hat ihre eigene One-Kapazität, um zu fragen, zu delegieren und zu automatisieren. Wähle Basic, Plus oder Max danach, wie viel Arbeit jedes Profil an One übergibt.",
-    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Alltag</span></div><p class="tl">Damit die gesamte Belegschaft ihre Anliegen selbst klärt, ohne auf jemanden zu warten.</p>
-      <h4>Für wen</h4><div class="who"><i>Mitarbeitende</i></div>
-      <h4>Was sie mit One machen</h4><ul><li>Fragen zu Richtlinien, Salden, Gehaltsabrechnungen und Dokumenten stellen und die Antwort mit Quelle erhalten.</li><li>Abwesenheiten, Ausgaben und Tickets per Chat beantragen.</li><li>Jeden Antrag in der App verfolgen.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Teamführung</span></div><p class="tl">Für alle, die Teams führen und den Kontext ihres Teams griffbereit brauchen.</p>
-      <h4>Für wen</h4><div class="who"><i>Führungskräfte</i></div>
-      <h4>Was sie mit One machen</h4><ul><li>Alles aus Basic, mit mehr Tageskapazität.</li><li>1:1s vorbereiten und die Analysen ihres Teams prüfen.</li><li>Abwesenheiten, Ausgaben und Schichten mit bereits gesammeltem Kontext genehmigen.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Maximale Kapazität</span></div><p class="tl">Für die Profile, die täglich am meisten Arbeit an One delegieren.</p>
-      <h4>Für wen</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>Was sie mit One machen</h4><ul><li>Alles aus Plus, mit der höchsten Tageskapazität.</li><li>Komplette Kurse erstellen, Ausgaben im Stapel verarbeiten und Berichte und Routinen anlegen.</li><li>Für die intensive Nutzung von One in ihrem Bereich konzipiert.</li></ul></div>`,
-    tierNote: "Agenten, die für das ganze Unternehmen arbeiten (Schichten abdecken, Kandidaten anrufen, Ausgaben genehmigen), nutzen eine separate Unternehmenskapazität, nicht die persönliche. Die genaue Kapazität jeder Stufe hängt von deinem Plan ab.",
+    s4e: "One · Persönliche Kapazität",
+    s4t: "KI für alle, ohne die Kontrolle abzugeben",
+    s4d: "Jede Person bekommt ihre eigene tägliche KI-Nutzung, innerhalb der Berechtigungen, denen du schon vertraust. Wähle eine Mischung persönlicher Pläne je nach Nutzertyp.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>In jedem Bundle enthalten.</b></p><h4>Empfohlen für</h4><div class="who"><i>Mitarbeitende</i></div><h4>Was sie mit One machen</h4><ul><li>Fragen zu Richtlinien, Salden, Gehaltsabrechnungen und Dokumenten stellen, mit Quelle.</li><li>Abwesenheiten, Ausgaben und Tickets per Chat beantragen.</li><li>Jede Anfrage in der App verfolgen.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 Nutzung vs. Free</b><br>Für die regelmäßige Nutzung.</p><h4>Empfohlen für</h4><div class="who"><i>Mitarbeitende</i><i>Teamleads</i></div><h4>Was sie mit One machen</h4><ul><li>Alles aus Free, mit doppelter Tagesnutzung.</li><li>Für alle, die One täglich in ihrer Arbeit nutzen.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorit</span></div><p class="usage"><b>x10 Nutzung vs. Basic</b><br>Für anspruchsvolle Workflows.</p><h4>Empfohlen für</h4><div class="who"><i>Teamleads</i><i>Manager</i><i>Admins</i></div><h4>Was sie mit One machen</h4><ul><li>1:1s vorbereiten und die Analytics des eigenen Teams einsehen.</li><li>Abwesenheiten, Ausgaben und Schichten mit bereits gesammeltem Kontext genehmigen.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 Nutzung vs. Basic</b><br>Für Power-User.</p><h4>Empfohlen für</h4><div class="who"><i>Manager</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Was sie mit One machen</h4><ul><li>Komplette Kurse erstellen, Ausgaben gesammelt verarbeiten sowie Berichte und Routinen aufbauen.</li><li>Für die intensive Nutzung von One im eigenen Bereich.</li></ul></div>`,
+    p1: "<b>Deine Daten bleiben unter Kontrolle</b><p>Jede Person sieht nur, was sie schon sehen durfte. One folgt exakt deinen Factorial-Berechtigungen: gleiche Rollen, gleicher Zugriff, nichts Neues offengelegt.</p>",
+    p2: "<b>Niemand überzieht das Budget</b><p>Jede Person hat ein tägliches Kontingent je nach persönlichem Plan. Ist es erreicht, pausiert One bis morgen. Keine Aufladungen, keine ausufernden Kosten.</p>",
+    flex: "<b>Du entscheidest, welcher persönliche Plan zu wem passt.</b> Beispiel mit 100 Nutzern: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Was als Nächstes kommt",
     s3d: "Jedes Produkt wird zum KI-Produkt. Umfang und Termine können sich ändern; wir halten dich auf dem Laufenden.",
     road: `<div><span>Demnächst</span><b>KI-1:1s</b><p>One bereitet jedes 1:1 mit der gesamten Historie der Person vor und begleitet es.</p></div>
@@ -1545,18 +1549,16 @@ const PT = {
       <tr><td>Conformidade</td><td>Sem garantias na UE.</td><td>Conforme com o RGPD e o Regulamento da IA da UE, alojada na UE.</td></tr>
       <tr><td>Fiabilidade</td><td>Inventa respostas sem avisar.</td><td>Responde com os teus dados e mostra a fonte. Se não sabe, diz.</td></tr>
       <tr><td>Controlo</td><td>Custo e ações opacos.</td><td>Tu decides que agentes correm e vês cada ação e quanto custou.</td></tr>`,
-    s4t: "One: capacidade pessoal",
-    s4d: "Cada pessoa tem a sua própria capacidade One para perguntar, delegar e automatizar. Escolhe Basic, Plus ou Max consoante o trabalho que cada perfil entrega à One.",
-    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Dia a dia</span></div><p class="tl">Para que toda a força de trabalho resolva os seus pedidos sem esperar por ninguém.</p>
-      <h4>Para quem é</h4><div class="who"><i>Colaboradores</i></div>
-      <h4>O que fazem com a One</h4><ul><li>Perguntam por políticas, saldos, recibos de vencimento e documentos, e recebem a resposta com a fonte.</li><li>Pedem ausências, despesas e tickets por conversa.</li><li>Acompanham cada pedido a partir da app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Gestão de equipas</span></div><p class="tl">Para quem lidera equipas e precisa do contexto da sua equipa à mão.</p>
-      <h4>Para quem é</h4><div class="who"><i>Gestores</i></div>
-      <h4>O que fazem com a One</h4><ul><li>Tudo o que há no Basic, com mais capacidade diária.</li><li>Preparam 1:1 e consultam a analítica da sua equipa.</li><li>Aprovam ausências, despesas e turnos com o contexto já reunido.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Capacidade máxima</span></div><p class="tl">Para os perfis que mais trabalho delegam na One todos os dias.</p>
-      <h4>Para quem é</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>O que fazem com a One</h4><ul><li>Tudo o que há no Plus, com a maior capacidade diária.</li><li>Criam cursos completos, processam lotes de despesas e criam relatórios e rotinas.</li><li>Pensado para uso intensivo da One na sua área.</li></ul></div>`,
-    tierNote: "Os agentes que trabalham para toda a empresa (cobrir turnos, ligar a candidatos, aprovar despesas) usam uma capacidade de empresa separada, não a pessoal. A capacidade exata de cada nível depende do teu plano.",
+    s4e: "One · Capacidade pessoal",
+    s4t: "IA para toda a equipa, sem perder o controlo",
+    s4d: "Cada pessoa tem a sua própria utilização diária de IA, dentro das permissões em que já confias. Escolhe uma combinação de planos pessoais consoante o tipo de utilizador.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluído em todos os bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Colaboradores</i></div><h4>O que fazem com a One</h4><ul><li>Perguntam sobre políticas, saldos, recibos de vencimento e documentos, com a fonte.</li><li>Pedem ausências, despesas e tickets por chat.</li><li>Acompanham cada pedido na app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de utilização vs Free</b><br>Para uso regular.</p><h4>Recomendado para</h4><div class="who"><i>Colaboradores</i><i>Team leaders</i></div><h4>O que fazem com a One</h4><ul><li>Tudo o que o Free inclui, com o dobro da utilização diária.</li><li>Para quem usa a One todos os dias no trabalho.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorito</span></div><p class="usage"><b>x10 de utilização vs Basic</b><br>Para fluxos de trabalho exigentes.</p><h4>Recomendado para</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>O que fazem com a One</h4><ul><li>Preparam 1:1 e consultam a análise da sua equipa.</li><li>Aprovam ausências, despesas e turnos com o contexto já reunido.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 de utilização vs Basic</b><br>Para power users.</p><h4>Recomendado para</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>O que fazem com a One</h4><ul><li>Criam cursos completos, processam lotes de despesas e constroem relatórios e rotinas.</li><li>Pensado para um uso intensivo da One na sua área.</li></ul></div>`,
+    p1: "<b>Os teus dados, sob controlo</b><p>Cada pessoa só vê o que já podia ver. A One segue exatamente as tuas permissões da Factorial: mesmas funções, mesmo acesso, nada de novo exposto.</p>",
+    p2: "<b>Ninguém gasta a mais</b><p>Cada pessoa tem uma utilização diária de acordo com o seu plano pessoal. Quando a atinge, a One pausa até ao dia seguinte. Sem carregamentos nem custos descontrolados.</p>",
+    flex: "<b>Tu escolhes que plano pessoal se ajusta a cada pessoa.</b> Exemplo com 100 utilizadores: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "O que aí vem",
     s3d: "Todos os produtos se estão a tornar produtos de IA. O âmbito e as datas podem mudar; manter-te-emos informado.",
     road: `<div><span>Brevemente</span><b>1:1 com IA</b><p>A One prepara e orienta cada 1:1 com o histórico completo da pessoa.</p></div>
@@ -1806,18 +1808,16 @@ const FR = {
       <tr><td>Conformité</td><td>Aucune garantie dans l’UE.</td><td>Conforme au RGPD et à l’AI Act européen, hébergé dans l’UE.</td></tr>
       <tr><td>Fiabilité</td><td>Invente des réponses sans prévenir.</td><td>Répond avec vos données et cite la source. S’il ne sait pas, il le dit.</td></tr>
       <tr><td>Contrôle</td><td>Coûts et actions opaques.</td><td>Vous décidez quels agents tournent et voyez chaque action et ce qu’elle a coûté.</td></tr>`,
-    s4t: "One : capacité personnelle",
-    s4d: "Chaque personne dispose de sa propre capacité One pour demander, déléguer et automatiser. Choisissez Basic, Plus ou Max selon la quantité de travail que chaque profil confie à One.",
-    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Au quotidien</span></div><p class="tl">Pour que tous les collaborateurs règlent leurs demandes seuls, sans attendre personne.</p>
-      <h4>Pour qui</h4><div class="who"><i>Collaborateurs</i></div>
-      <h4>Ce qu’ils font avec One</h4><ul><li>Poser des questions sur les politiques, soldes, bulletins de paie et documents, et obtenir la réponse avec la source.</li><li>Demander absences, notes de frais et tickets en discutant.</li><li>Suivre chaque demande depuis l’appli.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Gestion d’équipe</span></div><p class="tl">Pour ceux qui dirigent des équipes et ont besoin du contexte de leur équipe sous la main.</p>
-      <h4>Pour qui</h4><div class="who"><i>Managers</i></div>
-      <h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qui est dans Basic, avec plus de capacité quotidienne.</li><li>Préparer les 1:1 et consulter les analyses de leur équipe.</li><li>Valider absences, notes de frais et plannings avec le contexte déjà rassemblé.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Capacité maximale</span></div><p class="tl">Pour les profils qui délèguent le plus de travail à One chaque jour.</p>
-      <h4>Pour qui</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qui est dans Plus, avec la capacité quotidienne la plus élevée.</li><li>Construire des cours complets, traiter des lots de notes de frais et créer rapports et routines.</li><li>Conçu pour un usage intensif de One dans leur domaine.</li></ul></div>`,
-    tierNote: "Les agents qui travaillent pour toute l’entreprise (remplacer des créneaux, appeler des candidats, valider des notes de frais) utilisent une capacité entreprise distincte, pas la capacité personnelle. La capacité exacte de chaque niveau dépend de votre formule.",
+    s4e: "One · Capacité personnelle",
+    s4t: "L’IA pour tous, sans perdre le contrôle",
+    s4d: "Chaque personne dispose de sa propre utilisation quotidienne de l’IA, dans le respect des autorisations que vous maîtrisez déjà. Choisissez une combinaison de plans personnels selon le type d’utilisateur.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Inclus dans tous les bundles.</b></p><h4>Recommandé pour</h4><div class="who"><i>Collaborateurs</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Posent leurs questions sur les politiques, soldes, fiches de paie et documents, avec la source.</li><li>Demandent absences, notes de frais et tickets par chat.</li><li>Suivent chaque demande depuis l’app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 d’utilisation vs Free</b><br>Pour un usage régulier.</p><h4>Recommandé pour</h4><div class="who"><i>Collaborateurs</i><i>Team leaders</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qu’inclut Free, avec deux fois plus d’utilisation quotidienne.</li><li>Pour ceux qui utilisent One chaque jour dans leur travail.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Favori</span></div><p class="usage"><b>x10 d’utilisation vs Basic</b><br>Pour les workflows exigeants.</p><h4>Recommandé pour</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Préparent les 1:1 et consultent les analyses de leur équipe.</li><li>Approuvent absences, notes de frais et plannings avec le contexte déjà réuni.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 d’utilisation vs Basic</b><br>Pour les power users.</p><h4>Recommandé pour</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Créent des formations complètes, traitent les notes de frais par lots et construisent rapports et routines.</li><li>Conçu pour un usage intensif de One dans leur domaine.</li></ul></div>`,
+    p1: "<b>Vos données restent sous contrôle</b><p>Chacun ne voit que ce qu’il pouvait déjà voir. One suit exactement vos autorisations Factorial : mêmes rôles, mêmes accès, rien de nouveau exposé.</p>",
+    p2: "<b>Personne ne dépasse le budget</b><p>Chacun dispose d’une allocation quotidienne selon son plan personnel. Une fois atteinte, One se met en pause jusqu’au lendemain. Pas de recharges, pas de coûts incontrôlés.</p>",
+    flex: "<b>Vous choisissez le plan personnel adapté à chaque personne.</b> Exemple pour 100 utilisateurs : 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Prochainement",
     s3d: "Chaque produit devient un produit d’IA. Le périmètre et les dates peuvent évoluer ; nous vous tiendrons informé.",
     road: `<div><span>Bientôt</span><b>1:1 avec l’IA</b><p>One prépare et guide chaque 1:1 avec tout l’historique de la personne.</p></div>
@@ -1889,11 +1889,11 @@ const IT = {
       why: "Dalla valutazione, con un clic: assegni la formazione che colma ogni gap di competenze e ne misuri l’impatto nel ciclo successivo.",
       stat: { n: "94%", t: "dei dipendenti resterebbe più a lungo in un’azienda che investe nel loro sviluppo (LinkedIn Workplace Learning Report, 2023)" },
       soon: ["Corsi gamificati: meccaniche di gioco dentro i corsi."] },
-    engagement: { name: "Engagement",
+    engagement: { name: "Coinvolgimento",
       lead: "Ascolta il tuo team senza inviare un altro modulo: pulse quotidiano, sondaggi, eNPS e 1:1 con l’AI.",
       value: ["Pulse del team alla timbratura: check-in senza stanchezza da sondaggi e alert al manager giusto.", "Sondaggi automatici ed eNPS all’onboarding, all’uscita e a ogni tappa importante.", "Riunioni 1:1 con l’AI: One prepara ogni 1:1 con obiettivi, performance e umore."],
       one: [{ q: "Prepara l’1:1 di domani con Laura.", a: "Raccoglie i suoi obiettivi, l’ultima valutazione, il pulse recente e quanto discusso nei precedenti 1:1." }],
-      why: "Una buona performance non significa sempre engagement. Con il pulse legato a timbrature e performance, One vede il quadro completo di ogni persona.",
+      why: "Una buona performance non significa sempre coinvolgimento. Con il pulse legato a timbrature e performance, One vede il quadro completo di ogni persona.",
       stat: { n: "40–60%", t: "in meno di amministrazione manuale con valutazioni, 1:1 e sondaggi automatizzati" } },
     comunidades: { name: "Community",
       lead: "Spazi in cui le tue persone si incontrano, condividono e si riconoscono, oltre l’organigramma.",
@@ -1905,7 +1905,7 @@ const IT = {
       value: ["Pubblica per tutta l’azienda o per team e sedi specifici.", "Raggiunge tutti tramite l’app, anche chi non lavora al computer.", "Gli annunci stanno accanto alle policy e ai documenti a cui si riferiscono."],
       one: [{ q: "Scrivi l’annuncio del nuovo orario estivo in spagnolo e inglese.", a: "Lo redige a partire dalla tua policy sugli orari e lo traduce, pronto da rivedere." }],
       why: "La segmentazione usa gli stessi dati di team, sede e ruolo del resto di Factorial." },
-    ats: { name: "ATS & selezione",
+    ats: { name: "ATS e assunzioni",
       lead: "Un ATS che pianifica, filtra e decide con te, dalla posizione approvata all’offerta firmata.",
       value: ["Hiring Plan: ogni posizione approvata nella pianificazione dell’organico arriva come annuncio con responsabile, scadenza e stato.", "Report AI per ogni candidato e chiamate AI nella sua lingua, con trascrizione ed esito verde, giallo o rosso.", "Annunci illimitati, permessi per fase, videocolloqui con One e analytics di retention a un anno."],
       one: [
@@ -1915,7 +1915,7 @@ const IT = {
       why: "La posizione nasce approvata e con budget; chi firma entra con tutti i suoi dati, senza reinserire nulla; e gli analytics incrociano il canale di selezione con la valutazione della performance.",
       stats: [{ n: "70%", t: "di time-to-hire in meno con lo screening AI del primo colloquio" }, { n: "+25%", t: "di crescita dell’organico con lo stesso team di recruiting" }],
       soon: ["Candidati suggeriti dal talent pool (prossimamente).", "WhatsApp nel Recruiting e pagine aziendali per entità (prossimamente).", "Valutazione culturale (prossimamente)."] },
-    canal: { name: "Canale etico",
+    canal: { name: "Spazio sicuro",
       lead: "Un canale per segnalare illeciti in modo riservato, anche in forma anonima.",
       value: ["Segnalazioni riservate, con la possibilità di restare anonimi.", "Gestione dei casi con accesso limitato a chi se ne occupa.", "Ti aiuta a rispettare le norme sulla tutela dei segnalanti."],
       oneNote: "One segue alla lettera i permessi di Factorial: i casi sono visibili solo a chi li gestisce, a nessun altro.",
@@ -2067,18 +2067,16 @@ const IT = {
       <tr><td>Conformità</td><td>Nessuna garanzia nell’UE.</td><td>Conforme a GDPR e AI Act europeo, ospitata nell’UE.</td></tr>
       <tr><td>Affidabilità</td><td>Inventa risposte senza avvisare.</td><td>Risponde con i tuoi dati e mostra la fonte. Se non lo sa, lo dice.</td></tr>
       <tr><td>Controllo</td><td>Costi e azioni opachi.</td><td>Decidi tu quali agenti funzionano e vedi ogni azione e quanto è costata.</td></tr>`,
-    s4t: "One: capacità personale",
-    s4d: "Ogni persona ha la propria capacità One per chiedere, delegare e automatizzare. Scegli Basic, Plus o Max in base a quanto lavoro ogni profilo affida a One.",
-    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Uso quotidiano</span></div><p class="tl">Perché tutta la forza lavoro sbrighi le proprie richieste senza aspettare nessuno.</p>
-      <h4>Per chi è</h4><div class="who"><i>Dipendenti</i></div>
-      <h4>Cosa fanno con One</h4><ul><li>Chiedono di policy, saldi, cedolini e documenti e ricevono la risposta con la fonte.</li><li>Richiedono assenze, spese e ticket chattando.</li><li>Seguono ogni richiesta dall’app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Plus</b><span>Gestione del team</span></div><p class="tl">Per chi guida dei team e ha bisogno del contesto del proprio team a portata di mano.</p>
-      <h4>Per chi è</h4><div class="who"><i>Manager</i></div>
-      <h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Basic, con più capacità giornaliera.</li><li>Preparano gli 1:1 e consultano gli analytics del proprio team.</li><li>Approvano assenze, spese e turni con il contesto già raccolto.</li></ul></div>
-    <div class="tier max"><div class="tn"><b>Max</b><span>Capacità massima</span></div><p class="tl">Per i profili che ogni giorno delegano più lavoro a One.</p>
-      <h4>Per chi è</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
-      <h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Plus, con la massima capacità giornaliera.</li><li>Creano corsi completi, elaborano lotti di spese e creano report e routine.</li><li>Pensato per un uso intensivo di One nella loro area.</li></ul></div>`,
-    tierNote: "Gli agenti che lavorano per tutta l’azienda (copertura dei turni, chiamate ai candidati, approvazione delle spese) usano una capacità aziendale separata, non quella personale. La capacità esatta di ogni livello dipende dal tuo piano.",
+    s4e: "One · Capacità personale",
+    s4t: "AI per tutti, senza perdere il controllo",
+    s4d: "Ogni persona ha il proprio utilizzo giornaliero di AI, all’interno dei permessi di cui già ti fidi. Scegli un mix di piani personali in base al tipo di utente.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluso in ogni bundle.</b></p><h4>Consigliato per</h4><div class="who"><i>Dipendenti</i></div><h4>Cosa fanno con One</h4><ul><li>Chiedono di policy, saldi, cedolini e documenti, con la fonte.</li><li>Richiedono assenze, spese e ticket in chat.</li><li>Seguono ogni richiesta dall’app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 di utilizzo vs Free</b><br>Per un uso regolare.</p><h4>Consigliato per</h4><div class="who"><i>Dipendenti</i><i>Team leader</i></div><h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Free, con il doppio dell’utilizzo giornaliero.</li><li>Per chi usa One ogni giorno nel proprio lavoro.</li></ul></div>
+    <div class="tier fav"><div class="tn"><b>Plus</b><span>Preferito</span></div><p class="usage"><b>x10 di utilizzo vs Basic</b><br>Per flussi di lavoro impegnativi.</p><h4>Consigliato per</h4><div class="who"><i>Team leader</i><i>Manager</i><i>Admin</i></div><h4>Cosa fanno con One</h4><ul><li>Preparano gli 1:1 e consultano gli analytics del proprio team.</li><li>Approvano assenze, spese e turni con il contesto già raccolto.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 di utilizzo vs Basic</b><br>Per power user.</p><h4>Consigliato per</h4><div class="who"><i>Manager</i><i>Admin</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Cosa fanno con One</h4><ul><li>Creano corsi completi, elaborano lotti di spese e creano report e routine.</li><li>Pensato per un uso intensivo di One nella propria area.</li></ul></div>`,
+    p1: "<b>I tuoi dati restano sotto controllo</b><p>Ogni persona vede solo ciò che poteva già vedere. One segue esattamente i tuoi permessi Factorial: stessi ruoli, stessi accessi, niente di nuovo esposto.</p>",
+    p2: "<b>Nessuno sfora il budget</b><p>Ogni persona ha un utilizzo giornaliero in base al proprio piano personale. Raggiunto il limite, One si mette in pausa fino al giorno dopo. Niente ricariche, niente costi fuori controllo.</p>",
+    flex: "<b>Scegli tu quale piano personale si adatta a ogni persona.</b> Esempio con 100 utenti: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Cosa arriva",
     s3d: "Ogni prodotto sta diventando un prodotto AI. Ambito e date possono cambiare; ti terremo aggiornato.",
     road: `<div><span>Prossimamente</span><b>1:1 con l’AI</b><p>One prepara e guida ogni 1:1 con lo storico completo della persona.</p></div>
@@ -2113,11 +2111,11 @@ LONG.it = {
     <li><span class="when">Giorni feriali, 18:00</span><span>Persone con meno di 4 timbrature oggi<span class="src">Rilevazione presenze</span></span></li>
     <li><span class="when">Il 25</span><span>Variabili di paga in sospeso prima della chiusura<span class="src">Compensation · Turni · Spese</span></span></li>
     <li><span class="when">Primo giorno del mese</span><span>Formazione obbligatoria in sospeso per sede<span class="src">Formazione & LMS</span></span></li>
-    <li><span class="when">Venerdì, 12:00</span><span>Candidati in screening senza feedback dal team di selezione<span class="src">ATS & selezione</span></span></li>
+    <li><span class="when">Venerdì, 12:00</span><span>Candidati in screening senza feedback dal team di selezione<span class="src">ATS e assunzioni</span></span></li>
   </ul>
   <p class="disc-note">Qualsiasi report di Analytics può essere pianificato come routine dalla chat di One. Le routine usano crediti One.</p>`,
     ax: { t: "Esempi di report già connessi",
-      c1: ["Turnover ed engagement per reparto", "Core HR + Engagement · turnover (barre) ed eNPS (linea)", ["Negozi","Ops","Vendite","Supporto","Tech"]],
+      c1: ["Turnover e coinvolgimento per reparto", "Core HR + Coinvolgimento · turnover (barre) ed eNPS (linea)", ["Negozi","Ops","Vendite","Supporto","Tech"]],
       c2: ["Qualità dell’assunzione per canale", "Recruiting + Performance · retention a 1 anno", ["Segnalazioni","LinkedIn","Sito carriere","Portali di lavoro"]],
       c3: ["Costo dell’organico: effettivo vs. pianificato", "Organico + Revisione salariale + Compensation", ["G","F","M","A","M","G"], "Effettivo", "Pianificato"],
       c4: ["Assenteismo e straordinari per sede", "Assenze + Rilevazione presenze + Turni", ["Madrid","Barcellona","Valencia","Siviglia"], "Assenteismo %", "Straordinari"],
