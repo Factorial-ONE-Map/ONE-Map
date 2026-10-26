@@ -95,7 +95,8 @@ h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.9;letter-spacin
 .onebtn:hover{transform:scale(1.03)}
 .onebtn.active .disc{background:var(--midnight)}
 .onebtn.active .disc svg{color:#fff}
-.core span{font-size:14px;font-weight:500}
+.core .onelabel{display:flex;flex-direction:column;align-items:center;font-size:16px;font-weight:500;line-height:1.15}
+.core .onelabel small{font-size:12px;font-weight:400;opacity:.9;letter-spacing:.02em}
 
 @media (prefers-reduced-motion: no-preference){
   .wires .flow{stroke-dasharray:6 6;animation:flow 1.2s linear infinite}
@@ -230,6 +231,12 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
 .cta p{margin:0;font-size:17px}
 .cta h2{color:var(--red)}
+.ctaside{display:grid;gap:22px}
+.ctaact{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding-top:20px;border-top:1px solid #E6E6EC}
+.ctaact p{font-size:15px;color:#6C6C7D}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-size:15px;font-weight:500;padding:11px 20px;border-radius:999px;transition:background .2s var(--ease)}
+.btn:hover{background:var(--red-dark)}
+.btn:focus-visible{outline:3px solid rgba(255,53,94,.25);outline-offset:2px}
 footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:rgba(255,255,255,.7)}
 
 /* ---------- RESPONSIVE ---------- */
@@ -285,7 +292,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
         <div class="col left" id="colL"></div>
         <div class="core">
           <button class="onebtn" id="oneBtn" aria-label="Ver qué es One" data-i18n-aria="oneAria"><span class="disc"><svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg></span></button>
-          <span>One</span>
+          <span class="onelabel">One<small>AI Agent</small></span>
         </div>
         <div class="col right" id="colR"></div>
       </div>
@@ -355,7 +362,10 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 <section>
   <div class="cta">
     <h2 data-i18n="ctaT">¿Vemos tu ciclo completo con tus propios datos?</h2>
-    <p data-i18n="ctaD">Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
+    <div class="ctaside">
+      <p data-i18n="ctaD">Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
+      <div class="ctaact"><p data-i18n="ctaQ">¿Todavía no hablas con nadie de Factorial?</p><a class="btn" href="https://factorial.es/solicitar-demo" target="_blank" rel="noopener"><span data-i18n="ctaBtn">Solicita una demo</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+    </div>
   </div>
 </section>
 <footer data-i18n="footer">Los ejemplos de informes y conversaciones son ilustrativos y usan datos ficticios. Algunas funcionalidades dependen del plan contratado y de las credenciales de One. Factorial · octubre 2026.</footer>
@@ -1015,6 +1025,8 @@ const EN = {
     <div class="more"><span>Coming soon</span><b>And much more</b><p>New AI features reach every Factorial product every month.</p></div>`,
     ctaT: "Shall we walk through your full cycle with your own data?",
     ctaD: "We map your headcount, your hiring process and your pay policy, and show you the same flow inside Factorial, with One working at every step.",
+    ctaQ: "Not in touch with anyone at Factorial yet?",
+    ctaBtn: "Book a demo",
     footer: "Report and conversation examples are illustrative and use fictional data. Some features depend on your plan and One credits. Factorial · October 2026."
   }
 };
@@ -1313,6 +1325,8 @@ const DE = {
     <div class="more"><span>Demnächst</span><b>Und noch viel mehr</b><p>Jeden Monat kommen neue KI-Funktionen in jedes Factorial-Produkt.</p></div>`,
     ctaT: "Sollen wir deinen gesamten Zyklus gemeinsam mit deinen eigenen Daten durchgehen?",
     ctaD: "Wir bilden deine Personalplanung, deinen Recruiting-Prozess und deine Vergütungsrichtlinie ab und zeigen dir denselben Ablauf in Factorial, mit One bei jedem Schritt.",
+    ctaQ: "Noch keinen Kontakt zu jemandem von Factorial?",
+    ctaBtn: "Demo vereinbaren",
     footer: "Berichte und Gesprächsbeispiele sind illustrativ und verwenden fiktive Daten. Einige Funktionen hängen von deinem Plan und von One-Credits ab. Factorial · Oktober 2026."
   }
 };
@@ -1572,6 +1586,8 @@ const PT = {
     <div class="more"><span>Brevemente</span><b>E muito mais</b><p>Todos os meses chegam novas funcionalidades de IA a todos os produtos da Factorial.</p></div>`,
     ctaT: "Vemos o teu ciclo completo com os teus próprios dados?",
     ctaD: "Mapeamos os teus efetivos, o teu processo de recrutamento e a tua política salarial, e mostramos-te o mesmo fluxo dentro da Factorial, com a One a trabalhar em cada passo.",
+    ctaQ: "Ainda não falaste com ninguém da Factorial?",
+    ctaBtn: "Pedir uma demo",
     footer: "Os exemplos de relatórios e conversas são ilustrativos e usam dados fictícios. Algumas funcionalidades dependem do teu plano e dos créditos One. Factorial · outubro de 2026."
   }
 };
@@ -1831,6 +1847,8 @@ const FR = {
     <div class="more"><span>Bientôt</span><b>Et bien plus encore</b><p>De nouvelles fonctions IA arrivent chaque mois dans tous les produits Factorial.</p></div>`,
     ctaT: "On parcourt ensemble votre cycle complet avec vos propres données ?",
     ctaD: "Nous cartographions vos effectifs, votre processus de recrutement et votre politique de rémunération, et nous vous montrons le même flux dans Factorial, avec One à l’œuvre à chaque étape.",
+    ctaQ: "Vous n’êtes pas encore en contact avec Factorial ?",
+    ctaBtn: "Demander une démo",
     footer: "Les exemples de rapports et de conversations sont illustratifs et utilisent des données fictives. Certaines fonctionnalités dépendent de votre formule et des crédits One. Factorial · octobre 2026."
   }
 };
@@ -2090,6 +2108,8 @@ const IT = {
     <div class="more"><span>Prossimamente</span><b>E molto altro</b><p>Ogni mese arrivano nuove funzioni AI in tutti i prodotti Factorial.</p></div>`,
     ctaT: "Vediamo insieme il tuo ciclo completo con i tuoi dati?",
     ctaD: "Mappiamo il tuo organico, il tuo processo di selezione e la tua politica retributiva, e ti mostriamo lo stesso flusso dentro Factorial, con One al lavoro a ogni passaggio.",
+    ctaQ: "Non sei ancora in contatto con nessuno di Factorial?",
+    ctaBtn: "Prenota una demo",
     footer: "Gli esempi di report e conversazioni sono illustrativi e usano dati fittizi. Alcune funzioni dipendono dal tuo piano e dai crediti One. Factorial · ottobre 2026."
   }
 };
