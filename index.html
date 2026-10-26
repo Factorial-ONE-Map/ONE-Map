@@ -55,6 +55,10 @@ button{font:inherit;color:inherit}
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .top small{font-size:13px;font-weight:400;opacity:.9}
 .logo{height:20px;width:auto;color:#fff;opacity:.9}
+.topr{display:flex;align-items:center;gap:14px}
+.lang{display:inline-flex;border:1px solid rgba(255,255,255,.75);border-radius:999px;padding:2px;background:rgba(255,255,255,.08)}
+.lang button{appearance:none;border:0;background:transparent;color:#fff;font-size:12.5px;font-weight:500;padding:3px 10px;border-radius:999px;cursor:pointer;letter-spacing:.02em}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--red-dark)}
 h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spacing:-0.04em;margin:14px 0 10px}
 .sub{max-width:62ch;font-size:clamp(15px,1.2vw,17px);opacity:.92;margin:0 0 4px}
 .hint{font-size:14px;opacity:.85;margin:0}
@@ -234,7 +238,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
     <div class="mapcol">
       <div class="top">
         <small>All in One</small>
-        <span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <div class="topr"><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path>
 <path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path>
@@ -248,42 +252,42 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 <path d="M2861.49 148.292C2861.49 175.592 2839.36 197.723 2812.06 197.723C2784.76 197.723 2762.63 175.592 2762.63 148.292C2762.63 120.992 2784.76 98.8616 2812.06 98.8616C2839.36 98.8616 2861.49 120.992 2861.49 148.292Z" fill="currentColor"></path>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M2312.26 587.677C2403.26 587.677 2477.03 513.907 2477.03 422.908C2477.03 331.908 2403.26 258.138 2312.26 258.138C2221.26 258.138 2147.49 331.908 2147.49 422.908C2147.49 513.907 2221.26 587.677 2312.26 587.677ZM2312.26 508.038C2359.28 508.038 2397.39 469.924 2397.39 422.908C2397.39 375.891 2359.28 337.777 2312.26 337.777C2265.25 337.777 2227.13 375.891 2227.13 422.908C2227.13 469.924 2265.25 508.038 2312.26 508.038Z" fill="currentColor"></path>
 <path d="M1916.82 450.492V203.823L2008.43 175.754V258.66H2098.9V345.113H2008.43C2008.43 375.054 2007.28 424.895 2007.28 448.249C2007.28 485.301 2030.06 500.6 2052.92 500.6C2075.77 500.6 2096.2 487.049 2096.2 487.049L2125.52 564.326C2125.52 564.326 2061.04 604.823 1996.89 579.154C1932.73 553.485 1916.82 504.277 1916.82 450.492Z" fill="currentColor"></path>
-</svg></span>
+</svg></span></div>
       </div>
-      <h1>One ya conoce tu empresa</h1>
-      <p class="sub">Todos los módulos de Factorial comparten el mismo dato. One trabaja encima de todos ellos, con tus permisos y tus políticas.</p>
-      <p class="hint">Toca cualquier burbuja para ver qué aporta, qué hace One con ella y con qué se conecta.</p>
+      <h1 data-i18n="h1">One ya conoce tu empresa</h1>
+      <p class="sub" data-i18n="sub">Todos los módulos de Factorial comparten el mismo dato. One trabaja encima de todos ellos, con tus permisos y tus políticas.</p>
+      <p class="hint" data-i18n="hint">Toca cualquier burbuja para ver qué aporta, qué hace One con ella y con qué se conecta.</p>
       <div class="stage" id="stage">
         <svg class="wires" id="wires" aria-hidden="true"></svg>
         <div class="col left" id="colL"></div>
         <div class="core">
-          <button class="onebtn" id="oneBtn" aria-label="Ver qué es One"><span class="disc"><svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg></span></button>
+          <button class="onebtn" id="oneBtn" aria-label="Ver qué es One" data-i18n-aria="oneAria"><span class="disc"><svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg></span></button>
           <span>One</span>
         </div>
         <div class="col right" id="colR"></div>
       </div>
     </div>
-    <aside class="panel" id="panel" aria-live="polite" aria-label="Detalle del módulo">
+    <aside class="panel" id="panel" aria-live="polite" aria-label="Detalle del módulo" data-i18n-aria="panelAria">
       <div class="panel-in" id="panelIn"></div>
     </aside>
   </div>
   <div class="scrim" id="scrim"></div>
-  <a class="scrollcue" id="scrollCue" href="#mas" aria-label="Seguir bajando">Sigue bajando<span class="ar"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></span></a>
+  <a class="scrollcue" id="scrollCue" href="#mas" aria-label="Seguir bajando" data-i18n-aria="cueAria"><span data-i18n="cue">Sigue bajando</span><span class="ar"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></span></a>
 </div>
 
 <section id="mas">
-  <h2 class="st">El mismo dato, de principio a fin</h2>
-  <p class="sl">Cuando cada módulo vive en una herramienta distinta, cada decisión empieza de cero. En Factorial, lo que se captura una vez lo usa el siguiente paso. Toca cualquier paso para abrirlo en el mapa.</p>
+  <h2 class="st" data-i18n="s1t">El mismo dato, de principio a fin</h2>
+  <p class="sl" data-i18n="s1d">Cuando cada módulo vive en una herramienta distinta, cada decisión empieza de cero. En Factorial, lo que se captura una vez lo usa el siguiente paso. Toca cualquier paso para abrirlo en el mapa.</p>
   <div class="stories" id="stories"></div>
 </section>
 
 <section>
-  <h2 class="st">Tus equipos ya usan IA. Que sea la tuya.</h2>
-  <p class="sl">Lo que cambia no es la tecnología, es el contexto. Y con datos de personas, la confianza no es negociable.</p>
+  <h2 class="st" data-i18n="s2t">Tus equipos ya usan IA. Que sea la tuya.</h2>
+  <p class="sl" data-i18n="s2d">Lo que cambia no es la tecnología, es el contexto. Y con datos de personas, la confianza no es negociable.</p>
   <div class="cmpwrap">
   <table class="cmp">
-    <thead><tr><th></th><th>IA genérica</th><th>One</th></tr></thead>
-    <tbody>
+    <thead data-i18n="cmpHead"><tr><th></th><th>IA genérica</th><th>One</th></tr></thead>
+    <tbody data-i18n="cmpBody">
       <tr><td>Contexto</td><td>Empieza en blanco cada vez. El contexto lo pegas tú.</td><td>Conectado a tus datos de Factorial y a las herramientas que conectes desde el primer mensaje.</td></tr>
       <tr><td>Permisos</td><td>No sabe quién debe ver qué.</td><td>Cada persona solo ve lo que su rol le permite. Mismos roles, nada nuevo expuesto.</td></tr>
       <tr><td>Cumplimiento</td><td>Sin garantías en la UE.</td><td>Conforme con el RGPD y el Reglamento de IA de la UE, alojado en la UE.</td></tr>
@@ -295,9 +299,9 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 </section>
 
 <section>
-  <h2 class="st">Lo que viene</h2>
-  <p class="sl">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
-  <div class="road">
+  <h2 class="st" data-i18n="s3t">Lo que viene</h2>
+  <p class="sl" data-i18n="s3d">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
+  <div class="road" data-i18n="road">
     <div><span>Próximamente</span><b>1:1 con IA</b><p>One prepara y guía cada 1:1 con el historial completo de la persona.</p></div>
     <div><span>Próximamente</span><b>Cursos gamificados</b><p>Mecánicas de juego dentro de los cursos del LMS.</p></div>
     <div><span>Próximamente</span><b>Objetivos vía MCP</b><p>Factorial se conecta a tus herramientas y actualiza los objetivos con sus datos.</p></div>
@@ -310,11 +314,11 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 
 <section>
   <div class="cta">
-    <h2>¿Vemos tu ciclo completo con tus propios datos?</h2>
-    <p>Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
+    <h2 data-i18n="ctaT">¿Vemos tu ciclo completo con tus propios datos?</h2>
+    <p data-i18n="ctaD">Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
   </div>
 </section>
-<footer>Los ejemplos de informes y conversaciones son ilustrativos y usan datos ficticios. Algunas funcionalidades dependen del plan contratado y de las credenciales de One. Factorial · octubre 2026.</footer>
+<footer data-i18n="footer">Los ejemplos de informes y conversaciones son ilustrativos y usan datos ficticios. Algunas funcionalidades dependen del plan contratado y de las credenciales de One. Factorial · octubre 2026.</footer>
 
 <script>
 const HUBS = {
@@ -876,6 +880,295 @@ const STORIES = [
     ["tickets","Se lo cuentas a One y abre el ticket."],["inventario","One comprueba que no hay stock."],["marketplace","Encuentra uno que cumple la política."],["compras","Una persona aprueba, se compra e IT lo entrega."]] }
 ];
 
+/* ---------- ENGLISH ---------- */
+const EN = {
+  HUBS: {
+    talento: { name: "Talent", lead: "From the role you plan to the raise you defend. Every talent decision builds on the last one, not from scratch.", one: "The more talent products you have, the more context One has: it reads reviews, applications, courses and surveys at once." },
+    tiempo: { name: "Time", lead: "Clock-ins, shifts and absences on the same calendar, with every hour ready for payroll and projects.", one: "One covers shifts, answers balance questions and catches clock-in issues while they're still small." },
+    finanzas: { name: "Finance", lead: "HR and Finance work with the same numbers: headcount, expenses, purchases, projects and budget.", one: "One approves what meets the policy and leaves you only the exceptions." },
+    core: { name: "Core HR", lead: "The foundation: people, documents, policies and every employee's app. What's captured here is used by every module.", one: "One knows your policies, answers with the source and resolves requests before they reach a person." },
+    it: { name: "IT", lead: "Devices, software and inventory tied to the person who uses them, from their first day to their last.", one: "One investigates the ticket, checks stock and prepares the purchase so a person only has to approve." },
+    nomina: { name: "Payroll", lead: "Every change that affects pay reaches payroll validated, from clock-in to salary raise.", one: "One spots pending variables and anything that doesn't add up before payroll is calculated." }
+  },
+  M: {
+    desempeno: { name: "Performance",
+      lead: "Reviews, goals and feedback all year round, not just at the annual review.",
+      value: ["180° and 360° reviews with automated cycles, reminders and downloadable agreements.", "Individual and team goals and OKRs, with continuous feedback so you reach the review with data.", "9-box and talent analytics to see who has the most potential and who needs support."],
+      one: [{ q: "Who on my team is showing risk signals?", a: "Analyzes self-reviews and feedback, summarizes each case and explains why it flags it." }],
+      why: "Every result feeds the training you assign and the raise you propose. Recruitment uses the latest review to measure which sources bring people who stay and perform.",
+      soon: ["Goals connected via MCP: Factorial updates goals with data from your other tools."] },
+    formacion: { name: "Training & LMS",
+      lead: "Recorded trainings and interactive courses inside Factorial, tied to performance.",
+      value: ["Catalog, sessions and attendance; mandatory training with audit-ready traceability.", "LMS: courses with videos, quizzes and tests, automatic progress and certificates on completion.", "Salary cost of each training calculated automatically."],
+      one: [{ q: "Create an onboarding course for the store team.", a: "A structured course with modules and quizzes, in minutes. You review it and publish it." }],
+      why: "From the review, in one click: assign the training that closes each skills gap and measure its impact in the next cycle.",
+      stat: { n: "94%", t: "of employees would stay longer at a company that invests in their development (LinkedIn Workplace Learning Report, 2023)" },
+      soon: ["Gamified courses: game mechanics inside courses."] },
+    engagement: { name: "Engagement",
+      lead: "Listen to your team without sending another form: daily pulse, surveys, eNPS and AI 1:1s.",
+      value: ["Team pulse at clock-in: check-ins without survey fatigue and alerts to the right manager.", "Automated surveys and eNPS at onboarding, at exit and at every milestone.", "AI 1:1 meetings: One prepares each 1:1 with goals, performance and mood."],
+      one: [{ q: "Prepare tomorrow's 1:1 with Laura.", a: "Gathers her goals, latest review, recent pulse and what was discussed in previous 1:1s." }],
+      why: "Good performance doesn't always mean engagement. With pulse tied to clock-ins and performance context, One sees the full picture of each person.",
+      stat: { n: "40–60%", t: "less manual admin with automated reviews, 1:1s and surveys" },
+      tag: "AI 1:1s: coming soon" },
+    comunidades: { name: "Communities",
+      lead: "Spaces where your people meet, share and recognize each other, beyond the org chart.",
+      value: ["Communities by interest, location, project or team, open or invite-only.", "Posts, recognition and milestone celebrations from the app.", "Brings office, remote and in-store people together in one space."],
+      one: [{ q: "Which communities do you recommend now that I've joined?", a: "Suggests the ones for your team, your location and your interests, based on your profile." }],
+      why: "Communities are built on the same team, location and people data, so every new hire finds their place from day one." },
+    comunicaciones: { name: "Communications",
+      lead: "Announcements for the whole company or specific teams, where your people already work every day.",
+      value: ["Publish to the whole company or to specific teams and locations.", "Reaches everyone through the app, including people who don't sit at a computer.", "Announcements live next to the policies and documents they refer to."],
+      one: [{ q: "Draft the announcement for the new summer schedule in Spanish and English.", a: "Drafts it from your schedule policy and translates it, ready to review." }],
+      why: "Targeting comes from the same team, location and role data the rest of Factorial uses." },
+    ats: { name: "ATS & hiring",
+      lead: "An ATS that plans, screens and decides with you, from the approved position to the signed offer.",
+      value: ["Hiring Plan: every position approved in headcount planning arrives as a job with an owner, deadline and status.", "AI report per candidate and AI calls in their language, with transcript and a green, amber or red outcome.", "Unlimited jobs, per-stage permissions, video interviews with One and one-year retention analytics."],
+      one: [
+        { q: "Call every candidate who reaches the screening stage.", a: "A call in their language, announced, with consent and recorded. Returns transcript, report and suggested next step. A person decides." },
+        { q: "Create the job post for a Senior Product Designer in Barcelona.", a: "Drafts the post from the conversation and publishes it on your careers page and 250+ job boards." }
+      ],
+      why: "The job is born approved and budgeted; whoever signs joins with all their data, without retyping anything; and analytics cross hiring source with performance review.",
+      stats: [{ n: "70%", t: "less time-to-hire with AI first-round screening" }, { n: "+25%", t: "headcount growth with the same recruiting team" }],
+      soon: ["Suggested candidates from the talent pool (coming soon).", "WhatsApp in Recruitment and Company Pages per entity (coming soon).", "Cultural assessment (coming soon)."] },
+    canal: { name: "Whistleblowing channel",
+      lead: "A channel for anyone to report wrongdoing confidentially, anonymously too.",
+      value: ["Confidential reports, with the option to stay anonymous.", "Case tracking with access restricted to whoever handles it.", "Helps you comply with whistleblower protection rules."],
+      oneNote: "One follows Factorial's permissions exactly: cases are only visible to the people who handle them, no one else.",
+      why: "It lives in the same app as the rest of the employee's tools, so nobody has to look for where to report." },
+    control: { name: "Time tracking",
+      lead: "Clock in from phone or computer, with the working-time record always up to date.",
+      value: ["Clock in from the app or the web, with overtime and balances calculated.", "Issues visible to the manager before they reach payroll.", "Hours logged to projects feed the real cost of each project."],
+      one: [{ q: "Every weekday at 6 pm, send me who has fewer than 4 clock-ins today.", a: "Creates a routine that checks clock-ins daily and emails it to you." }],
+      why: "The same clock-in serves payroll, project costing and the team pulse, without capturing it twice." },
+    turnos: { name: "Shifts",
+      lead: "Rotas that respect your rules, and gaps filled without a call list.",
+      value: ["Planning by location, role and skills.", "Rest days, schedules and work locations are respected when planning.", "Actual shifts reach payroll, with no outdated shifts in the calculation."],
+      one: [{ q: "Find someone to cover María's shift today.", a: "Checks rest days, roles, skills, schedule and location, calls candidates one by one and tells the manager once the shift is covered." }],
+      why: "An absence opens the gap, One fills it and the new shift reaches clock-ins and payroll variables. Every rule respected and every call logged." },
+    ausencias: { name: "Time off",
+      lead: "Vacation, sick leave and permits with up-to-date balances and two-click approval.",
+      value: ["Time-off policies by team, location or collective agreement.", "Shared calendar to see who's out before approving.", "Absences and sick leave synced with payroll (with a3innuva, in Spain)."],
+      one: [{ q: "How many vacation days do I have left?", a: "Answers with that person's balance and the policy that applies. Everyone only sees their own." }],
+      why: "A sick leave doesn't stay on the calendar: it opens a gap in Shifts, adjusts clock-ins and reaches payroll as a variable." },
+    plantilla: { name: "Headcount planning",
+      lead: "HR and Finance see the same numbers from day one. No more five versions of the spreadsheet.",
+      value: ["Managers propose positions with role, level, pay band and date, tied to the job catalog.", "HR and Finance review a single version, with a record of who decided what and when.", "Approved positions open automatically in Recruitment: plan and execution always match."],
+      one: [{ q: "Prepare our 2027 headcount plan with our guidelines.", a: "Proposes roles, levels and costs for you to review." }],
+      why: "The position you approve is the job you post, and every finalized raise updates the cost forecast for the next plan.",
+      soon: ["Structured approval flows and link to budget.", "Planned vs. actual hires comparison."] },
+    proyectos: { name: "Project management",
+      lead: "Know whether each project is profitable while it's running, not when it closes.",
+      value: ["Hours logged from the clock-in widget, no parallel timesheets.", "Labor cost, fixed costs and expenses vs. budget, in real time.", "From quote to project and from project to invoice, with client data already loaded."],
+      one: [{ q: "Which projects are over budget this month?", a: "Crosses logged hours, labor cost and expenses, and explains where each one deviates." }],
+      why: "The cost of an hour comes from the person's real salary and the hour comes from the clock-in: nobody copies data between tools." },
+    fpa: { name: "Planning & analysis",
+      lead: "Budgets and forecasts with the real costs that already live in Factorial.",
+      value: ["Budgets by department or cost center.", "Actual vs. planned with headcount, payroll, expense, purchase and project data.", "A single source of truth for HR, Finance and leadership."],
+      one: [{ q: "How are we doing against the people budget this quarter?", a: "Compares actual payroll cost with the plan and flags deviations." }],
+      why: "The budget feeds itself: every hire, raise, expense or purchase is already recorded in its module." },
+    gastos: { name: "Expenses",
+      lead: "From a pile of receipts to closed books, with a single message.",
+      value: ["Upload receipts and the fields fill themselves.", "Every expense is checked against the policy: compliant ones are approved instantly.", "Card reconciliation and clean data for month-end close."],
+      one: [{ q: "Here are the receipts from my business trip. (uploads 5 at once)", a: "Reads each receipt, prepares the expenses, reconciles the card and checks policy and permissions. Only exceptions wait for a person." }],
+      why: "The approved expense reaches payroll if it needs reimbursing and the project if it's billable." },
+    compras: { name: "Procurement",
+      lead: "Purchase requests, approvals and suppliers in a single flow.",
+      value: ["Requests with approval by amount and team.", "Every purchase tied to its budget and to whoever requested it.", "Connected to inventory and software to know what's bought and for whom."],
+      one: [{ q: "My laptop just broke. I need a new one.", a: "Opens the ticket, checks there's no stock, finds one in the marketplace and buys it once a person approves." }],
+      why: "The purchase starts in a ticket, goes through the budget and ends up in the person's inventory." },
+    revision: { name: "Salary review",
+      lead: "Every raise justified, budgeted and defensible.",
+      value: ["Guidelines set once: eligibility, ranges and approvers. Every proposal is checked automatically.", "Each manager sees only their team, with out-of-policy items already flagged, and the budget is allocated in real time.", "The approved raise flows into the contract and the headcount forecast, without retyping."],
+      one: [{ q: "Propose raises for my team based on our policy.", a: "Figures and justification, already checked against the budget. You approve." }],
+      why: "You decide how many review cycles count toward eligibility: the raise reflects a trend, not a one-off score. And it reaches payroll as a validated variable." },
+    politicas: { name: "Policies",
+      lead: "Your rules, written once and applied in every module.",
+      value: ["Time-off, expense, schedule and other policies, applied by the modules that use them.", "Handbook: people ask and One answers with the source.", "If One doesn't know, it says so."],
+      one: [{ q: "Can I work remotely from another country for two weeks?", a: "Answers from your policy, shows the source and only reveals what that person can see." }],
+      why: "Routine questions never reach the manager's inbox, and the same criteria approve expenses or time off." },
+    portal: { name: "Employee portal",
+      lead: "The app where everyone sees their own information and asks for what they need.",
+      value: ["Personal data, payslips, documents and balances in one app.", "Time off, expenses and tickets from the phone.", "One built in to ask, request and track every request."],
+      oneNote: "One is included for the whole workforce, no training needed. Everyone asks what they need and only sees what their role allows.",
+      why: "Everything the employee does here goes straight into the right module, with no forms or emails in between." },
+    onoff: { name: "On/Offboarding",
+      lead: "Joiners and leavers as one flow, with tasks for HR, IT and the manager.",
+      value: ["The new hire arrives from Recruitment with all their data.", "Documents, signature, device, access and welcome training in the same flow.", "On exit, access and equipment are recovered without relying on anyone's memory."],
+      one: [{ q: "Prepare Marta's onboarding for Monday.", a: "Launches the tasks, prepares documents for signature, requests her laptop and assigns the welcome course." }],
+      why: "It's where the most modules meet: if the data is centralized, day one runs itself." },
+    documentos: { name: "Document management",
+      lead: "Each person's contracts, payslips and certificates, with permissions and templates.",
+      value: ["Folders per person and per company, with role-based permissions.", "Templates that fill in with the employee's data.", "One reads any file and extracts what matters."],
+      one: [{ q: "Which temporary contracts expire this quarter?", a: "Crosses it with contract data and returns the list with dates and owners." }],
+      why: "An approved salary change updates the contract; a hire generates its documents. Nobody rebuilds them." },
+    firma: { name: "E-signature",
+      lead: "Send for signature without leaving Factorial and keep the result where it belongs.",
+      value: ["Sign contracts, annexes and policies from any device.", "Recruitment offers signed from anywhere, and you know instantly when they're signed.", "The signed document stays in the person's profile."],
+      oneNote: "One prepares documents from your templates so you only have to review and send them for signature.",
+      why: "Zero data to retype when someone signs: the status reaches the process that requested it." },
+    analiticas: { name: "Analytics",
+      lead: "All of Factorial's data in one place, and One to query it in natural language.",
+      value: ["Reports that cross modules on the same data: people, time, talent, payroll and finance.", "Ask One to create a report, add widgets, filter or explain a trend, and save it.", "Everyone only sees what their permissions allow."],
+      one: [{ q: "Send me turnover by department every Monday.", a: "Creates the report, schedules it as a routine and explains the trend in every send." }],
+      why: "Every module flows here. Because all the data lives in Factorial, a report isn't built: it's asked for. No exporting, no merging spreadsheets and no waiting for Finance." },
+    tickets: { name: "Tickets",
+      lead: "Requests that arrive half-solved before a person touches them.",
+      value: ["Opened by chatting with One and tracked in Factorial.", "Routed automatically to the right team: IT, HR, Finance.", "One investigates and translates every message both ways."],
+      one: [{ q: "Hey One, my laptop just broke. I need a new one.", a: "Creates the ticket, routes it to IT, reads the context, sees there's no laptop in stock, finds one in the marketplace and drafts the plan. A person approves, it's bought and IT delivers it." }],
+      why: "One investigates across contracts, IT assets and employee profiles: the resolution is drafted with your policies and whoever resolves it just approves." },
+    mdm: { name: "Mobile device management",
+      lead: "Configure and secure company devices from the same place you manage people.",
+      value: ["Every device tied to the person who uses it.", "Device enrollment and removal within onboarding and offboarding.", "Fleet security status visible to IT."],
+      oneNote: "One keeps you compliant: checks against policies, fixes inconsistencies and tracks access and risks.",
+      why: "When someone joins or leaves, IT doesn't depend on an email from HR: the change is already in Factorial." },
+    inventario: { name: "Inventory",
+      lead: "What equipment each person has, with its history.",
+      value: ["Equipment assignment and return per person.", "Built into onboarding and offboarding.", "Stock visible before buying."],
+      oneNote: "When a ticket comes in, One checks inventory before proposing a purchase.",
+      why: "Inventory knows who's who because it shares people data with Core HR." },
+    software: { name: "Software management",
+      lead: "Which tools the company uses, who has access and what they cost.",
+      value: ["Inventory of apps and licenses.", "Access granted and revoked as people join and leave.", "License spend visible to Finance."],
+      oneNote: "One crosses licenses with active people to spot access that should no longer exist.",
+      why: "Licenses, people and budget in one place: nobody pays for an account of someone who already left." },
+    marketplace: { name: "Marketplace",
+      lead: "A catalog to order devices and equipment without hunting for suppliers.",
+      value: ["Device catalog ready to order.", "Purchases with approval and delivery to whoever needs it.", "Connected to tickets and inventory."],
+      oneNote: "If there's no stock, One finds the device in the marketplace and leaves the purchase ready to approve.",
+      why: "From ticket to delivery without switching tools." },
+    beneficios: { name: "Benefits",
+      lead: "Flexible compensation your team uses with a card and HR manages without paperwork.",
+      value: ["Meals, transport, childcare, health insurance, training and Wellhub.", "Visa card in the phone wallet, with balance and transactions in the app.", "Budgets by category, tax compliance and direct export to payroll."],
+      one: [{ q: "How much meal allowance do I have left this month?", a: "Answers with that person's balance, within their permissions." }],
+      why: "What each person uses reaches payroll as a pay item, without anyone compiling it by hand." },
+    compensacion: { name: "Compensation",
+      lead: "Every change reaches payroll already validated.",
+      value: ["Bonuses, contract changes and absences that affect payroll, visible instantly.", "Alerts before calculation: pending variables, unapproved bonuses or outdated shifts.", "Every payroll compared with approved variables and contracts, and actual vs. planned cost."],
+      one: [{ q: "What's missing before we close this month's payroll?", a: "Reviews pending variables and anything that doesn't add up, and tells you who needs to act." }],
+      why: "Everything flows here: clock-ins, shifts, time off, expenses, benefits and raises. If they're born connected, they arrive validated.",
+      stat: { n: "40 h", t: "a month you can save by syncing hires, exits, salary changes, absences and variables with your payroll provider (a3innuva integration, Spain)" } },
+    integraciones: { name: "Integrations",
+      lead: "Factorial connected to your payroll provider and the rest of your tools.",
+      value: ["a3innuva (Spain): hires, exits, contract and salary changes, absences, sick leave and variables.", "Compatible with other payroll software and with Factorial Professionals for advisory firms.", "API to connect with your ERP."],
+      oneNote: "If the data lives in Factorial or in something you connect, you can ask, delegate or automate with One.",
+      why: "Integrating isn't copying: the change is recorded once and synced." },
+    anticipo: { name: "Earned wage access",
+      lead: "Your team can request part of the salary already earned before the end of the month.",
+      value: ["Request from the app, no paperwork.", "Rules and limits you define.", "The advance is reflected in payroll without manual adjustments."],
+      oneNote: "People ask One how much they can request and how it works, according to your policy.",
+      why: "Because salary and days worked are already in Factorial, the available amount isn't calculated by hand." }
+  },
+  STORIES: [
+    { t: "A new hire", d: "The position is approved once and the rest follows on its own.", steps: ["The position is approved with its pay band.", "It opens as a job automatically; One screens and calls.", "The offer is signed from a phone.", "They join with all their data, no retyping.", "Their laptop is already assigned.", "They get the welcome course.", "Their hire reaches payroll validated."] },
+    { t: "A last-minute sick leave", d: "From the heads-up to payroll without anyone copying data.", steps: ["Someone says they're sick.", "One finds who can cover and calls them.", "The new shift is clocked like any other.", "The leave and the shift change arrive as variables.", "Absenteeism by location updates itself."] },
+    { t: "A review cycle", d: "The raise comes out of the review and feeds back into the plan.", steps: ["The review flags results and gaps.", "Training is assigned in one click.", "One proposes the raise within policy.", "The raise reaches payroll validated.", "The cost forecast updates for the next plan."] },
+    { t: "A broken laptop", d: "One message to One and one approval.", steps: ["You tell One and it opens the ticket.", "One checks there's no stock.", "It finds one that meets the policy.", "A person approves, it's bought and IT delivers it."] }
+  ],
+  UI: {
+    center: "The core", area: "Area", modules: "Modules", brings: "What it brings", withOne: "With One", connected: "Connected with",
+    soon: "What's next", soonNote: "Scope and dates may change.", guides: "Free guides and templates (in Spanish)", close: "Close",
+    title: "Factorial · Everything connected with One",
+    h1: "One already knows your company",
+    sub: "Every Factorial module shares the same data. One works on top of all of them, with your permissions and your policies.",
+    hint: "Tap any bubble to see what it brings, what One does with it and what it connects to.",
+    cue: "Keep scrolling", cueAria: "Keep scrolling", oneAria: "See what One is", panelAria: "Module details",
+    s1t: "The same data, end to end",
+    s1d: "When every module lives in a different tool, every decision starts from scratch. In Factorial, what's captured once is used by the next step. Tap any step to open it on the map.",
+    s2t: "Your teams already use AI. Make it yours.",
+    s2d: "What changes isn't the technology, it's the context. And with people data, trust is non-negotiable.",
+    cmpHead: `<tr><th></th><th>Generic AI</th><th>One</th></tr>`,
+    cmpBody: `<tr><td>Context</td><td>Starts blank every time. You paste the context.</td><td>Connected to your Factorial data and the tools you connect, from the first message.</td></tr>
+      <tr><td>Permissions</td><td>Doesn't know who should see what.</td><td>Each person only sees what their role allows. Same roles, nothing new exposed.</td></tr>
+      <tr><td>Compliance</td><td>No guarantees in the EU.</td><td>Compliant with GDPR and the EU AI Act, hosted in the EU.</td></tr>
+      <tr><td>Reliability</td><td>Makes up answers without warning.</td><td>Answers with your data and shows the source. If it doesn't know, it says so.</td></tr>
+      <tr><td>Control</td><td>Opaque cost and actions.</td><td>You decide which agents run and see every action and what it cost.</td></tr>`,
+    s3t: "What's next",
+    s3d: "Every product is becoming an AI product. Scope and dates may change; we'll keep you posted.",
+    road: `<div><span>Coming soon</span><b>AI 1:1s</b><p>One prepares and guides every 1:1 with the person's full history.</p></div>
+    <div><span>Coming soon</span><b>Gamified courses</b><p>Game mechanics inside LMS courses.</p></div>
+    <div><span>Coming soon</span><b>Goals via MCP</b><p>Factorial connects to your tools and updates goals with their data.</p></div>
+    <div><span>Coming soon</span><b>Headcount: approvals and budget</b><p>Structured approval flows and planned vs. actual comparison.</p></div>
+    <div><span>Coming soon</span><b>Suggested talent pool</b><p>Before publishing, see who in your candidate pool already fits.</p></div>
+    <div><span>Coming soon</span><b>WhatsApp in Recruitment</b><p>Messages, a heads-up before the AI call and documents via WhatsApp.</p></div>
+    <div class="more"><span>Coming soon</span><b>And much more!</b><p>New AI features reach every Factorial product every month.</p></div>`,
+    ctaT: "Shall we walk through your full cycle with your own data?",
+    ctaD: "We map your headcount, your hiring process and your pay policy, and show you the same flow inside Factorial, with One working at every step.",
+    footer: "Report and conversation examples are illustrative and use fictional data. Some features depend on your plan and One credits. Factorial · October 2026."
+  }
+};
+const UI_ES = {
+  center: "El centro", area: "Área", modules: "Módulos", brings: "Lo que aporta", withOne: "Con One", connected: "Conectado con",
+  soon: "Lo que viene", soonNote: "El alcance y las fechas pueden cambiar.", guides: "Guías y plantillas gratuitas", close: "Cerrar",
+  title: "Factorial · Todo conectado con One"
+};
+
+/* Contenido largo de los paneles de One y Analíticas, por idioma */
+const LONG = {
+  es: {
+    one: () => `<p class="lead">Tu agente de IA personal en el trabajo. Conoce tu contexto, actúa en todo Factorial y te ayuda a decidir, sin exponer tus datos.</p>
+    <h3>Tres formas de usarlo</h3>
+    <ul class="vals"><li><b>Pregunta.</b> Cualquier persona pregunta lo que necesita: políticas, saldos, datos del equipo. One responde con la fuente y solo con lo que su rol permite.</li>
+    <li><b>Delega.</b> Dentro de cada producto, One hace el trabajo: redacta la oferta, llama al candidato, prepara la propuesta de subida.</li>
+    <li><b>Automatiza.</b> Configuras una rutina una vez y One detecta, decide y actúa. Tú apruebas las excepciones.</li></ul>
+    <h3>Cómo trabaja</h3>
+    <p class="note">Detecta los desencadenantes en tus datos en tiempo real, los compara con tus políticas e historial, elige la acción o escala a una persona, hace el trabajo dentro de Factorial y registra lo que ha hecho. Cada paso queda visible y revisable.</p>
+    <h3>Por qué el dato centralizado lo cambia todo</h3>
+    <p class="why" style="color:var(--ink)">Cuantos más módulos conectas, más contexto tiene One. Una IA genérica empieza en blanco; One ya sabe quién es quién, qué dice tu política y qué pasó en el último ciclo.</p>
+    <div class="stats"><div class="stat"><b>RGPD</b><span>y Reglamento de IA de la UE, alojado en la UE</span></div><div class="stat"><b>Tus permisos</b><span>mismos roles de Factorial, nada nuevo expuesto</span></div></div>
+    <h3>Rutinas: One te trae la respuesta cuando toca</h3>
+    ${chatHTML([{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Crea la rutina, revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }])}`,
+    routines: `<h3>Rutinas con información siempre al día</h3>
+  <ul class="rt">
+    <li><span class="when">Lunes, 9:00</span><span>Rotación por departamento, con la tendencia explicada<span class="src">Core HR · Analíticas</span></span></li>
+    <li><span class="when">Laborables, 18:00</span><span>Personas con menos de 4 fichajes hoy<span class="src">Control horario</span></span></li>
+    <li><span class="when">Día 25</span><span>Variables de nómina pendientes antes del cierre<span class="src">Compensación · Turnos · Gastos</span></span></li>
+    <li><span class="when">Primer día del mes</span><span>Formaciones obligatorias pendientes por centro<span class="src">Formación y LMS</span></span></li>
+    <li><span class="when">Viernes, 12:00</span><span>Candidatos en screening sin feedback del hiring team<span class="src">ATS y selección</span></span></li>
+  </ul>
+  <p class="disc-note">Cualquier informe de Analíticas se puede programar como rutina desde el chat de One. Las rutinas consumen créditos de One.</p>`,
+    ax: { t: "Ejemplos de informes ya conectados",
+      c1: ["Rotación y compromiso por departamento", "Core HR + Engagement · rotación (barras) y eNPS (línea)", ["Tiendas","Ops","Ventas","Soporte","Tech"]],
+      c2: ["Calidad de contratación por fuente", "Selección + Desempeño · permanencia a 1 año", ["Referidos","LinkedIn","Web empleo","Portales"]],
+      c3: ["Coste de plantilla: real frente a previsto", "Plantilla + Revisión salarial + Compensación", ["E","F","M","A","M","J"], "Real", "Previsto"],
+      c4: ["Absentismo y horas extra por centro", "Ausencias + Control horario + Turnos", ["Madrid","Barcelona","Valencia","Sevilla"], "Absentismo %", "Horas extra"],
+      note: "Datos ficticios, solo para ilustrar qué se puede cruzar.",
+      tasksT: "Tareas que One ya hace solo",
+      tasks: ["Aprueba los gastos que cumplen la política y te deja solo las excepciones.", "Cubre turnos llamando a quien puede hacerlos según tus reglas.", "Llama a los candidatos que llegan a screening y te deja el informe.", "Resuelve tickets a medias para que quien los gestiona solo apruebe."] }
+  },
+  en: {
+    one: () => `<p class="lead">Your personal AI agent at work. It knows your context, acts across all of Factorial and helps you decide, without exposing your data.</p>
+    <h3>Three ways to use it</h3>
+    <ul class="vals"><li><b>Ask.</b> Anyone asks what they need: policies, balances, team data. One answers with the source and only with what their role allows.</li>
+    <li><b>Delegate.</b> Inside each product, One does the work: drafts the job post, calls the candidate, prepares the raise proposal.</li>
+    <li><b>Automate.</b> Set up a routine once and One detects, decides and acts. You approve the exceptions.</li></ul>
+    <h3>How it works</h3>
+    <p class="note">It detects triggers in your data in real time, compares them with your policies and history, picks the action or escalates to a person, does the work inside Factorial and logs what it did. Every step stays visible and reviewable.</p>
+    <h3>Why centralized data changes everything</h3>
+    <p class="why" style="color:var(--ink)">The more modules you connect, the more context One has. A generic AI starts blank; One already knows who's who, what your policy says and what happened in the last cycle.</p>
+    <div class="stats"><div class="stat"><b>GDPR</b><span>and the EU AI Act, hosted in the EU</span></div><div class="stat"><b>Your permissions</b><span>same Factorial roles, nothing new exposed</span></div></div>
+    <h3>Routines: One brings you the answer when it's due</h3>
+    ${chatHTML([{ q: "Every 25th, alert me about pending payroll variables.", a: "Creates the routine, reviews what's missing before close and sends it to you with who needs to act." }])}`,
+    routines: `<h3>Routines with always up-to-date information</h3>
+  <ul class="rt">
+    <li><span class="when">Monday, 9:00</span><span>Turnover by department, with the trend explained<span class="src">Core HR · Analytics</span></span></li>
+    <li><span class="when">Weekdays, 18:00</span><span>People with fewer than 4 clock-ins today<span class="src">Time tracking</span></span></li>
+    <li><span class="when">The 25th</span><span>Pending payroll variables before close<span class="src">Compensation · Shifts · Expenses</span></span></li>
+    <li><span class="when">First day of the month</span><span>Pending mandatory training by location<span class="src">Training & LMS</span></span></li>
+    <li><span class="when">Friday, 12:00</span><span>Candidates in screening without hiring-team feedback<span class="src">ATS & hiring</span></span></li>
+  </ul>
+  <p class="disc-note">Any Analytics report can be scheduled as a routine from the One chat. Routines use One credits.</p>`,
+    ax: { t: "Examples of reports already connected",
+      c1: ["Turnover and engagement by department", "Core HR + Engagement · turnover (bars) and eNPS (line)", ["Stores","Ops","Sales","Support","Tech"]],
+      c2: ["Quality of hire by source", "Recruitment + Performance · 1-year retention", ["Referrals","LinkedIn","Careers site","Job boards"]],
+      c3: ["Headcount cost: actual vs. planned", "Headcount + Salary review + Compensation", ["J","F","M","A","M","J"], "Actual", "Planned"],
+      c4: ["Absenteeism and overtime by location", "Time off + Time tracking + Shifts", ["Madrid","Barcelona","Valencia","Seville"], "Absenteeism %", "Overtime"],
+      note: "Fictional data, only to illustrate what can be crossed.",
+      tasksT: "Tasks One already does on its own",
+      tasks: ["Approves expenses that meet the policy and leaves you only the exceptions.", "Covers shifts by calling whoever can take them, following your rules.", "Calls candidates who reach screening and leaves you the report.", "Half-solves tickets so whoever handles them only approves."] }
+  }
+};
+
 const ISO = `<svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg>`;
 const HUB_ICONS = {
   talento:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
@@ -951,15 +1244,26 @@ function drawWires(){
   wires.innerHTML = d;
 }
 
+/* idioma: ?lang= o la última elección; español por defecto */
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q === 'en' || q === 'es') return q;
+  try { const s = localStorage.getItem('onemap-lang'); if (s === 'en' || s === 'es') return s; } catch (e) {}
+  return 'es';
+})();
+const tm = id => lang === 'en' ? { ...M[id], ...EN.M[id] } : M[id];
+const th = k => lang === 'en' ? { ...HUBS[k], ...EN.HUBS[k] } : HUBS[k];
+const U = k => (lang === 'en' ? EN.UI : UI_ES)[k];
+
 function chatHTML(list){
   return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
 }
 const EXT = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>';
 function guidesHTML(key){
   const g = FREEBIES[key]; if (!g || !g.length) return '';
-  return `<h3>Guías y plantillas gratuitas</h3><ul class="guides">${g.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${n}${EXT}</a></li>`).join('')}</ul>`;
+  return `<h3>${U('guides')}</h3><ul class="guides">${g.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${n}${EXT}</a></li>`).join('')}</ul>`;
 }
-function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${M[i].name}</button>`).join('')}</div>`; }
+function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${tm(i).name}</button>`).join('')}</div>`; }
 
 /* mini charts (ficticios) */
 function bars(vals, labels, line){
@@ -981,72 +1285,47 @@ function lines(a,b,labels){
   return s+'</svg>';
 }
 function analyticsExtra(){
-  return `<h3>Ejemplos de informes ya conectados</h3>
+  const x = LONG[lang].ax;
+  return `<h3>${x.t}</h3>
   <div class="dash">
-    <div class="card"><p class="ct">Rotación y compromiso por departamento</p><p class="cs">Core HR + Engagement · rotación (barras) y eNPS (línea)</p>${bars([14,9,6,11,4],["Tiendas","Ops","Ventas","Soporte","Tech"],[12,31,40,22,46])}</div>
-    <div class="card"><p class="ct">Calidad de contratación por fuente</p><p class="cs">Selección + Desempeño · permanencia a 1 año</p>${bars([88,81,72,64],["Referidos","LinkedIn","Web empleo","Portales"])}</div>
-    <div class="card"><p class="ct">Coste de plantilla: real frente a previsto</p><p class="cs">Plantilla + Revisión salarial + Compensación</p>${lines([402,408,419,431,436,452],[400,410,420,425,430,440],["E","F","M","A","M","J"])}<div class="legend"><span><i style="background:var(--red)"></i>Real</span><span><i style="background:var(--ink-3)"></i>Previsto</span></div></div>
-    <div class="card"><p class="ct">Absentismo y horas extra por centro</p><p class="cs">Ausencias + Control horario + Turnos</p>${bars([5.8,3.1,4.4,2.2],["Madrid","Barcelona","Valencia","Sevilla"],[38,12,26,9])}<div class="legend"><span><i style="background:var(--red)"></i>Absentismo %</span><span><i style="background:var(--ink)"></i>Horas extra</span></div></div>
+    <div class="card"><p class="ct">${x.c1[0]}</p><p class="cs">${x.c1[1]}</p>${bars([14,9,6,11,4],x.c1[2],[12,31,40,22,46])}</div>
+    <div class="card"><p class="ct">${x.c2[0]}</p><p class="cs">${x.c2[1]}</p>${bars([88,81,72,64],x.c2[2])}</div>
+    <div class="card"><p class="ct">${x.c3[0]}</p><p class="cs">${x.c3[1]}</p>${lines([402,408,419,431,436,452],[400,410,420,425,430,440],x.c3[2])}<div class="legend"><span><i style="background:var(--red)"></i>${x.c3[3]}</span><span><i style="background:var(--ink-3)"></i>${x.c3[4]}</span></div></div>
+    <div class="card"><p class="ct">${x.c4[0]}</p><p class="cs">${x.c4[1]}</p>${bars([5.8,3.1,4.4,2.2],x.c4[2],[38,12,26,9])}<div class="legend"><span><i style="background:var(--red)"></i>${x.c4[3]}</span><span><i style="background:var(--ink)"></i>${x.c4[4]}</span></div></div>
   </div>
-  <p class="disc-note">Datos ficticios, solo para ilustrar qué se puede cruzar.</p>
+  <p class="disc-note">${x.note}</p>
   ${routinesList()}
-  <h3>Tareas que One ya hace solo</h3>
-  <ul class="vals">
-    <li>Aprueba los gastos que cumplen la política y te deja solo las excepciones.</li>
-    <li>Cubre turnos llamando a quien puede hacerlos según tus reglas.</li>
-    <li>Llama a los candidatos que llegan a screening y te deja el informe.</li>
-    <li>Resuelve tickets a medias para que quien los gestiona solo apruebe.</li>
-  </ul>`;
+  <h3>${x.tasksT}</h3>
+  <ul class="vals">${x.tasks.map(t=>`<li>${t}</li>`).join('')}</ul>`;
 }
-function routinesList(){
-  return `<h3>Rutinas con información siempre al día</h3>
-  <ul class="rt">
-    <li><span class="when">Lunes, 9:00</span><span>Rotación por departamento, con la tendencia explicada<span class="src">Core HR · Analíticas</span></span></li>
-    <li><span class="when">Laborables, 18:00</span><span>Personas con menos de 4 fichajes hoy<span class="src">Control horario</span></span></li>
-    <li><span class="when">Día 25</span><span>Variables de nómina pendientes antes del cierre<span class="src">Compensación · Turnos · Gastos</span></span></li>
-    <li><span class="when">Primer día del mes</span><span>Formaciones obligatorias pendientes por centro<span class="src">Formación y LMS</span></span></li>
-    <li><span class="when">Viernes, 12:00</span><span>Candidatos en screening sin feedback del hiring team<span class="src">ATS y selección</span></span></li>
-  </ul>
-  <p class="disc-note">Cualquier informe de Analíticas se puede programar como rutina desde el chat de One. Las rutinas consumen créditos de One.</p>`;
-}
+function routinesList(){ return LONG[lang].routines; }
 
 function render(key){
   let h='';
-  const close = `<button class="close" type="button" id="closeBtn" aria-label="Cerrar"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button>`;
+  const close = `<button class="close" type="button" id="closeBtn" aria-label="${U('close')}"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button>`;
   if (key === 'one') {
-    h = `<div class="p-head"><div><p class="p-cat"><b>El centro</b></p><h2>One</h2></div>${close}</div>
-    <p class="lead">Tu agente de IA personal en el trabajo. Conoce tu contexto, actúa en todo Factorial y te ayuda a decidir, sin exponer tus datos.</p>
-    <h3>Tres formas de usarlo</h3>
-    <ul class="vals"><li><b>Pregunta.</b> Cualquier persona pregunta lo que necesita: políticas, saldos, datos del equipo. One responde con la fuente y solo con lo que su rol permite.</li>
-    <li><b>Delega.</b> Dentro de cada producto, One hace el trabajo: redacta la oferta, llama al candidato, prepara la propuesta de subida.</li>
-    <li><b>Automatiza.</b> Configuras una rutina una vez y One detecta, decide y actúa. Tú apruebas las excepciones.</li></ul>
-    <h3>Cómo trabaja</h3>
-    <p class="note">Detecta los desencadenantes en tus datos en tiempo real, los compara con tus políticas e historial, elige la acción o escala a una persona, hace el trabajo dentro de Factorial y registra lo que ha hecho. Cada paso queda visible y revisable.</p>
-    <h3>Por qué el dato centralizado lo cambia todo</h3>
-    <p class="why" style="color:var(--ink)">Cuantos más módulos conectas, más contexto tiene One. Una IA genérica empieza en blanco; One ya sabe quién es quién, qué dice tu política y qué pasó en el último ciclo.</p>
-    <div class="stats"><div class="stat"><b>RGPD</b><span>y Reglamento de IA de la UE, alojado en la UE</span></div><div class="stat"><b>Tus permisos</b><span>mismos roles de Factorial, nada nuevo expuesto</span></div></div>
-    <h3>Rutinas: One te trae la respuesta cuando toca</h3>
-    ${chatHTML([{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Crea la rutina, revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }])}
+    h = `<div class="p-head"><div><p class="p-cat"><b>${U('center')}</b></p><h2>One</h2></div>${close}</div>
+    ${LONG[lang].one()}
     ${routinesList()}
     ${guidesHTML('one')}`;
   } else if (key.startsWith('hub:')) {
-    const k = key.slice(4), hub = HUBS[k];
-    h = `<div class="p-head"><div><p class="p-cat"><b>Área</b></p><h2>${hub.name}</h2></div>${close}</div>
+    const k = key.slice(4), hub = th(k);
+    h = `<div class="p-head"><div><p class="p-cat"><b>${U('area')}</b></p><h2>${hub.name}</h2></div>${close}</div>
     <p class="lead">${hub.lead}</p>
-    <h3>Con One</h3><p class="note">${hub.one}</p>
-    <h3>Módulos</h3>${chipsHTML(ORDER[k])}`;
+    <h3>${U('withOne')}</h3><p class="note">${hub.one}</p>
+    <h3>${U('modules')}</h3>${chipsHTML(ORDER[k])}`;
   } else {
-    const m = M[key], hub = HUBS[m.hub];
+    const m = tm(key), hub = th(m.hub);
     h = `<div class="p-head"><div><p class="p-cat"><b>${hub.name}</b></p><h2>${m.name}</h2>${m.tag?`<span class="tag">${m.tag}</span>`:''}</div>${close}</div>
     <p class="lead">${m.lead}</p>
-    <h3>Lo que aporta</h3><ul class="vals">${m.value.map(v=>`<li>${v}</li>`).join('')}</ul>`;
+    <h3>${U('brings')}</h3><ul class="vals">${m.value.map(v=>`<li>${v}</li>`).join('')}</ul>`;
     const st = m.stats || (m.stat ? [m.stat] : null);
     if (st) h += `<div class="stats">${st.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.t}</span></div>`).join('')}</div>`;
-    h += `<h3>Con One</h3>` + (m.one ? chatHTML(m.one) : '') + (m.oneNote ? `<p class="note">${m.oneNote}</p>` : '');
+    h += `<h3>${U('withOne')}</h3>` + (m.one ? chatHTML(m.one) : '') + (m.oneNote ? `<p class="note">${m.oneNote}</p>` : '');
     if (m.special === 'analytics') h += analyticsExtra();
-    h += `<h3>Conectado con</h3>${chipsHTML(m.links)}<p class="why">${m.why}</p>`;
+    h += `<h3>${U('connected')}</h3>${chipsHTML(m.links)}<p class="why">${m.why}</p>`;
     h += guidesHTML(key);
-    if (m.soon) h += `<h3>Lo que viene</h3><ul class="soon">${m.soon.map(s=>`<li>${s}</li>`).join('')}</ul><p class="disc-note">El alcance y las fechas pueden cambiar.</p>`;
+    if (m.soon) h += `<h3>${U('soon')}</h3><ul class="soon">${m.soon.map(s=>`<li>${s}</li>`).join('')}</ul><p class="disc-note">${U('soonNote')}</p>`;
   }
   panelIn.innerHTML = h;
   panelIn.scrollTop = 0;
@@ -1076,7 +1355,7 @@ function select(key){
   current = key;
   render(key); mark(key);
   hero.classList.add('open');
-  history.replaceState(null,'','#'+encodeURIComponent(key));
+  history.replaceState(null,'',location.pathname + location.search + '#'+encodeURIComponent(key));
   if (window.scrollY > hero.offsetHeight*0.6) hero.scrollIntoView({behavior:'smooth'});
   requestAnimationFrame(drawWires);
   setTimeout(drawWires, 280);
@@ -1090,16 +1369,45 @@ function closePanel(){
 }
 
 function buildStories(){
-  const wrap = $('#stories');
-  STORIES.forEach(s => {
+  const wrap = $('#stories'); wrap.innerHTML = '';
+  STORIES.forEach((s0, si) => {
+    const s = lang === 'en' ? EN.STORIES[si] : { t: s0.t, d: s0.d, steps: s0.steps.map(x => x[1]) };
     const d = el('div', {class:'story'}, `<h3>${s.t}</h3><p>${s.d}</p>`);
     const ol = el('ol', {class:'chain'});
-    s.steps.forEach(([id,txt]) => { const li = el('li'); const b = el('button', {type:'button'}, M[id].name); b.addEventListener('click', () => select(id)); li.appendChild(b); li.appendChild(el('small',{},txt)); ol.appendChild(li); });
+    s0.steps.forEach(([id], i) => { const li = el('li'); const b = el('button', {type:'button'}, tm(id).name); b.addEventListener('click', () => select(id)); li.appendChild(b); li.appendChild(el('small',{},s.steps[i])); ol.appendChild(li); });
     d.appendChild(ol); wrap.appendChild(d);
   });
 }
 
-buildMap(); buildStories();
+/* textos fijos de la página: el español sale del HTML, el inglés de EN.UI */
+const STATIC_ES = {};
+document.querySelectorAll('[data-i18n]').forEach(n => STATIC_ES[n.dataset.i18n] = n.innerHTML);
+document.querySelectorAll('[data-i18n-aria]').forEach(n => STATIC_ES['aria:'+n.dataset.i18nAria] = n.getAttribute('aria-label'));
+
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.title = U('title');
+  document.querySelectorAll('[data-i18n]').forEach(n => n.innerHTML = lang === 'en' ? EN.UI[n.dataset.i18n] : STATIC_ES[n.dataset.i18n]);
+  document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', lang === 'en' ? EN.UI[n.dataset.i18nAria] : STATIC_ES['aria:'+n.dataset.i18nAria]));
+  stage.querySelectorAll('.pill').forEach(b => b.textContent = tm(b.dataset.id).name);
+  stage.querySelectorAll('[data-hub-btn]').forEach(b => b.lastChild.textContent = th(b.dataset.hubBtn).name);
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  buildStories();
+  if (current) { render(current); mark(current); }
+  requestAnimationFrame(drawWires);
+}
+function setLang(l){
+  if (l === lang) return;
+  lang = l;
+  try { localStorage.setItem('onemap-lang', l); } catch (e) {}
+  const u = new URL(location.href);
+  if (l === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+  history.replaceState(null, '', u);
+  applyLang();
+}
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+buildMap(); applyLang();
 $('#scrim').addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && hero.classList.contains('open')) closePanel(); });
 new ResizeObserver(() => drawWires()).observe(stage);
