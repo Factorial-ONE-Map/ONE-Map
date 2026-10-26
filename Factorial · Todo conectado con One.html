@@ -386,11 +386,12 @@ const M = {
     value: [
       "Evaluaciones 180° y 360° con ciclos, recordatorios y acuerdos descargables automatizados.",
       "Objetivos y OKRs individuales y de equipo, con feedback continuo para llegar a la evaluación con datos.",
-      "9-box y analíticas de talento para ver quién tiene más potencial y quién necesita apoyo."
+      "9-box y analíticas de talento para ver quién tiene más potencial y quién necesita apoyo.",
+      "Planes de incentivos: define normas de pago ligadas a objetivos y resultados; Factorial calcula cada bonus y lo paga automáticamente en nómina."
     ],
     one: [{ q: "¿Quién de mi equipo muestra señales de riesgo?", a: "Analiza autoevaluaciones y feedback, resume cada caso y explica por qué lo marca." }],
     why: "Cada resultado alimenta la formación que asignas y la subida que propones. Selección usa la última evaluación para medir qué fuentes traen a la gente que se queda y rinde.",
-    links: ["formacion", "revision", "engagement", "ats", "analiticas"],
+    links: ["compensacion", "formacion", "revision", "engagement", "ats", "analiticas"],
     soon: ["Objetivos conectados vía MCP: Factorial actualiza los objetivos con datos de tus otras herramientas."]
   },
   formacion: {
@@ -740,11 +741,12 @@ const M = {
     value: [
       "Bonus, cambios de contrato y ausencias que afectan a nómina, visibles al instante.",
       "Alertas antes del cálculo: variables pendientes, bonus sin aprobar o turnos desactualizados.",
-      "Cada nómina comparada con variables y contratos aprobados, y coste real frente a previsto."
+      "Cada nómina comparada con variables y contratos aprobados, y coste real frente a previsto.",
+      "Planes de incentivos conectados con Desempeño: normas de pago, cálculo automático de cada bonus y pago directo en nómina."
     ],
     one: [{ q: "¿Qué falta antes de cerrar la nómina de este mes?", a: "Revisa variables pendientes y lo que no cuadra, y te dice quién tiene que actuar." }],
     why: "Aquí desemboca todo: fichajes, turnos, ausencias, gastos, beneficios y subidas. Si nacen conectados, llegan validados.",
-    links: ["revision", "control", "turnos", "ausencias", "gastos", "beneficios", "integraciones"],
+    links: ["desempeno", "revision", "control", "turnos", "ausencias", "gastos", "beneficios", "integraciones"],
     stat: { n: "40 h", t: "al mes que puedes ahorrar sincronizando altas, bajas, cambios salariales, ausencias y variables con tu proveedor de nómina (integración a3innuva, España)" }
   },
   integraciones: {
@@ -803,7 +805,7 @@ const EN = {
   M: {
     desempeno: { name: "Performance",
       lead: "Reviews, goals and feedback all year round, not just at the annual review.",
-      value: ["180° and 360° reviews with automated cycles, reminders and downloadable agreements.", "Individual and team goals and OKRs, with continuous feedback so you reach the review with data.", "9-box and talent analytics to see who has the most potential and who needs support."],
+      value: ["180° and 360° reviews with automated cycles, reminders and downloadable agreements.", "Individual and team goals and OKRs, with continuous feedback so you reach the review with data.", "9-box and talent analytics to see who has the most potential and who needs support.", "Incentive plans: set payout rules tied to goals and results; Factorial calculates every bonus and pays it automatically through payroll."],
       one: [{ q: "Who on my team is showing risk signals?", a: "Analyzes self-reviews and feedback, summarizes each case and explains why it flags it." }],
       why: "Every result feeds the training you assign and the raise you propose. Recruitment uses the latest review to measure which sources bring people who stay and perform.",
       soon: ["Goals connected via MCP: Factorial updates goals with data from your other tools."] },
@@ -953,7 +955,7 @@ const EN = {
       why: "What each person uses reaches payroll as a pay item, without anyone compiling it by hand." },
     compensacion: { name: "Compensation",
       lead: "Every change reaches payroll already validated.",
-      value: ["Bonuses, contract changes and absences that affect payroll, visible instantly.", "Alerts before calculation: pending variables, unapproved bonuses or outdated shifts.", "Every payroll compared with approved variables and contracts, and actual vs. planned cost."],
+      value: ["Bonuses, contract changes and absences that affect payroll, visible instantly.", "Alerts before calculation: pending variables, unapproved bonuses or outdated shifts.", "Every payroll compared with approved variables and contracts, and actual vs. planned cost.", "Incentive plans connected to Performance: payout rules, automatic calculation of every bonus and direct payment through payroll."],
       one: [{ q: "What's missing before we close this month's payroll?", a: "Reviews pending variables and anything that doesn't add up, and tells you who needs to act." }],
       why: "Everything flows here: clock-ins, shifts, time off, expenses, benefits and raises. If they're born connected, they arrive validated.",
       stat: { n: "40 h", t: "a month you can save by syncing hires, exits, salary changes, absences and variables with your payroll provider (a3innuva integration, Spain)" } },
@@ -1101,7 +1103,7 @@ const DE = {
   M: {
     desempeno: { name: "Performance",
       lead: "Beurteilungen, Ziele und Feedback das ganze Jahr über, nicht nur im Jahresgespräch.",
-      value: ["180°- und 360°-Beurteilungen mit automatisierten Zyklen, Erinnerungen und herunterladbaren Vereinbarungen.", "Individuelle und Teamziele sowie OKRs, mit kontinuierlichem Feedback, damit du mit Daten ins Gespräch gehst.", "9-box und Talentanalysen, um zu sehen, wer das meiste Potenzial hat und wer Unterstützung braucht."],
+      value: ["180°- und 360°-Beurteilungen mit automatisierten Zyklen, Erinnerungen und herunterladbaren Vereinbarungen.", "Individuelle und Teamziele sowie OKRs, mit kontinuierlichem Feedback, damit du mit Daten ins Gespräch gehst.", "9-box und Talentanalysen, um zu sehen, wer das meiste Potenzial hat und wer Unterstützung braucht.", "Incentive-Pläne: Lege Auszahlungsregeln fest, die an Ziele und Ergebnisse gekoppelt sind. Factorial berechnet jeden Bonus und zahlt ihn automatisch über die Lohnabrechnung aus."],
       one: [{ q: "Wer in meinem Team zeigt Warnsignale?", a: "Analysiert Selbstbeurteilungen und Feedback, fasst jeden Fall zusammen und erklärt, warum er auffällt." }],
       why: "Jedes Ergebnis fließt in die Weiterbildung ein, die du zuweist, und in die Gehaltserhöhung, die du vorschlägst. Recruiting nutzt die letzte Beurteilung, um zu messen, welche Quellen Leute bringen, die bleiben und gute Leistung zeigen.",
       soon: ["Ziele über MCP verbunden: Factorial aktualisiert Ziele mit Daten aus deinen anderen Tools."] },
@@ -1251,7 +1253,7 @@ const DE = {
       why: "Was jede Person nutzt, erreicht die Lohnabrechnung als Gehaltsbestandteil, ohne dass es jemand von Hand zusammenstellt." },
     compensacion: { name: "Vergütung",
       lead: "Jede Änderung erreicht die Lohnabrechnung bereits geprüft.",
-      value: ["Boni, Vertragsänderungen und Abwesenheiten mit Einfluss auf die Abrechnung, sofort sichtbar.", "Warnungen vor der Berechnung: offene Variablen, nicht genehmigte Boni oder veraltete Schichten.", "Jede Abrechnung verglichen mit genehmigten Variablen und Verträgen, plus Ist- vs. Plankosten."],
+      value: ["Boni, Vertragsänderungen und Abwesenheiten mit Einfluss auf die Abrechnung, sofort sichtbar.", "Warnungen vor der Berechnung: offene Variablen, nicht genehmigte Boni oder veraltete Schichten.", "Jede Abrechnung verglichen mit genehmigten Variablen und Verträgen, plus Ist- vs. Plankosten.", "Incentive-Pläne, verbunden mit Performance: Auszahlungsregeln, automatische Berechnung jedes Bonus und direkte Auszahlung über die Lohnabrechnung."],
       one: [{ q: "Was fehlt noch, bevor wir die Lohnabrechnung dieses Monats abschließen?", a: "Prüft offene Variablen und alles, was nicht stimmt, und sagt dir, wer handeln muss." }],
       why: "Hier fließt alles zusammen: Stempelungen, Schichten, Abwesenheiten, Ausgaben, Benefits und Gehaltserhöhungen. Wenn sie verbunden entstehen, kommen sie geprüft an.",
       stat: { n: "40 h", t: "pro Monat sparst du, wenn du Einstellungen, Austritte, Gehaltsänderungen, Abwesenheiten und Variablen mit deinem Lohnabrechnungsanbieter synchronisierst (a3innuva-Integration, Spanien)" } },
@@ -1360,7 +1362,7 @@ const PT = {
   M: {
     desempeno: { name: "Desempenho",
       lead: "Avaliações, objetivos e feedback ao longo de todo o ano, não só na avaliação anual.",
-      value: ["Avaliações de 180° e 360° com ciclos automáticos, lembretes e acordos descarregáveis.", "Objetivos e OKRs individuais e de equipa, com feedback contínuo para chegares à avaliação com dados.", "9-box e analítica de talento para ver quem tem mais potencial e quem precisa de apoio."],
+      value: ["Avaliações de 180° e 360° com ciclos automáticos, lembretes e acordos descarregáveis.", "Objetivos e OKRs individuais e de equipa, com feedback contínuo para chegares à avaliação com dados.", "9-box e analítica de talento para ver quem tem mais potencial e quem precisa de apoio.", "Planos de incentivos: define regras de pagamento ligadas a objetivos e resultados; a Factorial calcula cada bónus e paga-o automaticamente no processamento salarial."],
       one: [{ q: "Quem da minha equipa está a mostrar sinais de risco?", a: "Analisa autoavaliações e feedback, resume cada caso e explica porque o assinala." }],
       why: "Cada resultado alimenta a formação que atribuis e o aumento que propões. O recrutamento usa a última avaliação para medir que fontes trazem pessoas que ficam e rendem.",
       soon: ["Objetivos ligados via MCP: a Factorial atualiza objetivos com dados das tuas outras ferramentas."] },
@@ -1510,7 +1512,7 @@ const PT = {
       why: "O que cada pessoa utiliza chega ao processamento salarial como rubrica, sem que ninguém o compile à mão." },
     compensacion: { name: "Remuneração",
       lead: "Cada alteração chega ao processamento salarial já validada.",
-      value: ["Prémios, alterações contratuais e ausências que afetam o salário, visíveis de imediato.", "Alertas antes do cálculo: variáveis pendentes, prémios por aprovar ou turnos desatualizados.", "Cada processamento comparado com as variáveis e contratos aprovados, e custo real vs. planeado."],
+      value: ["Prémios, alterações contratuais e ausências que afetam o salário, visíveis de imediato.", "Alertas antes do cálculo: variáveis pendentes, prémios por aprovar ou turnos desatualizados.", "Cada processamento comparado com as variáveis e contratos aprovados, e custo real vs. planeado.", "Planos de incentivos ligados ao Desempenho: regras de pagamento, cálculo automático de cada bónus e pagamento direto no processamento salarial."],
       one: [{ q: "O que falta antes de fecharmos o processamento salarial deste mês?", a: "Revê as variáveis pendentes e tudo o que não bate certo, e diz-te quem tem de agir." }],
       why: "Tudo desagua aqui: registos de ponto, turnos, ausências, despesas, benefícios e aumentos. Se nascem ligados, chegam validados.",
       stat: { n: "40 h", t: "por mês que podes poupar ao sincronizar contratações, saídas, alterações salariais, ausências e variáveis com o teu fornecedor de processamento salarial (integração com a3innuva, Espanha)" } },
@@ -1619,7 +1621,7 @@ const FR = {
   M: {
     desempeno: { name: "Performance",
       lead: "Évaluations, objectifs et feedback toute l’année, pas seulement à l’entretien annuel.",
-      value: ["Évaluations 180° et 360° avec cycles automatisés, relances et accords téléchargeables.", "Objectifs individuels et d’équipe, OKRs et feedback continu pour arriver à l’entretien avec des données.", "9-box et analyses talents pour identifier ceux qui ont le plus de potentiel et ceux qui ont besoin d’accompagnement."],
+      value: ["Évaluations 180° et 360° avec cycles automatisés, relances et accords téléchargeables.", "Objectifs individuels et d’équipe, OKRs et feedback continu pour arriver à l’entretien avec des données.", "9-box et analyses talents pour identifier ceux qui ont le plus de potentiel et ceux qui ont besoin d’accompagnement.", "Plans d’incentive : définissez des règles de versement liées aux objectifs et aux résultats ; Factorial calcule chaque prime et la verse automatiquement en paie."],
       one: [{ q: "Qui dans mon équipe montre des signaux de risque ?", a: "Analyse les auto-évaluations et les feedbacks, résume chaque cas et explique pourquoi il le signale." }],
       why: "Chaque résultat alimente les formations que vous attribuez et l’augmentation que vous proposez. Le recrutement s’appuie sur la dernière évaluation pour mesurer quelles sources amènent des personnes qui restent et performent.",
       soon: ["Objectifs connectés via MCP : Factorial met à jour les objectifs avec les données de vos autres outils."] },
@@ -1769,7 +1771,7 @@ const FR = {
       why: "Ce que chacun utilise arrive en paie comme élément de rémunération, sans que personne ne le compile à la main." },
     compensacion: { name: "Rémunération",
       lead: "Chaque changement arrive en paie déjà validé.",
-      value: ["Primes, changements de contrat et absences qui impactent la paie, visibles instantanément.", "Alertes avant le calcul : variables en attente, primes non validées ou plannings périmés.", "Chaque paie comparée aux variables et contrats validés, et coût réel vs prévu."],
+      value: ["Primes, changements de contrat et absences qui impactent la paie, visibles instantanément.", "Alertes avant le calcul : variables en attente, primes non validées ou plannings périmés.", "Chaque paie comparée aux variables et contrats validés, et coût réel vs prévu.", "Plans d’incentive connectés à la Performance : règles de versement, calcul automatique de chaque prime et versement direct en paie."],
       one: [{ q: "Que manque-t-il avant de clôturer la paie de ce mois ?", a: "Passe en revue les variables en attente et tout ce qui ne colle pas, et vous dit qui doit agir." }],
       why: "Tout converge ici : pointages, plannings, absences, notes de frais, avantages et augmentations. S’ils naissent connectés, ils arrivent validés.",
       stat: { n: "40 h", t: "par mois à gagner en synchronisant embauches, départs, changements de salaire, absences et variables avec votre prestataire de paie (intégration a3innuva, Espagne)" } },
@@ -1878,7 +1880,7 @@ const IT = {
   M: {
     desempeno: { name: "Performance",
       lead: "Valutazioni, obiettivi e feedback tutto l’anno, non solo alla valutazione annuale.",
-      value: ["Valutazioni a 180° e 360° con cicli automatizzati, promemoria e accordi scaricabili.", "Obiettivi e OKRs individuali e di team, con feedback continuo per arrivare alla valutazione con i dati.", "9-box e analytics sul talento per vedere chi ha più potenziale e chi ha bisogno di supporto."],
+      value: ["Valutazioni a 180° e 360° con cicli automatizzati, promemoria e accordi scaricabili.", "Obiettivi e OKRs individuali e di team, con feedback continuo per arrivare alla valutazione con i dati.", "9-box e analytics sul talento per vedere chi ha più potenziale e chi ha bisogno di supporto.", "Piani di incentivazione: definisci regole di pagamento legate a obiettivi e risultati; Factorial calcola ogni bonus e lo paga automaticamente in busta paga."],
       one: [{ q: "Chi del mio team mostra segnali di rischio?", a: "Analizza autovalutazioni e feedback, riassume ogni caso e spiega perché lo segnala." }],
       why: "Ogni risultato alimenta la formazione che assegni e l’aumento che proponi. Il recruiting usa l’ultima valutazione per misurare quali canali portano persone che restano e rendono.",
       soon: ["Obiettivi connessi via MCP: Factorial aggiorna gli obiettivi con i dati dei tuoi altri strumenti."] },
@@ -2028,7 +2030,7 @@ const IT = {
       why: "Ciò che ogni persona usa arriva alle paghe come voce di cedolino, senza che nessuno lo compili a mano." },
     compensacion: { name: "Compensation",
       lead: "Ogni modifica arriva alle paghe già validata.",
-      value: ["Bonus, cambi contrattuali e assenze che incidono sulle paghe, visibili all’istante.", "Alert prima del calcolo: variabili in sospeso, bonus non approvati o turni non aggiornati.", "Ogni cedolino confrontato con variabili e contratti approvati, e costo reale vs. pianificato."],
+      value: ["Bonus, cambi contrattuali e assenze che incidono sulle paghe, visibili all’istante.", "Alert prima del calcolo: variabili in sospeso, bonus non approvati o turni non aggiornati.", "Ogni cedolino confrontato con variabili e contratti approvati, e costo reale vs. pianificato.", "Piani di incentivazione collegati alla Performance: regole di pagamento, calcolo automatico di ogni bonus e pagamento diretto in busta paga."],
       one: [{ q: "Cosa manca prima di chiudere le paghe di questo mese?", a: "Controlla le variabili in sospeso e tutto ciò che non torna, e ti dice chi deve intervenire." }],
       why: "Tutto confluisce qui: timbrature, turni, assenze, spese, benefit e aumenti. Se nascono connessi, arrivano validati.",
       stat: { n: "40 h", t: "al mese che puoi risparmiare sincronizzando assunzioni, uscite, modifiche salariali, assenze e variabili con il tuo provider di paghe (integrazione a3innuva, Spagna)" } },
@@ -2050,12 +2052,12 @@ const IT = {
     { t: "Un portatile rotto", d: "Un messaggio a One e un’approvazione.", steps: ["Lo dici a One e apre il ticket.", "One verifica che non ci siano scorte.", "Ne trova uno conforme alla policy.", "Una persona approva, viene acquistato e l’IT lo consegna."] }
   ],
   UI: {
-    center: "Il cuore", area: "Area", modules: "Moduli", brings: "Cosa porta", withOne: "Con One", connected: "Connesso con",
+    center: "Il cuore", area: "Area", modules: "Moduli", brings: "Come ti aiuta", withOne: "Con One", connected: "Connesso con",
     soon: "Cosa arriva", soonNote: "Ambito e date possono cambiare.", close: "Chiudi",
     title: "Factorial · Tutto connesso con One",
     h1: "One conosce già la tua azienda",
     sub: "Ogni modulo di Factorial condivide gli stessi dati. One lavora sopra tutti, con i tuoi permessi e le tue policy.",
-    hint: "Tocca una bolla qualsiasi per vedere cosa porta, cosa fa One con essa e a cosa si collega.",
+    hint: "Tocca una bolla qualsiasi per vedere come ti aiuta, cosa fa One con essa e a cosa si collega.",
     cue: "Continua a scorrere", cueAria: "Continua a scorrere", oneAria: "Scopri cos’è One", panelAria: "Dettagli del modulo",
     s1t: "Gli stessi dati, da un capo all’altro",
     s1d: "Quando ogni modulo vive in uno strumento diverso, ogni decisione riparte da zero. In Factorial, ciò che inserisci una volta lo usa il passo successivo. Tocca un passaggio qualsiasi per aprirlo sulla mappa.",
