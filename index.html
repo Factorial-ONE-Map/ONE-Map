@@ -28,20 +28,27 @@
   --bg:#1B1B2C; --bg-alt:#23233A; --ink:#F1F1F5; --ink-2:#B4B4C3; --ink-3:#7C7C90;
   --line:#34344C; --accent-weak:#3A2030; --panel:#20203A; --bubble:#2B2B45; color-scheme:dark;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--red-dark)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:
+    radial-gradient(1100px 900px at 8% 0%, rgba(255,193,85,.55) 0%, rgba(255,193,85,0) 70%),
+    radial-gradient(900px 1100px at 100% 55%, rgba(150,70,170,.30) 0%, rgba(150,70,170,0) 70%),
+    radial-gradient(1400px 1000px at 100% 0%, rgba(198,15,53,.35) 0%, rgba(198,15,53,0) 70%),
+    linear-gradient(175deg, var(--tangerine) 0%, var(--red) 9%, var(--red) 50%, var(--red-dark) 100%);
+}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:2px}
 .light :focus-visible, .panel :focus-visible, section :focus-visible{outline-color:rgba(255,53,94,.55)}
 
 /* ---------- HERO / MAP ---------- */
-.hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;
-  background:
-    radial-gradient(60% 55% at 12% 0%, rgba(255,193,85,.55) 0%, rgba(255,193,85,0) 70%),
-    radial-gradient(50% 60% at 100% 100%, rgba(150,70,170,.35) 0%, rgba(150,70,170,0) 70%),
-    linear-gradient(135deg, var(--tangerine) 0%, var(--red) 42%, var(--red-dark) 100%);
-}
+.hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;background:transparent}
+.scrollcue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;text-decoration:none;font-size:13px;font-weight:500;opacity:.92;transition:opacity .3s var(--ease)}
+.scrollcue .ar{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);display:grid;place-items:center;background:rgba(255,255,255,.1)}
+.scrollcue:hover .ar{background:rgba(255,255,255,.25)}
+.scrollcue.gone{opacity:0;pointer-events:none}
+.hero.open .scrollcue{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion: no-preference){ .scrollcue .ar{animation:bob 1.8s var(--ease) infinite} @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}} }
 .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 0px;transition:grid-template-columns .25s var(--ease);min-height:100vh}
 .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) min(440px,40vw)}
 .mapcol{display:flex;flex-direction:column;padding:28px clamp(20px,4vw,56px) 28px;min-width:0}
@@ -136,6 +143,10 @@ h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spaci
 .soon{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .soon li{font-size:14px;padding-left:14px;border-left:2px solid var(--ink-3);color:var(--ink)}
 .disc-note{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.guides{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.guides a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.3;transition:background .15s var(--ease),border-color .15s var(--ease)}
+.guides a:hover{background:var(--accent-weak);border-color:var(--red)}
+.guides a svg{flex:none;color:var(--red)}
 
 /* analytics bits */
 .dash{display:grid;gap:12px}
@@ -152,42 +163,47 @@ h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spaci
 .rt .src{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
 
 /* ---------- SECTIONS ---------- */
-section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;margin:0 auto}
+section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;margin:0 auto;color:#fff;
+  --ink:#fff; --ink-2:rgba(255,255,255,.84); --ink-3:rgba(255,255,255,.55); --line:rgba(255,255,255,.28); --bg-alt:rgba(255,255,255,.12)}
+section:focus-visible, section :focus-visible{outline-color:rgba(255,255,255,.9)}
 section + section{padding-top:0}
 section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.98;letter-spacing:-0.04em;margin:0 0 14px;max-width:18ch}
 section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.story{background:var(--bg-alt);border-radius:20px;padding:22px}
+.story{background:var(--bg-alt);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:22px;backdrop-filter:blur(6px)}
 .story h3{font-size:20px;font-weight:500;letter-spacing:-0.02em;margin:0 0 4px}
 .story p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px}
 .chain{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
 .chain li{position:relative;padding:0 0 12px 30px;counter-increment:s}
-.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:500}
+.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--red-dark);font-size:11px;display:grid;place-items:center;font-weight:500}
 .chain li::after{content:"";position:absolute;left:9.5px;top:24px;bottom:2px;width:1px;background:var(--ink-3)}
 .chain li:last-child{padding-bottom:0}
 .chain li:last-child::after{display:none}
 .chain small{display:block;font-size:13px;color:var(--ink-2);line-height:1.35;margin-top:2px}
 .chain button{appearance:none;border:0;background:none;padding:0;font-size:15px;cursor:pointer;text-align:left;color:var(--ink);border-bottom:1px solid transparent}
-.chain button:hover{border-bottom-color:var(--red)}
+.chain button:hover{border-bottom-color:#fff}
 
 .cmp{width:100%;border-collapse:collapse;font-size:15px}
 .cmpwrap{overflow-x:auto}
 .cmp th,.cmp td{text-align:left;padding:14px 16px;border-top:1px solid var(--line);vertical-align:top}
 .cmp thead th{border-top:0;font-size:13px;font-weight:500;color:var(--ink-2)}
-.cmp thead th:last-child{color:var(--red)}
+.cmp thead th:last-child{color:#fff;font-weight:700}
 .cmp td:first-child{font-weight:500;width:18%}
 .cmp td:nth-child(2){color:var(--ink-2);width:36%}
 
 .road{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .road div{border-top:2px solid var(--ink);padding-top:12px}
 .road b{display:block;font-weight:500;font-size:16px;margin-bottom:4px}
-.road span{font-size:12.5px;color:var(--red);display:block;margin-bottom:6px}
+.road span{font-size:12px;font-weight:500;color:var(--red-dark);background:#fff;border-radius:999px;padding:2px 9px;display:inline-block;margin-bottom:8px}
 .road p{margin:0;font-size:14.5px;color:var(--ink-2)}
+.road .more{border-top-style:dashed}
+.road .more b{font-size:22px;letter-spacing:-0.02em}
 
-.cta{background:var(--red);color:#fff;border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
+.cta{background:#fff;color:var(--midnight);border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
 .cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
 .cta p{margin:0;font-size:17px}
-footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:var(--ink-3)}
+.cta h2{color:var(--red)}
+footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:rgba(255,255,255,.7)}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:1100px){
@@ -252,9 +268,10 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
     </aside>
   </div>
   <div class="scrim" id="scrim"></div>
+  <a class="scrollcue" id="scrollCue" href="#mas" aria-label="Seguir bajando">Sigue bajando<span class="ar"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></span></a>
 </div>
 
-<section>
+<section id="mas">
   <h2 class="st">El mismo dato, de principio a fin</h2>
   <p class="sl">Cuando cada módulo vive en una herramienta distinta, cada decisión empieza de cero. En Factorial, lo que se captura una vez lo usa el siguiente paso. Toca cualquier paso para abrirlo en el mapa.</p>
   <div class="stories" id="stories"></div>
@@ -281,12 +298,13 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
   <h2 class="st">Lo que viene</h2>
   <p class="sl">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
   <div class="road">
-    <div><span>Beta</span><b>1:1 con IA</b><p>One prepara y guía cada 1:1 con el historial completo de la persona.</p></div>
+    <div><span>Próximamente</span><b>1:1 con IA</b><p>One prepara y guía cada 1:1 con el historial completo de la persona.</p></div>
     <div><span>Próximamente</span><b>Cursos gamificados</b><p>Mecánicas de juego dentro de los cursos del LMS.</p></div>
     <div><span>Próximamente</span><b>Objetivos vía MCP</b><p>Factorial se conecta a tus herramientas y actualiza los objetivos con sus datos.</p></div>
     <div><span>Próximamente</span><b>Plantilla: aprobaciones y presupuesto</b><p>Flujos de aprobación estructurados y comparativa de previsto frente a real.</p></div>
-    <div><span>Prototipo · Q4 2026</span><b>Talent pool sugerido</b><p>Antes de publicar, ves quién de tu base de candidatos ya encaja.</p></div>
-    <div><span>Concepto · Q4 2026</span><b>WhatsApp en Recruitment</b><p>Mensajes, aviso previo a la llamada de IA y documentos por WhatsApp.</p></div>
+    <div><span>Próximamente</span><b>Talent pool sugerido</b><p>Antes de publicar, ves quién de tu base de candidatos ya encaja.</p></div>
+    <div><span>Próximamente</span><b>WhatsApp en Recruitment</b><p>Mensajes, aviso previo a la llamada de IA y documentos por WhatsApp.</p></div>
+    <div class="more"><span>Próximamente</span><b>¡Y mucho más!</b><p>Cada mes llegan nuevas funcionalidades de IA a todos los productos de Factorial.</p></div>
   </div>
 </section>
 
@@ -309,10 +327,10 @@ const HUBS = {
 };
 
 const ORDER = {
-  talento: ["desempeno", "formacion", "engagement", "comunicacion", "ats", "canal"],
+  talento: ["desempeno", "formacion", "engagement", "comunidades", "ats", "canal"],
   tiempo: ["control", "turnos", "ausencias"],
   finanzas: ["plantilla", "proyectos", "fpa", "gastos", "compras", "revision"],
-  core: ["politicas", "portal", "onoff", "documentos", "firma", "analiticas", "tickets", "rutinas"],
+  core: ["politicas", "portal", "comunicaciones", "onoff", "documentos", "firma", "analiticas", "tickets"],
   it: ["mdm", "inventario", "software", "marketplace"],
   nomina: ["beneficios", "compensacion", "integraciones", "anticipo"]
 };
@@ -341,7 +359,7 @@ const M = {
     ],
     one: [{ q: "Crea un curso de onboarding para el equipo de tienda.", a: "Un curso estructurado con módulos y cuestionarios, en minutos. Tú lo revisas y lo publicas." }],
     why: "Desde la evaluación, en un clic: asignas la formación que cierra cada carencia de competencias y mides su impacto en el siguiente ciclo.",
-    links: ["desempeno", "onoff", "compensacion", "analiticas", "rutinas"],
+    links: ["desempeno", "onoff", "compensacion", "analiticas"],
     stat: { n: "94%", t: "de las personas se quedaría más tiempo en una empresa que invierte en su desarrollo (LinkedIn Workplace Learning Report, 2023)" },
     soon: ["Cursos gamificados: mecánicas de juego dentro de los cursos."]
   },
@@ -357,10 +375,23 @@ const M = {
     why: "Un buen desempeño no siempre significa compromiso. Con el pulso ligado al fichaje y el contexto de desempeño, One ve el cuadro completo de cada persona.",
     links: ["control", "desempeno", "onoff", "analiticas"],
     stat: { n: "40–60%", t: "menos administración manual con evaluaciones, 1:1 y encuestas automatizadas" },
-    tag: "1:1 con IA en beta"
+    tag: "1:1 con IA: próximamente"
   },
-  comunicacion: {
-    name: "Comunicación", hub: "talento",
+  comunidades: {
+    name: "Comunidades", hub: "talento",
+    lead: "Espacios donde tu gente se encuentra, comparte y se reconoce, más allá del organigrama.",
+    value: [
+      "Comunidades por interés, centro, proyecto o equipo, abiertas o por invitación.",
+      "Publicaciones, reconocimientos y celebraciones de hitos desde la app.",
+      "Une a quien trabaja en oficina, en remoto o en tienda en un mismo espacio."
+    ],
+    one: [{ q: "¿Qué comunidades me recomiendas ahora que me he incorporado?", a: "Te sugiere las de tu equipo, tu centro y tus intereses, según tu perfil." }],
+    why: "Las comunidades se crean sobre los mismos datos de equipos, centros y personas, así que cada nueva incorporación encuentra su sitio desde el primer día.",
+    links: ["engagement", "comunicaciones", "portal", "onoff"],
+    check: true
+  },
+  comunicaciones: {
+    name: "Comunicaciones", hub: "core",
     lead: "Comunicados para toda la empresa o para equipos concretos, donde tu gente ya trabaja cada día.",
     value: [
       "Publica para toda la empresa o para equipos y centros concretos.",
@@ -369,7 +400,7 @@ const M = {
     ],
     one: [{ q: "Redacta el comunicado del nuevo horario de verano en español e inglés.", a: "Lo redacta a partir de tu política de horario y lo traduce, listo para revisar." }],
     why: "La segmentación sale de los mismos datos de equipos, centros y roles que usa el resto de Factorial.",
-    links: ["portal", "politicas", "engagement"],
+    links: ["portal", "politicas", "engagement", "comunidades"],
     check: true
   },
   ats: {
@@ -387,7 +418,7 @@ const M = {
     why: "La vacante nace aprobada y con presupuesto; quien firma entra con todos sus datos, sin volver a teclear nada; y la analítica cruza la fuente de contratación con la evaluación de desempeño.",
     links: ["plantilla", "onoff", "firma", "desempeno", "analiticas"],
     stats: [{ n: "70%", t: "menos time-to-hire con una primera criba con IA" }, { n: "+25%", t: "de crecimiento de plantilla con el mismo equipo de selección" }],
-    soon: ["Candidatos sugeridos del talent pool (prototipo, Q4 2026).", "WhatsApp en Recruitment y Company Pages por sociedad (concepto, Q4 2026 – Q1 2027).", "Cultural assessment (concepto, Q4 2026)."]
+    soon: ["Candidatos sugeridos del talent pool (próximamente).", "WhatsApp en Recruitment y Company Pages por sociedad (próximamente).", "Cultural assessment (próximamente)."]
   },
   canal: {
     name: "Canal seguro", hub: "talento",
@@ -412,7 +443,7 @@ const M = {
     ],
     one: [{ q: "Envíame de lunes a viernes a las 18:00 quién tiene menos de 4 fichajes hoy.", a: "Crea una rutina que revisa los fichajes cada día y te lo manda por email." }],
     why: "El mismo fichaje sirve para nómina, para el coste de proyectos y para recoger el pulso del equipo, sin capturarlo dos veces.",
-    links: ["turnos", "ausencias", "proyectos", "compensacion", "engagement", "rutinas"]
+    links: ["turnos", "ausencias", "proyectos", "compensacion", "engagement"]
   },
   turnos: {
     name: "Turnos", hub: "tiempo",
@@ -535,7 +566,7 @@ const M = {
     ],
     oneNote: "One está incluido para toda la plantilla, sin necesidad de formación. Cada persona pregunta lo que necesita y ve solo lo que su rol le permite.",
     why: "Todo lo que el empleado hace aquí entra directamente en el módulo correspondiente, sin formularios ni correos intermedios.",
-    links: ["ausencias", "gastos", "tickets", "documentos", "beneficios", "comunicacion"]
+    links: ["ausencias", "gastos", "tickets", "documentos", "beneficios", "comunicaciones"]
   },
   onoff: {
     name: "On/Offboarding", hub: "core",
@@ -583,7 +614,7 @@ const M = {
     ],
     one: [{ q: "Envíame la rotación por departamento cada lunes.", a: "Crea el informe, lo programa como rutina y te explica la tendencia en cada envío." }],
     why: "Como todo el dato vive en Factorial, un informe no se construye: se pregunta. Sin exportar, sin cruzar Excels y sin esperar a Finanzas.",
-    links: ["desempeno", "engagement", "ats", "control", "ausencias", "turnos", "plantilla", "compensacion", "revision", "gastos", "proyectos", "rutinas"]
+    links: ["desempeno", "engagement", "ats", "control", "ausencias", "turnos", "plantilla", "compensacion", "revision", "gastos", "proyectos"]
   },
   tickets: {
     name: "Tickets", hub: "core",
@@ -596,18 +627,6 @@ const M = {
     one: [{ q: "Oye One, se me acaba de estropear el portátil. Necesito uno nuevo.", a: "Crea el ticket, lo encamina a IT, lee el contexto, ve que no hay portátil en stock, encuentra uno en el marketplace y redacta el plan. Una persona aprueba, se compra e IT lo entrega." }],
     why: "One investiga entre contratos, activos de IT y perfiles de empleado: la resolución se redacta con tus políticas y quien resuelve solo aprueba.",
     links: ["inventario", "marketplace", "compras", "politicas", "portal"]
-  },
-  rutinas: {
-    name: "Rutinas", hub: "core", special: "routines",
-    lead: "Configura una pregunta una vez y One te trae la respuesta cuando toca.",
-    value: [
-      "Peticiones de datos diarias, semanales o mensuales, enviadas a tiempo.",
-      "Cualquier informe de Analíticas se programa como rutina desde el propio chat.",
-      "Detectan los problemas mientras aún son pequeños, no cuando ya son caros."
-    ],
-    one: [{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }],
-    why: "Una rutina solo es útil si los datos están al día y conectados: por eso aquí puede cruzar fichajes, ausencias, nómina o selección en el mismo envío.",
-    links: ["analiticas", "control", "compensacion", "formacion", "ats"]
   },
   mdm: {
     name: "Gestión de dispositivos móviles", hub: "it",
@@ -712,6 +731,136 @@ const M = {
   }
 };
 
+/* Guías gratuitas por producto (fuente: hoja de Freebies, columna Product → URL) */
+const FREEBIES = {
+  ats: [
+    ["eBook de Reclutamiento IT", "https://factorial.es/ebooks/reclutamiento-it"],
+    ["Plantilla profesiograma Excel", "https://factorial.es/plantillas/plantilla-profesiograma-excel-descargar-gratis"],
+    ["Plantilla profesiograma PDF", "https://factorial.es/plantillas/plantilla-para-realizar-un-profesiograma"],
+    ["Modelo para realizar entrevistas de trabajo", "https://factorial.es/plantillas/modelo-para-una-entrevista-de-trabajo"],
+    ["Plantilla word - oferta de trabajo", "https://factorial.es/plantillas/plantilla-oferta-trabajo-word"],
+    ["Modelo prueba psicotécnica", "https://factorial.es/plantillas/modelo-de-prueba-psicotecnica"],
+    ["Carta de rechazo a un candidato", "https://factorial.es/plantillas/carta-rechazo-candidato"],
+    ["Checklist oferta de trabajo", "https://factorial.es/plantillas/lista-oferta-trabajo"],
+    ["Oferta de trabajo Word", "https://factorial.es/plantillas/oferta-de-trabajo"],
+    ["Contratación eficiente paso a paso", "https://factorial.es/ebooks/como-contratar-mejor-paso-a-paso"]
+  ],
+  compensacion: [
+    ["30 tipos de gastos esenciales en tu empresa", "https://factorial.es/ebooks/30-tipo-gastos-empresa"],
+    ["Calculadora coste del empleado", "https://factorial.es/plantillas/calculadora-de-coste-de-empleado"],
+    ["Plantilla de nómina - Excel", "https://factorial.es/plantillas/plantilla-nomina"],
+    ["Registro salarial obligatorio", "https://factorial.es/plantillas/modelo-registro-salarial-obligatorio"],
+    ["Salario medio por provincia 2024 España", "https://factorial.es/plantillas/salario-medio-en-espana-por-provincia"],
+    ["Plantilla Nómina - Baja por enfermedad", "https://factorial.es/plantillas/nomina-de-baja-por-enfermedad"],
+    ["Calculadora salario Neto", "https://factorial.es/plantillas/calculadora-salario-neto"],
+    ["Incidencias en nómina", "https://factorial.es/plantillas/incidencias-en-nomina"],
+    ["Plantilla nóminas - Word", "https://factorial.es/plantillas/plantilla-de-nominas-en-word"],
+    ["Plantilla - cómo leer mi nómina", "https://factorial.es/plantillas/como-leer-mi-nomina"],
+    ["Digitalización Nóminas ft. Wolters Kluwer", "https://factorial.es/ebooks/ebook-digitalizacion-nominas-wolters-kluwer"],
+    ["Plantilla Nómina PDF", "https://factorial.es/plantillas/plantilla-nomina-editable-en-pdf"]
+  ],
+  control: [
+    ["Calculadora online de horas trabajadas", "https://factorial.es/calculadora-horas-trabajadas"],
+    ["eBook - Cómo implementar el control horario", "https://factorial.es/ebooks/como-implementar-el-control-horario"],
+    ["Plantilla PDF - Control horario", "https://factorial.es/plantillas/control-horario-pdf-descargable"],
+    ["Control Horario Word", "https://factorial.es/plantillas/plantilla-control-horario-trabajadores"],
+    ["Plantilla excel - Control horario", "https://factorial.es/plantillas/plantilla-control-horario-trabajadores-excel"],
+    ["Modelo - Bolsa de horas", "https://factorial.es/plantillas/modelo-clausula-bolsa-horas"],
+    ["kit sobre nueva ley control horario", "https://factorial.es/plantillas/kit-ley-fichaje"]
+  ],
+  gastos: [
+    ["Plantilla de control de gastos (top freebie expenses)", "https://factorial.es/plantillas/plantilla-control-gastos"],
+    ["eBook: optimización financiera para CFOs", "https://factorial.es/ebooks/optimizacion-financiera-para-cfos-ebook"],
+    ["Plantilla de seguimiento de los gastos", "https://factorial.es/plantillas/plantilla-seguimiento-gastos"],
+    ["Plantilla para un plan de tesorería", "https://factorial.es/plantillas/plantilla-para-un-plan-de-tesoreria"],
+    ["Plantilla de gastos para imprimir", "https://factorial.es/plantillas/plantilla-de-gastos-para-imprimir-editable"]
+  ],
+  desempeno: [
+    ["Performance Reviews", "https://factorial.es/ebooks/kit-herramientas-performance-review"],
+    ["40 preguntas que hacerte si lideras un equipo", "https://factorial.es/plantillas/checklist-40-preguntas-para-managers"],
+    ["eBook - Estrategias aumentar la fidelizacion de tus equipos", "https://factorial.es/plantillas/estrategias-fidelizacion-equipos"],
+    ["Plantilla evaluación 360", "https://factorial.es/plantillas/evaluacion-360-descargable"],
+    ["Test de motivación laboral", "https://factorial.es/plantillas/test-motivacion-laboral"],
+    ["Plantilla objetivos OKR", "https://factorial.es/plantillas/plantilla-objetivos-okr"],
+    ["Plantilla - rueda de competencias", "https://factorial.es/plantillas/plantilla-rueda-de-competencias"],
+    ["Encuesta para medir el estrés laboral", "https://factorial.es/plantillas/encuesta-para-medir-estres-laboral"],
+    ["Plantilla - Prueba DISC", "https://factorial.es/plantillas/plantilla-para-prueba-disc"],
+    ["Reuniones 1-1", "https://factorial.es/plantillas/reuniones-one-to-one"],
+    ["Kit de vuelta al trabajo", "https://factorial.es/ebooks/kit-para-potenciar-a-tu-equipo-de-vuelta-al-trabajo"],
+    ["Guia de evaluación del desempeño [premium asset 2026]", "https://factorial.es/ebooks/guia-evaluacion-del-desempeno"],
+    ["Evaluación desempeño plantilla en excel", "https://factorial.es/plantillas/evaluacion-desempeno-excel-descargable"]
+  ],
+  formacion: [
+    ["Descubre cómo aprovechar al máximo las bonificaciones de FUNDAE en tu empresa", "https://factorial.es/ebooks/formacion-bonificada-fundae-guia"],
+    ["Kit para desarrollar un plan de carrera", "https://factorial.es/plantillas/kit-plan-de-carrera"],
+    ["Plantilla profesiograma Word", "https://factorial.es/plantillas/plantilla-profesiograma-word-descargar-gratis"],
+    ["Plan de carrera PDF", "https://factorial.es/plantillas/plantilla-plan-de-carrera-con-ejemplo-en-pdf-para-empresa"],
+    ["Plantilla plan de carrera", "https://factorial.es/plantillas/plan-de-carrera"],
+    ["Plantilla - Employee Journey", "https://factorial.es/plantillas/plantilla-employee-journey"],
+    ["Plan de carrera personal", "https://factorial.es/plantillas/plan-de-carrera-personal"],
+    ["Guía sobre cómo liderar la formación del personal en la era de la IA [premium asset 2026]", "https://factorial.es/ebooks/guia-aprendizaje-desarrollo-lms"],
+    ["Plantilla excel plan formacion cursos formaciones", "https://factorial.es/plantillas/plantilla-excel-plan-formacion-cursos-formaciones"],
+    ["Guía completa para gestionar tu formación bonificada por FUNDAE", "https://factorial.es/ebooks/guia-lms-fundae-2026"],
+    ["Calculadora Crédito y Coste de Gestión de FUNDAE", "https://factorial.es/herramientas/calculadora-credito-coste-gestion-fundae"]
+  ],
+  canal: [
+    ["Kit para implementar un canal de denuncias efectivo", "https://factorial.es/plantillas/kit-canal-de-denuncias"]
+  ],
+  proyectos: [
+    ["Guía para calcular los costes en la gestión de proyectos", "https://factorial.es/ebooks/guia-costes-proyecto"],
+    ["Kit proyectos", "https://factorial.es/ebooks/guia-gestion-proyectos-rrh-finanzas-plantilla"]
+  ],
+  onoff: [
+    ["Modelo - Carta de despido", "https://factorial.es/plantillas/modelos-cartas-despido"],
+    ["Checklist offboarding", "https://factorial.es/plantillas/lista-offboarding"],
+    ["Guía Onboarding", "https://factorial.es/plantillas/guia-onboarding"],
+    ["Checklist onboarding en teletrabajo", "https://factorial.es/plantillas/checklist-onboarding-teletrabajo"],
+    ["Plantilla - Finiquito", "https://factorial.es/plantillas/plantilla-documento-finiquito"]
+  ],
+  turnos: [
+    ["Plantilla excel - gestión de turnos", "https://factorial.es/plantillas/plantilla-control-turnos-de-trabajo-excel"],
+    ["Ebook de Pico de Ventas", "https://factorial.es/plantillas/pico-de-ventas-estrategias"]
+  ],
+  ausencias: [
+    ["Plantilla excel - gestión de ausencias", "https://factorial.es/plantillas/gestion-de-ausencias-excel-descargable"],
+    ["Calendario laboral Valencia 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-valencia"],
+    ["Calendario laboral Madrid 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-madrid"],
+    ["Calendario laboral España 2025", "https://factorial.es/plantillas/plantilla-calendario-laboral-espana"],
+    ["Calendario laboral Barcelona 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-barcelona"],
+    ["Plantilla excel - gestión de ausencias y vacaciones", "https://factorial.es/plantillas/plantilla-control-vacaciones-empleados-excel"]
+  ],
+  comunicaciones: [
+    ["Plantilla para la comunicación interna", "https://factorial.es/plantillas/plantilla-comunicacion-interna"]
+  ],
+  portal: [
+    ["Cuadro de mando RR.HH.", "https://factorial.es/plantillas/cuadro-de-mando-rrhh"],
+    ["Plantilla de ficha del empleado", "https://factorial.es/plantillas/plantilla-ficha-empleado"],
+    ["Plantilla - Panel de Datos", "https://factorial.es/plantillas/panel-de-datos"]
+  ],
+  analiticas: [
+    ["Plantilla - Calcular Tasa de rotación", "https://factorial.es/plantillas/plantilla-tasa-de-rotacion"],
+    ["eBook: People Analytics", "https://factorial.es/ebooks/descargar-people-analytics-ebook"],
+    ["Los 7 datos clave en RR. HH.", "https://factorial.es/ebooks/7-kpis-clave-rrhh"]
+  ],
+  documentos: [
+    ["Guía de los tipos de contratos en España", "https://factorial.es/ebooks/guia-contratos-espana"]
+  ],
+  beneficios: [
+    ["Guía Retribución Flexible", "https://factorial.es/ebooks/todo-sobre-la-retribucion-flexible"],
+    ["Report Retribución Flexible", "https://factorial.es/reporte-retribucion-flexible"]
+  ],
+  one: [
+    ["Informe Global IA '25", "https://factorial.es/informe-ia-empresas"],
+    ["Freebie New IA EU Act", "https://factorial.es/ebooks/guia-ley-ia-union-europea"]
+  ],
+  revision: [
+    ["Nueva Normativa de Transparencia Salarial", "https://factorial.es/ebooks/normativa-ue-transparencia-salarial"]
+  ],
+  plantilla: [
+    ["Headcount Planning (oct 2026)", "https://factorial.es/ebooks/headcount-planning-rrhh-finanzas"]
+  ],
+};
+
 const STORIES = [
   { t: "Una nueva incorporación", d: "La posición se aprueba una vez y el resto se encadena solo.", steps: [
     ["plantilla","Se aprueba la posición con su banda salarial."],["ats","Se abre sola como vacante; One criba y llama."],["firma","La oferta se firma desde el móvil."],["onoff","Entra con todos sus datos, sin volver a teclear."],["inventario","Su portátil ya está asignado."],["formacion","Recibe el curso de bienvenida."],["compensacion","Su alta llega validada a nómina."]] },
@@ -776,25 +925,35 @@ function drawWires(){
   wires.setAttribute('viewBox', `0 0 ${s.width} ${s.height}`);
   const one = rel($('#oneBtn')); const R = one.w/2;
   let d = '';
+  // Cada módulo → su área → One: todos los caminos pasan por One
+  const hubIn = {}, hubOut = {};
   for (const h of [...LEFT, ...RIGHT]) {
     const left = HUBS[h].side === 'left';
     const hb = rel(stage.querySelector(`[data-hub-btn="${h}"]`));
-    const hx = left ? hb.l : hb.r, hy = hb.cy;
-    for (const id of ORDER[h]) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hx,hy)}"/>`; }
-    const ex = left ? hb.r : hb.l;
-    const ang = Math.atan2(hy-one.cy, ex-one.cx);
-    d += `<path class="base" d="${curve(ex,hy, one.cx+Math.cos(ang)*R*0.82, one.cy+Math.sin(ang)*R*0.82)}"/>`;
+    const ex = left ? hb.r : hb.l, ang = Math.atan2(hb.cy-one.cy, ex-one.cx);
+    hubIn[h] = { x: left ? hb.l : hb.r, y: hb.cy };
+    hubOut[h] = curve(ex,hb.cy, one.cx+Math.cos(ang)*R*0.82, one.cy+Math.sin(ang)*R*0.82);
+    for (const id of ORDER[h]) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`; }
+    d += `<path class="base" d="${hubOut[h]}"/>`;
   }
-  if (current && M[current]) {
-    const src = pillAnchor(current);
-    d += `<path class="flow" d="${curve(src.x,src.y, one.cx, one.cy)}"/>`;
-    for (const l of M[current].links) { const a = pillAnchor(l); d += `<path class="flow" d="${curve(one.cx,one.cy,a.x,a.y)}"/>`; }
+  const flowIds = !current ? [] : current === 'one' ? Object.keys(M)
+    : current.startsWith('hub:') ? ORDER[current.slice(4)] : [current, ...M[current].links];
+  const flowHubs = new Set();
+  for (const id of flowIds) {
+    const h = M[id].hub, a = pillAnchor(id); flowHubs.add(h);
+    d += `<path class="flow" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`;
   }
+  for (const h of flowHubs) d += `<path class="flow" d="${hubOut[h]}"/>`;
   wires.innerHTML = d;
 }
 
 function chatHTML(list){
   return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
+}
+const EXT = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>';
+function guidesHTML(key){
+  const g = FREEBIES[key]; if (!g || !g.length) return '';
+  return `<h3>Guías y plantillas gratuitas</h3><ul class="guides">${g.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${n}${EXT}</a></li>`).join('')}</ul>`;
 }
 function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${M[i].name}</button>`).join('')}</div>`; }
 
@@ -861,7 +1020,11 @@ function render(key){
     <p class="note">Detecta los desencadenantes en tus datos en tiempo real, los compara con tus políticas e historial, elige la acción o escala a una persona, hace el trabajo dentro de Factorial y registra lo que ha hecho. Cada paso queda visible y revisable.</p>
     <h3>Por qué el dato centralizado lo cambia todo</h3>
     <p class="why" style="color:var(--ink)">Cuantos más módulos conectas, más contexto tiene One. Una IA genérica empieza en blanco; One ya sabe quién es quién, qué dice tu política y qué pasó en el último ciclo.</p>
-    <div class="stats"><div class="stat"><b>RGPD</b><span>y Reglamento de IA de la UE, alojado en la UE</span></div><div class="stat"><b>Tus permisos</b><span>mismos roles de Factorial, nada nuevo expuesto</span></div></div>`;
+    <div class="stats"><div class="stat"><b>RGPD</b><span>y Reglamento de IA de la UE, alojado en la UE</span></div><div class="stat"><b>Tus permisos</b><span>mismos roles de Factorial, nada nuevo expuesto</span></div></div>
+    <h3>Rutinas: One te trae la respuesta cuando toca</h3>
+    ${chatHTML([{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Crea la rutina, revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }])}
+    ${routinesList()}
+    ${guidesHTML('one')}`;
   } else if (key.startsWith('hub:')) {
     const k = key.slice(4), hub = HUBS[k];
     h = `<div class="p-head"><div><p class="p-cat"><b>Área</b></p><h2>${hub.name}</h2></div>${close}</div>
@@ -877,8 +1040,8 @@ function render(key){
     if (st) h += `<div class="stats">${st.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.t}</span></div>`).join('')}</div>`;
     h += `<h3>Con One</h3>` + (m.one ? chatHTML(m.one) : '') + (m.oneNote ? `<p class="note">${m.oneNote}</p>` : '');
     if (m.special === 'analytics') h += analyticsExtra();
-    if (m.special === 'routines') h += routinesList();
     h += `<h3>Conectado con</h3>${chipsHTML(m.links)}<p class="why">${m.why}</p>`;
+    h += guidesHTML(key);
     if (m.soon) h += `<h3>Lo que viene</h3><ul class="soon">${m.soon.map(s=>`<li>${s}</li>`).join('')}</ul><p class="disc-note">El alcance y las fechas pueden cambiar.</p>`;
   }
   panelIn.innerHTML = h;
@@ -892,7 +1055,7 @@ function mark(key){
   $('#oneBtn').classList.remove('active');
   stage.classList.toggle('focus', !!key);
   if (!key) return;
-  if (key === 'one') { $('#oneBtn').classList.add('active'); stage.classList.remove('focus'); return; }
+  if (key === 'one') { $('#oneBtn').classList.add('active'); stage.classList.remove('focus'); stage.querySelectorAll('.pill').forEach(n => n.classList.add('linked')); return; }
   if (key.startsWith('hub:')) {
     const k = key.slice(4);
     stage.querySelector(`[data-hub-btn="${k}"]`).classList.add('active');
@@ -936,6 +1099,9 @@ buildMap(); buildStories();
 $('#scrim').addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && hero.classList.contains('open')) closePanel(); });
 new ResizeObserver(() => drawWires()).observe(stage);
+const cue = $('#scrollCue');
+cue.addEventListener('click', e => { e.preventDefault(); $('#mas').scrollIntoView({behavior:'smooth'}); });
+addEventListener('scroll', () => cue.classList.toggle('gone', scrollY > 80), {passive:true});
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawWires);
 window.addEventListener('load', () => {
   drawWires();
