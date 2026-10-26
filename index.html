@@ -31,11 +31,8 @@
 html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--red-dark)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;min-height:100vh;
-  background:
-    radial-gradient(1100px 900px at 8% 0%, rgba(255,193,85,.55) 0%, rgba(255,193,85,0) 70%),
-    radial-gradient(900px 1100px at 100% 55%, rgba(150,70,170,.30) 0%, rgba(150,70,170,0) 70%),
-    radial-gradient(1400px 1000px at 100% 0%, rgba(198,15,53,.35) 0%, rgba(198,15,53,0) 70%),
-    linear-gradient(175deg, var(--tangerine) 0%, var(--red) 9%, var(--red) 50%, var(--red-dark) 100%);
+  /* gradiente de marca: Radical Red 60% → Dark Red */
+  background:linear-gradient(135deg, var(--red) 0%, var(--red) 60%, var(--red-dark) 100%);
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:2px}
@@ -48,7 +45,6 @@ button{font:inherit;color:inherit}
 .scrollcue:hover .ar{background:rgba(255,255,255,.25)}
 .scrollcue.gone{opacity:0;pointer-events:none}
 .hero.open .scrollcue{opacity:0;pointer-events:none}
-@media (prefers-reduced-motion: no-preference){ .scrollcue .ar{animation:bob 1.8s var(--ease) infinite} @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}} }
 .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 0px;transition:grid-template-columns .25s var(--ease);min-height:100vh}
 .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) min(440px,40vw)}
 .mapcol{display:flex;flex-direction:column;padding:28px clamp(20px,4vw,56px) 28px;min-width:0}
@@ -56,10 +52,12 @@ button{font:inherit;color:inherit}
 .top small{font-size:13px;font-weight:400;opacity:.9}
 .logo{height:20px;width:auto;color:#fff;opacity:.9}
 .topr{display:flex;align-items:center;gap:14px}
-.lang{display:inline-flex;border:1px solid rgba(255,255,255,.75);border-radius:999px;padding:2px;background:rgba(255,255,255,.08)}
-.lang button{appearance:none;border:0;background:transparent;color:#fff;font-size:12.5px;font-weight:500;padding:3px 10px;border-radius:999px;cursor:pointer;letter-spacing:.02em}
-.lang button[aria-pressed="true"]{background:#fff;color:var(--red-dark)}
-h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spacing:-0.04em;margin:14px 0 10px}
+.lang{position:relative;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.75);border-radius:999px;padding:4px 10px 4px 9px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+.lang:hover,.lang:focus-within{background:rgba(255,255,255,.2)}
+.lang select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:#fff;font:inherit;font-size:13px;font-weight:500;padding:0 14px 0 0;margin-right:-14px;cursor:pointer;outline:none}
+.lang select option{color:var(--midnight);background:#fff}
+.lang .chev{pointer-events:none}
+h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.9;letter-spacing:-0.05em;margin:14px 0 12px;color:var(--midnight)}
 .sub{max-width:62ch;font-size:clamp(15px,1.2vw,17px);opacity:.92;margin:0 0 4px}
 .hint{font-size:14px;opacity:.85;margin:0}
 
@@ -167,21 +165,23 @@ section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;marg
   --ink:#fff; --ink-2:rgba(255,255,255,.84); --ink-3:rgba(255,255,255,.55); --line:rgba(255,255,255,.28); --bg-alt:rgba(255,255,255,.12)}
 section:focus-visible, section :focus-visible{outline-color:rgba(255,255,255,.9)}
 section + section{padding-top:0}
-section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.98;letter-spacing:-0.04em;margin:0 0 14px;max-width:18ch}
+section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.9;letter-spacing:-0.04em;margin:0 0 14px;max-width:18ch;color:var(--midnight)}
 section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.story{background:var(--bg-alt);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:22px;backdrop-filter:blur(6px)}
+/* tarjetas planas sobre el rojo: blanco y Midnight, sin transparencias */
+.story,.tier{background:#fff;color:var(--midnight);--ink:var(--midnight);--ink-2:#6C6C7D;--ink-3:#AEAEB8;--line:#E6E6EC}
+.story{border-radius:20px;padding:22px}
 .story h3{font-size:20px;font-weight:500;letter-spacing:-0.02em;margin:0 0 4px}
 .story p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px}
 .chain{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
 .chain li{position:relative;padding:0 0 12px 30px;counter-increment:s}
-.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--red-dark);font-size:11px;display:grid;place-items:center;font-weight:500}
+.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:500}
 .chain li::after{content:"";position:absolute;left:9.5px;top:24px;bottom:2px;width:1px;background:var(--ink-3)}
 .chain li:last-child{padding-bottom:0}
 .chain li:last-child::after{display:none}
 .chain small{display:block;font-size:13px;color:var(--ink-2);line-height:1.35;margin-top:2px}
 .chain button{appearance:none;border:0;background:none;padding:0;font-size:15px;cursor:pointer;text-align:left;color:var(--ink);border-bottom:1px solid transparent}
-.chain button:hover{border-bottom-color:#fff}
+.chain button:hover{border-bottom-color:var(--red)}
 
 .cmp{width:100%;border-collapse:collapse;font-size:15px}
 .cmpwrap{overflow-x:auto}
@@ -200,17 +200,18 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .road .more b{font-size:22px;letter-spacing:-0.02em}
 
 .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.tier{background:var(--bg-alt);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:14px}
-.tier.max{background:#fff;color:var(--midnight);border-color:#fff;--ink:var(--midnight);--ink-2:#6C6C7D}
+.tier{border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:14px}
+.tier.max{background:var(--midnight);color:#fff;--ink:#fff;--ink-2:rgba(255,255,255,.72)}
 .tier .tn{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .tier .tn b{font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
-.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.18)}
-.tier.max .tn span{background:#FFE3EA;color:var(--red-dark)}
+.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:#F6F6F8;color:var(--midnight)}
+.tier.max .tn span{background:var(--red);color:#fff}
 .tier .tl{margin:0;font-size:15px;color:var(--ink-2)}
 .tier h4{margin:4px 0 0;font-size:12.5px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
 .who{display:flex;flex-wrap:wrap;gap:6px}
 .who i{font-style:normal;font-size:13.5px;font-weight:500;padding:4px 11px;border-radius:999px;border:1px solid currentColor}
-.tier.max .who i{color:var(--red)}
+.tier .who i{color:var(--red)}
+.tier.max .who i{color:#fff}
 .tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .tier li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.4}
 .tier li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;border:2px solid currentColor;opacity:.8}
@@ -252,7 +253,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
     <div class="mapcol">
       <div class="top">
         <small>All in One</small>
-        <div class="topr"><div class="lang" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <div class="topr"><label class="lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><select id="langSel" aria-label="Idioma / Language"><option value="es">Español</option><option value="en">English</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="fr">Français</option><option value="it">Italiano</option></select><svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></label><span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path>
 <path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path>
@@ -339,7 +340,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
     <div><span>Próximamente</span><b>Plantilla: aprobaciones y presupuesto</b><p>Flujos de aprobación estructurados y comparativa de previsto frente a real.</p></div>
     <div><span>Próximamente</span><b>Talent pool sugerido</b><p>Antes de publicar, ves quién de tu base de candidatos ya encaja.</p></div>
     <div><span>Próximamente</span><b>WhatsApp en Recruitment</b><p>Mensajes, aviso previo a la llamada de IA y documentos por WhatsApp.</p></div>
-    <div class="more"><span>Próximamente</span><b>¡Y mucho más!</b><p>Cada mes llegan nuevas funcionalidades de IA a todos los productos de Factorial.</p></div>
+    <div class="more"><span>Próximamente</span><b>Y mucho más</b><p>Cada mes llegan nuevas funcionalidades de IA a todos los productos de Factorial.</p></div>
   </div>
 </section>
 
@@ -1003,7 +1004,7 @@ const EN = {
     <div><span>Coming soon</span><b>Headcount: approvals and budget</b><p>Structured approval flows and planned vs. actual comparison.</p></div>
     <div><span>Coming soon</span><b>Suggested talent pool</b><p>Before publishing, see who in your candidate pool already fits.</p></div>
     <div><span>Coming soon</span><b>WhatsApp in Recruitment</b><p>Messages, a heads-up before the AI call and documents via WhatsApp.</p></div>
-    <div class="more"><span>Coming soon</span><b>And much more!</b><p>New AI features reach every Factorial product every month.</p></div>`,
+    <div class="more"><span>Coming soon</span><b>And much more</b><p>New AI features reach every Factorial product every month.</p></div>`,
     ctaT: "Shall we walk through your full cycle with your own data?",
     ctaD: "We map your headcount, your hiring process and your pay policy, and show you the same flow inside Factorial, with One working at every step.",
     footer: "Report and conversation examples are illustrative and use fictional data. Some features depend on your plan and One credits. Factorial · October 2026."
@@ -1079,6 +1080,1050 @@ const LONG = {
       tasksT: "Tasks One already does on its own",
       tasks: ["Approves expenses that meet the policy and leaves you only the exceptions.", "Covers shifts by calling whoever can take them, following your rules.", "Calls candidates who reach screening and leaves you the report.", "Half-solves tickets so whoever handles them only approves."] }
   }
+};
+
+/* ---------- ALEMÁN ---------- */
+const DE = {
+  HUBS: {
+    talento: { name: "Talent", lead: "Von der geplanten Stelle bis zur Gehaltserhöhung, die du vertreten kannst. Jede Talententscheidung baut auf der vorherigen auf, nicht bei null.", one: "Je mehr Talent-Produkte du nutzt, desto mehr Kontext hat One: Es liest Beurteilungen, Bewerbungen, Kurse und Umfragen gleichzeitig." },
+    tiempo: { name: "Zeit", lead: "Zeiterfassung, Schichten und Abwesenheiten im selben Kalender, jede Stunde bereit für Lohnabrechnung und Projekte.", one: "One deckt Schichten ab, beantwortet Fragen zu Salden und erkennt Stempelprobleme, solange sie noch klein sind." },
+    finanzas: { name: "Finanzen", lead: "HR und Finanzen arbeiten mit denselben Zahlen: Personalbestand, Ausgaben, Einkäufe, Projekte und Budget.", one: "One genehmigt, was der Richtlinie entspricht, und lässt dir nur die Ausnahmen." },
+    core: { name: "Core HR", lead: "Das Fundament: Mitarbeitende, Dokumente, Richtlinien und die App jedes Einzelnen. Was hier erfasst wird, nutzt jedes Modul.", one: "One kennt deine Richtlinien, antwortet mit Quellenangabe und erledigt Anfragen, bevor sie bei einer Person landen." },
+    it: { name: "IT", lead: "Geräte, Software und Inventar, verknüpft mit der Person, die sie nutzt, vom ersten bis zum letzten Tag.", one: "One untersucht das Ticket, prüft den Bestand und bereitet den Einkauf vor, sodass nur noch eine Person freigeben muss." },
+    nomina: { name: "Lohnabrechnung", lead: "Jede Änderung, die das Gehalt betrifft, erreicht die Lohnabrechnung geprüft, von der Zeiterfassung bis zur Gehaltserhöhung.", one: "One erkennt offene Variablen und alles, was nicht stimmt, bevor die Abrechnung berechnet wird." }
+  },
+  M: {
+    desempeno: { name: "Performance",
+      lead: "Beurteilungen, Ziele und Feedback das ganze Jahr über, nicht nur im Jahresgespräch.",
+      value: ["180°- und 360°-Beurteilungen mit automatisierten Zyklen, Erinnerungen und herunterladbaren Vereinbarungen.", "Individuelle und Teamziele sowie OKRs, mit kontinuierlichem Feedback, damit du mit Daten ins Gespräch gehst.", "9-box und Talentanalysen, um zu sehen, wer das meiste Potenzial hat und wer Unterstützung braucht."],
+      one: [{ q: "Wer in meinem Team zeigt Warnsignale?", a: "Analysiert Selbstbeurteilungen und Feedback, fasst jeden Fall zusammen und erklärt, warum er auffällt." }],
+      why: "Jedes Ergebnis fließt in die Weiterbildung ein, die du zuweist, und in die Gehaltserhöhung, die du vorschlägst. Recruiting nutzt die letzte Beurteilung, um zu messen, welche Quellen Leute bringen, die bleiben und gute Leistung zeigen.",
+      soon: ["Ziele über MCP verbunden: Factorial aktualisiert Ziele mit Daten aus deinen anderen Tools."] },
+    formacion: { name: "Weiterbildung & LMS",
+      lead: "Aufgezeichnete Schulungen und interaktive Kurse direkt in Factorial, verknüpft mit der Performance.",
+      value: ["Katalog, Termine und Teilnahme; verpflichtende Schulungen mit auditfester Nachverfolgbarkeit.", "LMS: Kurse mit Videos, Quizzen und Tests, automatischem Fortschritt und Zertifikaten zum Abschluss.", "Lohnkosten jeder Schulung werden automatisch berechnet."],
+      one: [{ q: "Erstelle einen Onboarding-Kurs für das Store-Team.", a: "Ein strukturierter Kurs mit Modulen und Quizzen, in Minuten. Du prüfst ihn und veröffentlichst ihn." }],
+      why: "Direkt aus der Beurteilung, mit einem Klick: Weise die Schulung zu, die jede Kompetenzlücke schließt, und miss ihre Wirkung im nächsten Zyklus.",
+      stat: { n: "94%", t: "der Mitarbeitenden würden länger in einem Unternehmen bleiben, das in ihre Entwicklung investiert (LinkedIn Workplace Learning Report, 2023)" },
+      soon: ["Gamifizierte Kurse: Spielmechaniken in Kursen."] },
+    engagement: { name: "Engagement",
+      lead: "Hör deinem Team zu, ohne ein weiteres Formular zu verschicken: tägliches Stimmungsbild, Umfragen, eNPS und KI-1:1s.",
+      value: ["Team-Puls beim Einstempeln: Check-ins ohne Umfragemüdigkeit und Hinweise an die richtige Führungskraft.", "Automatisierte Umfragen und eNPS beim Onboarding, beim Austritt und bei jedem Meilenstein.", "KI-1:1-Gespräche: One bereitet jedes 1:1 mit Zielen, Performance und Stimmung vor."],
+      one: [{ q: "Bereite das 1:1 mit Laura für morgen vor.", a: "Sammelt ihre Ziele, die letzte Beurteilung, den aktuellen Puls und was in früheren 1:1s besprochen wurde." }],
+      why: "Gute Leistung heißt nicht immer Engagement. Mit dem Puls, verknüpft mit Zeiterfassung und Performance-Kontext, sieht One das Gesamtbild jeder Person.",
+      stat: { n: "40–60%", t: "weniger manueller Verwaltungsaufwand mit automatisierten Beurteilungen, 1:1s und Umfragen" } },
+    comunidades: { name: "Communities",
+      lead: "Räume, in denen sich deine Leute treffen, austauschen und einander anerkennen, jenseits des Organigramms.",
+      value: ["Communities nach Interesse, Standort, Projekt oder Team, offen oder nur auf Einladung.", "Beiträge, Anerkennung und Feiern von Meilensteinen direkt in der App.", "Bringt Büro-, Remote- und Filialmitarbeitende in einem Raum zusammen."],
+      one: [{ q: "Welche Communities empfiehlst du mir, jetzt wo ich beigetreten bin?", a: "Schlägt passende Communities für dein Team, deinen Standort und deine Interessen vor, basierend auf deinem Profil." }],
+      why: "Communities basieren auf denselben Team-, Standort- und Personendaten, sodass jede neue Person vom ersten Tag an ihren Platz findet." },
+    comunicaciones: { name: "Kommunikation",
+      lead: "Ankündigungen für das ganze Unternehmen oder bestimmte Teams, dort, wo deine Leute ohnehin jeden Tag arbeiten.",
+      value: ["Veröffentliche für das ganze Unternehmen oder für bestimmte Teams und Standorte.", "Erreicht alle über die App, auch Menschen, die nicht am Computer sitzen.", "Ankündigungen stehen direkt neben den Richtlinien und Dokumenten, auf die sie sich beziehen."],
+      one: [{ q: "Entwirf die Ankündigung zur neuen Sommerarbeitszeit auf Spanisch und Englisch.", a: "Entwirft sie auf Basis deiner Arbeitszeitrichtlinie und übersetzt sie, bereit zur Prüfung." }],
+      why: "Die Zielgruppen kommen aus denselben Team-, Standort- und Rollendaten, die der Rest von Factorial nutzt." },
+    ats: { name: "ATS & Recruiting",
+      lead: "Ein ATS, das mit dir plant, vorauswählt und entscheidet, von der genehmigten Stelle bis zum unterschriebenen Angebot.",
+      value: ["Hiring Plan: Jede in der Personalplanung genehmigte Stelle kommt als Job mit Verantwortlichem, Frist und Status an.", "KI-Bericht pro Kandidat und KI-Anrufe in seiner Sprache, mit Transkript und grünem, gelbem oder rotem Ergebnis.", "Unbegrenzte Jobs, Berechtigungen pro Phase, Videointerviews mit One und Analysen mit einem Jahr Retention."],
+      one: [
+        { q: "Ruf jeden Kandidaten an, der die Screening-Phase erreicht.", a: "Ein Anruf in seiner Sprache, angekündigt, mit Einwilligung und aufgezeichnet. Liefert Transkript, Bericht und empfohlenen nächsten Schritt. Eine Person entscheidet." },
+        { q: "Erstelle die Stellenanzeige für einen Senior Product Designer in Barcelona.", a: "Entwirft die Anzeige aus dem Gespräch und veröffentlicht sie auf deiner Karriereseite und über 250 Jobbörsen." }
+      ],
+      why: "Die Stelle entsteht genehmigt und budgetiert; wer unterschreibt, startet mit allen Daten, ohne etwas neu einzutippen; und die Analysen verknüpfen die Recruiting-Quelle mit der Leistungsbeurteilung.",
+      stats: [{ n: "70%", t: "weniger Time-to-Hire mit KI-Erstscreening" }, { n: "+25%", t: "Personalwachstum mit demselben Recruiting-Team" }],
+      soon: ["Vorgeschlagene Kandidaten aus dem Talentpool (demnächst).", "WhatsApp im Recruiting und Unternehmensseiten pro Gesellschaft (demnächst).", "Kulturelles Assessment (demnächst)."] },
+    canal: { name: "Vertrauenskanal",
+      lead: "Ein Kanal, über den jeder Fehlverhalten vertraulich melden kann, auch anonym.",
+      value: ["Vertrauliche Meldungen, auf Wunsch anonym.", "Fallverfolgung mit Zugriff nur für die zuständigen Personen.", "Hilft dir, die Vorgaben zum Hinweisgeberschutz einzuhalten."],
+      oneNote: "One folgt exakt den Berechtigungen von Factorial: Fälle sind nur für die Personen sichtbar, die sie bearbeiten, für niemanden sonst.",
+      why: "Er lebt in derselben App wie die übrigen Werkzeuge der Mitarbeitenden, sodass niemand suchen muss, wo man meldet." },
+    control: { name: "Zeiterfassung",
+      lead: "Stempeln per Smartphone oder Computer, mit stets aktueller Arbeitszeitaufzeichnung.",
+      value: ["Stempeln über App oder Web, mit berechneten Überstunden und Salden.", "Probleme sind für die Führungskraft sichtbar, bevor sie die Lohnabrechnung erreichen.", "Auf Projekte gebuchte Stunden fließen in die tatsächlichen Kosten jedes Projekts ein."],
+      one: [{ q: "Schick mir jeden Werktag um 18 Uhr, wer heute weniger als 4 Stempelungen hat.", a: "Erstellt eine Routine, die täglich die Stempelungen prüft und sie dir per E-Mail schickt." }],
+      why: "Dieselbe Stempelung dient der Lohnabrechnung, der Projektkalkulation und dem Team-Puls, ohne sie doppelt zu erfassen." },
+    turnos: { name: "Schichten",
+      lead: "Dienstpläne, die deine Regeln einhalten, und Lücken, die ohne Telefonliste gefüllt werden.",
+      value: ["Planung nach Standort, Rolle und Qualifikation.", "Ruhetage, Arbeitszeiten und Arbeitsorte werden bei der Planung berücksichtigt.", "Tatsächliche Schichten erreichen die Lohnabrechnung, ohne veraltete Schichten in der Berechnung."],
+      one: [{ q: "Finde jemanden, der heute Marías Schicht übernimmt.", a: "Prüft Ruhetage, Rollen, Qualifikationen, Arbeitszeit und Standort, ruft Kandidaten nacheinander an und informiert die Führungskraft, sobald die Schicht besetzt ist." }],
+      why: "Eine Abwesenheit öffnet die Lücke, One füllt sie, und die neue Schicht erreicht Zeiterfassung und Lohnvariablen. Jede Regel eingehalten und jeder Anruf protokolliert." },
+    ausencias: { name: "Abwesenheiten",
+      lead: "Urlaub, Krankheit und Freistellungen mit aktuellen Salden und Genehmigung in zwei Klicks.",
+      value: ["Abwesenheitsrichtlinien nach Team, Standort oder Tarifvertrag.", "Gemeinsamer Kalender, um vor der Genehmigung zu sehen, wer fehlt.", "Abwesenheiten und Krankmeldungen mit der Lohnabrechnung synchronisiert (mit a3innuva, in Spanien)."],
+      one: [{ q: "Wie viele Urlaubstage habe ich noch?", a: "Antwortet mit dem Saldo dieser Person und der geltenden Richtlinie. Jeder sieht nur seine eigenen Daten." }],
+      why: "Eine Krankmeldung bleibt nicht im Kalender hängen: Sie öffnet eine Lücke in den Schichten, passt die Stempelungen an und erreicht die Lohnabrechnung als Variable." },
+    plantilla: { name: "Personalplanung",
+      lead: "HR und Finanzen sehen vom ersten Tag an dieselben Zahlen. Schluss mit fünf Versionen der Tabelle.",
+      value: ["Führungskräfte schlagen Stellen mit Rolle, Level, Gehaltsband und Datum vor, verknüpft mit dem Jobkatalog.", "HR und Finanzen prüfen eine einzige Version, mit Protokoll, wer wann was entschieden hat.", "Genehmigte Stellen werden automatisch im Recruiting eröffnet: Plan und Umsetzung stimmen immer überein."],
+      one: [{ q: "Erstelle unseren Personalplan 2027 nach unseren Vorgaben.", a: "Schlägt Rollen, Level und Kosten zur Prüfung vor." }],
+      why: "Die Stelle, die du genehmigst, ist der Job, den du ausschreibst, und jede abgeschlossene Gehaltserhöhung aktualisiert die Kostenprognose für den nächsten Plan.",
+      soon: ["Strukturierte Genehmigungsabläufe und Verknüpfung mit dem Budget.", "Vergleich von geplanten und tatsächlichen Einstellungen."] },
+    proyectos: { name: "Projektmanagement",
+      lead: "Wisse, ob jedes Projekt profitabel ist, während es läuft, nicht erst beim Abschluss.",
+      value: ["Stunden direkt über das Stempel-Widget gebucht, keine parallelen Stundenzettel.", "Personalkosten, Fixkosten und Ausgaben im Vergleich zum Budget, in Echtzeit.", "Vom Angebot zum Projekt und vom Projekt zur Rechnung, mit bereits geladenen Kundendaten."],
+      one: [{ q: "Welche Projekte liegen diesen Monat über dem Budget?", a: "Verknüpft gebuchte Stunden, Personalkosten und Ausgaben und erklärt, wo jedes Projekt abweicht." }],
+      why: "Die Kosten einer Stunde stammen vom tatsächlichen Gehalt der Person, und die Stunde kommt aus der Zeiterfassung: Niemand kopiert Daten zwischen Tools." },
+    fpa: { name: "Financial Workplace",
+      lead: "Budgets und Prognosen mit den realen Kosten, die bereits in Factorial liegen.",
+      value: ["Budgets nach Abteilung oder Kostenstelle.", "Ist vs. Plan mit Daten zu Personalbestand, Lohnabrechnung, Ausgaben, Einkäufen und Projekten.", "Eine einzige Datenbasis für HR, Finanzen und Geschäftsleitung."],
+      one: [{ q: "Wie stehen wir in diesem Quartal zum Personalbudget?", a: "Vergleicht die tatsächlichen Lohnkosten mit dem Plan und markiert Abweichungen." }],
+      why: "Das Budget füllt sich von selbst: Jede Einstellung, Gehaltserhöhung, Ausgabe oder Bestellung ist bereits in ihrem Modul erfasst." },
+    gastos: { name: "Ausgaben",
+      lead: "Vom Belegstapel zum abgeschlossenen Monat, mit einer einzigen Nachricht.",
+      value: ["Belege hochladen, und die Felder füllen sich von selbst.", "Jede Ausgabe wird gegen die Richtlinie geprüft: Konforme werden sofort genehmigt.", "Kartenabgleich und saubere Daten für den Monatsabschluss."],
+      one: [{ q: "Hier sind die Belege von meiner Geschäftsreise. (lädt 5 auf einmal hoch)", a: "Liest jeden Beleg, bereitet die Ausgaben vor, gleicht die Karte ab und prüft Richtlinie und Berechtigungen. Nur Ausnahmen warten auf eine Person." }],
+      why: "Die genehmigte Ausgabe erreicht die Lohnabrechnung, wenn sie erstattet werden muss, und das Projekt, wenn sie abrechenbar ist." },
+    compras: { name: "Einkauf",
+      lead: "Bestellanfragen, Genehmigungen und Lieferanten in einem einzigen Ablauf.",
+      value: ["Anfragen mit Genehmigung nach Betrag und Team.", "Jeder Einkauf ist mit seinem Budget und der anfragenden Person verknüpft.", "Verbunden mit Inventar und Software, um zu wissen, was für wen gekauft wird."],
+      one: [{ q: "Mein Laptop ist gerade kaputtgegangen. Ich brauche einen neuen.", a: "Öffnet das Ticket, prüft, dass nichts auf Lager ist, findet einen im Marketplace und kauft ihn, sobald eine Person freigibt." }],
+      why: "Der Einkauf beginnt in einem Ticket, läuft über das Budget und landet im Inventar der Person." },
+    revision: { name: "Gehaltsrunde",
+      lead: "Jede Gehaltserhöhung begründet, budgetiert und vertretbar.",
+      value: ["Richtlinien einmal festgelegt: Berechtigung, Spannen und Genehmigende. Jeder Vorschlag wird automatisch geprüft.", "Jede Führungskraft sieht nur ihr Team, mit bereits markierten Abweichungen von der Richtlinie, und das Budget wird in Echtzeit verteilt.", "Die genehmigte Erhöhung fließt in den Vertrag und die Personalprognose, ohne Neueingabe."],
+      one: [{ q: "Schlage Gehaltserhöhungen für mein Team nach unserer Richtlinie vor.", a: "Zahlen und Begründung, bereits gegen das Budget geprüft. Du genehmigst." }],
+      why: "Du entscheidest, wie viele Beurteilungszyklen für die Berechtigung zählen: Die Erhöhung spiegelt einen Trend wider, keinen Einzelwert. Und sie erreicht die Lohnabrechnung als geprüfte Variable." },
+    politicas: { name: "Richtlinien",
+      lead: "Deine Regeln, einmal formuliert und in jedem Modul angewendet.",
+      value: ["Richtlinien zu Abwesenheiten, Ausgaben, Arbeitszeiten und mehr, angewendet von den Modulen, die sie nutzen.", "Handbuch: Die Leute fragen, und One antwortet mit Quellenangabe.", "Wenn One etwas nicht weiß, sagt es das."],
+      one: [{ q: "Kann ich zwei Wochen aus einem anderen Land remote arbeiten?", a: "Antwortet auf Basis deiner Richtlinie, zeigt die Quelle und legt nur offen, was diese Person sehen darf." }],
+      why: "Routinefragen landen nie im Postfach der Führungskraft, und dieselben Kriterien genehmigen Ausgaben oder Abwesenheiten." },
+    portal: { name: "Mitarbeiterportal",
+      lead: "Die App, in der jeder seine eigenen Informationen sieht und anfragt, was er braucht.",
+      value: ["Persönliche Daten, Gehaltsabrechnungen, Dokumente und Salden in einer App.", "Abwesenheiten, Ausgaben und Tickets vom Smartphone.", "One ist integriert, um zu fragen, zu beantragen und jeden Antrag zu verfolgen."],
+      oneNote: "One ist für die gesamte Belegschaft enthalten, ohne Schulung. Jeder fragt, was er braucht, und sieht nur, was seine Rolle erlaubt.",
+      why: "Alles, was Mitarbeitende hier tun, geht direkt ins richtige Modul, ohne Formulare oder E-Mails dazwischen." },
+    onoff: { name: "On-/Offboarding",
+      lead: "Eintritte und Austritte als ein Ablauf, mit Aufgaben für HR, IT und die Führungskraft.",
+      value: ["Die neue Person kommt mit allen Daten aus dem Recruiting.", "Dokumente, Unterschrift, Gerät, Zugänge und Willkommensschulung im selben Ablauf.", "Beim Austritt werden Zugänge und Geräte zurückgeholt, ohne dass es am Gedächtnis von jemandem hängt."],
+      one: [{ q: "Bereite Martas Onboarding für Montag vor.", a: "Startet die Aufgaben, bereitet Dokumente zur Unterschrift vor, bestellt ihren Laptop und weist den Willkommenskurs zu." }],
+      why: "Hier treffen die meisten Module aufeinander: Sind die Daten zentral, läuft der erste Tag von allein." },
+    documentos: { name: "Dokumentenverwaltung",
+      lead: "Verträge, Gehaltsabrechnungen und Bescheinigungen jeder Person, mit Berechtigungen und Vorlagen.",
+      value: ["Ordner pro Person und pro Unternehmen, mit rollenbasierten Berechtigungen.", "Vorlagen, die sich mit den Daten der Mitarbeitenden füllen.", "One liest jede Datei und extrahiert, was wichtig ist."],
+      one: [{ q: "Welche befristeten Verträge laufen in diesem Quartal aus?", a: "Gleicht mit den Vertragsdaten ab und liefert die Liste mit Terminen und Verantwortlichen." }],
+      why: "Eine genehmigte Gehaltsänderung aktualisiert den Vertrag; eine Einstellung erzeugt ihre Dokumente. Niemand baut sie neu." },
+    firma: { name: "E-Signatur",
+      lead: "Zur Unterschrift senden, ohne Factorial zu verlassen, und das Ergebnis dort ablegen, wo es hingehört.",
+      value: ["Verträge, Anhänge und Richtlinien von jedem Gerät aus unterschreiben.", "Recruiting-Angebote von überall unterschrieben, und du weißt sofort, wann sie unterzeichnet sind.", "Das unterschriebene Dokument bleibt im Profil der Person."],
+      oneNote: "One bereitet Dokumente aus deinen Vorlagen vor, sodass du sie nur prüfen und zur Unterschrift senden musst.",
+      why: "Keine Daten neu eintippen, wenn jemand unterschreibt: Der Status erreicht den Prozess, der ihn angefordert hat." },
+    analiticas: { name: "Analytics",
+      lead: "Alle Daten von Factorial an einem Ort, und One, um sie in natürlicher Sprache abzufragen.",
+      value: ["Berichte, die Module auf denselben Daten verknüpfen: Personal, Zeit, Talent, Lohnabrechnung und Finanzen.", "Bitte One, einen Bericht zu erstellen, Widgets hinzuzufügen, zu filtern oder einen Trend zu erklären, und speichere ihn.", "Jeder sieht nur, was seine Berechtigungen erlauben."],
+      one: [{ q: "Schick mir jeden Montag die Fluktuation nach Abteilung.", a: "Erstellt den Bericht, plant ihn als Routine und erklärt bei jedem Versand den Trend." }],
+      why: "Jedes Modul fließt hier zusammen. Weil alle Daten in Factorial liegen, wird ein Bericht nicht gebaut, sondern angefragt. Kein Export, kein Zusammenführen von Tabellen und kein Warten auf die Finanzabteilung." },
+    tickets: { name: "Tickets",
+      lead: "Anfragen, die halb gelöst ankommen, bevor eine Person sie anfasst.",
+      value: ["Im Chat mit One eröffnet und in Factorial verfolgt.", "Automatisch an das richtige Team geleitet: IT, HR, Finanzen.", "One recherchiert und übersetzt jede Nachricht in beide Richtungen."],
+      one: [{ q: "Hey One, mein Laptop ist gerade kaputtgegangen. Ich brauche einen neuen.", a: "Erstellt das Ticket, leitet es an die IT, liest den Kontext, sieht, dass kein Laptop auf Lager ist, findet einen im Marketplace und entwirft den Plan. Eine Person gibt frei, er wird gekauft und die IT liefert ihn aus." }],
+      why: "One recherchiert über Verträge, IT-Assets und Mitarbeiterprofile hinweg: Die Lösung wird mit deinen Richtlinien entworfen, und wer sie umsetzt, muss nur noch freigeben." },
+    mdm: { name: "Mobile Device Management",
+      lead: "Konfiguriere und sichere Firmengeräte an derselben Stelle, an der du Mitarbeitende verwaltest.",
+      value: ["Jedes Gerät ist mit der Person verknüpft, die es nutzt.", "Geräteanmeldung und -entfernung im Rahmen von Onboarding und Offboarding.", "Sicherheitsstatus der Geräteflotte für die IT sichtbar."],
+      oneNote: "One hält dich compliant: Es prüft gegen Richtlinien, behebt Unstimmigkeiten und verfolgt Zugriffe und Risiken.",
+      why: "Wenn jemand eintritt oder geht, ist die IT nicht auf eine E-Mail der HR angewiesen: Die Änderung steht bereits in Factorial." },
+    inventario: { name: "Inventar",
+      lead: "Welche Ausstattung jede Person hat, mit Historie.",
+      value: ["Ausgabe und Rückgabe von Geräten pro Person.", "In Onboarding und Offboarding integriert.", "Bestand vor dem Kauf sichtbar."],
+      oneNote: "Wenn ein Ticket eingeht, prüft One das Inventar, bevor es einen Kauf vorschlägt.",
+      why: "Das Inventar weiß, wer wer ist, weil es die Personendaten mit Core HR teilt." },
+    software: { name: "Software-Verwaltung",
+      lead: "Welche Tools das Unternehmen nutzt, wer Zugriff hat und was sie kosten.",
+      value: ["Inventar von Apps und Lizenzen.", "Zugriffe werden beim Ein- und Austritt von Personen vergeben und entzogen.", "Lizenzkosten für die Finanzabteilung sichtbar."],
+      oneNote: "One gleicht Lizenzen mit aktiven Personen ab, um Zugriffe zu finden, die es nicht mehr geben sollte.",
+      why: "Lizenzen, Personen und Budget an einem Ort: Niemand zahlt für den Account von jemandem, der längst gegangen ist." },
+    marketplace: { name: "Marketplace",
+      lead: "Ein Katalog, um Geräte und Ausstattung zu bestellen, ohne Lieferanten zu suchen.",
+      value: ["Gerätekatalog, sofort bestellbar.", "Einkäufe mit Genehmigung und Lieferung an alle, die es brauchen.", "Verbunden mit Tickets und Inventar."],
+      oneNote: "Ist nichts auf Lager, findet One das Gerät im Marketplace und hält den Einkauf zur Freigabe bereit.",
+      why: "Vom Ticket bis zur Lieferung, ohne das Tool zu wechseln." },
+    beneficios: { name: "Benefits",
+      lead: "Flexible Vergütung, die dein Team mit einer Karte nutzt und die HR ohne Papierkram verwaltet.",
+      value: ["Essen, Verkehr, Kinderbetreuung, Krankenversicherung, Weiterbildung und Wellhub.", "Visa-Karte im Wallet des Smartphones, mit Saldo und Transaktionen in der App.", "Budgets nach Kategorie, Steuerkonformität und direkter Export in die Lohnabrechnung."],
+      one: [{ q: "Wie viel Essenszuschuss habe ich diesen Monat noch?", a: "Antwortet mit dem Saldo dieser Person, im Rahmen ihrer Berechtigungen." }],
+      why: "Was jede Person nutzt, erreicht die Lohnabrechnung als Gehaltsbestandteil, ohne dass es jemand von Hand zusammenstellt." },
+    compensacion: { name: "Vergütung",
+      lead: "Jede Änderung erreicht die Lohnabrechnung bereits geprüft.",
+      value: ["Boni, Vertragsänderungen und Abwesenheiten mit Einfluss auf die Abrechnung, sofort sichtbar.", "Warnungen vor der Berechnung: offene Variablen, nicht genehmigte Boni oder veraltete Schichten.", "Jede Abrechnung verglichen mit genehmigten Variablen und Verträgen, plus Ist- vs. Plankosten."],
+      one: [{ q: "Was fehlt noch, bevor wir die Lohnabrechnung dieses Monats abschließen?", a: "Prüft offene Variablen und alles, was nicht stimmt, und sagt dir, wer handeln muss." }],
+      why: "Hier fließt alles zusammen: Stempelungen, Schichten, Abwesenheiten, Ausgaben, Benefits und Gehaltserhöhungen. Wenn sie verbunden entstehen, kommen sie geprüft an.",
+      stat: { n: "40 h", t: "pro Monat sparst du, wenn du Einstellungen, Austritte, Gehaltsänderungen, Abwesenheiten und Variablen mit deinem Lohnabrechnungsanbieter synchronisierst (a3innuva-Integration, Spanien)" } },
+    integraciones: { name: "Integrationen",
+      lead: "Factorial verbunden mit deinem Lohnabrechnungsanbieter und dem Rest deiner Tools.",
+      value: ["a3innuva (Spanien): Einstellungen, Austritte, Vertrags- und Gehaltsänderungen, Abwesenheiten, Krankmeldungen und Variablen.", "Kompatibel mit anderer Lohnabrechnungssoftware und mit Factorial Professionals für Beratungskanzleien.", "API zur Anbindung an dein ERP."],
+      oneNote: "Wenn die Daten in Factorial oder in etwas liegen, das du anbindest, kannst du mit One fragen, delegieren oder automatisieren.",
+      why: "Integrieren heißt nicht kopieren: Die Änderung wird einmal erfasst und synchronisiert." },
+    anticipo: { name: "Gehaltsvorschuss",
+      lead: "Dein Team kann einen Teil des bereits verdienten Gehalts schon vor Monatsende anfordern.",
+      value: ["Anfrage aus der App, ohne Papierkram.", "Regeln und Limits, die du festlegst.", "Der Vorschuss wird in der Lohnabrechnung ohne manuelle Anpassungen berücksichtigt."],
+      oneNote: "Die Leute fragen One, wie viel sie anfordern können und wie es funktioniert, gemäß deiner Richtlinie.",
+      why: "Weil Gehalt und geleistete Tage bereits in Factorial liegen, wird der verfügbare Betrag nicht von Hand berechnet." }
+  },
+  STORIES: [
+    { t: "Eine Neueinstellung", d: "Die Stelle wird einmal genehmigt, der Rest folgt von allein.", steps: ["Die Stelle wird mit ihrem Gehaltsband genehmigt.", "Sie wird automatisch als Job eröffnet; One wählt vor und ruft an.", "Das Angebot wird vom Smartphone aus unterschrieben.", "Die Person startet mit allen Daten, ohne Neueingabe.", "Der Laptop ist bereits zugewiesen.", "Sie erhält den Willkommenskurs.", "Die Einstellung erreicht die Lohnabrechnung geprüft."] },
+    { t: "Eine kurzfristige Krankmeldung", d: "Von der Meldung bis zur Lohnabrechnung, ohne dass jemand Daten kopiert.", steps: ["Jemand meldet sich krank.", "One findet, wer einspringen kann, und ruft an.", "Die neue Schicht wird wie jede andere gestempelt.", "Die Abwesenheit und die Schichtänderung kommen als Variablen an.", "Die Fehlzeiten pro Standort aktualisieren sich von selbst."] },
+    { t: "Ein Beurteilungszyklus", d: "Die Gehaltserhöhung ergibt sich aus der Beurteilung und fließt zurück in den Plan.", steps: ["Die Beurteilung zeigt Ergebnisse und Lücken.", "Weiterbildung wird mit einem Klick zugewiesen.", "One schlägt die Gehaltserhöhung im Rahmen der Richtlinie vor.", "Die Gehaltserhöhung erreicht die Lohnabrechnung geprüft.", "Die Kostenprognose für den nächsten Plan wird aktualisiert."] },
+    { t: "Ein kaputter Laptop", d: "Eine Nachricht an One und eine Freigabe.", steps: ["Du sagst es One, und es öffnet das Ticket.", "One prüft, dass nichts auf Lager ist.", "Es findet ein Gerät, das der Richtlinie entspricht.", "Eine Person gibt frei, es wird gekauft und die IT liefert es aus."] }
+  ],
+  UI: {
+    center: "Der Kern", area: "Bereich", modules: "Module", brings: "Was es bringt", withOne: "Mit One", connected: "Verbunden mit",
+    soon: "Was als Nächstes kommt", soonNote: "Umfang und Termine können sich ändern.", close: "Schließen",
+    title: "Factorial · Alles verbunden mit One",
+    h1: "One kennt dein Unternehmen bereits",
+    sub: "Jedes Factorial-Modul teilt dieselben Daten. One arbeitet auf allen von ihnen, mit deinen Berechtigungen und deinen Richtlinien.",
+    hint: "Tippe auf eine Bubble, um zu sehen, was sie bringt, was One damit macht und womit sie verbunden ist.",
+    cue: "Weiter scrollen", cueAria: "Weiter scrollen", oneAria: "Sieh, was One ist", panelAria: "Modul-Details",
+    s1t: "Dieselben Daten, durchgängig",
+    s1d: "Wenn jedes Modul in einem anderen Tool liegt, beginnt jede Entscheidung bei null. In Factorial nutzt der nächste Schritt, was einmal erfasst wurde. Tippe auf einen Schritt, um ihn auf der Map zu öffnen.",
+    s2t: "Deine Teams nutzen bereits KI. Mach sie zu deiner.",
+    s2d: "Nicht die Technologie ändert sich, sondern der Kontext. Und bei Personendaten ist Vertrauen unverhandelbar.",
+    cmpHead: `<tr><th></th><th>Generische KI</th><th>One</th></tr>`,
+    cmpBody: `<tr><td>Kontext</td><td>Startet jedes Mal leer. Du fügst den Kontext selbst ein.</td><td>Verbunden mit deinen Factorial-Daten und den Tools, die du anbindest, ab der ersten Nachricht.</td></tr>
+      <tr><td>Berechtigungen</td><td>Weiß nicht, wer was sehen darf.</td><td>Jeder sieht nur, was seine Rolle erlaubt. Dieselben Rollen, nichts Neues wird offengelegt.</td></tr>
+      <tr><td>Compliance</td><td>Keine Garantien in der EU.</td><td>Konform mit DSGVO und EU-KI-Verordnung, gehostet in der EU.</td></tr>
+      <tr><td>Verlässlichkeit</td><td>Erfindet Antworten, ohne zu warnen.</td><td>Antwortet mit deinen Daten und zeigt die Quelle. Wenn es etwas nicht weiß, sagt es das.</td></tr>
+      <tr><td>Kontrolle</td><td>Intransparente Kosten und Aktionen.</td><td>Du entscheidest, welche Agenten laufen, und siehst jede Aktion und was sie gekostet hat.</td></tr>`,
+    s4t: "One: persönliche Kapazität",
+    s4d: "Jede Person hat ihre eigene One-Kapazität, um zu fragen, zu delegieren und zu automatisieren. Wähle Basic, Plus oder Max danach, wie viel Arbeit jedes Profil an One übergibt.",
+    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Alltag</span></div><p class="tl">Damit die gesamte Belegschaft ihre Anliegen selbst klärt, ohne auf jemanden zu warten.</p>
+      <h4>Für wen</h4><div class="who"><i>Mitarbeitende</i></div>
+      <h4>Was sie mit One machen</h4><ul><li>Fragen zu Richtlinien, Salden, Gehaltsabrechnungen und Dokumenten stellen und die Antwort mit Quelle erhalten.</li><li>Abwesenheiten, Ausgaben und Tickets per Chat beantragen.</li><li>Jeden Antrag in der App verfolgen.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Teamführung</span></div><p class="tl">Für alle, die Teams führen und den Kontext ihres Teams griffbereit brauchen.</p>
+      <h4>Für wen</h4><div class="who"><i>Führungskräfte</i></div>
+      <h4>Was sie mit One machen</h4><ul><li>Alles aus Basic, mit mehr Tageskapazität.</li><li>1:1s vorbereiten und die Analysen ihres Teams prüfen.</li><li>Abwesenheiten, Ausgaben und Schichten mit bereits gesammeltem Kontext genehmigen.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Maximale Kapazität</span></div><p class="tl">Für die Profile, die täglich am meisten Arbeit an One delegieren.</p>
+      <h4>Für wen</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>Was sie mit One machen</h4><ul><li>Alles aus Plus, mit der höchsten Tageskapazität.</li><li>Komplette Kurse erstellen, Ausgaben im Stapel verarbeiten und Berichte und Routinen anlegen.</li><li>Für die intensive Nutzung von One in ihrem Bereich konzipiert.</li></ul></div>`,
+    tierNote: "Agenten, die für das ganze Unternehmen arbeiten (Schichten abdecken, Kandidaten anrufen, Ausgaben genehmigen), nutzen eine separate Unternehmenskapazität, nicht die persönliche. Die genaue Kapazität jeder Stufe hängt von deinem Plan ab.",
+    s3t: "Was als Nächstes kommt",
+    s3d: "Jedes Produkt wird zum KI-Produkt. Umfang und Termine können sich ändern; wir halten dich auf dem Laufenden.",
+    road: `<div><span>Demnächst</span><b>KI-1:1s</b><p>One bereitet jedes 1:1 mit der gesamten Historie der Person vor und begleitet es.</p></div>
+    <div><span>Demnächst</span><b>Gamifizierte Kurse</b><p>Spielmechaniken in LMS-Kursen.</p></div>
+    <div><span>Demnächst</span><b>Ziele über MCP</b><p>Factorial verbindet sich mit deinen Tools und aktualisiert Ziele mit deren Daten.</p></div>
+    <div><span>Demnächst</span><b>Personalplanung: Genehmigungen und Budget</b><p>Strukturierte Genehmigungsabläufe und Vergleich von Plan und Ist.</p></div>
+    <div><span>Demnächst</span><b>Vorgeschlagener Talentpool</b><p>Sieh vor der Veröffentlichung, wer in deinem Kandidatenpool bereits passt.</p></div>
+    <div><span>Demnächst</span><b>WhatsApp im Recruiting</b><p>Nachrichten, Vorankündigung des KI-Anrufs und Dokumente über WhatsApp.</p></div>
+    <div class="more"><span>Demnächst</span><b>Und noch viel mehr</b><p>Jeden Monat kommen neue KI-Funktionen in jedes Factorial-Produkt.</p></div>`,
+    ctaT: "Sollen wir deinen gesamten Zyklus gemeinsam mit deinen eigenen Daten durchgehen?",
+    ctaD: "Wir bilden deine Personalplanung, deinen Recruiting-Prozess und deine Vergütungsrichtlinie ab und zeigen dir denselben Ablauf in Factorial, mit One bei jedem Schritt.",
+    footer: "Berichte und Gesprächsbeispiele sind illustrativ und verwenden fiktive Daten. Einige Funktionen hängen von deinem Plan und von One-Credits ab. Factorial · Oktober 2026."
+  }
+};
+
+LONG.de = {
+    one: () => `<p class="lead">Dein persönlicher KI-Agent bei der Arbeit. Er kennt deinen Kontext, handelt in ganz Factorial und hilft dir beim Entscheiden, ohne deine Daten offenzulegen.</p>
+    <h3>Drei Arten, es zu nutzen</h3>
+    <ul class="vals"><li><b>Fragen.</b> Jeder fragt, was er braucht: Richtlinien, Salden, Teamdaten. One antwortet mit Quelle und nur mit dem, was seine Rolle erlaubt.</li>
+    <li><b>Delegieren.</b> In jedem Produkt erledigt One die Arbeit: entwirft die Stellenanzeige, ruft den Kandidaten an, bereitet den Vorschlag zur Gehaltserhöhung vor.</li>
+    <li><b>Automatisieren.</b> Richte eine Routine einmal ein, und One erkennt, entscheidet und handelt. Du genehmigst die Ausnahmen.</li></ul>
+    <h3>So funktioniert es</h3>
+    <p class="note">Es erkennt Auslöser in deinen Daten in Echtzeit, gleicht sie mit deinen Richtlinien und deiner Historie ab, wählt die Aktion oder eskaliert an eine Person, erledigt die Arbeit in Factorial und protokolliert, was es getan hat. Jeder Schritt bleibt sichtbar und nachprüfbar.</p>
+    <h3>Warum zentrale Daten alles verändern</h3>
+    <p class="why" style="color:var(--ink)">Je mehr Module du verbindest, desto mehr Kontext hat One. Eine generische KI startet leer; One weiß bereits, wer wer ist, was deine Richtlinie sagt und was im letzten Zyklus passiert ist.</p>
+    <div class="stats"><div class="stat"><b>DSGVO</b><span>und EU-KI-Verordnung, gehostet in der EU</span></div><div class="stat"><b>Deine Berechtigungen</b><span>dieselben Factorial-Rollen, nichts Neues wird offengelegt</span></div></div>
+    <h3>Routinen: One liefert dir die Antwort, wenn sie fällig ist</h3>
+    ${chatHTML([{ q: "Erinnere mich jeden 25. an offene Lohnvariablen.", a: "Erstellt die Routine, prüft vor dem Abschluss, was fehlt, und schickt es dir mit den Personen, die handeln müssen." }])}`,
+    routines: `<h3>Routinen mit stets aktuellen Informationen</h3>
+  <ul class="rt">
+    <li><span class="when">Montag, 9:00</span><span>Fluktuation nach Abteilung, mit erklärtem Trend<span class="src">Core HR · Analytics</span></span></li>
+    <li><span class="when">Werktags, 18:00</span><span>Personen mit weniger als 4 Stempelungen heute<span class="src">Zeiterfassung</span></span></li>
+    <li><span class="when">Der 25.</span><span>Offene Lohnvariablen vor dem Abschluss<span class="src">Vergütung · Schichten · Ausgaben</span></span></li>
+    <li><span class="when">Erster Tag des Monats</span><span>Offene Pflichtschulungen nach Standort<span class="src">Weiterbildung & LMS</span></span></li>
+    <li><span class="when">Freitag, 12:00</span><span>Kandidaten im Screening ohne Feedback des Einstellungsteams<span class="src">ATS & Recruiting</span></span></li>
+  </ul>
+  <p class="disc-note">Jeder Analytics-Bericht kann aus dem One-Chat als Routine geplant werden. Routinen verbrauchen One-Credits.</p>`,
+    ax: { t: "Beispiele für bereits verbundene Berichte",
+      c1: ["Fluktuation und Engagement nach Abteilung", "Core HR + Engagement · Fluktuation (Balken) und eNPS (Linie)", ["Stores","Betrieb","Vertrieb","Support","Tech"]],
+      c2: ["Einstellungsqualität nach Quelle", "Recruiting + Performance · Retention nach 1 Jahr", ["Empfehlungen","LinkedIn","Karriereseite","Jobbörsen"]],
+      c3: ["Personalkosten: Ist vs. Plan", "Personalplanung + Gehaltsrunde + Vergütung", ["J","F","M","A","M","J"], "Ist", "Plan"],
+      c4: ["Fehlzeiten und Überstunden nach Standort", "Abwesenheiten + Zeiterfassung + Schichten", ["Madrid","Barcelona","Valencia","Sevilla"], "Fehlzeiten %", "Überstunden"],
+      note: "Fiktive Daten, nur zur Veranschaulichung, was sich verknüpfen lässt.",
+      tasksT: "Aufgaben, die One bereits selbstständig erledigt",
+      tasks: ["Genehmigt Ausgaben, die der Richtlinie entsprechen, und lässt dir nur die Ausnahmen.", "Deckt Schichten ab, indem es anruft, wer sie übernehmen kann, nach deinen Regeln.", "Ruft Kandidaten an, die das Screening erreichen, und liefert dir den Bericht.", "Löst Tickets zur Hälfte, sodass die zuständige Person nur noch freigibt."] }
+};
+
+/* ---------- PORTUGUÉS (PORTUGAL) ---------- */
+const PT = {
+  HUBS: {
+    talento: { name: "Talento", lead: "Do cargo que planeias ao aumento que defendes. Cada decisão de talento assenta na anterior, não começa do zero.", one: "Quantos mais produtos de talento tiveres, mais contexto tem a One: lê avaliações, candidaturas, cursos e inquéritos em simultâneo." },
+    tiempo: { name: "Tempo", lead: "Registos de ponto, turnos e ausências no mesmo calendário, com cada hora pronta para o processamento salarial e os projetos.", one: "A One cobre turnos, responde a dúvidas sobre saldos e apanha falhas no ponto enquanto ainda são pequenas." },
+    finanzas: { name: "Finanças", lead: "RH e Finanças trabalham com os mesmos números: efetivos, despesas, compras, projetos e orçamento.", one: "A One aprova o que cumpre a política e deixa-te só as exceções." },
+    core: { name: "Core HR", lead: "A base: pessoas, documentos, políticas e a app de cada colaborador. O que se regista aqui é usado por todos os módulos.", one: "A One conhece as tuas políticas, responde com a fonte e resolve pedidos antes de chegarem a uma pessoa." },
+    it: { name: "IT", lead: "Dispositivos, software e inventário associados a quem os usa, do primeiro ao último dia.", one: "A One investiga o ticket, verifica o stock e prepara a compra para que só falte aprovar." },
+    nomina: { name: "Salários", lead: "Cada alteração que afeta a remuneração chega validada ao processamento salarial, do registo de ponto ao aumento.", one: "A One deteta variáveis pendentes e tudo o que não bate certo antes de o processamento ser calculado." }
+  },
+  M: {
+    desempeno: { name: "Desempenho",
+      lead: "Avaliações, objetivos e feedback ao longo de todo o ano, não só na avaliação anual.",
+      value: ["Avaliações de 180° e 360° com ciclos automáticos, lembretes e acordos descarregáveis.", "Objetivos e OKRs individuais e de equipa, com feedback contínuo para chegares à avaliação com dados.", "9-box e analítica de talento para ver quem tem mais potencial e quem precisa de apoio."],
+      one: [{ q: "Quem da minha equipa está a mostrar sinais de risco?", a: "Analisa autoavaliações e feedback, resume cada caso e explica porque o assinala." }],
+      why: "Cada resultado alimenta a formação que atribuis e o aumento que propões. O recrutamento usa a última avaliação para medir que fontes trazem pessoas que ficam e rendem.",
+      soon: ["Objetivos ligados via MCP: a Factorial atualiza objetivos com dados das tuas outras ferramentas."] },
+    formacion: { name: "Formação & LMS",
+      lead: "Formações gravadas e cursos interativos dentro da Factorial, ligados ao desempenho.",
+      value: ["Catálogo, sessões e assiduidade; formação obrigatória com rastreabilidade pronta para auditoria.", "LMS: cursos com vídeos, questionários e testes, progresso automático e certificados à conclusão.", "Custo salarial de cada formação calculado automaticamente."],
+      one: [{ q: "Cria um curso de onboarding para a equipa das lojas.", a: "Um curso estruturado com módulos e questionários, em minutos. Tu revês e publicas." }],
+      why: "A partir da avaliação, num clique: atribui a formação que fecha cada lacuna de competências e mede o impacto no ciclo seguinte.",
+      stat: { n: "94%", t: "dos colaboradores ficariam mais tempo numa empresa que investe no seu desenvolvimento (LinkedIn Workplace Learning Report, 2023)" },
+      soon: ["Cursos gamificados: mecânicas de jogo dentro dos cursos."] },
+    engagement: { name: "Envolvimento",
+      lead: "Ouve a tua equipa sem enviar mais um formulário: pulso diário, inquéritos, eNPS e 1:1 com IA.",
+      value: ["Pulso da equipa no registo de ponto: check-ins sem fadiga de inquéritos e alertas para o gestor certo.", "Inquéritos e eNPS automáticos no onboarding, na saída e em cada marco.", "Reuniões 1:1 com IA: a One prepara cada 1:1 com objetivos, desempenho e estado de espírito."],
+      one: [{ q: "Prepara o 1:1 de amanhã com a Laura.", a: "Reúne os objetivos dela, a última avaliação, o pulso recente e o que foi falado nos 1:1 anteriores." }],
+      why: "Bom desempenho nem sempre significa envolvimento. Com o pulso ligado ao ponto e ao contexto de desempenho, a One vê o quadro completo de cada pessoa.",
+      stat: { n: "40–60%", t: "menos administração manual com avaliações, 1:1 e inquéritos automáticos" } },
+    comunidades: { name: "Comunidades",
+      lead: "Espaços onde as tuas pessoas se encontram, partilham e se reconhecem, para além do organigrama.",
+      value: ["Comunidades por interesse, localização, projeto ou equipa, abertas ou por convite.", "Publicações, reconhecimentos e celebração de marcos a partir da app.", "Une pessoas do escritório, em remoto e nas lojas num único espaço."],
+      one: [{ q: "Que comunidades me recomendas, agora que entrei?", a: "Sugere as da tua equipa, da tua localização e dos teus interesses, com base no teu perfil." }],
+      why: "As comunidades assentam nos mesmos dados de equipa, localização e pessoas, por isso cada nova pessoa encontra o seu lugar desde o primeiro dia." },
+    comunicaciones: { name: "Comunicações",
+      lead: "Comunicados para toda a empresa ou para equipas específicas, onde as tuas pessoas já trabalham todos os dias.",
+      value: ["Publica para toda a empresa ou para equipas e localizações específicas.", "Chega a todos pela app, incluindo quem não trabalha num computador.", "Os comunicados ficam junto das políticas e dos documentos a que se referem."],
+      one: [{ q: "Redige o comunicado do novo horário de verão em espanhol e inglês.", a: "Redige-o a partir da tua política de horários e traduz, pronto a rever." }],
+      why: "A segmentação vem dos mesmos dados de equipa, localização e função que o resto da Factorial usa." },
+    ats: { name: "ATS & recrutamento",
+      lead: "Um ATS que planeia, filtra e decide contigo, da posição aprovada à proposta assinada.",
+      value: ["Plano de contratação: cada posição aprovada no planeamento de efetivos chega como vaga com responsável, prazo e estado.", "Relatório de IA por candidato e chamadas de IA no idioma dele, com transcrição e resultado verde, âmbar ou vermelho.", "Vagas ilimitadas, permissões por fase, entrevistas em vídeo com a One e analítica de retenção a um ano."],
+      one: [
+        { q: "Liga a todos os candidatos que chegarem à fase de triagem.", a: "Uma chamada no idioma deles, anunciada, com consentimento e gravada. Devolve transcrição, relatório e próximo passo sugerido. Quem decide é uma pessoa." },
+        { q: "Cria a oferta de emprego para um Senior Product Designer em Barcelona.", a: "Redige a oferta a partir da conversa e publica-a na tua página de carreiras e em mais de 250 portais de emprego." }
+      ],
+      why: "A vaga nasce aprovada e orçamentada; quem assina entra com todos os dados, sem voltar a escrever nada; e a analítica cruza a fonte de recrutamento com a avaliação de desempenho.",
+      stats: [{ n: "70%", t: "menos tempo de contratação com triagem de primeira ronda por IA" }, { n: "+25%", t: "de crescimento de efetivos com a mesma equipa de recrutamento" }],
+      soon: ["Candidatos sugeridos a partir do banco de talento (brevemente).", "WhatsApp no Recrutamento e Páginas de Empresa por entidade (brevemente).", "Avaliação cultural (brevemente)."] },
+    canal: { name: "Canal de confiança",
+      lead: "Um canal para qualquer pessoa denunciar irregularidades de forma confidencial, e também anónima.",
+      value: ["Denúncias confidenciais, com opção de anonimato.", "Acompanhamento de casos com acesso restrito a quem os gere.", "Ajuda-te a cumprir as regras de proteção de denunciantes."],
+      oneNote: "A One respeita exatamente as permissões da Factorial: os casos só são visíveis a quem os gere, a mais ninguém.",
+      why: "Vive na mesma app que o resto das ferramentas do colaborador, por isso ninguém tem de procurar onde denunciar." },
+    control: { name: "Registo de ponto",
+      lead: "Regista o ponto no telemóvel ou no computador, com o registo do tempo de trabalho sempre atualizado.",
+      value: ["Regista o ponto na app ou na web, com horas extra e saldos calculados.", "Incidências visíveis para o gestor antes de chegarem ao processamento salarial.", "As horas imputadas a projetos alimentam o custo real de cada projeto."],
+      one: [{ q: "Todos os dias úteis às 18h, envia-me quem tem menos de 4 registos de ponto hoje.", a: "Cria uma rotina que verifica os registos de ponto todos os dias e envia-ta por email." }],
+      why: "O mesmo registo de ponto serve o processamento salarial, o custo dos projetos e o pulso da equipa, sem o capturar duas vezes." },
+    turnos: { name: "Turnos",
+      lead: "Escalas que respeitam as tuas regras e vagas preenchidas sem listas de chamadas.",
+      value: ["Planeamento por localização, função e competências.", "Dias de descanso, horários e locais de trabalho são respeitados no planeamento.", "Os turnos reais chegam ao processamento salarial, sem turnos desatualizados no cálculo."],
+      one: [{ q: "Encontra alguém para cobrir o turno da María hoje.", a: "Verifica dias de descanso, funções, competências, horário e localização, liga aos candidatos um a um e avisa o gestor quando o turno estiver coberto." }],
+      why: "Uma ausência abre a vaga, a One preenche-a e o novo turno chega aos registos de ponto e às variáveis salariais. Todas as regras respeitadas e cada chamada registada." },
+    ausencias: { name: "Ausências",
+      lead: "Férias, baixas e licenças com saldos atualizados e aprovação em dois cliques.",
+      value: ["Políticas de ausências por equipa, localização ou convenção coletiva.", "Calendário partilhado para ver quem está ausente antes de aprovar.", "Ausências e baixas sincronizadas com o processamento salarial (com a3innuva, em Espanha)."],
+      one: [{ q: "Quantos dias de férias me restam?", a: "Responde com o saldo dessa pessoa e a política aplicável. Cada pessoa só vê o seu." }],
+      why: "Uma baixa não fica só no calendário: abre uma vaga nos Turnos, ajusta os registos de ponto e chega ao processamento salarial como variável." },
+    plantilla: { name: "Planeamento de efetivos",
+      lead: "RH e Finanças veem os mesmos números desde o primeiro dia. Chega de cinco versões da folha de cálculo.",
+      value: ["Os gestores propõem posições com função, nível, banda salarial e data, ligadas ao catálogo de funções.", "RH e Finanças revêem uma única versão, com registo de quem decidiu o quê e quando.", "As posições aprovadas abrem automaticamente no Recrutamento: plano e execução sempre alinhados."],
+      one: [{ q: "Prepara o nosso plano de efetivos para 2027 com as nossas diretrizes.", a: "Propõe funções, níveis e custos para tu reveres." }],
+      why: "A posição que aprovas é a vaga que publicas, e cada aumento finalizado atualiza a previsão de custos do plano seguinte.",
+      soon: ["Fluxos de aprovação estruturados e ligação ao orçamento.", "Comparação entre contratações planeadas e reais."] },
+    proyectos: { name: "Gestão de projetos",
+      lead: "Sabe se cada projeto é rentável enquanto decorre, não quando termina.",
+      value: ["Horas imputadas a partir do widget de ponto, sem folhas de horas paralelas.", "Custo laboral, custos fixos e despesas vs. orçamento, em tempo real.", "Do orçamento ao projeto e do projeto à fatura, com os dados do cliente já carregados."],
+      one: [{ q: "Que projetos estão acima do orçamento este mês?", a: "Cruza horas imputadas, custo laboral e despesas, e explica onde cada um se desvia." }],
+      why: "O custo de uma hora vem do salário real da pessoa e a hora vem do registo de ponto: ninguém copia dados entre ferramentas." },
+    fpa: { name: "Financial workplace",
+      lead: "Orçamentos e previsões com os custos reais que já vivem na Factorial.",
+      value: ["Orçamentos por departamento ou centro de custo.", "Real vs. planeado com dados de efetivos, salários, despesas, compras e projetos.", "Uma única fonte de verdade para RH, Finanças e direção."],
+      one: [{ q: "Como estamos face ao orçamento de pessoas neste trimestre?", a: "Compara o custo salarial real com o plano e assinala desvios." }],
+      why: "O orçamento alimenta-se sozinho: cada contratação, aumento, despesa ou compra já está registada no seu módulo." },
+    gastos: { name: "Despesas",
+      lead: "De uma pilha de recibos às contas fechadas, com uma só mensagem.",
+      value: ["Carrega os recibos e os campos preenchem-se sozinhos.", "Cada despesa é verificada face à política: as conformes são aprovadas de imediato.", "Reconciliação de cartões e dados limpos para o fecho do mês."],
+      one: [{ q: "Aqui estão os recibos da minha viagem de trabalho. (carrega 5 de uma vez)", a: "Lê cada recibo, prepara as despesas, reconcilia o cartão e verifica política e permissões. Só as exceções esperam por uma pessoa." }],
+      why: "A despesa aprovada chega ao processamento salarial se for para reembolsar e ao projeto se for faturável." },
+    compras: { name: "Compras",
+      lead: "Pedidos de compra, aprovações e fornecedores num único fluxo.",
+      value: ["Pedidos com aprovação por valor e equipa.", "Cada compra associada ao seu orçamento e a quem a pediu.", "Ligado ao inventário e ao software para saber o que se compra e para quem."],
+      one: [{ q: "O meu portátil avariou. Preciso de um novo.", a: "Abre o ticket, verifica que não há stock, encontra um no marketplace e compra-o assim que uma pessoa aprovar." }],
+      why: "A compra começa num ticket, passa pelo orçamento e acaba no inventário da pessoa." },
+    revision: { name: "Revisão salarial",
+      lead: "Cada aumento justificado, orçamentado e defensável.",
+      value: ["Diretrizes definidas uma só vez: elegibilidade, intervalos e aprovadores. Cada proposta é verificada automaticamente.", "Cada gestor vê apenas a sua equipa, com os casos fora da política já assinalados, e o orçamento é distribuído em tempo real.", "O aumento aprovado flui para o contrato e para a previsão de efetivos, sem voltar a escrever nada."],
+      one: [{ q: "Propõe aumentos para a minha equipa com base na nossa política.", a: "Valores e justificação, já verificados face ao orçamento. Tu aprovas." }],
+      why: "Tu decides quantos ciclos de avaliação contam para a elegibilidade: o aumento reflete uma tendência, não uma nota isolada. E chega ao processamento salarial como variável validada." },
+    politicas: { name: "Políticas",
+      lead: "As tuas regras, escritas uma vez e aplicadas em todos os módulos.",
+      value: ["Políticas de ausências, despesas, horários e outras, aplicadas pelos módulos que as usam.", "Manual do colaborador: as pessoas perguntam e a One responde com a fonte.", "Se a One não sabe, diz."],
+      one: [{ q: "Posso trabalhar remotamente a partir de outro país durante duas semanas?", a: "Responde com base na tua política, mostra a fonte e só revela o que essa pessoa pode ver." }],
+      why: "As dúvidas de rotina nunca chegam à caixa de entrada do gestor, e os mesmos critérios aprovam despesas ou ausências." },
+    portal: { name: "Portal do colaborador",
+      lead: "A app onde cada pessoa vê a sua informação e pede o que precisa.",
+      value: ["Dados pessoais, recibos de vencimento, documentos e saldos numa só app.", "Ausências, despesas e tickets a partir do telemóvel.", "A One integrada para perguntar, pedir e acompanhar cada pedido."],
+      oneNote: "A One está incluída para toda a força de trabalho, sem necessidade de formação. Cada pessoa pergunta o que precisa e só vê o que a sua função permite.",
+      why: "Tudo o que o colaborador faz aqui vai diretamente para o módulo certo, sem formulários nem emails pelo meio." },
+    onoff: { name: "On/Offboarding",
+      lead: "Entradas e saídas como um único fluxo, com tarefas para RH, IT e o gestor.",
+      value: ["A nova contratação chega do Recrutamento com todos os seus dados.", "Documentos, assinatura, dispositivo, acessos e formação de boas-vindas no mesmo fluxo.", "À saída, acessos e equipamento são recuperados sem depender da memória de ninguém."],
+      one: [{ q: "Prepara o onboarding da Marta para segunda-feira.", a: "Lança as tarefas, prepara os documentos para assinatura, pede o portátil dela e atribui o curso de boas-vindas." }],
+      why: "É onde mais módulos se encontram: se os dados estiverem centralizados, o primeiro dia corre sozinho." },
+    documentos: { name: "Gestão documental",
+      lead: "Contratos, recibos de vencimento e certificados de cada pessoa, com permissões e modelos.",
+      value: ["Pastas por pessoa e por empresa, com permissões por função.", "Modelos que se preenchem com os dados do colaborador.", "A One lê qualquer ficheiro e extrai o que importa."],
+      one: [{ q: "Que contratos a termo caducam neste trimestre?", a: "Cruza com os dados contratuais e devolve a lista com datas e responsáveis." }],
+      why: "Uma alteração salarial aprovada atualiza o contrato; uma contratação gera os seus documentos. Ninguém os refaz." },
+    firma: { name: "Assinatura eletrónica",
+      lead: "Envia para assinatura sem sair da Factorial e guarda o resultado onde deve ficar.",
+      value: ["Assina contratos, adendas e políticas a partir de qualquer dispositivo.", "Propostas do Recrutamento assinadas de qualquer lugar, e sabes de imediato quando estão assinadas.", "O documento assinado fica no perfil da pessoa."],
+      oneNote: "A One prepara documentos a partir dos teus modelos para só teres de os rever e enviar para assinatura.",
+      why: "Zero dados para voltar a escrever quando alguém assina: o estado chega ao processo que o pediu." },
+    analiticas: { name: "Analítica",
+      lead: "Todos os dados da Factorial num só lugar, e a One para os consultar em linguagem natural.",
+      value: ["Relatórios que cruzam módulos sobre os mesmos dados: pessoas, tempo, talento, salários e finanças.", "Pede à One que crie um relatório, adicione widgets, filtre ou explique uma tendência, e guarda-o.", "Cada pessoa só vê o que as suas permissões permitem."],
+      one: [{ q: "Envia-me a rotatividade por departamento todas as segundas-feiras.", a: "Cria o relatório, agenda-o como rotina e explica a tendência em cada envio." }],
+      why: "Todos os módulos desaguam aqui. Como todos os dados vivem na Factorial, um relatório não se constrói: pede-se. Sem exportar, sem juntar folhas de cálculo e sem esperar pelas Finanças." },
+    tickets: { name: "Tickets",
+      lead: "Pedidos que chegam meio resolvidos antes de uma pessoa lhes tocar.",
+      value: ["Abertos ao conversar com a One e acompanhados na Factorial.", "Encaminhados automaticamente para a equipa certa: IT, RH, Finanças.", "A One investiga e traduz cada mensagem nos dois sentidos."],
+      one: [{ q: "Olá One, o meu portátil avariou. Preciso de um novo.", a: "Cria o ticket, encaminha-o para o IT, lê o contexto, vê que não há portáteis em stock, encontra um no marketplace e redige o plano. Uma pessoa aprova, é comprado e o IT entrega-o." }],
+      why: "A One investiga contratos, ativos de IT e perfis de colaboradores: a resolução é redigida com as tuas políticas e quem a resolve só tem de aprovar." },
+    mdm: { name: "Gestão de dispositivos móveis",
+      lead: "Configura e protege os dispositivos da empresa no mesmo sítio onde geres pessoas.",
+      value: ["Cada dispositivo associado a quem o usa.", "Registo e remoção de dispositivos integrados no onboarding e offboarding.", "Estado de segurança da frota visível para o IT."],
+      oneNote: "A One mantém-te em conformidade: verifica políticas, corrige inconsistências e acompanha acessos e riscos.",
+      why: "Quando alguém entra ou sai, o IT não depende de um email dos RH: a alteração já está na Factorial." },
+    inventario: { name: "Inventário",
+      lead: "Que equipamento tem cada pessoa, com o seu histórico.",
+      value: ["Atribuição e devolução de equipamento por pessoa.", "Integrado no onboarding e offboarding.", "Stock visível antes de comprar."],
+      oneNote: "Quando chega um ticket, a One verifica o inventário antes de propor uma compra.",
+      why: "O inventário sabe quem é quem porque partilha os dados de pessoas com o Core HR." },
+    software: { name: "Gestão de software",
+      lead: "Que ferramentas usa a empresa, quem tem acesso e quanto custam.",
+      value: ["Inventário de apps e licenças.", "Acessos concedidos e revogados à medida que as pessoas entram e saem.", "Gasto em licenças visível para as Finanças."],
+      oneNote: "A One cruza licenças com pessoas ativas para detetar acessos que já não deviam existir.",
+      why: "Licenças, pessoas e orçamento num só lugar: ninguém paga a conta de quem já saiu." },
+    marketplace: { name: "Marketplace",
+      lead: "Um catálogo para encomendar dispositivos e equipamento sem andar à procura de fornecedores.",
+      value: ["Catálogo de dispositivos pronto a encomendar.", "Compras com aprovação e entrega a quem precisa.", "Ligado aos tickets e ao inventário."],
+      oneNote: "Se não houver stock, a One encontra o dispositivo no marketplace e deixa a compra pronta a aprovar.",
+      why: "Do ticket à entrega sem mudar de ferramenta." },
+    beneficios: { name: "Benefícios",
+      lead: "Remuneração flexível que a tua equipa usa com um cartão e que os RH gerem sem papelada.",
+      value: ["Refeição, transportes, creche, seguro de saúde, formação e Wellhub.", "Cartão Visa na carteira do telemóvel, com saldo e movimentos na app.", "Orçamentos por categoria, conformidade fiscal e exportação direta para o processamento salarial."],
+      one: [{ q: "Quanto subsídio de refeição me resta este mês?", a: "Responde com o saldo dessa pessoa, dentro das suas permissões." }],
+      why: "O que cada pessoa utiliza chega ao processamento salarial como rubrica, sem que ninguém o compile à mão." },
+    compensacion: { name: "Remuneração",
+      lead: "Cada alteração chega ao processamento salarial já validada.",
+      value: ["Prémios, alterações contratuais e ausências que afetam o salário, visíveis de imediato.", "Alertas antes do cálculo: variáveis pendentes, prémios por aprovar ou turnos desatualizados.", "Cada processamento comparado com as variáveis e contratos aprovados, e custo real vs. planeado."],
+      one: [{ q: "O que falta antes de fecharmos o processamento salarial deste mês?", a: "Revê as variáveis pendentes e tudo o que não bate certo, e diz-te quem tem de agir." }],
+      why: "Tudo desagua aqui: registos de ponto, turnos, ausências, despesas, benefícios e aumentos. Se nascem ligados, chegam validados.",
+      stat: { n: "40 h", t: "por mês que podes poupar ao sincronizar contratações, saídas, alterações salariais, ausências e variáveis com o teu fornecedor de processamento salarial (integração com a3innuva, Espanha)" } },
+    integraciones: { name: "Integrações",
+      lead: "A Factorial ligada ao teu fornecedor de processamento salarial e ao resto das tuas ferramentas.",
+      value: ["a3innuva (Espanha): contratações, saídas, alterações contratuais e salariais, ausências, baixas e variáveis.", "Compatível com outro software de processamento salarial e com a Factorial Professionals para gabinetes de contabilidade.", "API para ligar ao teu ERP."],
+      oneNote: "Se os dados vivem na Factorial ou em algo que ligues, podes perguntar, delegar ou automatizar com a One.",
+      why: "Integrar não é copiar: a alteração regista-se uma vez e sincroniza-se." },
+    anticipo: { name: "Adiantamento salarial",
+      lead: "A tua equipa pode pedir parte do salário já ganho antes do fim do mês.",
+      value: ["Pedido a partir da app, sem papelada.", "Regras e limites definidos por ti.", "O adiantamento reflete-se no processamento salarial sem ajustes manuais."],
+      oneNote: "As pessoas perguntam à One quanto podem pedir e como funciona, de acordo com a tua política.",
+      why: "Como o salário e os dias trabalhados já estão na Factorial, o valor disponível não se calcula à mão." }
+  },
+  STORIES: [
+    { t: "Uma nova contratação", d: "A posição aprova-se uma vez e o resto segue sozinho.", steps: ["A posição é aprovada com a sua banda salarial.", "Abre automaticamente como vaga; a One filtra e liga.", "A proposta é assinada a partir do telemóvel.", "Entra com todos os dados, sem voltar a escrever nada.", "O portátil já está atribuído.", "Recebe o curso de boas-vindas.", "A contratação chega validada ao processamento salarial."] },
+    { t: "Uma baixa de última hora", d: "Do aviso ao processamento salarial sem ninguém copiar dados.", steps: ["Alguém avisa que está doente.", "A One encontra quem pode cobrir e liga-lhe.", "O novo turno é registado como qualquer outro.", "A baixa e a alteração de turno chegam como variáveis.", "O absentismo por localização atualiza-se sozinho."] },
+    { t: "Um ciclo de avaliação", d: "O aumento sai da avaliação e realimenta o plano.", steps: ["A avaliação assinala resultados e lacunas.", "A formação é atribuída num clique.", "A One propõe o aumento dentro da política.", "O aumento chega validado ao processamento salarial.", "A previsão de custos atualiza-se para o plano seguinte."] },
+    { t: "Um portátil avariado", d: "Uma mensagem à One e uma aprovação.", steps: ["Dizes à One e ela abre o ticket.", "A One verifica que não há stock.", "Encontra um que cumpre a política.", "Uma pessoa aprova, é comprado e o IT entrega-o."] }
+  ],
+  UI: {
+    center: "O núcleo", area: "Área", modules: "Módulos", brings: "O que traz", withOne: "Com a One", connected: "Ligado a",
+    soon: "O que aí vem", soonNote: "O âmbito e as datas podem mudar.", close: "Fechar",
+    title: "Factorial · Tudo ligado com a One",
+    h1: "A One já conhece a tua empresa",
+    sub: "Todos os módulos da Factorial partilham os mesmos dados. A One trabalha sobre todos eles, com as tuas permissões e as tuas políticas.",
+    hint: "Toca em qualquer bolha para veres o que traz, o que a One faz com isso e a que se liga.",
+    cue: "Continua a deslizar", cueAria: "Continua a deslizar", oneAria: "Ver o que é a One", panelAria: "Detalhes do módulo",
+    s1t: "Os mesmos dados, de ponta a ponta",
+    s1d: "Quando cada módulo vive numa ferramenta diferente, cada decisão começa do zero. Na Factorial, o que se regista uma vez é usado no passo seguinte. Toca em qualquer passo para o abrir no mapa.",
+    s2t: "As tuas equipas já usam IA. Torna-a tua.",
+    s2d: "O que muda não é a tecnologia, é o contexto. E com dados de pessoas, a confiança não é negociável.",
+    cmpHead: `<tr><th></th><th>IA genérica</th><th>One</th></tr>`,
+    cmpBody: `<tr><td>Contexto</td><td>Começa em branco de cada vez. Tens de colar o contexto.</td><td>Ligada aos teus dados da Factorial e às ferramentas que ligares, desde a primeira mensagem.</td></tr>
+      <tr><td>Permissões</td><td>Não sabe quem deve ver o quê.</td><td>Cada pessoa só vê o que a sua função permite. Os mesmos perfis, nada de novo exposto.</td></tr>
+      <tr><td>Conformidade</td><td>Sem garantias na UE.</td><td>Conforme com o RGPD e o Regulamento da IA da UE, alojada na UE.</td></tr>
+      <tr><td>Fiabilidade</td><td>Inventa respostas sem avisar.</td><td>Responde com os teus dados e mostra a fonte. Se não sabe, diz.</td></tr>
+      <tr><td>Controlo</td><td>Custo e ações opacos.</td><td>Tu decides que agentes correm e vês cada ação e quanto custou.</td></tr>`,
+    s4t: "One: capacidade pessoal",
+    s4d: "Cada pessoa tem a sua própria capacidade One para perguntar, delegar e automatizar. Escolhe Basic, Plus ou Max consoante o trabalho que cada perfil entrega à One.",
+    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Dia a dia</span></div><p class="tl">Para que toda a força de trabalho resolva os seus pedidos sem esperar por ninguém.</p>
+      <h4>Para quem é</h4><div class="who"><i>Colaboradores</i></div>
+      <h4>O que fazem com a One</h4><ul><li>Perguntam por políticas, saldos, recibos de vencimento e documentos, e recebem a resposta com a fonte.</li><li>Pedem ausências, despesas e tickets por conversa.</li><li>Acompanham cada pedido a partir da app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Gestão de equipas</span></div><p class="tl">Para quem lidera equipas e precisa do contexto da sua equipa à mão.</p>
+      <h4>Para quem é</h4><div class="who"><i>Gestores</i></div>
+      <h4>O que fazem com a One</h4><ul><li>Tudo o que há no Basic, com mais capacidade diária.</li><li>Preparam 1:1 e consultam a analítica da sua equipa.</li><li>Aprovam ausências, despesas e turnos com o contexto já reunido.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Capacidade máxima</span></div><p class="tl">Para os perfis que mais trabalho delegam na One todos os dias.</p>
+      <h4>Para quem é</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>O que fazem com a One</h4><ul><li>Tudo o que há no Plus, com a maior capacidade diária.</li><li>Criam cursos completos, processam lotes de despesas e criam relatórios e rotinas.</li><li>Pensado para uso intensivo da One na sua área.</li></ul></div>`,
+    tierNote: "Os agentes que trabalham para toda a empresa (cobrir turnos, ligar a candidatos, aprovar despesas) usam uma capacidade de empresa separada, não a pessoal. A capacidade exata de cada nível depende do teu plano.",
+    s3t: "O que aí vem",
+    s3d: "Todos os produtos se estão a tornar produtos de IA. O âmbito e as datas podem mudar; manter-te-emos informado.",
+    road: `<div><span>Brevemente</span><b>1:1 com IA</b><p>A One prepara e orienta cada 1:1 com o histórico completo da pessoa.</p></div>
+    <div><span>Brevemente</span><b>Cursos gamificados</b><p>Mecânicas de jogo dentro dos cursos LMS.</p></div>
+    <div><span>Brevemente</span><b>Objetivos via MCP</b><p>A Factorial liga-se às tuas ferramentas e atualiza objetivos com os dados delas.</p></div>
+    <div><span>Brevemente</span><b>Efetivos: aprovações e orçamento</b><p>Fluxos de aprovação estruturados e comparação entre planeado e real.</p></div>
+    <div><span>Brevemente</span><b>Banco de talento sugerido</b><p>Antes de publicar, vê quem do teu banco de candidatos já encaixa.</p></div>
+    <div><span>Brevemente</span><b>WhatsApp no Recrutamento</b><p>Mensagens, um aviso antes da chamada de IA e documentos via WhatsApp.</p></div>
+    <div class="more"><span>Brevemente</span><b>E muito mais</b><p>Todos os meses chegam novas funcionalidades de IA a todos os produtos da Factorial.</p></div>`,
+    ctaT: "Vemos o teu ciclo completo com os teus próprios dados?",
+    ctaD: "Mapeamos os teus efetivos, o teu processo de recrutamento e a tua política salarial, e mostramos-te o mesmo fluxo dentro da Factorial, com a One a trabalhar em cada passo.",
+    footer: "Os exemplos de relatórios e conversas são ilustrativos e usam dados fictícios. Algumas funcionalidades dependem do teu plano e dos créditos One. Factorial · outubro de 2026."
+  }
+};
+
+LONG.pt = {
+    one: () => `<p class="lead">O teu agente de IA pessoal no trabalho. Conhece o teu contexto, age em toda a Factorial e ajuda-te a decidir, sem expor os teus dados.</p>
+    <h3>Três formas de a usar</h3>
+    <ul class="vals"><li><b>Perguntar.</b> Qualquer pessoa pergunta o que precisa: políticas, saldos, dados da equipa. A One responde com a fonte e só com o que a sua função permite.</li>
+    <li><b>Delegar.</b> Dentro de cada produto, a One faz o trabalho: redige a oferta de emprego, liga ao candidato, prepara a proposta de aumento.</li>
+    <li><b>Automatizar.</b> Define uma rotina uma vez e a One deteta, decide e age. Tu aprovas as exceções.</li></ul>
+    <h3>Como funciona</h3>
+    <p class="note">Deteta gatilhos nos teus dados em tempo real, compara-os com as tuas políticas e o teu histórico, escolhe a ação ou escala para uma pessoa, faz o trabalho dentro da Factorial e regista o que fez. Cada passo fica visível e auditável.</p>
+    <h3>Porque é que dados centralizados mudam tudo</h3>
+    <p class="why" style="color:var(--ink)">Quantos mais módulos ligares, mais contexto tem a One. Uma IA genérica começa em branco; a One já sabe quem é quem, o que diz a tua política e o que aconteceu no último ciclo.</p>
+    <div class="stats"><div class="stat"><b>RGPD</b><span>e Regulamento da IA da UE, alojada na UE</span></div><div class="stat"><b>As tuas permissões</b><span>os mesmos perfis da Factorial, nada de novo exposto</span></div></div>
+    <h3>Rotinas: a One traz-te a resposta quando é devida</h3>
+    ${chatHTML([{ q: "Todos os dias 25, avisa-me das variáveis salariais pendentes.", a: "Cria a rotina, revê o que falta antes do fecho e envia-to com quem tem de agir." }])}`,
+    routines: `<h3>Rotinas com informação sempre atualizada</h3>
+  <ul class="rt">
+    <li><span class="when">Segunda-feira, 9:00</span><span>Rotatividade por departamento, com a tendência explicada<span class="src">Core HR · Analítica</span></span></li>
+    <li><span class="when">Dias úteis, 18:00</span><span>Pessoas com menos de 4 registos de ponto hoje<span class="src">Registo de ponto</span></span></li>
+    <li><span class="when">Dia 25</span><span>Variáveis salariais pendentes antes do fecho<span class="src">Remuneração · Turnos · Despesas</span></span></li>
+    <li><span class="when">Primeiro dia do mês</span><span>Formação obrigatória pendente por localização<span class="src">Formação & LMS</span></span></li>
+    <li><span class="when">Sexta-feira, 12:00</span><span>Candidatos em triagem sem feedback da equipa de contratação<span class="src">ATS & recrutamento</span></span></li>
+  </ul>
+  <p class="disc-note">Qualquer relatório de Analítica pode ser agendado como rotina a partir do chat da One. As rotinas usam créditos One.</p>`,
+    ax: { t: "Exemplos de relatórios já ligados",
+      c1: ["Rotatividade e envolvimento por departamento", "Core HR + Envolvimento · rotatividade (barras) e eNPS (linha)", ["Lojas","Operações","Vendas","Suporte","Tecnologia"]],
+      c2: ["Qualidade da contratação por fonte", "Recrutamento + Desempenho · retenção a 1 ano", ["Indicações","LinkedIn","Site de carreiras","Portais de emprego"]],
+      c3: ["Custo de efetivos: real vs. planeado", "Efetivos + Revisão salarial + Remuneração", ["J","F","M","A","M","J"], "Real", "Planeado"],
+      c4: ["Absentismo e horas extra por localização", "Ausências + Registo de ponto + Turnos", ["Madrid","Barcelona","Valência","Sevilha"], "Absentismo %", "Horas extra"],
+      note: "Dados fictícios, apenas para ilustrar o que se pode cruzar.",
+      tasksT: "Tarefas que a One já faz sozinha",
+      tasks: ["Aprova despesas que cumprem a política e deixa-te só as exceções.", "Cobre turnos ligando a quem os pode assumir, seguindo as tuas regras.", "Liga a candidatos que chegam à triagem e deixa-te o relatório.", "Resolve tickets a meio caminho para que quem os gere só tenha de aprovar."] }
+};
+
+/* ---------- FRANCÉS ---------- */
+const FR = {
+  HUBS: {
+    talento: { name: "Talents", lead: "Du poste que vous planifiez à l’augmentation que vous défendez. Chaque décision talent s’appuie sur la précédente, sans repartir de zéro.", one: "Plus vous utilisez de produits talents, plus One a de contexte : il lit en même temps évaluations, candidatures, formations et enquêtes." },
+    tiempo: { name: "Temps", lead: "Pointages, plannings et absences sur le même calendrier, avec chaque heure prête pour la paie et les projets.", one: "One couvre les plannings, répond aux questions sur les soldes et repère les anomalies de pointage quand elles sont encore minimes." },
+    finanzas: { name: "Finance", lead: "RH et Finance travaillent avec les mêmes chiffres : effectifs, notes de frais, achats, projets et budget.", one: "One valide ce qui respecte la politique et ne vous laisse que les exceptions." },
+    core: { name: "Core HR", lead: "Le socle : les personnes, les documents, les politiques et l’appli de chaque collaborateur. Ce qui est saisi ici sert à tous les modules.", one: "One connaît vos politiques, répond en citant la source et traite les demandes avant qu’elles n’arrivent à un humain." },
+    it: { name: "IT", lead: "Équipements, logiciels et inventaire rattachés à la personne qui les utilise, de son premier jour à son dernier.", one: "One analyse le ticket, vérifie le stock et prépare l’achat : il ne reste plus qu’à valider." },
+    nomina: { name: "Paie", lead: "Chaque changement qui touche la rémunération arrive validé en paie, du pointage à l’augmentation.", one: "One repère les variables en attente et tout ce qui ne colle pas avant le calcul de la paie." }
+  },
+  M: {
+    desempeno: { name: "Performance",
+      lead: "Évaluations, objectifs et feedback toute l’année, pas seulement à l’entretien annuel.",
+      value: ["Évaluations 180° et 360° avec cycles automatisés, relances et accords téléchargeables.", "Objectifs individuels et d’équipe, OKRs et feedback continu pour arriver à l’entretien avec des données.", "9-box et analyses talents pour identifier ceux qui ont le plus de potentiel et ceux qui ont besoin d’accompagnement."],
+      one: [{ q: "Qui dans mon équipe montre des signaux de risque ?", a: "Analyse les auto-évaluations et les feedbacks, résume chaque cas et explique pourquoi il le signale." }],
+      why: "Chaque résultat alimente les formations que vous attribuez et l’augmentation que vous proposez. Le recrutement s’appuie sur la dernière évaluation pour mesurer quelles sources amènent des personnes qui restent et performent.",
+      soon: ["Objectifs connectés via MCP : Factorial met à jour les objectifs avec les données de vos autres outils."] },
+    formacion: { name: "Formation & LMS",
+      lead: "Formations enregistrées et cours interactifs dans Factorial, reliés à la performance.",
+      value: ["Catalogue, sessions et présence ; formations obligatoires avec traçabilité prête pour les audits.", "LMS : cours avec vidéos, quiz et tests, suivi automatique de la progression et certificats en fin de parcours.", "Coût salarial de chaque formation calculé automatiquement."],
+      one: [{ q: "Crée un parcours d’intégration pour l’équipe magasin.", a: "Un cours structuré avec modules et quiz, en quelques minutes. Vous le relisez et le publiez." }],
+      why: "Depuis l’évaluation, en un clic : attribuez la formation qui comble chaque écart de compétences et mesurez son impact au cycle suivant.",
+      stat: { n: "94%", t: "des collaborateurs resteraient plus longtemps dans une entreprise qui investit dans leur développement (LinkedIn Workplace Learning Report, 2023)" },
+      soon: ["Cours gamifiés : mécaniques de jeu au cœur des cours."] },
+    engagement: { name: "Engagement",
+      lead: "Écoutez vos équipes sans envoyer un formulaire de plus : pulse quotidien, enquêtes, eNPS et 1:1 avec l’IA.",
+      value: ["Pulse d’équipe au pointage : des check-ins sans lassitude des enquêtes et des alertes au bon manager.", "Enquêtes automatisées et eNPS à l’intégration, au départ et à chaque étape clé.", "1:1 avec l’IA : One prépare chaque 1:1 avec les objectifs, la performance et le moral."],
+      one: [{ q: "Prépare le 1:1 de demain avec Laura.", a: "Rassemble ses objectifs, sa dernière évaluation, son pulse récent et ce qui a été abordé lors des précédents 1:1." }],
+      why: "Une bonne performance ne signifie pas toujours de l’engagement. Avec un pulse relié aux pointages et à la performance, One voit le tableau complet de chaque personne.",
+      stat: { n: "40–60%", t: "d’administratif manuel en moins grâce aux évaluations, 1:1 et enquêtes automatisés" } },
+    comunidades: { name: "Communautés",
+      lead: "Des espaces où vos équipes se retrouvent, partagent et se reconnaissent, au-delà de l’organigramme.",
+      value: ["Communautés par centre d’intérêt, site, projet ou équipe, ouvertes ou sur invitation.", "Publications, reconnaissance et célébration des étapes clés depuis l’appli.", "Réunit au même endroit les équipes du siège, en télétravail et en magasin."],
+      one: [{ q: "Quelles communautés me conseillez-vous maintenant que je suis arrivé ?", a: "Suggère celles de votre équipe, de votre site et de vos centres d’intérêt, d’après votre profil." }],
+      why: "Les communautés reposent sur les mêmes données d’équipe, de site et de personnes : chaque recrue trouve sa place dès le premier jour." },
+    comunicaciones: { name: "Communication",
+      lead: "Des annonces pour toute l’entreprise ou pour certaines équipes, là où vos collaborateurs travaillent déjà au quotidien.",
+      value: ["Publiez pour toute l’entreprise ou pour des équipes et sites précis.", "Touche tout le monde via l’appli, y compris les personnes qui ne travaillent pas sur ordinateur.", "Les annonces vivent à côté des politiques et documents auxquels elles renvoient."],
+      one: [{ q: "Rédige l’annonce des nouveaux horaires d’été en espagnol et en anglais.", a: "La rédige à partir de votre politique d’horaires et la traduit, prête à relire." }],
+      why: "Le ciblage s’appuie sur les mêmes données d’équipe, de site et de poste que le reste de Factorial." },
+    ats: { name: "ATS & recrutement",
+      lead: "Un ATS qui planifie, présélectionne et décide avec vous, du poste validé à l’offre signée.",
+      value: ["Plan de recrutement : chaque poste validé en planification des effectifs arrive comme une offre avec responsable, échéance et statut.", "Rapport IA par candidat et appels IA dans sa langue, avec transcription et résultat vert, orange ou rouge.", "Offres illimitées, droits par étape, entretiens vidéo avec One et analyses de rétention à un an."],
+      one: [
+        { q: "Appelle tous les candidats qui arrivent à l’étape de présélection.", a: "Un appel dans leur langue, annoncé, avec consentement et enregistré. Vous recevez transcription, rapport et prochaine étape suggérée. Un humain décide." },
+        { q: "Crée l’offre d’emploi de Senior Product Designer à Barcelone.", a: "Rédige l’annonce à partir de la conversation et la publie sur votre page carrières et plus de 250 job boards." }
+      ],
+      why: "L’offre naît validée et budgétée ; la personne qui signe arrive avec toutes ses données, sans rien ressaisir ; et les analyses croisent source de recrutement et évaluation de performance.",
+      stats: [{ n: "70%", t: "de time-to-hire en moins grâce à la présélection IA au premier tour" }, { n: "+25%", t: "de croissance des effectifs avec la même équipe de recrutement" }],
+      soon: ["Candidats suggérés depuis le vivier de talents (bientôt disponible).", "WhatsApp dans le recrutement et pages entreprise par entité (bientôt disponible).", "Évaluation culturelle (bientôt disponible)."] },
+    canal: { name: "Canal d’alerte",
+      lead: "Un canal permettant à chacun de signaler un manquement en toute confidentialité, y compris de façon anonyme.",
+      value: ["Signalements confidentiels, avec option d’anonymat.", "Suivi des dossiers avec un accès limité aux personnes qui les traitent.", "Vous aide à respecter les règles de protection des lanceurs d’alerte."],
+      oneNote: "One respecte exactement les droits d’accès de Factorial : les dossiers ne sont visibles que des personnes qui les traitent, de personne d’autre.",
+      why: "Il vit dans la même appli que les autres outils du collaborateur : personne n’a à chercher où signaler." },
+    control: { name: "Pointage",
+      lead: "Pointez depuis le téléphone ou l’ordinateur, avec un registre du temps de travail toujours à jour.",
+      value: ["Pointage depuis l’appli ou le web, avec heures supplémentaires et soldes calculés.", "Anomalies visibles du manager avant d’arriver en paie.", "Les heures imputées aux projets alimentent le coût réel de chaque projet."],
+      one: [{ q: "Chaque jour ouvré à 18 h, envoie-moi qui a moins de 4 pointages aujourd’hui.", a: "Crée une routine qui vérifie les pointages chaque jour et vous l’envoie par e-mail." }],
+      why: "Le même pointage sert la paie, le suivi des coûts projet et le pulse d’équipe, sans saisie en double." },
+    turnos: { name: "Plannings",
+      lead: "Des plannings qui respectent vos règles et des trous comblés sans liste d’appels.",
+      value: ["Planification par site, poste et compétences.", "Jours de repos, horaires et lieux de travail respectés dans la planification.", "Les plannings réels arrivent en paie, sans planning périmé dans le calcul."],
+      one: [{ q: "Trouve quelqu’un pour remplacer María sur son créneau aujourd’hui.", a: "Vérifie jours de repos, postes, compétences, horaires et site, appelle les candidats un par un et prévient le manager une fois le créneau couvert." }],
+      why: "Une absence ouvre un trou, One le comble et le nouveau créneau arrive dans les pointages et les variables de paie. Chaque règle respectée et chaque appel tracé." },
+    ausencias: { name: "Absences",
+      lead: "Congés, arrêts maladie et autorisations avec soldes à jour et validation en deux clics.",
+      value: ["Politiques d’absences par équipe, site ou convention collective.", "Calendrier partagé pour voir qui est absent avant de valider.", "Absences et arrêts maladie synchronisés avec la paie (avec a3innuva, en Espagne)."],
+      one: [{ q: "Combien de jours de congés me reste-t-il ?", a: "Répond avec le solde de la personne et la politique applicable. Chacun ne voit que le sien." }],
+      why: "Un arrêt maladie ne reste pas dans le calendrier : il ouvre un trou dans les plannings, ajuste les pointages et arrive en paie sous forme de variable." },
+    plantilla: { name: "Plan d’effectifs",
+      lead: "RH et Finance voient les mêmes chiffres dès le premier jour. Fini les cinq versions du tableur.",
+      value: ["Les managers proposent des postes avec fonction, niveau, grille salariale et date, reliés au catalogue des postes.", "RH et Finance examinent une seule version, avec la trace de qui a décidé quoi et quand.", "Les postes validés s’ouvrent automatiquement dans le recrutement : plan et exécution toujours alignés."],
+      one: [{ q: "Prépare notre plan d’effectifs 2027 selon nos directives.", a: "Propose fonctions, niveaux et coûts à relire." }],
+      why: "Le poste que vous validez est l’offre que vous publiez, et chaque augmentation finalisée met à jour la prévision de coûts du prochain plan.",
+      soon: ["Circuits de validation structurés et lien avec le budget.", "Comparaison embauches prévues vs réalisées."] },
+    proyectos: { name: "Gestion de projets",
+      lead: "Sachez si chaque projet est rentable pendant qu’il avance, pas à sa clôture.",
+      value: ["Heures imputées depuis le widget de pointage, sans feuilles de temps parallèles.", "Coût du travail, coûts fixes et frais vs budget, en temps réel.", "Du devis au projet et du projet à la facture, avec les données client déjà chargées."],
+      one: [{ q: "Quels projets dépassent le budget ce mois-ci ?", a: "Croise heures imputées, coût du travail et frais, et explique où chacun dérive." }],
+      why: "Le coût d’une heure vient du salaire réel de la personne et l’heure vient du pointage : personne ne recopie de données d’un outil à l’autre." },
+    fpa: { name: "Pilotage financier",
+      lead: "Budgets et prévisions avec les coûts réels qui vivent déjà dans Factorial.",
+      value: ["Budgets par département ou centre de coûts.", "Réel vs prévu avec les données d’effectifs, de paie, de notes de frais, d’achats et de projets.", "Une source unique de vérité pour les RH, la Finance et la direction."],
+      one: [{ q: "Où en sommes-nous par rapport au budget masse salariale ce trimestre ?", a: "Compare le coût de paie réel au plan et signale les écarts." }],
+      why: "Le budget se nourrit tout seul : chaque embauche, augmentation, note de frais ou achat est déjà enregistré dans son module." },
+    gastos: { name: "Notes de frais",
+      lead: "D’un tas de justificatifs à des comptes clos, en un seul message.",
+      value: ["Déposez les justificatifs et les champs se remplissent seuls.", "Chaque dépense est vérifiée selon la politique : les conformes sont validées instantanément.", "Rapprochement des cartes et données propres pour la clôture mensuelle."],
+      one: [{ q: "Voici les justificatifs de mon déplacement pro. (envoie 5 fichiers d’un coup)", a: "Lit chaque justificatif, prépare les notes de frais, rapproche la carte et vérifie politique et droits. Seules les exceptions attendent un humain." }],
+      why: "La note de frais validée arrive en paie si elle doit être remboursée et dans le projet si elle est facturable." },
+    compras: { name: "Achats",
+      lead: "Demandes d’achat, validations et fournisseurs dans un seul flux.",
+      value: ["Demandes avec validation selon le montant et l’équipe.", "Chaque achat rattaché à son budget et à son demandeur.", "Connecté à l’inventaire et aux logiciels pour savoir ce qui est acheté et pour qui."],
+      one: [{ q: "Mon ordinateur portable vient de tomber en panne. Il m’en faut un nouveau.", a: "Ouvre le ticket, vérifie qu’il n’y a pas de stock, en trouve un dans le marketplace et l’achète une fois qu’un humain a validé." }],
+      why: "L’achat démarre dans un ticket, passe par le budget et finit dans l’inventaire de la personne." },
+    revision: { name: "Révision salariale",
+      lead: "Chaque augmentation justifiée, budgétée et défendable.",
+      value: ["Directives définies une fois : éligibilité, fourchettes et validateurs. Chaque proposition est vérifiée automatiquement.", "Chaque manager ne voit que son équipe, avec les cas hors politique déjà signalés, et le budget est réparti en temps réel.", "L’augmentation validée alimente le contrat et la prévision d’effectifs, sans ressaisie."],
+      one: [{ q: "Propose des augmentations pour mon équipe selon notre politique.", a: "Chiffres et justification, déjà vérifiés par rapport au budget. Vous validez." }],
+      why: "Vous décidez combien de cycles d’évaluation comptent pour l’éligibilité : l’augmentation reflète une tendance, pas une note ponctuelle. Et elle arrive en paie comme variable validée." },
+    politicas: { name: "Politiques",
+      lead: "Vos règles, écrites une fois et appliquées dans chaque module.",
+      value: ["Politiques d’absences, de notes de frais, d’horaires et autres, appliquées par les modules concernés.", "Handbook : on pose la question et One répond en citant la source.", "Si One ne sait pas, il le dit."],
+      one: [{ q: "Puis-je télétravailler depuis un autre pays pendant deux semaines ?", a: "Répond à partir de votre politique, cite la source et ne révèle que ce que cette personne peut voir." }],
+      why: "Les questions courantes n’arrivent plus dans la boîte du manager, et les mêmes critères valident notes de frais ou absences." },
+    portal: { name: "Portail collaborateur",
+      lead: "L’appli où chacun voit ses propres informations et demande ce dont il a besoin.",
+      value: ["Données personnelles, bulletins de paie, documents et soldes dans une seule appli.", "Absences, notes de frais et tickets depuis le téléphone.", "One intégré pour demander, solliciter et suivre chaque demande."],
+      oneNote: "One est inclus pour tous les collaborateurs, sans formation nécessaire. Chacun demande ce dont il a besoin et ne voit que ce que son rôle autorise.",
+      why: "Tout ce que fait le collaborateur ici va directement dans le bon module, sans formulaires ni e-mails entre les deux." },
+    onoff: { name: "On/Offboarding",
+      lead: "Arrivées et départs dans un seul flux, avec des tâches pour les RH, l’IT et le manager.",
+      value: ["La nouvelle recrue arrive depuis le recrutement avec toutes ses données.", "Documents, signature, équipement, accès et formation d’accueil dans le même flux.", "Au départ, accès et matériel sont récupérés sans dépendre de la mémoire de quiconque."],
+      one: [{ q: "Prépare l’onboarding de Marta pour lundi.", a: "Lance les tâches, prépare les documents à signer, demande son ordinateur portable et lui attribue la formation d’accueil." }],
+      why: "C’est là que se rejoignent le plus de modules : si les données sont centralisées, le premier jour se déroule tout seul." },
+    documentos: { name: "Gestion documentaire",
+      lead: "Contrats, bulletins de paie et attestations de chaque personne, avec droits d’accès et modèles.",
+      value: ["Dossiers par personne et par entreprise, avec droits selon le rôle.", "Modèles qui se remplissent avec les données du collaborateur.", "One lit n’importe quel fichier et en extrait l’essentiel."],
+      one: [{ q: "Quels CDD arrivent à échéance ce trimestre ?", a: "Croise avec les données de contrat et renvoie la liste avec dates et responsables." }],
+      why: "Une modification salariale validée met à jour le contrat ; une embauche génère ses documents. Personne ne les refait." },
+    firma: { name: "Signature électronique",
+      lead: "Envoyez à la signature sans quitter Factorial et conservez le résultat au bon endroit.",
+      value: ["Signez contrats, avenants et politiques depuis n’importe quel appareil.", "Offres de recrutement signées de n’importe où, et vous savez immédiatement quand elles le sont.", "Le document signé reste dans le profil de la personne."],
+      oneNote: "One prépare les documents à partir de vos modèles : il ne vous reste qu’à les relire et à les envoyer à la signature.",
+      why: "Aucune donnée à ressaisir quand quelqu’un signe : le statut remonte au processus qui l’a demandé." },
+    analiticas: { name: "Analytique",
+      lead: "Toutes les données de Factorial au même endroit, et One pour les interroger en langage naturel.",
+      value: ["Des rapports qui croisent les modules sur les mêmes données : personnes, temps, talents, paie et finance.", "Demandez à One de créer un rapport, d’ajouter des widgets, de filtrer ou d’expliquer une tendance, puis enregistrez-le.", "Chacun ne voit que ce que ses droits autorisent."],
+      one: [{ q: "Envoie-moi le turnover par département chaque lundi.", a: "Crée le rapport, le programme comme routine et explique la tendance à chaque envoi." }],
+      why: "Tous les modules alimentent cet espace. Comme toutes les données vivent dans Factorial, un rapport ne se construit pas : il se demande. Sans export, sans fusion de tableurs et sans attendre la Finance." },
+    tickets: { name: "Tickets",
+      lead: "Des demandes qui arrivent à moitié résolues avant qu’un humain n’y touche.",
+      value: ["Ouverts en discutant avec One et suivis dans Factorial.", "Routés automatiquement vers la bonne équipe : IT, RH, Finance.", "One enquête et traduit chaque message dans les deux sens."],
+      one: [{ q: "Salut One, mon ordinateur portable vient de tomber en panne. Il m’en faut un nouveau.", a: "Crée le ticket, le route vers l’IT, lit le contexte, constate qu’il n’y a pas d’ordinateur en stock, en trouve un dans le marketplace et prépare le plan. Un humain valide, il est acheté et l’IT le livre." }],
+      why: "One enquête à travers les contrats, les équipements IT et les profils collaborateurs : la résolution est rédigée avec vos politiques et la personne qui la traite n’a plus qu’à valider." },
+    mdm: { name: "Gestion des appareils mobiles",
+      lead: "Configurez et sécurisez les appareils de l’entreprise depuis le même endroit que la gestion des personnes.",
+      value: ["Chaque appareil rattaché à la personne qui l’utilise.", "Enregistrement et retrait des appareils intégrés à l’onboarding et à l’offboarding.", "État de sécurité du parc visible pour l’IT."],
+      oneNote: "One vous maintient en conformité : vérifie les politiques, corrige les incohérences et suit les accès et les risques.",
+      why: "Quand quelqu’un arrive ou part, l’IT ne dépend pas d’un e-mail des RH : le changement est déjà dans Factorial." },
+    inventario: { name: "Inventaire",
+      lead: "Quel équipement a chaque personne, avec son historique.",
+      value: ["Attribution et restitution du matériel par personne.", "Intégré à l’onboarding et à l’offboarding.", "Stock visible avant d’acheter."],
+      oneNote: "Quand un ticket arrive, One vérifie l’inventaire avant de proposer un achat.",
+      why: "L’inventaire sait qui est qui car il partage les données des personnes avec Core HR." },
+    software: { name: "Gestion des logiciels",
+      lead: "Quels outils utilise l’entreprise, qui y a accès et combien ils coûtent.",
+      value: ["Inventaire des applications et des licences.", "Accès accordés et retirés au fil des arrivées et des départs.", "Dépenses de licences visibles pour la Finance."],
+      oneNote: "One croise les licences avec les personnes actives pour repérer les accès qui ne devraient plus exister.",
+      why: "Licences, personnes et budget au même endroit : personne ne paie le compte de quelqu’un qui est déjà parti." },
+    marketplace: { name: "Marketplace",
+      lead: "Un catalogue pour commander appareils et équipements sans chercher de fournisseurs.",
+      value: ["Catalogue d’appareils prêt à commander.", "Achats avec validation et livraison à la personne concernée.", "Connecté aux tickets et à l’inventaire."],
+      oneNote: "S’il n’y a pas de stock, One trouve l’appareil dans le marketplace et laisse l’achat prêt à valider.",
+      why: "Du ticket à la livraison sans changer d’outil." },
+    beneficios: { name: "Avantages",
+      lead: "Une rémunération flexible que vos équipes utilisent avec une carte et que les RH gèrent sans paperasse.",
+      value: ["Repas, transport, garde d’enfants, assurance santé, formation et Wellhub.", "Carte Visa dans le wallet du téléphone, avec solde et opérations dans l’appli.", "Budgets par catégorie, conformité fiscale et export direct vers la paie."],
+      one: [{ q: "Combien me reste-t-il de titres-restaurant ce mois-ci ?", a: "Répond avec le solde de la personne, dans la limite de ses droits." }],
+      why: "Ce que chacun utilise arrive en paie comme élément de rémunération, sans que personne ne le compile à la main." },
+    compensacion: { name: "Rémunération",
+      lead: "Chaque changement arrive en paie déjà validé.",
+      value: ["Primes, changements de contrat et absences qui impactent la paie, visibles instantanément.", "Alertes avant le calcul : variables en attente, primes non validées ou plannings périmés.", "Chaque paie comparée aux variables et contrats validés, et coût réel vs prévu."],
+      one: [{ q: "Que manque-t-il avant de clôturer la paie de ce mois ?", a: "Passe en revue les variables en attente et tout ce qui ne colle pas, et vous dit qui doit agir." }],
+      why: "Tout converge ici : pointages, plannings, absences, notes de frais, avantages et augmentations. S’ils naissent connectés, ils arrivent validés.",
+      stat: { n: "40 h", t: "par mois à gagner en synchronisant embauches, départs, changements de salaire, absences et variables avec votre prestataire de paie (intégration a3innuva, Espagne)" } },
+    integraciones: { name: "Intégrations",
+      lead: "Factorial connecté à votre prestataire de paie et au reste de vos outils.",
+      value: ["a3innuva (Espagne) : embauches, départs, changements de contrat et de salaire, absences, arrêts maladie et variables.", "Compatible avec d’autres logiciels de paie et avec Factorial Professionals pour les cabinets.", "API pour se connecter à votre ERP."],
+      oneNote: "Si la donnée vit dans Factorial ou dans un outil que vous connectez, vous pouvez demander, déléguer ou automatiser avec One.",
+      why: "Intégrer, ce n’est pas copier : le changement est saisi une seule fois et synchronisé." },
+    anticipo: { name: "Acompte sur salaire",
+      lead: "Vos équipes peuvent demander une partie du salaire déjà gagné avant la fin du mois.",
+      value: ["Demande depuis l’appli, sans paperasse.", "Règles et plafonds que vous définissez.", "L’acompte est reflété en paie sans ajustement manuel."],
+      oneNote: "Les collaborateurs demandent à One combien ils peuvent solliciter et comment ça marche, selon votre politique.",
+      why: "Comme le salaire et les jours travaillés sont déjà dans Factorial, le montant disponible n’est pas calculé à la main." }
+  },
+  STORIES: [
+    { t: "Une nouvelle recrue", d: "Le poste est validé une seule fois et le reste suit tout seul.", steps: ["Le poste est validé avec sa grille salariale.", "Il s’ouvre automatiquement comme offre ; One présélectionne et appelle.", "L’offre est signée depuis un téléphone.", "La personne arrive avec toutes ses données, sans ressaisie.", "Son ordinateur portable est déjà attribué.", "Elle reçoit la formation d’accueil.", "Son embauche arrive en paie validée."] },
+    { t: "Un arrêt maladie de dernière minute", d: "De l’alerte à la paie sans que personne ne recopie de données.", steps: ["Quelqu’un annonce qu’il est malade.", "One trouve qui peut le remplacer et l’appelle.", "Le nouveau créneau est pointé comme n’importe quel autre.", "L’arrêt et le changement de planning arrivent comme variables.", "L’absentéisme par site se met à jour tout seul."] },
+    { t: "Un cycle d’évaluation", d: "L’augmentation découle de l’évaluation et alimente le plan.", steps: ["L’évaluation fait ressortir résultats et écarts.", "La formation est attribuée en un clic.", "One propose l’augmentation dans le respect de la politique.", "L’augmentation arrive en paie validée.", "La prévision de coûts se met à jour pour le prochain plan."] },
+    { t: "Un ordinateur portable en panne", d: "Un message à One et une validation.", steps: ["Vous le dites à One et il ouvre le ticket.", "One vérifie qu’il n’y a pas de stock.", "Il en trouve un qui respecte la politique.", "Un humain valide, il est acheté et l’IT le livre."] }
+  ],
+  UI: {
+    center: "Le socle", area: "Domaine", modules: "Modules", brings: "Ce que ça apporte", withOne: "Avec One", connected: "Connecté avec",
+    soon: "Prochainement", soonNote: "Le périmètre et les dates peuvent évoluer.", close: "Fermer",
+    title: "Factorial · Tout connecté avec One",
+    h1: "One connaît déjà votre entreprise",
+    sub: "Tous les modules Factorial partagent les mêmes données. One travaille par-dessus, avec vos droits d’accès et vos politiques.",
+    hint: "Touchez une bulle pour voir ce qu’elle apporte, ce que One en fait et à quoi elle est connectée.",
+    cue: "Continuez à faire défiler", cueAria: "Continuez à faire défiler", oneAria: "Découvrir One", panelAria: "Détails du module",
+    s1t: "Les mêmes données, de bout en bout",
+    s1d: "Quand chaque module vit dans un outil différent, chaque décision repart de zéro. Dans Factorial, ce qui est saisi une fois sert à l’étape suivante. Touchez une étape pour l’ouvrir sur la carte.",
+    s2t: "Vos équipes utilisent déjà l’IA. Faites-en la vôtre.",
+    s2d: "Ce qui change, ce n’est pas la technologie, c’est le contexte. Et avec des données RH, la confiance n’est pas négociable.",
+    cmpHead: `<tr><th></th><th>IA générique</th><th>One</th></tr>`,
+    cmpBody: `<tr><td>Contexte</td><td>Repart de zéro à chaque fois. Vous collez le contexte.</td><td>Connecté à vos données Factorial et aux outils que vous branchez, dès le premier message.</td></tr>
+      <tr><td>Droits d’accès</td><td>Ne sait pas qui doit voir quoi.</td><td>Chacun ne voit que ce que son rôle autorise. Mêmes rôles, rien de nouveau exposé.</td></tr>
+      <tr><td>Conformité</td><td>Aucune garantie dans l’UE.</td><td>Conforme au RGPD et à l’AI Act européen, hébergé dans l’UE.</td></tr>
+      <tr><td>Fiabilité</td><td>Invente des réponses sans prévenir.</td><td>Répond avec vos données et cite la source. S’il ne sait pas, il le dit.</td></tr>
+      <tr><td>Contrôle</td><td>Coûts et actions opaques.</td><td>Vous décidez quels agents tournent et voyez chaque action et ce qu’elle a coûté.</td></tr>`,
+    s4t: "One : capacité personnelle",
+    s4d: "Chaque personne dispose de sa propre capacité One pour demander, déléguer et automatiser. Choisissez Basic, Plus ou Max selon la quantité de travail que chaque profil confie à One.",
+    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Au quotidien</span></div><p class="tl">Pour que tous les collaborateurs règlent leurs demandes seuls, sans attendre personne.</p>
+      <h4>Pour qui</h4><div class="who"><i>Collaborateurs</i></div>
+      <h4>Ce qu’ils font avec One</h4><ul><li>Poser des questions sur les politiques, soldes, bulletins de paie et documents, et obtenir la réponse avec la source.</li><li>Demander absences, notes de frais et tickets en discutant.</li><li>Suivre chaque demande depuis l’appli.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Gestion d’équipe</span></div><p class="tl">Pour ceux qui dirigent des équipes et ont besoin du contexte de leur équipe sous la main.</p>
+      <h4>Pour qui</h4><div class="who"><i>Managers</i></div>
+      <h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qui est dans Basic, avec plus de capacité quotidienne.</li><li>Préparer les 1:1 et consulter les analyses de leur équipe.</li><li>Valider absences, notes de frais et plannings avec le contexte déjà rassemblé.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Capacité maximale</span></div><p class="tl">Pour les profils qui délèguent le plus de travail à One chaque jour.</p>
+      <h4>Pour qui</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qui est dans Plus, avec la capacité quotidienne la plus élevée.</li><li>Construire des cours complets, traiter des lots de notes de frais et créer rapports et routines.</li><li>Conçu pour un usage intensif de One dans leur domaine.</li></ul></div>`,
+    tierNote: "Les agents qui travaillent pour toute l’entreprise (remplacer des créneaux, appeler des candidats, valider des notes de frais) utilisent une capacité entreprise distincte, pas la capacité personnelle. La capacité exacte de chaque niveau dépend de votre formule.",
+    s3t: "Prochainement",
+    s3d: "Chaque produit devient un produit d’IA. Le périmètre et les dates peuvent évoluer ; nous vous tiendrons informé.",
+    road: `<div><span>Bientôt</span><b>1:1 avec l’IA</b><p>One prépare et guide chaque 1:1 avec tout l’historique de la personne.</p></div>
+    <div><span>Bientôt</span><b>Cours gamifiés</b><p>Mécaniques de jeu au cœur des cours LMS.</p></div>
+    <div><span>Bientôt</span><b>Objectifs via MCP</b><p>Factorial se connecte à vos outils et met à jour les objectifs avec leurs données.</p></div>
+    <div><span>Bientôt</span><b>Effectifs : validations et budget</b><p>Circuits de validation structurés et comparaison prévu vs réalisé.</p></div>
+    <div><span>Bientôt</span><b>Vivier de talents suggéré</b><p>Avant de publier, voyez qui dans votre vivier de candidats correspond déjà.</p></div>
+    <div><span>Bientôt</span><b>WhatsApp dans le recrutement</b><p>Messages, prévenance avant l’appel IA et documents via WhatsApp.</p></div>
+    <div class="more"><span>Bientôt</span><b>Et bien plus encore</b><p>De nouvelles fonctions IA arrivent chaque mois dans tous les produits Factorial.</p></div>`,
+    ctaT: "On parcourt ensemble votre cycle complet avec vos propres données ?",
+    ctaD: "Nous cartographions vos effectifs, votre processus de recrutement et votre politique de rémunération, et nous vous montrons le même flux dans Factorial, avec One à l’œuvre à chaque étape.",
+    footer: "Les exemples de rapports et de conversations sont illustratifs et utilisent des données fictives. Certaines fonctionnalités dépendent de votre formule et des crédits One. Factorial · octobre 2026."
+  }
+};
+
+LONG.fr = {
+    one: () => `<p class="lead">Votre agent IA personnel au travail. Il connaît votre contexte, agit dans tout Factorial et vous aide à décider, sans exposer vos données.</p>
+    <h3>Trois façons de l’utiliser</h3>
+    <ul class="vals"><li><b>Demandez.</b> Chacun demande ce dont il a besoin : politiques, soldes, données d’équipe. One répond en citant la source et uniquement avec ce que son rôle autorise.</li>
+    <li><b>Déléguez.</b> Dans chaque produit, One fait le travail : rédige l’offre d’emploi, appelle le candidat, prépare la proposition d’augmentation.</li>
+    <li><b>Automatisez.</b> Configurez une routine une fois et One détecte, décide et agit. Vous validez les exceptions.</li></ul>
+    <h3>Comment ça marche</h3>
+    <p class="note">Il détecte en temps réel les déclencheurs dans vos données, les compare à vos politiques et à votre historique, choisit l’action ou passe la main à un humain, fait le travail dans Factorial et consigne ce qu’il a fait. Chaque étape reste visible et vérifiable.</p>
+    <h3>Pourquoi des données centralisées changent tout</h3>
+    <p class="why" style="color:var(--ink)">Plus vous connectez de modules, plus One a de contexte. Une IA générique repart de zéro ; One sait déjà qui est qui, ce que dit votre politique et ce qui s’est passé au dernier cycle.</p>
+    <div class="stats"><div class="stat"><b>RGPD</b><span>et AI Act européen, hébergé dans l’UE</span></div><div class="stat"><b>Vos droits d’accès</b><span>mêmes rôles Factorial, rien de nouveau exposé</span></div></div>
+    <h3>Routines : One vous apporte la réponse au bon moment</h3>
+    ${chatHTML([{ q: "Chaque 25, alerte-moi sur les variables de paie en attente.", a: "Crée la routine, vérifie ce qui manque avant la clôture et vous l’envoie avec les personnes qui doivent agir." }])}`,
+    routines: `<h3>Des routines toujours à jour</h3>
+  <ul class="rt">
+    <li><span class="when">Lundi, 9:00</span><span>Turnover par département, avec la tendance expliquée<span class="src">Core HR · Analytique</span></span></li>
+    <li><span class="when">Jours ouvrés, 18:00</span><span>Personnes avec moins de 4 pointages aujourd’hui<span class="src">Pointage</span></span></li>
+    <li><span class="when">Le 25</span><span>Variables de paie en attente avant la clôture<span class="src">Rémunération · Plannings · Notes de frais</span></span></li>
+    <li><span class="when">Premier jour du mois</span><span>Formations obligatoires en attente par site<span class="src">Formation & LMS</span></span></li>
+    <li><span class="when">Vendredi, 12:00</span><span>Candidats en présélection sans retour de l’équipe de recrutement<span class="src">ATS & recrutement</span></span></li>
+  </ul>
+  <p class="disc-note">Tout rapport Analytique peut être programmé comme routine depuis le chat One. Les routines consomment des crédits One.</p>`,
+    ax: { t: "Exemples de rapports déjà connectés",
+      c1: ["Turnover et engagement par département", "Core HR + Engagement · turnover (barres) et eNPS (courbe)", ["Magasins","Ops","Ventes","Support","Tech"]],
+      c2: ["Qualité du recrutement par source", "Recrutement + Performance · rétention à 1 an", ["Cooptation","LinkedIn","Site carrières","Job boards"]],
+      c3: ["Coût des effectifs : réel vs prévu", "Effectifs + Révision salariale + Rémunération", ["J","F","M","A","M","J"], "Réel", "Prévu"],
+      c4: ["Absentéisme et heures supplémentaires par site", "Absences + Pointage + Plannings", ["Madrid","Barcelone","Valence","Séville"], "Absentéisme %", "Heures sup."],
+      note: "Données fictives, uniquement pour illustrer ce qui peut être croisé.",
+      tasksT: "Des tâches que One fait déjà seul",
+      tasks: ["Valide les notes de frais conformes à la politique et ne vous laisse que les exceptions.", "Couvre les créneaux en appelant ceux qui peuvent les prendre, selon vos règles.", "Appelle les candidats qui arrivent en présélection et vous laisse le rapport.", "Résout à moitié les tickets pour que la personne qui les traite n’ait plus qu’à valider."] }
+};
+
+/* ---------- ITALIANO ---------- */
+const IT = {
+  HUBS: {
+    talento: { name: "Talento", lead: "Dal ruolo che pianifichi all’aumento che sostieni. Ogni decisione sul talento parte dalla precedente, non da zero.", one: "Più prodotti di talento usi, più contesto ha One: legge valutazioni, candidature, corsi e sondaggi allo stesso tempo." },
+    tiempo: { name: "Tempo", lead: "Timbrature, turni e assenze sullo stesso calendario, con ogni ora pronta per paghe e progetti.", one: "One copre i turni, risponde alle domande sui saldi e intercetta i problemi di timbratura quando sono ancora piccoli." },
+    finanzas: { name: "Finanza", lead: "HR e Finanza lavorano con gli stessi numeri: organico, spese, acquisti, progetti e budget.", one: "One approva ciò che rispetta la policy e ti lascia solo le eccezioni." },
+    core: { name: "Core HR", lead: "Le fondamenta: persone, documenti, policy e l’app di ogni dipendente. Ciò che inserisci qui lo usa ogni modulo.", one: "One conosce le tue policy, risponde citando la fonte e risolve le richieste prima che arrivino a una persona." },
+    it: { name: "IT", lead: "Dispositivi, software e inventario legati alla persona che li usa, dal primo all’ultimo giorno.", one: "One indaga sul ticket, controlla le scorte e prepara l’acquisto: a una persona resta solo da approvare." },
+    nomina: { name: "Paghe", lead: "Ogni modifica che incide sulla retribuzione arriva alle paghe già validata, dalla timbratura all’aumento di stipendio.", one: "One individua le variabili in sospeso e tutto ciò che non torna prima del calcolo del cedolino." }
+  },
+  M: {
+    desempeno: { name: "Performance",
+      lead: "Valutazioni, obiettivi e feedback tutto l’anno, non solo alla valutazione annuale.",
+      value: ["Valutazioni a 180° e 360° con cicli automatizzati, promemoria e accordi scaricabili.", "Obiettivi e OKRs individuali e di team, con feedback continuo per arrivare alla valutazione con i dati.", "9-box e analytics sul talento per vedere chi ha più potenziale e chi ha bisogno di supporto."],
+      one: [{ q: "Chi del mio team mostra segnali di rischio?", a: "Analizza autovalutazioni e feedback, riassume ogni caso e spiega perché lo segnala." }],
+      why: "Ogni risultato alimenta la formazione che assegni e l’aumento che proponi. Il recruiting usa l’ultima valutazione per misurare quali canali portano persone che restano e rendono.",
+      soon: ["Obiettivi connessi via MCP: Factorial aggiorna gli obiettivi con i dati dei tuoi altri strumenti."] },
+    formacion: { name: "Formazione & LMS",
+      lead: "Formazioni registrate e corsi interattivi dentro Factorial, collegati alla performance.",
+      value: ["Catalogo, sessioni e presenze; formazione obbligatoria con tracciabilità pronta per gli audit.", "LMS: corsi con video, quiz e test, avanzamento automatico e certificati al completamento.", "Costo salariale di ogni formazione calcolato in automatico."],
+      one: [{ q: "Crea un corso di onboarding per il team del negozio.", a: "Un corso strutturato con moduli e quiz, in pochi minuti. Tu lo rivedi e lo pubblichi." }],
+      why: "Dalla valutazione, con un clic: assegni la formazione che colma ogni gap di competenze e ne misuri l’impatto nel ciclo successivo.",
+      stat: { n: "94%", t: "dei dipendenti resterebbe più a lungo in un’azienda che investe nel loro sviluppo (LinkedIn Workplace Learning Report, 2023)" },
+      soon: ["Corsi gamificati: meccaniche di gioco dentro i corsi."] },
+    engagement: { name: "Engagement",
+      lead: "Ascolta il tuo team senza inviare un altro modulo: pulse quotidiano, sondaggi, eNPS e 1:1 con l’AI.",
+      value: ["Pulse del team alla timbratura: check-in senza stanchezza da sondaggi e alert al manager giusto.", "Sondaggi automatici ed eNPS all’onboarding, all’uscita e a ogni tappa importante.", "Riunioni 1:1 con l’AI: One prepara ogni 1:1 con obiettivi, performance e umore."],
+      one: [{ q: "Prepara l’1:1 di domani con Laura.", a: "Raccoglie i suoi obiettivi, l’ultima valutazione, il pulse recente e quanto discusso nei precedenti 1:1." }],
+      why: "Una buona performance non significa sempre engagement. Con il pulse legato a timbrature e performance, One vede il quadro completo di ogni persona.",
+      stat: { n: "40–60%", t: "in meno di amministrazione manuale con valutazioni, 1:1 e sondaggi automatizzati" } },
+    comunidades: { name: "Community",
+      lead: "Spazi in cui le tue persone si incontrano, condividono e si riconoscono, oltre l’organigramma.",
+      value: ["Community per interesse, sede, progetto o team, aperte o su invito.", "Post, riconoscimenti e celebrazioni dei traguardi direttamente dall’app.", "Riunisce in un unico spazio chi lavora in ufficio, da remoto e in negozio."],
+      one: [{ q: "Quali community mi consigli ora che sono entrato?", a: "Suggerisce quelle per il tuo team, la tua sede e i tuoi interessi, in base al tuo profilo." }],
+      why: "Le community si basano sugli stessi dati di team, sede e persone, così ogni nuovo assunto trova il suo posto fin dal primo giorno." },
+    comunicaciones: { name: "Comunicazioni",
+      lead: "Annunci per tutta l’azienda o per team specifici, dove le tue persone lavorano già ogni giorno.",
+      value: ["Pubblica per tutta l’azienda o per team e sedi specifici.", "Raggiunge tutti tramite l’app, anche chi non lavora al computer.", "Gli annunci stanno accanto alle policy e ai documenti a cui si riferiscono."],
+      one: [{ q: "Scrivi l’annuncio del nuovo orario estivo in spagnolo e inglese.", a: "Lo redige a partire dalla tua policy sugli orari e lo traduce, pronto da rivedere." }],
+      why: "La segmentazione usa gli stessi dati di team, sede e ruolo del resto di Factorial." },
+    ats: { name: "ATS & selezione",
+      lead: "Un ATS che pianifica, filtra e decide con te, dalla posizione approvata all’offerta firmata.",
+      value: ["Hiring Plan: ogni posizione approvata nella pianificazione dell’organico arriva come annuncio con responsabile, scadenza e stato.", "Report AI per ogni candidato e chiamate AI nella sua lingua, con trascrizione ed esito verde, giallo o rosso.", "Annunci illimitati, permessi per fase, videocolloqui con One e analytics di retention a un anno."],
+      one: [
+        { q: "Chiama tutti i candidati che arrivano alla fase di screening.", a: "Una chiamata nella loro lingua, annunciata, con consenso e registrata. Restituisce trascrizione, report e prossimo passo suggerito. La decisione è di una persona." },
+        { q: "Crea l’annuncio per un Senior Product Designer a Barcellona.", a: "Redige l’annuncio dalla conversazione e lo pubblica sulla tua pagina carriere e su oltre 250 portali di lavoro." }
+      ],
+      why: "La posizione nasce approvata e con budget; chi firma entra con tutti i suoi dati, senza reinserire nulla; e gli analytics incrociano il canale di selezione con la valutazione della performance.",
+      stats: [{ n: "70%", t: "di time-to-hire in meno con lo screening AI del primo colloquio" }, { n: "+25%", t: "di crescita dell’organico con lo stesso team di recruiting" }],
+      soon: ["Candidati suggeriti dal talent pool (prossimamente).", "WhatsApp nel Recruiting e pagine aziendali per entità (prossimamente).", "Valutazione culturale (prossimamente)."] },
+    canal: { name: "Canale etico",
+      lead: "Un canale per segnalare illeciti in modo riservato, anche in forma anonima.",
+      value: ["Segnalazioni riservate, con la possibilità di restare anonimi.", "Gestione dei casi con accesso limitato a chi se ne occupa.", "Ti aiuta a rispettare le norme sulla tutela dei segnalanti."],
+      oneNote: "One segue alla lettera i permessi di Factorial: i casi sono visibili solo a chi li gestisce, a nessun altro.",
+      why: "Vive nella stessa app degli altri strumenti del dipendente, così nessuno deve cercare dove segnalare." },
+    control: { name: "Rilevazione presenze",
+      lead: "Timbra da telefono o computer, con il registro dell’orario di lavoro sempre aggiornato.",
+      value: ["Timbra dall’app o dal web, con straordinari e saldi calcolati.", "Anomalie visibili al manager prima che arrivino alle paghe.", "Le ore registrate sui progetti alimentano il costo reale di ogni progetto."],
+      one: [{ q: "Ogni giorno feriale alle 18, mandami chi oggi ha meno di 4 timbrature.", a: "Crea una routine che controlla le timbrature ogni giorno e te la invia via email." }],
+      why: "La stessa timbratura serve per le paghe, il costo dei progetti e il pulse del team, senza inserirla due volte." },
+    turnos: { name: "Turni",
+      lead: "Turnazioni che rispettano le tue regole e buchi coperti senza elenchi di telefonate.",
+      value: ["Pianificazione per sede, ruolo e competenze.", "Giorni di riposo, orari e sedi di lavoro rispettati in fase di pianificazione.", "I turni effettivi arrivano alle paghe, senza turni superati nel calcolo."],
+      one: [{ q: "Trova qualcuno che copra il turno di María oggi.", a: "Verifica riposi, ruoli, competenze, orario e sede, chiama i candidati uno a uno e avvisa il manager quando il turno è coperto." }],
+      why: "Un’assenza apre il buco, One lo riempie e il nuovo turno arriva a timbrature e variabili di paga. Ogni regola rispettata e ogni chiamata registrata." },
+    ausencias: { name: "Assenze",
+      lead: "Ferie, malattia e permessi con saldi aggiornati e approvazione in due clic.",
+      value: ["Policy di assenza per team, sede o contratto collettivo.", "Calendario condiviso per vedere chi è assente prima di approvare.", "Assenze e malattie sincronizzate con le paghe (con a3innuva, in Spagna)."],
+      one: [{ q: "Quanti giorni di ferie mi restano?", a: "Risponde con il saldo di quella persona e la policy che si applica. Ognuno vede solo il proprio." }],
+      why: "Una malattia non resta sul calendario: apre un buco nei Turni, adegua le timbrature e arriva alle paghe come variabile." },
+    plantilla: { name: "Pianificazione organico",
+      lead: "HR e Finanza vedono gli stessi numeri fin dal primo giorno. Basta con le cinque versioni del foglio di calcolo.",
+      value: ["I manager propongono posizioni con ruolo, livello, fascia retributiva e data, collegate al catalogo dei ruoli.", "HR e Finanza rivedono un’unica versione, con il registro di chi ha deciso cosa e quando.", "Le posizioni approvate si aprono in automatico nel Recruiting: pianificazione ed esecuzione sempre allineate."],
+      one: [{ q: "Prepara il nostro piano di organico 2027 secondo le nostre linee guida.", a: "Propone ruoli, livelli e costi da rivedere." }],
+      why: "La posizione che approvi è l’annuncio che pubblichi, e ogni aumento finalizzato aggiorna la previsione dei costi per il piano successivo.",
+      soon: ["Flussi di approvazione strutturati e collegamento al budget.", "Confronto tra assunzioni pianificate ed effettive."] },
+    proyectos: { name: "Gestione progetti",
+      lead: "Scopri se ogni progetto è redditizio mentre è in corso, non quando si chiude.",
+      value: ["Ore registrate dal widget di timbratura, senza fogli ore paralleli.", "Costo del lavoro, costi fissi e spese rispetto al budget, in tempo reale.", "Dal preventivo al progetto e dal progetto alla fattura, con i dati del cliente già caricati."],
+      one: [{ q: "Quali progetti sono fuori budget questo mese?", a: "Incrocia ore registrate, costo del lavoro e spese, e spiega dove ognuno si discosta." }],
+      why: "Il costo di un’ora deriva dallo stipendio reale della persona e l’ora deriva dalla timbratura: nessuno copia dati tra strumenti." },
+    fpa: { name: "Financial workplace",
+      lead: "Budget e previsioni con i costi reali che vivono già in Factorial.",
+      value: ["Budget per reparto o centro di costo.", "Consuntivo vs. pianificato con dati di organico, paghe, spese, acquisti e progetti.", "Un’unica fonte di verità per HR, Finanza e direzione."],
+      one: [{ q: "Come siamo messi rispetto al budget del personale in questo trimestre?", a: "Confronta il costo reale delle paghe con il piano e segnala gli scostamenti." }],
+      why: "Il budget si alimenta da solo: ogni assunzione, aumento, spesa o acquisto è già registrato nel suo modulo." },
+    gastos: { name: "Spese",
+      lead: "Da una pila di scontrini alla chiusura dei conti, con un solo messaggio.",
+      value: ["Carica gli scontrini e i campi si compilano da soli.", "Ogni spesa è verificata rispetto alla policy: quelle conformi vengono approvate all’istante.", "Riconciliazione delle carte e dati puliti per la chiusura di fine mese."],
+      one: [{ q: "Ecco gli scontrini della mia trasferta. (ne carica 5 insieme)", a: "Legge ogni scontrino, prepara le spese, riconcilia la carta e verifica policy e permessi. Solo le eccezioni aspettano una persona." }],
+      why: "La spesa approvata arriva alle paghe se va rimborsata e al progetto se è fatturabile." },
+    compras: { name: "Acquisti",
+      lead: "Richieste di acquisto, approvazioni e fornitori in un unico flusso.",
+      value: ["Richieste con approvazione per importo e team.", "Ogni acquisto è legato al suo budget e a chi l’ha richiesto.", "Collegato a inventario e software per sapere cosa si compra e per chi."],
+      one: [{ q: "Mi si è appena rotto il portatile. Ne ho bisogno di uno nuovo.", a: "Apre il ticket, verifica che non ci siano scorte, ne trova uno nel marketplace e lo acquista appena una persona approva." }],
+      why: "L’acquisto parte da un ticket, passa dal budget e finisce nell’inventario della persona." },
+    revision: { name: "Revisione salariale",
+      lead: "Ogni aumento giustificato, a budget e difendibile.",
+      value: ["Linee guida definite una volta: idoneità, fasce e approvatori. Ogni proposta viene verificata in automatico.", "Ogni manager vede solo il proprio team, con le voci fuori policy già segnalate, e il budget si assegna in tempo reale.", "L’aumento approvato confluisce nel contratto e nella previsione dell’organico, senza reinserimenti."],
+      one: [{ q: "Proponi gli aumenti per il mio team in base alla nostra policy.", a: "Cifre e motivazioni, già verificate rispetto al budget. Tu approvi." }],
+      why: "Decidi quanti cicli di valutazione contano per l’idoneità: l’aumento riflette un andamento, non un punteggio isolato. E arriva alle paghe come variabile validata." },
+    politicas: { name: "Policy",
+      lead: "Le tue regole, scritte una volta e applicate in ogni modulo.",
+      value: ["Policy su assenze, spese, orari e altro, applicate dai moduli che le usano.", "Handbook: le persone chiedono e One risponde citando la fonte.", "Se One non lo sa, lo dice."],
+      one: [{ q: "Posso lavorare da remoto da un altro Paese per due settimane?", a: "Risponde in base alla tua policy, mostra la fonte e rivela solo ciò che quella persona può vedere." }],
+      why: "Le domande di routine non arrivano mai nella casella del manager, e gli stessi criteri approvano spese o assenze." },
+    portal: { name: "Portale dipendente",
+      lead: "L’app in cui ognuno vede le proprie informazioni e chiede ciò che gli serve.",
+      value: ["Dati personali, cedolini, documenti e saldi in un’unica app.", "Assenze, spese e ticket dal telefono.", "One integrato per chiedere, richiedere e seguire ogni richiesta."],
+      oneNote: "One è incluso per tutta la forza lavoro, senza bisogno di formazione. Ognuno chiede ciò che gli serve e vede solo ciò che il suo ruolo consente.",
+      why: "Tutto ciò che il dipendente fa qui va direttamente nel modulo giusto, senza moduli né email di mezzo." },
+    onoff: { name: "On/Offboarding",
+      lead: "Nuovi ingressi e uscite come un unico flusso, con attività per HR, IT e manager.",
+      value: ["Il nuovo assunto arriva dal Recruiting con tutti i suoi dati.", "Documenti, firma, dispositivo, accessi e formazione di benvenuto nello stesso flusso.", "All’uscita, accessi e attrezzature vengono recuperati senza affidarsi alla memoria di qualcuno."],
+      one: [{ q: "Prepara l’onboarding di Marta per lunedì.", a: "Avvia le attività, prepara i documenti da firmare, richiede il suo portatile e assegna il corso di benvenuto." }],
+      why: "È il punto in cui si incontrano più moduli: se i dati sono centralizzati, il primo giorno si organizza da solo." },
+    documentos: { name: "Gestione documentale",
+      lead: "Contratti, cedolini e certificati di ogni persona, con permessi e modelli.",
+      value: ["Cartelle per persona e per azienda, con permessi basati sul ruolo.", "Modelli che si compilano con i dati del dipendente.", "One legge qualsiasi file ed estrae ciò che conta."],
+      one: [{ q: "Quali contratti a termine scadono in questo trimestre?", a: "Lo incrocia con i dati contrattuali e restituisce l’elenco con date e responsabili." }],
+      why: "Una modifica salariale approvata aggiorna il contratto; un’assunzione genera i suoi documenti. Nessuno deve rifarli." },
+    firma: { name: "Firma elettronica",
+      lead: "Invia per la firma senza uscire da Factorial e conserva l’esito dove deve stare.",
+      value: ["Firma contratti, allegati e policy da qualsiasi dispositivo.", "Offerte del Recruiting firmate da ovunque, e sai subito quando sono firmate.", "Il documento firmato resta nel profilo della persona."],
+      oneNote: "One prepara i documenti dai tuoi modelli, così devi solo rivederli e inviarli per la firma.",
+      why: "Zero dati da reinserire quando qualcuno firma: lo stato arriva al processo che l’ha richiesto." },
+    analiticas: { name: "Analytics",
+      lead: "Tutti i dati di Factorial in un unico posto, e One per interrogarli in linguaggio naturale.",
+      value: ["Report che incrociano i moduli sugli stessi dati: persone, tempo, talento, paghe e finanza.", "Chiedi a One di creare un report, aggiungere widget, filtrare o spiegare un andamento, e salvalo.", "Ognuno vede solo ciò che i suoi permessi consentono."],
+      one: [{ q: "Mandami il turnover per reparto ogni lunedì.", a: "Crea il report, lo pianifica come routine e spiega l’andamento a ogni invio." }],
+      why: "Ogni modulo confluisce qui. Poiché tutti i dati vivono in Factorial, un report non si costruisce: si chiede. Senza esportazioni, senza unire fogli di calcolo e senza aspettare la Finanza." },
+    tickets: { name: "Ticket",
+      lead: "Richieste che arrivano già a metà risolte prima che una persona le tocchi.",
+      value: ["Aperti chattando con One e tracciati in Factorial.", "Instradati in automatico al team giusto: IT, HR, Finanza.", "One indaga e traduce ogni messaggio in entrambe le direzioni."],
+      one: [{ q: "Ciao One, mi si è appena rotto il portatile. Ne ho bisogno di uno nuovo.", a: "Crea il ticket, lo instrada all’IT, legge il contesto, verifica che non ci siano portatili in magazzino, ne trova uno nel marketplace e prepara il piano. Una persona approva, viene acquistato e l’IT lo consegna." }],
+      why: "One indaga tra contratti, asset IT e profili dei dipendenti: la risoluzione viene preparata con le tue policy e chi la gestisce deve solo approvare." },
+    mdm: { name: "Gestione dispositivi mobili",
+      lead: "Configura e proteggi i dispositivi aziendali dallo stesso posto in cui gestisci le persone.",
+      value: ["Ogni dispositivo legato alla persona che lo usa.", "Registrazione e rimozione dei dispositivi all’interno di onboarding e offboarding.", "Stato di sicurezza della flotta visibile all’IT."],
+      oneNote: "One ti mantiene conforme: verifica le policy, corregge le incoerenze e monitora accessi e rischi.",
+      why: "Quando qualcuno entra o esce, l’IT non dipende da un’email dell’HR: la modifica è già in Factorial." },
+    inventario: { name: "Inventario",
+      lead: "Quali attrezzature ha ogni persona, con il suo storico.",
+      value: ["Assegnazione e restituzione delle attrezzature per persona.", "Integrato in onboarding e offboarding.", "Scorte visibili prima di acquistare."],
+      oneNote: "Quando arriva un ticket, One controlla l’inventario prima di proporre un acquisto.",
+      why: "L’inventario sa chi è chi perché condivide i dati delle persone con Core HR." },
+    software: { name: "Gestione software",
+      lead: "Quali strumenti usa l’azienda, chi ha accesso e quanto costano.",
+      value: ["Inventario di app e licenze.", "Accessi concessi e revocati quando le persone entrano ed escono.", "Spesa per le licenze visibile alla Finanza."],
+      oneNote: "One incrocia le licenze con le persone attive per individuare accessi che non dovrebbero più esistere.",
+      why: "Licenze, persone e budget in un unico posto: nessuno paga l’account di chi se n’è già andato." },
+    marketplace: { name: "Marketplace",
+      lead: "Un catalogo per ordinare dispositivi e attrezzature senza cercare fornitori.",
+      value: ["Catalogo di dispositivi pronto da ordinare.", "Acquisti con approvazione e consegna a chi ne ha bisogno.", "Collegato a ticket e inventario."],
+      oneNote: "Se non ci sono scorte, One trova il dispositivo nel marketplace e lascia l’acquisto pronto da approvare.",
+      why: "Dal ticket alla consegna senza cambiare strumento." },
+    beneficios: { name: "Benefit",
+      lead: "Una retribuzione flessibile che il tuo team usa con una carta e che l’HR gestisce senza scartoffie.",
+      value: ["Pasti, trasporti, asilo, assicurazione sanitaria, formazione e Wellhub.", "Carta Visa nel wallet del telefono, con saldo e movimenti nell’app.", "Budget per categoria, conformità fiscale ed esportazione diretta alle paghe."],
+      one: [{ q: "Quanto buono pasto mi resta questo mese?", a: "Risponde con il saldo di quella persona, nei limiti dei suoi permessi." }],
+      why: "Ciò che ogni persona usa arriva alle paghe come voce di cedolino, senza che nessuno lo compili a mano." },
+    compensacion: { name: "Compensation",
+      lead: "Ogni modifica arriva alle paghe già validata.",
+      value: ["Bonus, cambi contrattuali e assenze che incidono sulle paghe, visibili all’istante.", "Alert prima del calcolo: variabili in sospeso, bonus non approvati o turni non aggiornati.", "Ogni cedolino confrontato con variabili e contratti approvati, e costo reale vs. pianificato."],
+      one: [{ q: "Cosa manca prima di chiudere le paghe di questo mese?", a: "Controlla le variabili in sospeso e tutto ciò che non torna, e ti dice chi deve intervenire." }],
+      why: "Tutto confluisce qui: timbrature, turni, assenze, spese, benefit e aumenti. Se nascono connessi, arrivano validati.",
+      stat: { n: "40 h", t: "al mese che puoi risparmiare sincronizzando assunzioni, uscite, modifiche salariali, assenze e variabili con il tuo provider di paghe (integrazione a3innuva, Spagna)" } },
+    integraciones: { name: "Integrazioni",
+      lead: "Factorial connesso al tuo provider di paghe e al resto dei tuoi strumenti.",
+      value: ["a3innuva (Spagna): assunzioni, uscite, modifiche contrattuali e salariali, assenze, malattie e variabili.", "Compatibile con altri software di paghe e con Factorial Professionals per gli studi di consulenza.", "API per connetterti al tuo ERP."],
+      oneNote: "Se i dati vivono in Factorial o in qualcosa che colleghi, puoi chiedere, delegare o automatizzare con One.",
+      why: "Integrare non significa copiare: la modifica si registra una volta e si sincronizza." },
+    anticipo: { name: "Anticipo stipendio",
+      lead: "Il tuo team può richiedere una parte dello stipendio già maturato prima della fine del mese.",
+      value: ["Richiesta dall’app, senza scartoffie.", "Regole e limiti definiti da te.", "L’anticipo si riflette nelle paghe senza rettifiche manuali."],
+      oneNote: "Le persone chiedono a One quanto possono richiedere e come funziona, secondo la tua policy.",
+      why: "Poiché stipendio e giorni lavorati sono già in Factorial, l’importo disponibile non si calcola a mano." }
+  },
+  STORIES: [
+    { t: "Un nuovo assunto", d: "La posizione si approva una volta e il resto segue da solo.", steps: ["La posizione viene approvata con la sua fascia retributiva.", "Si apre in automatico come annuncio; One filtra e chiama.", "L’offerta si firma da un telefono.", "Entra con tutti i suoi dati, senza reinserire nulla.", "Il suo portatile è già assegnato.", "Riceve il corso di benvenuto.", "La sua assunzione arriva alle paghe validata."] },
+    { t: "Una malattia dell’ultimo minuto", d: "Dall’avviso alle paghe senza che nessuno copi dati.", steps: ["Qualcuno comunica di essere malato.", "One trova chi può coprire e lo chiama.", "Il nuovo turno si timbra come tutti gli altri.", "La malattia e il cambio turno arrivano come variabili.", "L’assenteismo per sede si aggiorna da solo."] },
+    { t: "Un ciclo di valutazione", d: "L’aumento nasce dalla valutazione e rientra nel piano.", steps: ["La valutazione segnala risultati e gap.", "La formazione si assegna con un clic.", "One propone l’aumento nel rispetto della policy.", "L’aumento arriva alle paghe validato.", "La previsione dei costi si aggiorna per il piano successivo."] },
+    { t: "Un portatile rotto", d: "Un messaggio a One e un’approvazione.", steps: ["Lo dici a One e apre il ticket.", "One verifica che non ci siano scorte.", "Ne trova uno conforme alla policy.", "Una persona approva, viene acquistato e l’IT lo consegna."] }
+  ],
+  UI: {
+    center: "Il cuore", area: "Area", modules: "Moduli", brings: "Cosa porta", withOne: "Con One", connected: "Connesso con",
+    soon: "Cosa arriva", soonNote: "Ambito e date possono cambiare.", close: "Chiudi",
+    title: "Factorial · Tutto connesso con One",
+    h1: "One conosce già la tua azienda",
+    sub: "Ogni modulo di Factorial condivide gli stessi dati. One lavora sopra tutti, con i tuoi permessi e le tue policy.",
+    hint: "Tocca una bolla qualsiasi per vedere cosa porta, cosa fa One con essa e a cosa si collega.",
+    cue: "Continua a scorrere", cueAria: "Continua a scorrere", oneAria: "Scopri cos’è One", panelAria: "Dettagli del modulo",
+    s1t: "Gli stessi dati, da un capo all’altro",
+    s1d: "Quando ogni modulo vive in uno strumento diverso, ogni decisione riparte da zero. In Factorial, ciò che inserisci una volta lo usa il passo successivo. Tocca un passaggio qualsiasi per aprirlo sulla mappa.",
+    s2t: "I tuoi team usano già l’AI. Rendila tua.",
+    s2d: "Ciò che cambia non è la tecnologia, è il contesto. E con i dati delle persone, la fiducia non è negoziabile.",
+    cmpHead: `<tr><th></th><th>AI generica</th><th>One</th></tr>`,
+    cmpBody: `<tr><td>Contesto</td><td>Parte da zero ogni volta. Il contesto lo incolli tu.</td><td>Connessa ai tuoi dati Factorial e agli strumenti che colleghi, fin dal primo messaggio.</td></tr>
+      <tr><td>Permessi</td><td>Non sa chi dovrebbe vedere cosa.</td><td>Ognuno vede solo ciò che il suo ruolo consente. Stessi ruoli, nulla di nuovo esposto.</td></tr>
+      <tr><td>Conformità</td><td>Nessuna garanzia nell’UE.</td><td>Conforme a GDPR e AI Act europeo, ospitata nell’UE.</td></tr>
+      <tr><td>Affidabilità</td><td>Inventa risposte senza avvisare.</td><td>Risponde con i tuoi dati e mostra la fonte. Se non lo sa, lo dice.</td></tr>
+      <tr><td>Controllo</td><td>Costi e azioni opachi.</td><td>Decidi tu quali agenti funzionano e vedi ogni azione e quanto è costata.</td></tr>`,
+    s4t: "One: capacità personale",
+    s4d: "Ogni persona ha la propria capacità One per chiedere, delegare e automatizzare. Scegli Basic, Plus o Max in base a quanto lavoro ogni profilo affida a One.",
+    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Uso quotidiano</span></div><p class="tl">Perché tutta la forza lavoro sbrighi le proprie richieste senza aspettare nessuno.</p>
+      <h4>Per chi è</h4><div class="who"><i>Dipendenti</i></div>
+      <h4>Cosa fanno con One</h4><ul><li>Chiedono di policy, saldi, cedolini e documenti e ricevono la risposta con la fonte.</li><li>Richiedono assenze, spese e ticket chattando.</li><li>Seguono ogni richiesta dall’app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Gestione del team</span></div><p class="tl">Per chi guida dei team e ha bisogno del contesto del proprio team a portata di mano.</p>
+      <h4>Per chi è</h4><div class="who"><i>Manager</i></div>
+      <h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Basic, con più capacità giornaliera.</li><li>Preparano gli 1:1 e consultano gli analytics del proprio team.</li><li>Approvano assenze, spese e turni con il contesto già raccolto.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Capacità massima</span></div><p class="tl">Per i profili che ogni giorno delegano più lavoro a One.</p>
+      <h4>Per chi è</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Plus, con la massima capacità giornaliera.</li><li>Creano corsi completi, elaborano lotti di spese e creano report e routine.</li><li>Pensato per un uso intensivo di One nella loro area.</li></ul></div>`,
+    tierNote: "Gli agenti che lavorano per tutta l’azienda (copertura dei turni, chiamate ai candidati, approvazione delle spese) usano una capacità aziendale separata, non quella personale. La capacità esatta di ogni livello dipende dal tuo piano.",
+    s3t: "Cosa arriva",
+    s3d: "Ogni prodotto sta diventando un prodotto AI. Ambito e date possono cambiare; ti terremo aggiornato.",
+    road: `<div><span>Prossimamente</span><b>1:1 con l’AI</b><p>One prepara e guida ogni 1:1 con lo storico completo della persona.</p></div>
+    <div><span>Prossimamente</span><b>Corsi gamificati</b><p>Meccaniche di gioco dentro i corsi LMS.</p></div>
+    <div><span>Prossimamente</span><b>Obiettivi via MCP</b><p>Factorial si connette ai tuoi strumenti e aggiorna gli obiettivi con i loro dati.</p></div>
+    <div><span>Prossimamente</span><b>Organico: approvazioni e budget</b><p>Flussi di approvazione strutturati e confronto tra pianificato ed effettivo.</p></div>
+    <div><span>Prossimamente</span><b>Talent pool suggerito</b><p>Prima di pubblicare, vedi chi nel tuo bacino di candidati è già in linea.</p></div>
+    <div><span>Prossimamente</span><b>WhatsApp nel Recruiting</b><p>Messaggi, un avviso prima della chiamata AI e documenti via WhatsApp.</p></div>
+    <div class="more"><span>Prossimamente</span><b>E molto altro</b><p>Ogni mese arrivano nuove funzioni AI in tutti i prodotti Factorial.</p></div>`,
+    ctaT: "Vediamo insieme il tuo ciclo completo con i tuoi dati?",
+    ctaD: "Mappiamo il tuo organico, il tuo processo di selezione e la tua politica retributiva, e ti mostriamo lo stesso flusso dentro Factorial, con One al lavoro a ogni passaggio.",
+    footer: "Gli esempi di report e conversazioni sono illustrativi e usano dati fittizi. Alcune funzioni dipendono dal tuo piano e dai crediti One. Factorial · ottobre 2026."
+  }
+};
+
+LONG.it = {
+    one: () => `<p class="lead">Il tuo agente AI personale al lavoro. Conosce il tuo contesto, agisce su tutto Factorial e ti aiuta a decidere, senza esporre i tuoi dati.</p>
+    <h3>Tre modi di usarlo</h3>
+    <ul class="vals"><li><b>Chiedi.</b> Chiunque chiede ciò che gli serve: policy, saldi, dati del team. One risponde citando la fonte e solo con ciò che il suo ruolo consente.</li>
+    <li><b>Delega.</b> Dentro ogni prodotto, One fa il lavoro: redige l’annuncio, chiama il candidato, prepara la proposta di aumento.</li>
+    <li><b>Automatizza.</b> Imposta una routine una volta e One rileva, decide e agisce. Tu approvi le eccezioni.</li></ul>
+    <h3>Come funziona</h3>
+    <p class="note">Rileva i trigger nei tuoi dati in tempo reale, li confronta con le tue policy e il tuo storico, sceglie l’azione o la passa a una persona, fa il lavoro dentro Factorial e registra ciò che ha fatto. Ogni passaggio resta visibile e verificabile.</p>
+    <h3>Perché i dati centralizzati cambiano tutto</h3>
+    <p class="why" style="color:var(--ink)">Più moduli colleghi, più contesto ha One. Un’AI generica parte da zero; One sa già chi è chi, cosa dice la tua policy e cosa è successo nell’ultimo ciclo.</p>
+    <div class="stats"><div class="stat"><b>GDPR</b><span>e AI Act europeo, ospitata nell’UE</span></div><div class="stat"><b>I tuoi permessi</b><span>stessi ruoli Factorial, nulla di nuovo esposto</span></div></div>
+    <h3>Routine: One ti porta la risposta quando serve</h3>
+    ${chatHTML([{ q: "Ogni 25 del mese, avvisami delle variabili di paga in sospeso.", a: "Crea la routine, controlla cosa manca prima della chiusura e te lo invia con chi deve intervenire." }])}`,
+    routines: `<h3>Routine con informazioni sempre aggiornate</h3>
+  <ul class="rt">
+    <li><span class="when">Lunedì, 9:00</span><span>Turnover per reparto, con l’andamento spiegato<span class="src">Core HR · Analytics</span></span></li>
+    <li><span class="when">Giorni feriali, 18:00</span><span>Persone con meno di 4 timbrature oggi<span class="src">Rilevazione presenze</span></span></li>
+    <li><span class="when">Il 25</span><span>Variabili di paga in sospeso prima della chiusura<span class="src">Compensation · Turni · Spese</span></span></li>
+    <li><span class="when">Primo giorno del mese</span><span>Formazione obbligatoria in sospeso per sede<span class="src">Formazione & LMS</span></span></li>
+    <li><span class="when">Venerdì, 12:00</span><span>Candidati in screening senza feedback dal team di selezione<span class="src">ATS & selezione</span></span></li>
+  </ul>
+  <p class="disc-note">Qualsiasi report di Analytics può essere pianificato come routine dalla chat di One. Le routine usano crediti One.</p>`,
+    ax: { t: "Esempi di report già connessi",
+      c1: ["Turnover ed engagement per reparto", "Core HR + Engagement · turnover (barre) ed eNPS (linea)", ["Negozi","Ops","Vendite","Supporto","Tech"]],
+      c2: ["Qualità dell’assunzione per canale", "Recruiting + Performance · retention a 1 anno", ["Segnalazioni","LinkedIn","Sito carriere","Portali di lavoro"]],
+      c3: ["Costo dell’organico: effettivo vs. pianificato", "Organico + Revisione salariale + Compensation", ["G","F","M","A","M","G"], "Effettivo", "Pianificato"],
+      c4: ["Assenteismo e straordinari per sede", "Assenze + Rilevazione presenze + Turni", ["Madrid","Barcellona","Valencia","Siviglia"], "Assenteismo %", "Straordinari"],
+      note: "Dati fittizi, solo per illustrare cosa si può incrociare.",
+      tasksT: "Attività che One già svolge da solo",
+      tasks: ["Approva le spese conformi alla policy e ti lascia solo le eccezioni.", "Copre i turni chiamando chi può farli, seguendo le tue regole.", "Chiama i candidati che arrivano allo screening e ti lascia il report.", "Risolve a metà i ticket così chi li gestisce deve solo approvare."] }
 };
 
 const ISO = `<svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg>`;
@@ -1157,15 +2202,18 @@ function drawWires(){
 }
 
 /* idioma: ?lang= o la última elección; español por defecto */
+const I18N = { en: EN, de: DE, pt: PT, fr: FR, it: IT };
+const isLang = l => l === 'es' || !!I18N[l];
 let lang = (() => {
   const q = new URLSearchParams(location.search).get('lang');
-  if (q === 'en' || q === 'es') return q;
-  try { const s = localStorage.getItem('onemap-lang'); if (s === 'en' || s === 'es') return s; } catch (e) {}
+  if (isLang(q)) return q;
+  try { const s = localStorage.getItem('onemap-lang'); if (isLang(s)) return s; } catch (e) {}
   return 'es';
 })();
-const tm = id => lang === 'en' ? { ...M[id], ...EN.M[id] } : M[id];
-const th = k => lang === 'en' ? { ...HUBS[k], ...EN.HUBS[k] } : HUBS[k];
-const U = k => (lang === 'en' ? EN.UI : UI_ES)[k];
+const T = () => I18N[lang];  // undefined en español: el contenido base ya está en español
+const tm = id => T() ? { ...M[id], ...T().M[id] } : M[id];
+const th = k => T() ? { ...HUBS[k], ...T().HUBS[k] } : HUBS[k];
+const U = k => (T() ? T().UI : UI_ES)[k];
 
 function chatHTML(list){
   return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
@@ -1276,7 +2324,7 @@ function closePanel(){
 function buildStories(){
   const wrap = $('#stories'); wrap.innerHTML = '';
   STORIES.forEach((s0, si) => {
-    const s = lang === 'en' ? EN.STORIES[si] : { t: s0.t, d: s0.d, steps: s0.steps.map(x => x[1]) };
+    const s = T() ? T().STORIES[si] : { t: s0.t, d: s0.d, steps: s0.steps.map(x => x[1]) };
     const d = el('div', {class:'story'}, `<h3>${s.t}</h3><p>${s.d}</p>`);
     const ol = el('ol', {class:'chain'});
     s0.steps.forEach(([id], i) => { const li = el('li'); const b = el('button', {type:'button'}, tm(id).name); b.addEventListener('click', () => select(id)); li.appendChild(b); li.appendChild(el('small',{},s.steps[i])); ol.appendChild(li); });
@@ -1292,11 +2340,11 @@ document.querySelectorAll('[data-i18n-aria]').forEach(n => STATIC_ES['aria:'+n.d
 function applyLang(){
   document.documentElement.lang = lang;
   document.title = U('title');
-  document.querySelectorAll('[data-i18n]').forEach(n => n.innerHTML = lang === 'en' ? EN.UI[n.dataset.i18n] : STATIC_ES[n.dataset.i18n]);
-  document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', lang === 'en' ? EN.UI[n.dataset.i18nAria] : STATIC_ES['aria:'+n.dataset.i18nAria]));
+  document.querySelectorAll('[data-i18n]').forEach(n => n.innerHTML = T() ? T().UI[n.dataset.i18n] : STATIC_ES[n.dataset.i18n]);
+  document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', T() ? T().UI[n.dataset.i18nAria] : STATIC_ES['aria:'+n.dataset.i18nAria]));
   stage.querySelectorAll('.pill').forEach(b => b.textContent = tm(b.dataset.id).name);
   stage.querySelectorAll('[data-hub-btn]').forEach(b => b.lastChild.textContent = th(b.dataset.hubBtn).name);
-  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  $('#langSel').value = lang;
   buildStories();
   if (current) { render(current); mark(current); }
   requestAnimationFrame(drawWires);
@@ -1306,11 +2354,11 @@ function setLang(l){
   lang = l;
   try { localStorage.setItem('onemap-lang', l); } catch (e) {}
   const u = new URL(location.href);
-  if (l === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+  if (l === 'es') u.searchParams.delete('lang'); else u.searchParams.set('lang', l);
   history.replaceState(null, '', u);
   applyLang();
 }
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+$('#langSel').addEventListener('change', e => setLang(e.target.value));
 
 buildMap(); applyLang();
 $('#scrim').addEventListener('click', closePanel);
