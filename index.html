@@ -613,7 +613,7 @@ const M = {
       "Cada persona ve solo lo que sus permisos le dejan ver."
     ],
     one: [{ q: "Envíame la rotación por departamento cada lunes.", a: "Crea el informe, lo programa como rutina y te explica la tendencia en cada envío." }],
-    why: "Como todo el dato vive en Factorial, un informe no se construye: se pregunta. Sin exportar, sin cruzar Excels y sin esperar a Finanzas.",
+    why: "Todos los módulos llegan aquí. Como todo el dato vive en Factorial, un informe no se construye: se pregunta. Sin exportar, sin cruzar Excels y sin esperar a Finanzas.",
     links: ["desempeno", "engagement", "ats", "control", "ausencias", "turnos", "plantilla", "compensacion", "revision", "gastos", "proyectos"]
   },
   tickets: {
@@ -730,6 +730,10 @@ const M = {
     check: true
   }
 };
+
+/* Todo llega a Analíticas: cada módulo enlaza con Analíticas y Analíticas con todos */
+M.analiticas.links = Object.keys(M).filter(k => k !== 'analiticas');
+for (const k of M.analiticas.links) if (!M[k].links.includes('analiticas')) M[k].links.push('analiticas');
 
 /* Guías gratuitas por producto (fuente: hoja de Freebies, columna Product → URL) */
 const FREEBIES = {
