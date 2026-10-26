@@ -147,10 +147,6 @@ h1{font-weight:300;font-size:clamp(36px,4.6vw,66px);line-height:.95;letter-spaci
 .soon{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .soon li{font-size:14px;padding-left:14px;border-left:2px solid var(--ink-3);color:var(--ink)}
 .disc-note{font-size:12.5px;color:var(--ink-3);margin-top:8px}
-.guides{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.guides a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.3;transition:background .15s var(--ease),border-color .15s var(--ease)}
-.guides a:hover{background:var(--accent-weak);border-color:var(--red)}
-.guides a svg{flex:none;color:var(--red)}
 
 /* analytics bits */
 .dash{display:grid;gap:12px}
@@ -202,6 +198,24 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .road p{margin:0;font-size:14.5px;color:var(--ink-2)}
 .road .more{border-top-style:dashed}
 .road .more b{font-size:22px;letter-spacing:-0.02em}
+
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.tier{background:var(--bg-alt);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;gap:14px}
+.tier.max{background:#fff;color:var(--midnight);border-color:#fff;--ink:var(--midnight);--ink-2:#6C6C7D}
+.tier .tn{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tier .tn b{font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
+.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.18)}
+.tier.max .tn span{background:#FFE3EA;color:var(--red-dark)}
+.tier .tl{margin:0;font-size:15px;color:var(--ink-2)}
+.tier h4{margin:4px 0 0;font-size:12.5px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.who{display:flex;flex-wrap:wrap;gap:6px}
+.who i{font-style:normal;font-size:13.5px;font-weight:500;padding:4px 11px;border-radius:999px;border:1px solid currentColor}
+.tier.max .who i{color:var(--red)}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.tier li{position:relative;padding-left:18px;font-size:14.5px;line-height:1.4}
+.tier li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;border:2px solid currentColor;opacity:.8}
+.tier.max li::before{border-color:var(--red);opacity:1}
+.tiernote{font-size:13.5px;color:var(--ink-2);margin:20px 0 0;max-width:80ch}
 
 .cta{background:#fff;color:var(--midnight);border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
 .cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
@@ -299,6 +313,23 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 </section>
 
 <section>
+  <h2 class="st" data-i18n="s4t">One: capacidad personal</h2>
+  <p class="sl" data-i18n="s4d">Cada persona tiene su propia capacidad de One para preguntar, delegar y automatizar. Elige Basic, Plus o Max según cuánto trabajo le pide a One cada perfil.</p>
+  <div class="tiers" data-i18n="tiers">
+    <div class="tier"><div class="tn"><b>Basic</b><span>Día a día</span></div><p class="tl">Para que toda la plantilla resuelva lo suyo sin esperar a nadie.</p>
+      <h4>Para quién</h4><div class="who"><i>Empleados</i></div>
+      <h4>Qué hace con One</h4><ul><li>Pregunta por políticas, saldos, nóminas y documentos, y recibe la respuesta con la fuente.</li><li>Pide ausencias, gastos y tickets chateando.</li><li>Sigue cada solicitud desde la app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Gestión de equipo</span></div><p class="tl">Para quien lidera personas y necesita el contexto de su equipo a mano.</p>
+      <h4>Para quién</h4><div class="who"><i>Managers</i></div>
+      <h4>Qué hace con One</h4><ul><li>Todo lo de Basic, con más capacidad diaria.</li><li>Prepara 1:1 y consulta las analíticas de su equipo.</li><li>Aprueba ausencias, gastos y turnos con el contexto ya reunido.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Máxima capacidad</span></div><p class="tl">Para los perfiles que más trabajo delegan en One cada día.</p>
+      <h4>Para quién</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>Qué hace con One</h4><ul><li>Todo lo de Plus, con la mayor capacidad diaria.</li><li>Crea cursos completos, procesa lotes de gastos y construye informes y rutinas.</li><li>Pensado para un uso intensivo de One en su área.</li></ul></div>
+  </div>
+  <p class="tiernote" data-i18n="tierNote">Los agentes que trabajan para toda la empresa (cubrir turnos, llamar a candidatos, aprobar gastos) usan una capacidad de empresa aparte, no la personal. La capacidad exacta de cada nivel depende de tu plan.</p>
+</section>
+
+<section>
   <h2 class="st" data-i18n="s3t">Lo que viene</h2>
   <p class="sl" data-i18n="s3d">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
   <div class="road" data-i18n="road">
@@ -378,8 +409,7 @@ const M = {
     one: [{ q: "Prepárame el 1:1 con Laura de mañana.", a: "Reúne sus objetivos, la última evaluación, el pulso reciente y lo hablado en 1:1 anteriores." }],
     why: "Un buen desempeño no siempre significa compromiso. Con el pulso ligado al fichaje y el contexto de desempeño, One ve el cuadro completo de cada persona.",
     links: ["control", "desempeno", "onoff", "analiticas"],
-    stat: { n: "40–60%", t: "menos administración manual con evaluaciones, 1:1 y encuestas automatizadas" },
-    tag: "1:1 con IA: próximamente"
+    stat: { n: "40–60%", t: "menos administración manual con evaluaciones, 1:1 y encuestas automatizadas" }
   },
   comunidades: {
     name: "Comunidades", hub: "talento",
@@ -739,135 +769,6 @@ const M = {
 M.analiticas.links = Object.keys(M).filter(k => k !== 'analiticas');
 for (const k of M.analiticas.links) if (!M[k].links.includes('analiticas')) M[k].links.push('analiticas');
 
-/* Guías gratuitas por producto (fuente: hoja de Freebies, columna Product → URL) */
-const FREEBIES = {
-  ats: [
-    ["eBook de Reclutamiento IT", "https://factorial.es/ebooks/reclutamiento-it"],
-    ["Plantilla profesiograma Excel", "https://factorial.es/plantillas/plantilla-profesiograma-excel-descargar-gratis"],
-    ["Plantilla profesiograma PDF", "https://factorial.es/plantillas/plantilla-para-realizar-un-profesiograma"],
-    ["Modelo para realizar entrevistas de trabajo", "https://factorial.es/plantillas/modelo-para-una-entrevista-de-trabajo"],
-    ["Plantilla word - oferta de trabajo", "https://factorial.es/plantillas/plantilla-oferta-trabajo-word"],
-    ["Modelo prueba psicotécnica", "https://factorial.es/plantillas/modelo-de-prueba-psicotecnica"],
-    ["Carta de rechazo a un candidato", "https://factorial.es/plantillas/carta-rechazo-candidato"],
-    ["Checklist oferta de trabajo", "https://factorial.es/plantillas/lista-oferta-trabajo"],
-    ["Oferta de trabajo Word", "https://factorial.es/plantillas/oferta-de-trabajo"],
-    ["Contratación eficiente paso a paso", "https://factorial.es/ebooks/como-contratar-mejor-paso-a-paso"]
-  ],
-  compensacion: [
-    ["30 tipos de gastos esenciales en tu empresa", "https://factorial.es/ebooks/30-tipo-gastos-empresa"],
-    ["Calculadora coste del empleado", "https://factorial.es/plantillas/calculadora-de-coste-de-empleado"],
-    ["Plantilla de nómina - Excel", "https://factorial.es/plantillas/plantilla-nomina"],
-    ["Registro salarial obligatorio", "https://factorial.es/plantillas/modelo-registro-salarial-obligatorio"],
-    ["Salario medio por provincia 2024 España", "https://factorial.es/plantillas/salario-medio-en-espana-por-provincia"],
-    ["Plantilla Nómina - Baja por enfermedad", "https://factorial.es/plantillas/nomina-de-baja-por-enfermedad"],
-    ["Calculadora salario Neto", "https://factorial.es/plantillas/calculadora-salario-neto"],
-    ["Incidencias en nómina", "https://factorial.es/plantillas/incidencias-en-nomina"],
-    ["Plantilla nóminas - Word", "https://factorial.es/plantillas/plantilla-de-nominas-en-word"],
-    ["Plantilla - cómo leer mi nómina", "https://factorial.es/plantillas/como-leer-mi-nomina"],
-    ["Digitalización Nóminas ft. Wolters Kluwer", "https://factorial.es/ebooks/ebook-digitalizacion-nominas-wolters-kluwer"],
-    ["Plantilla Nómina PDF", "https://factorial.es/plantillas/plantilla-nomina-editable-en-pdf"]
-  ],
-  control: [
-    ["Calculadora online de horas trabajadas", "https://factorial.es/calculadora-horas-trabajadas"],
-    ["eBook - Cómo implementar el control horario", "https://factorial.es/ebooks/como-implementar-el-control-horario"],
-    ["Plantilla PDF - Control horario", "https://factorial.es/plantillas/control-horario-pdf-descargable"],
-    ["Control Horario Word", "https://factorial.es/plantillas/plantilla-control-horario-trabajadores"],
-    ["Plantilla excel - Control horario", "https://factorial.es/plantillas/plantilla-control-horario-trabajadores-excel"],
-    ["Modelo - Bolsa de horas", "https://factorial.es/plantillas/modelo-clausula-bolsa-horas"],
-    ["kit sobre nueva ley control horario", "https://factorial.es/plantillas/kit-ley-fichaje"]
-  ],
-  gastos: [
-    ["Plantilla de control de gastos (top freebie expenses)", "https://factorial.es/plantillas/plantilla-control-gastos"],
-    ["eBook: optimización financiera para CFOs", "https://factorial.es/ebooks/optimizacion-financiera-para-cfos-ebook"],
-    ["Plantilla de seguimiento de los gastos", "https://factorial.es/plantillas/plantilla-seguimiento-gastos"],
-    ["Plantilla para un plan de tesorería", "https://factorial.es/plantillas/plantilla-para-un-plan-de-tesoreria"],
-    ["Plantilla de gastos para imprimir", "https://factorial.es/plantillas/plantilla-de-gastos-para-imprimir-editable"]
-  ],
-  desempeno: [
-    ["Performance Reviews", "https://factorial.es/ebooks/kit-herramientas-performance-review"],
-    ["40 preguntas que hacerte si lideras un equipo", "https://factorial.es/plantillas/checklist-40-preguntas-para-managers"],
-    ["eBook - Estrategias aumentar la fidelizacion de tus equipos", "https://factorial.es/plantillas/estrategias-fidelizacion-equipos"],
-    ["Plantilla evaluación 360", "https://factorial.es/plantillas/evaluacion-360-descargable"],
-    ["Test de motivación laboral", "https://factorial.es/plantillas/test-motivacion-laboral"],
-    ["Plantilla objetivos OKR", "https://factorial.es/plantillas/plantilla-objetivos-okr"],
-    ["Plantilla - rueda de competencias", "https://factorial.es/plantillas/plantilla-rueda-de-competencias"],
-    ["Encuesta para medir el estrés laboral", "https://factorial.es/plantillas/encuesta-para-medir-estres-laboral"],
-    ["Plantilla - Prueba DISC", "https://factorial.es/plantillas/plantilla-para-prueba-disc"],
-    ["Reuniones 1-1", "https://factorial.es/plantillas/reuniones-one-to-one"],
-    ["Kit de vuelta al trabajo", "https://factorial.es/ebooks/kit-para-potenciar-a-tu-equipo-de-vuelta-al-trabajo"],
-    ["Guia de evaluación del desempeño [premium asset 2026]", "https://factorial.es/ebooks/guia-evaluacion-del-desempeno"],
-    ["Evaluación desempeño plantilla en excel", "https://factorial.es/plantillas/evaluacion-desempeno-excel-descargable"]
-  ],
-  formacion: [
-    ["Descubre cómo aprovechar al máximo las bonificaciones de FUNDAE en tu empresa", "https://factorial.es/ebooks/formacion-bonificada-fundae-guia"],
-    ["Kit para desarrollar un plan de carrera", "https://factorial.es/plantillas/kit-plan-de-carrera"],
-    ["Plantilla profesiograma Word", "https://factorial.es/plantillas/plantilla-profesiograma-word-descargar-gratis"],
-    ["Plan de carrera PDF", "https://factorial.es/plantillas/plantilla-plan-de-carrera-con-ejemplo-en-pdf-para-empresa"],
-    ["Plantilla plan de carrera", "https://factorial.es/plantillas/plan-de-carrera"],
-    ["Plantilla - Employee Journey", "https://factorial.es/plantillas/plantilla-employee-journey"],
-    ["Plan de carrera personal", "https://factorial.es/plantillas/plan-de-carrera-personal"],
-    ["Guía sobre cómo liderar la formación del personal en la era de la IA [premium asset 2026]", "https://factorial.es/ebooks/guia-aprendizaje-desarrollo-lms"],
-    ["Plantilla excel plan formacion cursos formaciones", "https://factorial.es/plantillas/plantilla-excel-plan-formacion-cursos-formaciones"],
-    ["Guía completa para gestionar tu formación bonificada por FUNDAE", "https://factorial.es/ebooks/guia-lms-fundae-2026"],
-    ["Calculadora Crédito y Coste de Gestión de FUNDAE", "https://factorial.es/herramientas/calculadora-credito-coste-gestion-fundae"]
-  ],
-  canal: [
-    ["Kit para implementar un canal de denuncias efectivo", "https://factorial.es/plantillas/kit-canal-de-denuncias"]
-  ],
-  proyectos: [
-    ["Guía para calcular los costes en la gestión de proyectos", "https://factorial.es/ebooks/guia-costes-proyecto"],
-    ["Kit proyectos", "https://factorial.es/ebooks/guia-gestion-proyectos-rrh-finanzas-plantilla"]
-  ],
-  onoff: [
-    ["Modelo - Carta de despido", "https://factorial.es/plantillas/modelos-cartas-despido"],
-    ["Checklist offboarding", "https://factorial.es/plantillas/lista-offboarding"],
-    ["Guía Onboarding", "https://factorial.es/plantillas/guia-onboarding"],
-    ["Checklist onboarding en teletrabajo", "https://factorial.es/plantillas/checklist-onboarding-teletrabajo"],
-    ["Plantilla - Finiquito", "https://factorial.es/plantillas/plantilla-documento-finiquito"]
-  ],
-  turnos: [
-    ["Plantilla excel - gestión de turnos", "https://factorial.es/plantillas/plantilla-control-turnos-de-trabajo-excel"],
-    ["Ebook de Pico de Ventas", "https://factorial.es/plantillas/pico-de-ventas-estrategias"]
-  ],
-  ausencias: [
-    ["Plantilla excel - gestión de ausencias", "https://factorial.es/plantillas/gestion-de-ausencias-excel-descargable"],
-    ["Calendario laboral Valencia 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-valencia"],
-    ["Calendario laboral Madrid 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-madrid"],
-    ["Calendario laboral España 2025", "https://factorial.es/plantillas/plantilla-calendario-laboral-espana"],
-    ["Calendario laboral Barcelona 2024", "https://factorial.es/plantillas/plantilla-calendario-laboral-barcelona"],
-    ["Plantilla excel - gestión de ausencias y vacaciones", "https://factorial.es/plantillas/plantilla-control-vacaciones-empleados-excel"]
-  ],
-  comunicaciones: [
-    ["Plantilla para la comunicación interna", "https://factorial.es/plantillas/plantilla-comunicacion-interna"]
-  ],
-  portal: [
-    ["Cuadro de mando RR.HH.", "https://factorial.es/plantillas/cuadro-de-mando-rrhh"],
-    ["Plantilla de ficha del empleado", "https://factorial.es/plantillas/plantilla-ficha-empleado"],
-    ["Plantilla - Panel de Datos", "https://factorial.es/plantillas/panel-de-datos"]
-  ],
-  analiticas: [
-    ["Plantilla - Calcular Tasa de rotación", "https://factorial.es/plantillas/plantilla-tasa-de-rotacion"],
-    ["eBook: People Analytics", "https://factorial.es/ebooks/descargar-people-analytics-ebook"],
-    ["Los 7 datos clave en RR. HH.", "https://factorial.es/ebooks/7-kpis-clave-rrhh"]
-  ],
-  documentos: [
-    ["Guía de los tipos de contratos en España", "https://factorial.es/ebooks/guia-contratos-espana"]
-  ],
-  beneficios: [
-    ["Guía Retribución Flexible", "https://factorial.es/ebooks/todo-sobre-la-retribucion-flexible"],
-    ["Report Retribución Flexible", "https://factorial.es/reporte-retribucion-flexible"]
-  ],
-  one: [
-    ["Informe Global IA '25", "https://factorial.es/informe-ia-empresas"],
-    ["Freebie New IA EU Act", "https://factorial.es/ebooks/guia-ley-ia-union-europea"]
-  ],
-  revision: [
-    ["Nueva Normativa de Transparencia Salarial", "https://factorial.es/ebooks/normativa-ue-transparencia-salarial"]
-  ],
-  plantilla: [
-    ["Headcount Planning (oct 2026)", "https://factorial.es/ebooks/headcount-planning-rrhh-finanzas"]
-  ],
-};
 
 const STORIES = [
   { t: "Una nueva incorporación", d: "La posición se aprueba una vez y el resto se encadena solo.", steps: [
@@ -909,8 +810,7 @@ const EN = {
       value: ["Team pulse at clock-in: check-ins without survey fatigue and alerts to the right manager.", "Automated surveys and eNPS at onboarding, at exit and at every milestone.", "AI 1:1 meetings: One prepares each 1:1 with goals, performance and mood."],
       one: [{ q: "Prepare tomorrow's 1:1 with Laura.", a: "Gathers her goals, latest review, recent pulse and what was discussed in previous 1:1s." }],
       why: "Good performance doesn't always mean engagement. With pulse tied to clock-ins and performance context, One sees the full picture of each person.",
-      stat: { n: "40–60%", t: "less manual admin with automated reviews, 1:1s and surveys" },
-      tag: "AI 1:1s: coming soon" },
+      stat: { n: "40–60%", t: "less manual admin with automated reviews, 1:1s and surveys" } },
     comunidades: { name: "Communities",
       lead: "Spaces where your people meet, share and recognize each other, beyond the org chart.",
       value: ["Communities by interest, location, project or team, open or invite-only.", "Posts, recognition and milestone celebrations from the app.", "Brings office, remote and in-store people together in one space."],
@@ -1067,7 +967,7 @@ const EN = {
   ],
   UI: {
     center: "The core", area: "Area", modules: "Modules", brings: "What it brings", withOne: "With One", connected: "Connected with",
-    soon: "What's next", soonNote: "Scope and dates may change.", guides: "Free guides and templates (in Spanish)", close: "Close",
+    soon: "What's next", soonNote: "Scope and dates may change.", close: "Close",
     title: "Factorial · Everything connected with One",
     h1: "One already knows your company",
     sub: "Every Factorial module shares the same data. One works on top of all of them, with your permissions and your policies.",
@@ -1083,6 +983,18 @@ const EN = {
       <tr><td>Compliance</td><td>No guarantees in the EU.</td><td>Compliant with GDPR and the EU AI Act, hosted in the EU.</td></tr>
       <tr><td>Reliability</td><td>Makes up answers without warning.</td><td>Answers with your data and shows the source. If it doesn't know, it says so.</td></tr>
       <tr><td>Control</td><td>Opaque cost and actions.</td><td>You decide which agents run and see every action and what it cost.</td></tr>`,
+    s4t: "One: personal capacity",
+    s4d: "Each person has their own One capacity to ask, delegate and automate. Choose Basic, Plus or Max based on how much work each profile hands to One.",
+    tiers: `<div class="tier"><div class="tn"><b>Basic</b><span>Everyday</span></div><p class="tl">So the whole workforce sorts out their own requests without waiting on anyone.</p>
+      <h4>Who it's for</h4><div class="who"><i>Employees</i></div>
+      <h4>What they do with One</h4><ul><li>Ask about policies, balances, payslips and documents, and get the answer with the source.</li><li>Request time off, expenses and tickets by chatting.</li><li>Track every request from the app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Plus</b><span>Team management</span></div><p class="tl">For people who lead teams and need their team's context at hand.</p>
+      <h4>Who it's for</h4><div class="who"><i>Managers</i></div>
+      <h4>What they do with One</h4><ul><li>Everything in Basic, with more daily capacity.</li><li>Prepare 1:1s and check their team's analytics.</li><li>Approve time off, expenses and shifts with the context already gathered.</li></ul></div>
+    <div class="tier max"><div class="tn"><b>Max</b><span>Maximum capacity</span></div><p class="tl">For the profiles that delegate the most work to One every day.</p>
+      <h4>Who it's for</h4><div class="who"><i>Training Manager</i><i>Finance Manager</i></div>
+      <h4>What they do with One</h4><ul><li>Everything in Plus, with the highest daily capacity.</li><li>Build full courses, process batches of expenses and create reports and routines.</li><li>Designed for intensive use of One in their area.</li></ul></div>`,
+    tierNote: "Agents that work for the whole company (covering shifts, calling candidates, approving expenses) use a separate company capacity, not the personal one. The exact capacity of each tier depends on your plan.",
     s3t: "What's next",
     s3d: "Every product is becoming an AI product. Scope and dates may change; we'll keep you posted.",
     road: `<div><span>Coming soon</span><b>AI 1:1s</b><p>One prepares and guides every 1:1 with the person's full history.</p></div>
@@ -1099,7 +1011,7 @@ const EN = {
 };
 const UI_ES = {
   center: "El centro", area: "Área", modules: "Módulos", brings: "Lo que aporta", withOne: "Con One", connected: "Conectado con",
-  soon: "Lo que viene", soonNote: "El alcance y las fechas pueden cambiar.", guides: "Guías y plantillas gratuitas", close: "Cerrar",
+  soon: "Lo que viene", soonNote: "El alcance y las fechas pueden cambiar.", close: "Cerrar",
   title: "Factorial · Todo conectado con One"
 };
 
@@ -1258,11 +1170,6 @@ const U = k => (lang === 'en' ? EN.UI : UI_ES)[k];
 function chatHTML(list){
   return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
 }
-const EXT = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12"/></svg>';
-function guidesHTML(key){
-  const g = FREEBIES[key]; if (!g || !g.length) return '';
-  return `<h3>${U('guides')}</h3><ul class="guides">${g.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${n}${EXT}</a></li>`).join('')}</ul>`;
-}
 function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${tm(i).name}</button>`).join('')}</div>`; }
 
 /* mini charts (ficticios) */
@@ -1306,8 +1213,7 @@ function render(key){
   if (key === 'one') {
     h = `<div class="p-head"><div><p class="p-cat"><b>${U('center')}</b></p><h2>One</h2></div>${close}</div>
     ${LONG[lang].one()}
-    ${routinesList()}
-    ${guidesHTML('one')}`;
+    ${routinesList()}`;
   } else if (key.startsWith('hub:')) {
     const k = key.slice(4), hub = th(k);
     h = `<div class="p-head"><div><p class="p-cat"><b>${U('area')}</b></p><h2>${hub.name}</h2></div>${close}</div>
@@ -1324,7 +1230,6 @@ function render(key){
     h += `<h3>${U('withOne')}</h3>` + (m.one ? chatHTML(m.one) : '') + (m.oneNote ? `<p class="note">${m.oneNote}</p>` : '');
     if (m.special === 'analytics') h += analyticsExtra();
     h += `<h3>${U('connected')}</h3>${chipsHTML(m.links)}<p class="why">${m.why}</p>`;
-    h += guidesHTML(key);
     if (m.soon) h += `<h3>${U('soon')}</h3><ul class="soon">${m.soon.map(s=>`<li>${s}</li>`).join('')}</ul><p class="disc-note">${U('soonNote')}</p>`;
   }
   panelIn.innerHTML = h;
