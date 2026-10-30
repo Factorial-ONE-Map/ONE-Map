@@ -1830,9 +1830,9 @@ const FR = {
       value: ["Compatible avec votre logiciel de paie et avec Factorial Professionals pour les cabinets.", "API pour se connecter à votre ERP."],
       oneNote: "Si la donnée vit dans Factorial ou dans un outil que vous connectez, vous pouvez demander, déléguer ou automatiser avec ONE.",
       why: "Intégrer, ce n’est pas copier : le changement est saisi une seule fois et synchronisé." },
-    anticipo: { name: "Avance sur salaire",
+    anticipo: { name: "Acompte sur salaire",
       lead: "Vos équipes peuvent demander une partie du salaire déjà gagné avant la fin du mois.",
-      value: ["Demande depuis l’appli, sans paperasse.", "Règles et plafonds que vous définissez.", "L’avance est reflétée en paie sans ajustement manuel."],
+      value: ["Demande depuis l’appli, sans paperasse.", "Règles et plafonds que vous définissez.", "L’acompte est déduit de la paie sans ajustement manuel."],
       oneNote: "Les collaborateurs demandent à ONE combien ils peuvent solliciter et comment ça marche, selon votre politique.",
       why: "Comme le salaire et les jours travaillés sont déjà dans Factorial, le montant disponible n’est pas calculé à la main." }
   },
@@ -2441,9 +2441,9 @@ HUBX.fr = {
     ask: "Verrouille ou efface l’ordinateur que Marta a perdu" },
   nomina: { tag: "La paie juste, du premier coup",
     lead: "Temps, absences et dépenses alimentent automatiquement la paie : vous repérez les erreurs avant le jour de paie, pas après.",
-    pains: ["Un cycle de paie guidé et collaboratif, avec votre prestataire de paie connecté via Factorial Professionals.", "Détection automatique des erreurs dans les éléments de salaire et les résultats de paie.", "Paiements SEPA et distribution automatique des bulletins de paie."],
-    stats: [{ n: "70+", t: "intégrations avec prestataires de paie, ERP et plus encore" }],
-    ask: "Que manque-t-il avant de clôturer la paie de ce mois-ci ?" }
+    pains: ["Un cycle de paie guidé et collaboratif, avec votre prestataire de paie connecté via Factorial Professionals.", "Détection automatique des erreurs dans les éléments de salaire et les résultats de paie.", "Paiements SEPA et distribution automatique des bulletins de paie.", "Acomptes sur salaire sans intérêts ni frais."],
+    stats: [{ n: "0 €", t: "d’intérêts et de frais sur les acomptes sur salaire" }, { n: "70+", t: "intégrations avec prestataires de paie, ERP et plus encore" }],
+    ask: "Quel acompte sur salaire puis-je encore demander ce mois-ci ?" }
 };
 
 MODX.fr = {
@@ -2475,7 +2475,7 @@ MODX.fr = {
   marketplace: { extra: ["Achetez ou louez des appareils, livraison et récupération incluses."] },
   beneficios: { extra: ["Carte digitale dans Apple Wallet et Google Wallet, avec conformité fiscale intégrée.", "Disponible en Espagne et au Portugal."], try: "Combien me reste-t-il de titres-restaurant ?" },
   integraciones: { extra: ["Connecteur MCP : tout assistant compatible utilise Factorial avec vos propres droits d’accès.", "70+ intégrations : ATS et job boards, e-mail et agendas, ERP et outils de BI."] },
-  anticipo: { extra: ["Sans intérêts, sans frais et sans prêt : le plafond est calculé automatiquement."], try: "Quel montant d’avance sur salaire puis-je demander ce mois-ci ?" }
+  anticipo: { extra: ["Sans intérêts, sans frais et sans prêt : le plafond est calculé automatiquement."], try: "Quel acompte sur salaire puis-je demander ce mois-ci ?" }
 };
 
 FACTS.fr = {
@@ -2728,7 +2728,7 @@ FACTS.it.sec = { t: "Sicurezza e compliance",
 /* idioma: ?lang= o la última elección; español por defecto */
 const I18N = { en: EN, de: DE, pt: PT, fr: FR, it: IT };
 /* módulos que no se ofrecen en cada mercado: no aparecen en el mapa ni en los paneles */
-const HIDE = { de: ['beneficios', 'anticipo'], fr: ['beneficios', 'anticipo'], it: ['beneficios', 'anticipo'] };
+const HIDE = { de: ['beneficios', 'anticipo'], fr: ['beneficios'], it: ['beneficios', 'anticipo'] };
 const shown = id => !(HIDE[lang] || []).includes(id);
 const isLang = l => l === 'es' || !!I18N[l];
 let lang = (() => {
