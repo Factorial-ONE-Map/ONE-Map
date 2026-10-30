@@ -2333,7 +2333,8 @@ MODX.es = {
 };
 
 FACTS.es = {
-  t: "La IA para empresas",
+  e: "Nosotros",
+  t: "Factorial en cifras",
   d: "Factorial nació en Barcelona en 2016 para las empresas medianas de toda Europa. Hoy integramos la IA en el sistema con el que funciona tu empresa, empezando por RR. HH., Finanzas e IT.",
   items: [["+17.000", "clientes de todos los sectores"], ["+1 M", "de personas usan Factorial cada día"], ["4,8/5", "de valoración del onboarding"], ["+450", "personas cuidan de nuestros clientes"], ["+20 M€", "invertidos en producto cada año"], ["+700 M€", "de financiación"]],
   note: "Oficinas en Barcelona, Madrid y Múnich · Soporte por teléfono, ticket y chat en hasta 7 idiomas · Datos alojados en la UE"
@@ -2405,7 +2406,8 @@ MODX.en = {
 };
 
 FACTS.en = {
-  t: "The AI for Business",
+  e: "About us",
+  t: "Factorial in numbers",
   d: "Factorial was founded in Barcelona in 2016 for mid-market companies across Europe. Today we build AI into the system your company runs on, starting with HR, Finance and IT.",
   items: [["17,000+", "clients across every industry"], ["1M+", "people use Factorial every day"], ["4.8/5", "onboarding rating"], ["450+", "people taking care of our customers"], ["€20M+", "invested in product every year"], ["€700M+", "in funding"]],
   note: "Offices in Barcelona, Madrid and Munich · Phone, ticket and chat support in up to 7 languages · Data hosted in the EU"
@@ -2477,7 +2479,8 @@ MODX.fr = {
 };
 
 FACTS.fr = {
-  t: "L’IA pour l’entreprise",
+  e: "Qui sommes-nous",
+  t: "Factorial en chiffres",
   d: "Factorial a été fondée à Barcelone en 2016 pour les ETI et PME de toute l’Europe. Aujourd’hui, nous intégrons l’IA au système qui fait tourner votre entreprise, en commençant par les RH, la Finance et l’IT.",
   items: [["17 000+", "clients dans tous les secteurs"], ["1 M+", "de personnes utilisent Factorial chaque jour"], ["4,8/5", "note de l’onboarding"], ["450+", "personnes au service de nos clients"], ["20 M€+", "investis chaque année dans le produit"], ["700 M€+", "de levées de fonds"]],
   note: "Bureaux à Barcelone, Madrid et Munich · Support par téléphone, ticket et chat dans jusqu’à 7 langues · Données hébergées dans l’UE"
@@ -2549,7 +2552,8 @@ MODX.pt = {
 };
 
 FACTS.pt = {
-  t: "A IA para as empresas",
+  e: "Sobre nós",
+  t: "A Factorial em números",
   d: "A Factorial foi fundada em Barcelona em 2016 para empresas de média dimensão em toda a Europa. Hoje integramos a IA no sistema que faz funcionar a sua empresa, começando pelos RH, Finanças e IT.",
   items: [["+17.000", "clientes de todos os setores"], ["+1 M", "de pessoas usam a Factorial todos os dias"], ["4,8/5", "de avaliação do onboarding"], ["+450", "pessoas dedicadas aos nossos clientes"], ["+20 M€", "investidos em produto todos os anos"], ["+700 M€", "de financiamento"]],
   note: "Escritórios em Barcelona, Madrid e Munique · Suporte por telefone, ticket e chat em até 7 idiomas · Dados alojados na UE"
@@ -2621,7 +2625,8 @@ MODX.it = {
 };
 
 FACTS.it = {
-  t: "L’AI per le aziende",
+  e: "Chi siamo",
+  t: "Factorial in numeri",
   d: "Factorial è nata a Barcellona nel 2016 per le aziende di medie dimensioni in tutta Europa. Oggi integriamo l’AI nei processi su cui si regge la tua azienda, a partire da HR, Finance e IT.",
   items: [["+17.000", "clienti di ogni settore"], ["+1 M", "di persone usano Factorial ogni giorno"], ["4,8/5", "valutazione dell’onboarding"], ["+450", "persone si occupano dei nostri clienti"], ["+20 M€", "investiti nel prodotto ogni anno"], ["+700 M€", "di finanziamenti"]],
   note: "Uffici a Barcellona, Madrid e Monaco · Assistenza via telefono, ticket e chat in fino a 7 lingue · Dati ospitati nell’UE"
@@ -2693,7 +2698,8 @@ MODX.de = {
 };
 
 FACTS.de = {
-  t: "Die KI für Unternehmen",
+  e: "Über uns",
+  t: "Factorial in Zahlen",
   d: "Factorial wurde 2016 in Barcelona gegründet, gebaut für den Mittelstand in ganz Europa. Heute integrieren wir KI in das System, mit dem Ihr Unternehmen arbeitet, angefangen bei HR, Finanzen und IT.",
   items: [["17.000+", "Kunden aus allen Branchen"], ["1 Mio.+", "Menschen nutzen Factorial jeden Tag"], ["4,8/5", "Bewertung unseres Onboardings"], ["450+", "Menschen kümmern sich um unsere Kunden"], ["20 Mio. €+", "investieren wir jedes Jahr in das Produkt"], ["700 Mio. €+", "Finanzierung"]],
   note: "Büros in Barcelona, Madrid und München · Support per Telefon, Ticket und Chat in bis zu 7 Sprachen · Daten in der EU gehostet"
@@ -2744,7 +2750,7 @@ function tryHTML(q){ const [o,c] = QUOTES[lang] || QUOTES.es; return `<p class="
 function renderFacts(){
   const f = FACTS[lang], s = $('#facts');
   s.hidden = !f; if (!f) return;
-  s.innerHTML = `<p class="eyebrow">Factorial</p><h2 class="st">${f.t}</h2><p class="sl">${f.d}</p>
+  s.innerHTML = `<p class="eyebrow">${f.e}</p><h2 class="st">${f.t}</h2><p class="sl">${f.d}</p>
   <div class="facts">${f.items.map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join('')}</div><p class="factnote">${f.note}</p>`
   + (f.sec ? `<div class="sec"><h3>${f.sec.t}</h3><div class="certs">${f.sec.certs.map(([n,t])=>`<div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8.2-7.5 9.5-4.4-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg></span><b>${n}</b><span>${t}</span></div>`).join('')}</div>
   <ul class="secl">${f.sec.items.map(t=>`<li>${t}</li>`).join('')}</ul></div>` : '');
