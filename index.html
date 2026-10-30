@@ -184,6 +184,16 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .facts div{border-top:2px solid var(--red);padding-top:10px}
 .facts b{display:block;font-size:clamp(30px,3vw,40px);font-weight:500;line-height:1}
 .facts span{display:block;font-size:14.5px;color:var(--ink-2);margin-top:6px}
+.sec{margin-top:44px;padding-top:32px;border-top:1px solid var(--line)}
+.sec h3{font-size:clamp(24px,2.4vw,30px);font-weight:500;line-height:1;margin:0 0 20px}
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.certs div{border:1px solid var(--line);border-radius:20px;padding:18px 20px;display:grid;gap:4px}
+.certs .ic{width:36px;height:36px;border-radius:50%;background:var(--ink-50);color:var(--red);display:grid;place-items:center;margin-bottom:6px}
+.certs b{font-size:18px;font-weight:500}
+.certs span:not(.ic){font-size:14px;color:var(--ink-2);line-height:1.4}
+.secl{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 32px}
+.secl li{position:relative;padding-left:20px;font-size:15px;line-height:1.45}
+.secl li::before{content:"";position:absolute;left:0;top:.5em;width:9px;height:9px;border-radius:50%;border:2px solid var(--red)}
 .factnote{font-size:14px;color:var(--ink-2);margin:24px 0 0}
 .road{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .road div{border-top:2px solid var(--line);padding-top:12px}
@@ -1255,7 +1265,7 @@ const DE = {
       lead: "Jede Änderung erreicht die Lohnabrechnung bereits geprüft.",
       value: ["Deckt den gesamten Abrechnungszyklus ab: Vorbereitung (inklusive Mitarbeiter-Updates), Nachbereitung (Ergebnisse aus Ihrer Lohnsoftware) und darüber hinaus, mit Financial Planning, Verteilung der Gehaltsabrechnungen über das Dokumentenmanagement und SEPA-Zahlungen mit Treasury.", "Mitarbeiter-Updates bereit für die Abrechnung: Ein- und Austritte, Vertrags- und Gehaltsänderungen, Abwesenheiten und Boni, sofort sichtbar.", "Warnungen vor der Berechnung: offene Variablen, nicht genehmigte Boni oder veraltete Schichten.", "Jede Abrechnung verglichen mit genehmigten Variablen und Verträgen, plus Ist- vs. Plankosten.", "Bonuspläne, verbunden mit Performance: Auszahlungsregeln, automatische Berechnung jedes Bonus und direkte Auszahlung über die Lohnabrechnung."],
       one: [{ q: "Was fehlt noch, bevor wir die Lohnabrechnung dieses Monats abschließen?", a: "Prüft offene Variablen und alles, was nicht stimmt, und sagt Ihnen, wer handeln muss." }],
-      why: "Hier fließt alles zusammen: Stempelungen, Schichten, Abwesenheiten, Ausgaben, Benefits und Gehaltserhöhungen. Wenn sie verbunden entstehen, kommen sie geprüft an.",
+      why: "Hier fließt alles zusammen: Stempelungen, Schichten, Abwesenheiten, Ausgaben und Gehaltserhöhungen. Wenn sie verbunden entstehen, kommen sie geprüft an.",
       stat: { n: "40 h", t: "pro Monat sparen Sie, wenn Sie Einstellungen, Austritte, Gehaltsänderungen, Abwesenheiten und Variablen mit Ihrem Lohnabrechnungsanbieter synchronisieren" } },
     integraciones: { name: "Integrationen",
       lead: "Factorial verbunden mit Ihrem Lohnabrechnungsanbieter und dem Rest Ihrer Tools.",
@@ -1627,7 +1637,7 @@ const FR = {
     finanzas: { name: "Finance", lead: "RH et Finance travaillent avec les mêmes chiffres : effectifs, notes de frais, achats, projets et budget.", one: "ONE valide ce qui respecte la politique et ne vous laisse que les exceptions." },
     core: { name: "Core HR", lead: "Le socle : les personnes, les documents, les politiques et l’appli de chaque collaborateur. Ce qui est saisi ici sert à tous les modules.", one: "ONE connaît vos politiques, répond en citant la source et traite les demandes avant qu’elles n’arrivent à un humain." },
     it: { name: "IT", lead: "Équipements, logiciels et inventaire rattachés à la personne qui les utilise, de son premier jour à son dernier.", one: "ONE analyse le ticket, vérifie le stock et prépare l’achat : il ne reste plus qu’à valider." },
-    nomina: { name: "Paie & Avantages", lead: "Chaque changement qui touche la rémunération arrive validé en paie, du pointage à l’augmentation.", one: "ONE repère les variables en attente et tout ce qui ne colle pas avant le calcul de la paie." }
+    nomina: { name: "Paie", lead: "Chaque changement qui touche la rémunération arrive validé en paie, du pointage à l’augmentation.", one: "ONE repère les variables en attente et tout ce qui ne colle pas avant le calcul de la paie." }
   },
   M: {
     desempeno: { name: "Performance",
@@ -1785,7 +1795,7 @@ const FR = {
       lead: "Chaque changement arrive en paie déjà validé.",
       value: ["Couvre tout le cycle de paie : pré-paie (préparation et mises à jour des collaborateurs), post-paie (résultats calculés par votre logiciel de paie) et au-delà, avec Planification financière, la distribution des bulletins dans la Gestion des documents et les paiements SEPA avec Trésorerie.", "Mises à jour des collaborateurs prêtes pour la paie : entrées, sorties, changements de contrat et de salaire, absences et primes, visibles immédiatement.", "Alertes avant le calcul : variables en attente, primes non validées ou plannings périmés.", "Chaque paie comparée aux variables et contrats validés, et coût réel vs prévu.", "Plans d’incentive connectés à Performance : règles de versement, calcul automatique de chaque prime et versement direct en paie."],
       one: [{ q: "Que manque-t-il avant de clôturer la paie de ce mois ?", a: "Passe en revue les variables en attente et tout ce qui ne colle pas, et vous dit qui doit agir." }],
-      why: "Tout converge ici : pointages, plannings, absences, notes de frais, avantages et augmentations. S’ils naissent connectés, ils arrivent validés.",
+      why: "Tout converge ici : pointages, plannings, absences, notes de frais et augmentations. S’ils naissent connectés, ils arrivent validés.",
       stat: { n: "40 h", t: "par mois à gagner en synchronisant embauches, départs, changements de salaire, absences et variables avec votre prestataire de paie" } },
     integraciones: { name: "Intégrations",
       lead: "Factorial connecté à votre prestataire de paie et au reste de vos outils.",
@@ -2050,7 +2060,7 @@ const IT = {
       lead: "Ogni modifica arriva alle paghe già validata.",
       value: ["Copre tutto il ciclo paghe: pre-elaborazione (preparazione e aggiornamenti dei dipendenti), post-elaborazione (risultati calcolati dal tuo software paghe) e oltre, con Financial Planning, distribuzione dei cedolini in Gestione documentale e pagamenti SEPA con Tesoreria.", "Aggiornamenti dei dipendenti pronti per le paghe: assunzioni, cessazioni, modifiche di contratto e stipendio, assenze e bonus, visibili all’istante.", "Alert prima del calcolo: variabili in sospeso, bonus non approvati o turni non aggiornati.", "Ogni cedolino confrontato con variabili e contratti approvati, e costo reale vs. pianificato.", "Piani di incentivazione collegati alla Performance: regole di pagamento, calcolo automatico di ogni bonus e pagamento diretto in busta paga."],
       one: [{ q: "Cosa manca prima di chiudere le paghe di questo mese?", a: "Controlla le variabili in sospeso e tutto ciò che non torna, e ti dice chi deve intervenire." }],
-      why: "Tutto confluisce qui: timbrature, turni, assenze, spese, benefit e aumenti. Se nascono connessi, arrivano validati.",
+      why: "Tutto confluisce qui: timbrature, turni, assenze, spese e aumenti. Se nascono connessi, arrivano validati.",
       stat: { n: "40 h", t: "al mese che puoi risparmiare sincronizzando assunzioni, uscite, modifiche salariali, assenze e variabili con il tuo consulente del lavoro o software paghe" } },
     integraciones: { name: "Integrazioni",
       lead: "Factorial connesso al tuo consulente del lavoro, al tuo software paghe e al resto dei tuoi strumenti.",
@@ -2208,11 +2218,11 @@ function drawWires(){
     const ex = left ? hb.r : hb.l, ang = Math.atan2(hb.cy-one.cy, ex-one.cx);
     hubIn[h] = { x: left ? hb.l : hb.r, y: hb.cy };
     hubOut[h] = curve(ex,hb.cy, one.cx+Math.cos(ang)*R*0.82, one.cy+Math.sin(ang)*R*0.82);
-    for (const id of ORDER[h]) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`; }
+    for (const id of ORDER[h].filter(shown)) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`; }
     d += `<path class="base" d="${hubOut[h]}"/>`;
   }
-  const flowIds = !current ? [] : current === 'one' ? Object.keys(M)
-    : current.startsWith('hub:') ? ORDER[current.slice(4)] : [current, ...M[current].links];
+  const flowIds = (!current ? [] : current === 'one' ? Object.keys(M)
+    : current.startsWith('hub:') ? ORDER[current.slice(4)] : [current, ...M[current].links]).filter(shown);
   const flowHubs = new Set();
   for (const id of flowIds) {
     const h = M[id].hub, a = pillAnchor(id); flowHubs.add(h);
@@ -2398,10 +2408,10 @@ HUBX.fr = {
     stats: [{ n: "1 clic", t: "pour récupérer les licences inutilisées" }, { n: "Zero-touch", t: "déploiement des appareils, de macOS à ChromeOS" }],
     ask: "Verrouille ou efface l’ordinateur que Marta a perdu" },
   nomina: { tag: "La paie juste, du premier coup",
-    lead: "Temps, absences, dépenses et avantages alimentent automatiquement la paie : vous repérez les erreurs avant le jour de paie, pas après.",
-    pains: ["Un cycle de paie guidé et collaboratif, avec votre prestataire de paie connecté via Factorial Professionals.", "Détection automatique des erreurs dans les éléments de salaire et les résultats de paie.", "Paiements SEPA et distribution automatique des bulletins de paie.", "Rémunération flexible et avances sur salaire, sans intérêts ni frais."],
-    stats: [{ n: "0 €", t: "d’intérêts et de frais sur les avances sur salaire" }, { n: "70+", t: "intégrations avec prestataires de paie, ERP et plus encore" }],
-    ask: "Quel montant d’avance sur salaire puis-je encore demander ce mois-ci ?" }
+    lead: "Temps, absences et dépenses alimentent automatiquement la paie : vous repérez les erreurs avant le jour de paie, pas après.",
+    pains: ["Un cycle de paie guidé et collaboratif, avec votre prestataire de paie connecté via Factorial Professionals.", "Détection automatique des erreurs dans les éléments de salaire et les résultats de paie.", "Paiements SEPA et distribution automatique des bulletins de paie."],
+    stats: [{ n: "70+", t: "intégrations avec prestataires de paie, ERP et plus encore" }],
+    ask: "Que manque-t-il avant de clôturer la paie de ce mois-ci ?" }
 };
 
 MODX.fr = {
@@ -2542,10 +2552,10 @@ HUBX.it = {
     stats: [{ n: "1 clic", t: "per recuperare le licenze che nessuno usa" }, { n: "Zero-touch", t: "distribuzione dei dispositivi, da macOS a ChromeOS" }],
     ask: "Blocca o cancella il portatile che Marta ha perso" },
   nomina: { tag: "Buste paga, giuste al primo colpo",
-    lead: "Presenze, assenze, spese e benefit confluiscono automaticamente nelle buste paga, così gli errori li trovi prima del pagamento, non dopo.",
-    pains: ["Un ciclo paghe guidato e condiviso, con il tuo consulente del lavoro collegato tramite Factorial Professionals.", "Rilevamento automatico degli errori nelle voci retributive e nei risultati delle buste paga.", "Pagamenti SEPA e invio automatico delle buste paga.", "Retribuzione flessibile e anticipi sullo stipendio senza interessi né commissioni."],
-    stats: [{ n: "0 €", t: "di interessi e commissioni sugli anticipi salariali" }, { n: "70+", t: "integrazioni con software paghe, ERP e altro" }],
-    ask: "Quanto anticipo sullo stipendio posso ancora chiedere questo mese?" }
+    lead: "Presenze, assenze e spese confluiscono automaticamente nelle buste paga, così gli errori li trovi prima del pagamento, non dopo.",
+    pains: ["Un ciclo paghe guidato e condiviso, con il tuo consulente del lavoro collegato tramite Factorial Professionals.", "Rilevamento automatico degli errori nelle voci retributive e nei risultati delle buste paga.", "Pagamenti SEPA e invio automatico delle buste paga."],
+    stats: [{ n: "70+", t: "integrazioni con software paghe, ERP e altro" }],
+    ask: "Cosa manca prima di chiudere le buste paga di questo mese?" }
 };
 
 MODX.it = {
@@ -2614,10 +2624,10 @@ HUBX.de = {
     stats: [{ n: "1 Klick", t: "um Lizenzen zurückzuholen, die niemand nutzt" }, { n: "Zero-Touch", t: "Gerätebereitstellung, von macOS bis ChromeOS" }],
     ask: "Sperre oder lösche den Laptop, den Marta verloren hat" },
   nomina: { tag: "Löhne, gleich beim ersten Mal richtig",
-    lead: "Zeiten, Abwesenheiten, Ausgaben und Benefits fließen automatisch in die Lohnabrechnung. So finden Sie Fehler vor dem Zahltag, nicht danach.",
-    pains: ["Ein geführter, gemeinsamer Abrechnungszyklus, mit Ihrem Lohnbüro über Factorial Professionals verbunden.", "Automatische Fehlererkennung in Gehaltsbestandteilen und Abrechnungsergebnissen.", "SEPA-Zahlungen und automatischer Versand der Gehaltsabrechnungen.", "Flexible Vergütung und Gehaltsvorschuss ohne Zinsen und ohne Gebühren."],
-    stats: [{ n: "0 €", t: "Zinsen und Gebühren beim Gehaltsvorschuss" }, { n: "70+", t: "Integrationen mit Lohnabrechnungsanbietern, ERPs und mehr" }],
-    ask: "Wie viel Gehaltsvorschuss kann ich diesen Monat noch abrufen?" }
+    lead: "Zeiten, Abwesenheiten und Ausgaben fließen automatisch in die Lohnabrechnung. So finden Sie Fehler vor dem Zahltag, nicht danach.",
+    pains: ["Ein geführter, gemeinsamer Abrechnungszyklus, mit Ihrem Lohnbüro über Factorial Professionals verbunden.", "Automatische Fehlererkennung in Gehaltsbestandteilen und Abrechnungsergebnissen.", "SEPA-Zahlungen und automatischer Versand der Gehaltsabrechnungen."],
+    stats: [{ n: "70+", t: "Integrationen mit Lohnabrechnungsanbietern, ERPs und mehr" }],
+    ask: "Was fehlt noch, bevor wir die Abrechnung dieses Monats abschließen?" }
 };
 
 MODX.de = {
@@ -2659,8 +2669,31 @@ FACTS.de = {
   note: "Büros in Barcelona, Madrid und München · Support per Telefon, Ticket und Chat in bis zu 7 Sprachen · Daten in der EU gehostet"
 };
 
+/* Seguridad y cumplimiento (fuente: slides de seguridad y RGPD de los decks) */
+FACTS.es.sec = { t: "Seguridad y cumplimiento",
+  certs: [["ISO/IEC 27001", "Sistema de gestión de la seguridad de la información"], ["SOC 2 Tipo I y II", "Controles de seguridad auditados de forma independiente"], ["ENS categoría alta", "Esquema Nacional de Seguridad (España)"]],
+  items: ["Datos alojados en la UE (AWS Fráncfort).", "Conforme con el RGPD: Factorial puede actuar como responsable o encargado del tratamiento, con DPA y delegado de protección de datos.", "Conforme con el Reglamento de IA de la UE: tus datos nunca se usan para entrenar modelos de otros clientes.", "ONE solo ve y hace lo que permite el rol de cada persona.", "Acceso con SSO (Google, Microsoft, LinkedIn) y MFA por defecto.", "Revisiones trimestrales de accesos y monitorización continua."] };
+FACTS.en.sec = { t: "Security and compliance",
+  certs: [["ISO/IEC 27001", "Information security management system"], ["SOC 2 Type I & II", "Independently audited security controls"], ["ENS high category", "Spain's National Security Framework"]],
+  items: ["Data hosted in the EU (AWS Frankfurt).", "GDPR compliant: Factorial can act as controller or processor, with a DPA and a data protection officer.", "EU AI Act compliant: your data is never used to train models for other customers.", "ONE only sees and does what each person's role allows.", "SSO sign-in (Google, Microsoft, LinkedIn) and MFA by default.", "Quarterly access reviews and continuous monitoring."] };
+FACTS.de.sec = { t: "Sicherheit und Compliance",
+  certs: [["ISO/IEC 27001", "Managementsystem für Informationssicherheit"], ["SOC 2 Typ I & II", "Unabhängig geprüfte Sicherheitskontrollen"], ["ENS, hohe Kategorie", "Nationales Sicherheitsschema Spaniens"]],
+  items: ["Daten in der EU gehostet (AWS Frankfurt).", "DSGVO-konform: Factorial kann als Verantwortlicher oder Auftragsverarbeiter agieren, mit AVV und Datenschutzbeauftragtem.", "EU AI Act-konform: Ihre Daten werden nie zum Training von Modellen für andere Kunden verwendet.", "ONE sieht und tut nur, was die Rolle der jeweiligen Person erlaubt.", "Anmeldung per SSO (Google, Microsoft, LinkedIn) und MFA standardmäßig.", "Vierteljährliche Überprüfung der Zugriffsrechte und kontinuierliches Monitoring."] };
+FACTS.pt.sec = { t: "Segurança e conformidade",
+  certs: [["ISO/IEC 27001", "Sistema de gestão da segurança da informação"], ["SOC 2 Tipo I e II", "Controlos de segurança auditados de forma independente"], ["ENS categoria alta", "Esquema Nacional de Segurança (Espanha)"]],
+  items: ["Dados alojados na UE (AWS Frankfurt).", "Conforme com o RGPD: a Factorial pode atuar como responsável ou subcontratante, com DPA e encarregado da proteção de dados.", "Conforme com o Regulamento da IA da UE: os seus dados nunca são usados para treinar modelos de outros clientes.", "O ONE só vê e faz o que a função de cada pessoa permite.", "Acesso com SSO (Google, Microsoft, LinkedIn) e MFA por defeito.", "Revisão trimestral dos acessos e monitorização contínua."] };
+FACTS.fr.sec = { t: "Sécurité et conformité",
+  certs: [["ISO/IEC 27001", "Système de management de la sécurité de l’information"], ["SOC 2 Type I et II", "Contrôles de sécurité audités de manière indépendante"], ["ENS catégorie haute", "Schéma national de sécurité (Espagne)"]],
+  items: ["Données hébergées dans l’UE (AWS Francfort).", "Conforme au RGPD : Factorial peut agir comme responsable de traitement ou sous-traitant, avec DPA et délégué à la protection des données.", "Conforme à l’AI Act européen : vos données ne servent jamais à entraîner des modèles pour d’autres clients.", "ONE ne voit et ne fait que ce que le rôle de chaque personne autorise.", "Connexion SSO (Google, Microsoft, LinkedIn) et MFA par défaut.", "Revue trimestrielle des droits d’accès et surveillance continue."] };
+FACTS.it.sec = { t: "Sicurezza e compliance",
+  certs: [["ISO/IEC 27001", "Sistema di gestione della sicurezza delle informazioni"], ["SOC 2 Tipo I e II", "Controlli di sicurezza verificati in modo indipendente"], ["ENS categoria alta", "Schema nazionale di sicurezza (Spagna)"]],
+  items: ["Dati ospitati nell’UE (AWS Francoforte).", "Conforme al GDPR: Factorial può agire come titolare o responsabile del trattamento, con DPA e responsabile della protezione dei dati.", "Conforme all’AI Act europeo: i tuoi dati non vengono mai usati per addestrare modelli di altri clienti.", "ONE vede e fa solo ciò che il ruolo di ogni persona consente.", "Accesso con SSO (Google, Microsoft, LinkedIn) e MFA di default.", "Revisione trimestrale dei permessi di accesso e monitoraggio continuo."] };
+
 /* idioma: ?lang= o la última elección; español por defecto */
 const I18N = { en: EN, de: DE, pt: PT, fr: FR, it: IT };
+/* módulos que no se ofrecen en cada mercado: no aparecen en el mapa ni en los paneles */
+const HIDE = { de: ['beneficios', 'anticipo'], fr: ['beneficios', 'anticipo'], it: ['beneficios', 'anticipo'] };
+const shown = id => !(HIDE[lang] || []).includes(id);
 const isLang = l => l === 'es' || !!I18N[l];
 let lang = (() => {
   const q = new URLSearchParams(location.search).get('lang');
@@ -2682,9 +2715,11 @@ function renderFacts(){
   const f = FACTS[lang], s = $('#facts');
   s.hidden = !f; if (!f) return;
   s.innerHTML = `<p class="eyebrow">Factorial</p><h2 class="st">${f.t}</h2><p class="sl">${f.d}</p>
-  <div class="facts">${f.items.map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join('')}</div><p class="factnote">${f.note}</p>`;
+  <div class="facts">${f.items.map(([n,t])=>`<div><b>${n}</b><span>${t}</span></div>`).join('')}</div><p class="factnote">${f.note}</p>`
+  + (f.sec ? `<div class="sec"><h3>${f.sec.t}</h3><div class="certs">${f.sec.certs.map(([n,t])=>`<div><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8.2-7.5 9.5-4.4-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg></span><b>${n}</b><span>${t}</span></div>`).join('')}</div>
+  <ul class="secl">${f.sec.items.map(t=>`<li>${t}</li>`).join('')}</ul></div>` : '');
 }
-function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${tm(i).name}</button>`).join('')}</div>`; }
+function chipsHTML(ids){ return `<div class="chips">${ids.filter(shown).map(i=>`<button class="chip" type="button" data-go="${i}">${tm(i).name}</button>`).join('')}</div>`; }
 
 /* mini charts (ficticios) */
 function bars(vals, labels, line){
@@ -2735,7 +2770,7 @@ function render(key){
     if (x) h += `<h3>${U('solves')}</h3><ul class="vals">${x.pains.map(v=>`<li>${v}</li>`).join('')}</ul>
     <div class="stats">${x.stats.map(s=>`<div class="stat"><b>${s.n}</b><span>${s.t}</span></div>`).join('')}</div>`;
     h += `<h3>${U('withOne')}</h3><p class="note">${hub.one}</p>${x && x.ask ? tryHTML(x.ask) : ''}
-    <h3>${U('modules')}</h3><div class="modlist">${ORDER[k].map(i=>`<button type="button" data-go="${i}"><b>${tm(i).name}</b><span>${tm(i).lead}</span></button>`).join('')}</div>`;
+    <h3>${U('modules')}</h3><div class="modlist">${ORDER[k].filter(shown).map(i=>`<button type="button" data-go="${i}"><b>${tm(i).name}</b><span>${tm(i).lead}</span></button>`).join('')}</div>`;
   } else {
     const m = tm(key), hub = th(m.hub), mx = (MODX[lang] || {})[key] || {};
     h = `<div class="p-head"><div><p class="p-cat"><b>${hub.name}</b></p><h2>${m.name}</h2>${m.tag?`<span class="tag">${m.tag}</span>`:''}</div>${close}</div>
@@ -2812,7 +2847,8 @@ function applyLang(){
   document.title = U('title');
   document.querySelectorAll('[data-i18n]').forEach(n => n.innerHTML = T() ? T().UI[n.dataset.i18n] : STATIC_ES[n.dataset.i18n]);
   document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', T() ? T().UI[n.dataset.i18nAria] : STATIC_ES['aria:'+n.dataset.i18nAria]));
-  stage.querySelectorAll('.pill').forEach(b => b.textContent = tm(b.dataset.id).name);
+  stage.querySelectorAll('.pill').forEach(b => { b.textContent = tm(b.dataset.id).name; b.style.display = shown(b.dataset.id) ? '' : 'none'; });
+  if (current && M[current] && !shown(current)) closePanel();
   stage.querySelectorAll('[data-hub-btn]').forEach(b => b.lastChild.textContent = th(b.dataset.hubBtn).name);
   $('#langSel').value = lang;
   buildStories();
