@@ -8,62 +8,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 <style>
+/* Factorial Brand Refresh (verano 2026): Sunrise para superficies de IA, blanco para el resto.
+ * Midnight solo como texto, nunca como fondo. Sin isotipo. Tracking −3% en todo. */
 :root{
-  --red:#FF355E; --red-dark:#C60F35; --tangerine:#FF9153; --midnight:#25253D;
-  --bg:#FFFFFF; --bg-alt:#F6F6F8; --ink:#25253D; --ink-2:#6C6C7D; --ink-3:#AEAEB8;
-  --line:#E6E6EC; --accent-weak:#FFE3EA; --panel:#FFFFFF; --bubble:#F6F6F8;
+  --red:#FF355E; --r140:#C60F35; --r40:#FFAEBF; --midnight:#25253D; --m20:#E3E3EF;
+  --ink:#25253D; --ink-2:#6C6C7D; --ink-3:#AEAEB8; --ink-50:#F6F6F8;
+  --line:#E3E3EF; --panel:#FFFFFF;
+  --sunrise:linear-gradient(125deg, #FFC155 0%, #FF355E 20%, #FF355E 80%, #D2D9F9 100%);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --font:'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ease:cubic-bezier(.2,.8,.2,1);
   color-scheme: light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#1B1B2C; --bg-alt:#23233A; --ink:#F1F1F5; --ink-2:#B4B4C3; --ink-3:#7C7C90;
-    --line:#34344C; --accent-weak:#3A2030; --panel:#20203A; --bubble:#2B2B45; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#1B1B2C; --bg-alt:#23233A; --ink:#F1F1F5; --ink-2:#B4B4C3; --ink-3:#7C7C90;
-  --line:#34344C; --accent-weak:#3A2030; --panel:#20203A; --bubble:#2B2B45; color-scheme:dark;
-}
-html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--red-dark)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:#fff}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased;min-height:100vh;
-  /* gradiente de marca: Radical Red 60% → Dark Red */
-  background:linear-gradient(135deg, var(--red) 0%, var(--red) 60%, var(--red-dark) 100%);
-}
-button{font:inherit;color:inherit}
-:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:2px}
-.light :focus-visible, .panel :focus-visible, section :focus-visible{outline-color:rgba(255,53,94,.55)}
+body{margin:0;background:#fff;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.45;letter-spacing:-0.03em;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit;letter-spacing:inherit}
+:focus-visible{outline:3px solid rgba(255,53,94,.25);outline-offset:2px}
+.sunrise :focus-visible{outline-color:rgba(255,255,255,.9)}
+
+/* superficie Sunrise: gradiente 125° + grano al 7% en overlay */
+.sunrise{position:relative;background:var(--sunrise);color:#fff;isolation:isolate}
+.sunrise::before{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.07;mix-blend-mode:overlay;pointer-events:none;z-index:-1}
 
 /* ---------- HERO / MAP ---------- */
-.hero{position:relative;min-height:100vh;color:#fff;overflow:hidden;background:transparent}
-.scrollcue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;text-decoration:none;font-size:13px;font-weight:500;opacity:.92;transition:opacity .3s var(--ease)}
-.scrollcue .ar{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.8);display:grid;place-items:center;background:rgba(255,255,255,.1)}
-.scrollcue:hover .ar{background:rgba(255,255,255,.25)}
-.scrollcue.gone{opacity:0;pointer-events:none}
-.hero.open .scrollcue{opacity:0;pointer-events:none}
-.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 0px;transition:grid-template-columns .25s var(--ease);min-height:100vh}
+.hero{min-height:100vh;overflow:hidden}
+.scrollcue{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;text-decoration:none;font-size:13px;font-weight:500;transition:opacity .2s var(--ease)}
+.scrollcue .ar{width:38px;height:38px;border-radius:50%;border:1.5px solid #fff;display:grid;place-items:center}
+.scrollcue:hover .ar{background:rgba(255,255,255,.2)}
+.scrollcue.gone,.hero.open .scrollcue{opacity:0;pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1fr) 0px;transition:grid-template-columns .2s var(--ease);min-height:100vh}
 .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) min(440px,40vw)}
 .mapcol{display:flex;flex-direction:column;padding:28px clamp(20px,4vw,56px) 28px;min-width:0}
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px}
-.top small{font-size:13px;font-weight:400;opacity:.9}
-.logo{height:20px;width:auto;color:#fff;opacity:.9}
-.topr{display:flex;align-items:center;gap:14px}
-.lang{position:relative;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.75);border-radius:999px;padding:4px 10px 4px 9px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}
+.top small{font-size:13px;font-weight:400}
+.logo{height:18px;width:auto;color:#fff;display:block}
+.topr{display:flex;align-items:center;gap:16px}
+.lang{position:relative;display:inline-flex;align-items:center;gap:6px;border:1px solid #fff;border-radius:999px;padding:4px 10px 4px 9px;color:#fff;cursor:pointer}
 .lang:hover,.lang:focus-within{background:rgba(255,255,255,.2)}
-.lang select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:#fff;font:inherit;font-size:13px;font-weight:500;padding:0 14px 0 0;margin-right:-14px;cursor:pointer;outline:none}
+.lang select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:#fff;font-size:13px;font-weight:500;padding:0 14px 0 0;margin-right:-14px;cursor:pointer;outline:none}
 .lang select option{color:var(--midnight);background:#fff}
 .lang .chev{pointer-events:none}
-h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.9;letter-spacing:-0.05em;margin:14px 0 12px;color:var(--midnight)}
-.sub{max-width:62ch;font-size:clamp(15px,1.2vw,17px);opacity:.92;margin:0 0 4px}
-.hint{font-size:14px;opacity:.85;margin:0}
+h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.95;margin:14px 0 12px;color:#fff}
+.sub{max-width:62ch;font-size:clamp(16px,1.3vw,18px);margin:0 0 4px}
+.hint{font-size:15px;margin:0}
 
 .stage{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(10px,2vw,40px);padding:18px 0 4px;min-height:540px}
 .stage svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.wires path{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.3;transition:opacity .2s var(--ease)}
+.wires path{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.3;transition:opacity .2s var(--ease)}
 .wires .flow{stroke:#fff;stroke-width:2;opacity:1}
 .stage.focus .wires .base{opacity:.22}
 .col{display:flex;flex-direction:column;gap:clamp(12px,2.4vh,30px);position:relative;z-index:1}
@@ -74,110 +68,95 @@ h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.9;letter-spacin
 .col.left .mods{align-items:flex-end}
 .col.right .mods{align-items:flex-start}
 
-.pill{appearance:none;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:3px 11px 3px 9px;font-size:clamp(12px,.92vw,13.5px);line-height:1.3;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease),border-color .2s var(--ease)}
-.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75;flex:none}
-.pill:hover{background:rgba(255,255,255,.22)}
-.pill.special{border-width:1.5px}
-.hubbtn{appearance:none;border:0;background:#fff;color:var(--midnight);border-radius:999px;padding:7px 16px 7px 8px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:9px;cursor:pointer;box-shadow:0 8px 24px rgba(120,10,40,.18);white-space:nowrap;transition:opacity .2s var(--ease),transform .2s var(--ease)}
+.pill{appearance:none;border:1px solid #fff;background:transparent;color:#fff;border-radius:999px;padding:3px 11px 3px 9px;font-size:clamp(12.5px,.95vw,14px);line-height:1.3;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:background .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease),box-shadow .2s var(--ease)}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.pill:hover{background:rgba(255,255,255,.2)}
+.hubbtn{appearance:none;border:0;background:#fff;color:var(--midnight);border-radius:999px;padding:7px 16px 7px 8px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:9px;cursor:pointer;white-space:nowrap;transition:opacity .2s var(--ease),box-shadow .2s var(--ease)}
 .hubbtn .ic{width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
 .hubbtn .ic svg{width:14px;height:14px}
-.stage.focus .pill:not(.active):not(.linked){opacity:.38}
-.stage.focus .hubbtn:not(.active):not(.linked){opacity:.55}
-.pill.linked{background:#fff;color:var(--red-dark);border-color:#fff;opacity:1}
-.pill.active{background:var(--midnight);color:#fff;border-color:var(--midnight)}
-.hubbtn.active{background:var(--midnight);color:#fff}
+.stage.focus .pill:not(.active):not(.linked){opacity:.4}
+.stage.focus .hubbtn:not(.active):not(.linked){opacity:.6}
+.pill.linked{background:#fff;color:var(--r140);opacity:1}
+.pill.active{background:#fff;color:var(--r140);font-weight:500;box-shadow:0 0 0 3px rgba(255,255,255,.55)}
+.hubbtn.active{box-shadow:0 0 0 3px rgba(255,255,255,.55)}
 
 .core{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
 .onebtn{appearance:none;border:0;cursor:pointer;width:clamp(120px,12vw,168px);aspect-ratio:1;border-radius:50%;padding:0;display:grid;place-items:center;
-  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.28) 0 54%, rgba(255,255,255,.12) 55% 70%, rgba(255,255,255,.06) 71%);transition:transform .2s var(--ease)}
-.onebtn .disc{width:62%;aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(120,10,40,.25)}
-.onebtn .disc svg{width:58%;height:auto;color:var(--red)}
+  background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.3) 0 54%, rgba(255,255,255,.14) 55% 70%, rgba(255,255,255,.06) 71%);transition:transform .2s var(--ease)}
+.onebtn .disc{width:62%;aspect-ratio:1;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center;font-size:clamp(20px,2vw,30px);font-weight:500;transition:box-shadow .2s var(--ease)}
 .onebtn:hover{transform:scale(1.03)}
-.onebtn.active .disc{background:var(--midnight)}
-.onebtn.active .disc svg{color:#fff}
-.core .onelabel{display:flex;flex-direction:column;align-items:center;font-size:16px;font-weight:500;line-height:1.15}
-.core .onelabel small{font-size:12px;font-weight:400;opacity:.9;letter-spacing:.02em}
+.onebtn.active .disc{box-shadow:0 0 0 4px rgba(255,255,255,.6)}
+.core .onelabel{font-size:15px;font-weight:500}
 
 @media (prefers-reduced-motion: no-preference){
   .wires .flow{stroke-dasharray:6 6;animation:flow 1.2s linear infinite}
   @keyframes flow{to{stroke-dashoffset:-24}}
-  .onebtn .disc{animation:pulse 3.2s var(--ease) infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(120,10,40,.25),0 0 0 0 rgba(255,255,255,.35)}50%{box-shadow:0 10px 30px rgba(120,10,40,.25),0 0 0 14px rgba(255,255,255,0)}}
 }
 
 /* ---------- PANEL ---------- */
-.panel{position:relative;background:var(--panel);color:var(--ink);overflow:hidden;min-width:0}
+.panel{position:relative;background:var(--panel);color:var(--ink);overflow:hidden;min-width:0;z-index:2}
 .panel-in{position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 28px 40px;width:min(440px,40vw)}
 .panel[hidden]{display:block}
 .hero:not(.open) .panel-in{visibility:hidden}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .p-cat{font-size:13px;color:var(--ink-2);margin:0 0 6px}
-.p-cat b{color:var(--red);font-weight:500}
-.panel h2{font-size:30px;font-weight:500;letter-spacing:-0.035em;line-height:1.02;margin:0}
-.close{appearance:none;border:1px solid var(--line);background:transparent;width:36px;height:36px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
-.close:hover{background:var(--bg-alt)}
-.lead{font-size:17px;line-height:1.4;margin:14px 0 22px;color:var(--ink)}
-.panel h3{font-size:13px;font-weight:500;color:var(--ink-2);margin:26px 0 10px;letter-spacing:0}
+.p-cat b{color:var(--r140);font-weight:500}
+.panel h2{font-size:30px;font-weight:500;line-height:1;margin:0}
+.close{appearance:none;border:1px solid var(--line);background:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;display:grid;place-items:center;flex:none}
+.close:hover{background:var(--ink-50)}
+.lead{font-size:17px;line-height:1.4;margin:14px 0 22px}
+.panel h3{font-size:13px;font-weight:500;color:var(--ink-2);margin:26px 0 10px}
 .vals{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .vals li{position:relative;padding-left:20px;font-size:15px;line-height:1.42}
 .vals li::before{content:"";position:absolute;left:0;top:.48em;width:9px;height:9px;border-radius:50%;border:2px solid var(--red)}
-.tag{display:inline-block;margin-top:12px;font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-weak);color:var(--red-dark)}
-:root[data-theme="dark"] .tag{color:#FF8FA6}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag{color:#FF8FA6}}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
 .stat{border-top:2px solid var(--red);padding-top:8px}
-.stat b{display:block;font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
+.stat b{display:block;font-size:30px;font-weight:500;line-height:1}
 .stat span{font-size:13px;color:var(--ink-2);line-height:1.35;display:block;margin-top:4px}
 
 .chat{display:grid;gap:8px;margin-bottom:12px}
-.msg{max-width:92%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.4}
-.msg.u{justify-self:end;background:var(--midnight);color:#fff;border-bottom-right-radius:4px}
-:root[data-theme="dark"] .msg.u{background:#3A3A5C}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .msg.u{background:#3A3A5C}}
-.msg.o{justify-self:start;background:var(--bubble);border-bottom-left-radius:4px}
-.msg.o .who{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--red);margin-bottom:3px}
-.msg.o .who svg{width:13px;height:13px}
-.note{font-size:14.5px;line-height:1.45;background:var(--bubble);border-radius:12px;padding:12px 14px;margin:0}
+.msg{max-width:92%;padding:10px 14px;border-radius:20px;font-size:14.5px;line-height:1.4}
+.msg.u{justify-self:end;background:var(--m20);border-bottom-right-radius:6px}
+.msg.o{justify-self:start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
+.msg.o .who{font-size:12px;font-weight:500;color:var(--r140);margin-bottom:3px}
+.note{font-size:14.5px;line-height:1.45;background:var(--ink-50);border-radius:20px;padding:12px 16px;margin:0}
 
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{appearance:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 11px;font-size:13.5px;cursor:pointer;transition:background .15s var(--ease),border-color .15s var(--ease)}
-.chip:hover{background:var(--accent-weak);border-color:var(--red)}
+.chip{appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:13.5px;cursor:pointer;transition:background .15s var(--ease),border-color .15s var(--ease)}
+.chip:hover{background:var(--ink-50);border-color:var(--red)}
 .why{font-size:14.5px;color:var(--ink-2);margin:10px 0 0}
 .soon{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.soon li{font-size:14px;padding-left:14px;border-left:2px solid var(--ink-3);color:var(--ink)}
-.disc-note{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.soon li{font-size:14px;padding-left:14px;border-left:2px solid var(--ink-3)}
+.disc-note{font-size:12.5px;color:var(--ink-2);margin-top:8px}
 
 /* analytics bits */
 .dash{display:grid;gap:12px}
-.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px 10px}
+.card{border:1px solid var(--line);border-radius:20px;padding:14px 16px 12px}
 .card .ct{font-size:14px;font-weight:500;margin:0 0 2px}
 .card .cs{font-size:12px;color:var(--ink-2);margin:0 0 8px}
 .card svg{width:100%;height:auto;display:block}
 .legend{display:flex;gap:12px;font-size:11.5px;color:var(--ink-2);margin-top:4px}
 .legend i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
-.rt{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.rt li{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
+.rt{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.rt li{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:10px 16px;border-top:1px solid var(--line);font-size:14px}
 .rt li:first-child{border-top:0}
-.rt .when{color:var(--red);font-weight:500;font-size:13px}
+.rt .when{color:var(--r140);font-weight:500;font-size:13px}
 .rt .src{display:block;font-size:12px;color:var(--ink-2);margin-top:2px}
 
-/* ---------- SECTIONS ---------- */
-section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;margin:0 auto;color:#fff;
-  --ink:#fff; --ink-2:rgba(255,255,255,.84); --ink-3:rgba(255,255,255,.55); --line:rgba(255,255,255,.28); --bg-alt:rgba(255,255,255,.12)}
-section:focus-visible, section :focus-visible{outline-color:rgba(255,255,255,.9)}
+/* ---------- SECCIONES (fondo blanco: separación del color) ---------- */
+section{padding:clamp(56px,8vw,104px) clamp(20px,5vw,80px);max-width:1280px;margin:0 auto}
 section + section{padding-top:0}
-section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.9;letter-spacing:-0.04em;margin:0 0 14px;max-width:18ch;color:var(--midnight)}
+section h2.st{font-weight:500;font-size:clamp(32px,4vw,52px);line-height:.95;margin:0 0 14px;max-width:18ch;color:var(--midnight)}
 section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-/* tarjetas planas sobre el rojo: blanco y Midnight, sin transparencias */
-.story,.tier{background:#fff;color:var(--midnight);--ink:var(--midnight);--ink-2:#6C6C7D;--ink-3:#AEAEB8;--line:#E6E6EC}
-.story{border-radius:20px;padding:22px}
-.story h3{font-size:20px;font-weight:500;letter-spacing:-0.02em;margin:0 0 4px}
+.story,.tier{background:#fff;border:1px solid var(--line);border-radius:20px}
+.story{padding:22px}
+.story h3{font-size:20px;font-weight:500;margin:0 0 4px}
 .story p{margin:0 0 16px;color:var(--ink-2);font-size:14.5px}
 .chain{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
 .chain li{position:relative;padding:0 0 12px 30px;counter-increment:s}
-.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;display:grid;place-items:center;font-weight:500}
-.chain li::after{content:"";position:absolute;left:9.5px;top:24px;bottom:2px;width:1px;background:var(--ink-3)}
+.chain li::before{content:counter(s);position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--red);background:#fff;color:var(--r140);font-size:11px;display:grid;place-items:center;font-weight:500}
+.chain li::after{content:"";position:absolute;left:9.5px;top:24px;bottom:2px;width:1px;background:var(--line)}
 .chain li:last-child{padding-bottom:0}
 .chain li:last-child::after{display:none}
 .chain small{display:block;font-size:13px;color:var(--ink-2);line-height:1.35;margin-top:2px}
@@ -188,64 +167,61 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .cmpwrap{overflow-x:auto}
 .cmp th,.cmp td{text-align:left;padding:14px 16px;border-top:1px solid var(--line);vertical-align:top}
 .cmp thead th{border-top:0;font-size:13px;font-weight:500;color:var(--ink-2)}
-.cmp thead th:last-child{color:#fff;font-weight:700}
+.cmp thead th:last-child{color:var(--r140)}
 .cmp td:first-child{font-weight:500;width:18%}
 .cmp td:nth-child(2){color:var(--ink-2);width:36%}
 
 .road{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.road div{border-top:2px solid var(--ink);padding-top:12px}
+.road div{border-top:2px solid var(--line);padding-top:12px}
 .road b{display:block;font-weight:500;font-size:16px;margin-bottom:4px}
-.road span{font-size:12px;font-weight:500;color:var(--red-dark);background:#fff;border-radius:999px;padding:2px 9px;display:inline-block;margin-bottom:8px}
+.road span{font-size:12px;font-weight:500;color:var(--r140);border:1px solid var(--red);border-radius:999px;padding:1px 9px;display:inline-block;margin-bottom:8px}
 .road p{margin:0;font-size:14.5px;color:var(--ink-2)}
 .road .more{border-top-style:dashed}
-.road .more b{font-size:22px;letter-spacing:-0.02em}
+.road .more b{font-size:22px}
 
-.eyebrow{font-size:15px;font-weight:300;margin:0 0 12px;opacity:.95}
+.eyebrow{font-size:15px;font-weight:300;margin:0 0 12px;color:var(--ink-3)}
 .tiers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 @media (max-width:980px){ .tiers{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:560px){ .tiers{grid-template-columns:1fr} }
-.tier{border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:10px}
-.tier.fav{background:var(--midnight);color:#fff;--ink:#fff;--ink-2:rgba(255,255,255,.72)}
+.tier{padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.tier.fav{border:2px solid var(--red)}
 .tier .tn{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.tier .tn b{font-size:30px;font-weight:500;letter-spacing:-0.04em;line-height:1}
-.tier .tn span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--red);color:#fff}
+.tier .tn b{font-size:30px;font-weight:500;line-height:1}
+.tier .tn span{font-size:12px;font-weight:500;padding:2px 10px;border-radius:999px;border:1px solid var(--red);color:var(--r140)}
 .tier .usage{margin:0 0 4px;font-size:14px;line-height:1.4;color:var(--ink-2)}
 .tier .usage b{color:var(--ink);font-weight:500}
-.tier h4{margin:6px 0 0;font-size:12px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+.tier h4{margin:6px 0 0;font-size:13px;font-weight:500;color:var(--ink-2)}
 .who{display:flex;flex-wrap:wrap;gap:6px}
-.who i{font-style:normal;font-size:13px;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid currentColor}
-.tier .who i{color:var(--red)}
-.tier.fav .who i{color:#fff}
+.who i{font-style:normal;font-size:13px;font-weight:500;padding:3px 10px;border-radius:999px;border:1px solid var(--red);color:var(--r140)}
 .tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .tier li{position:relative;padding-left:18px;font-size:14px;line-height:1.4}
 .tier li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;border:2px solid var(--red)}
 .props{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px 40px;margin-top:36px}
 .prop{display:flex;gap:14px;align-items:flex-start}
-.prop .pic{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center}
-.prop b{display:block;font-size:18px;font-weight:500;letter-spacing:-0.02em;margin:2px 0 4px}
+.prop .pic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--ink-50);color:var(--red);display:grid;place-items:center}
+.prop b{display:block;font-size:18px;font-weight:500;margin:2px 0 4px}
 .prop p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
-.flexmix{margin:28px 0 0;background:#fff;color:var(--midnight);border-radius:20px;padding:18px 22px;font-size:15.5px;line-height:1.45}
-.flexmix b{color:var(--red);font-weight:500}
+.flexmix{margin:28px 0 0;background:var(--ink-50);border-radius:20px;padding:18px 22px;font-size:15.5px;line-height:1.45}
+.flexmix b{color:var(--r140);font-weight:500}
 
-.cta{background:#fff;color:var(--midnight);border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end}
-.cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;letter-spacing:-0.04em;margin:0}
-.cta p{margin:0;font-size:17px}
-.cta h2{color:var(--red)}
+/* cierre: superficie Sunrise con texto blanco y CTA en píldora blanca */
+.cta{border-radius:20px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:end;overflow:hidden}
+.cta h2{font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1;margin:0;color:#fff}
+.cta p{margin:0;font-size:18px}
 .ctaside{display:grid;gap:22px}
-.ctaact{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding-top:20px;border-top:1px solid #E6E6EC}
-.ctaact p{font-size:15px;color:#6C6C7D}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-size:15px;font-weight:500;padding:11px 20px;border-radius:999px;transition:background .2s var(--ease)}
-.btn:hover{background:var(--red-dark)}
-.btn:focus-visible{outline:3px solid rgba(255,53,94,.25);outline-offset:2px}
-footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:rgba(255,255,255,.7)}
+.ctaact{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding-top:20px;border-top:1px solid rgba(255,255,255,.5)}
+.ctaact p{font-size:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--red);text-decoration:none;font-size:17px;font-weight:400;padding:12px 22px;border-radius:999px;transition:color .2s var(--ease)}
+.btn:hover{color:var(--r140)}
+footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:var(--ink-2)}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:1100px){
   .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) 0px}
-  .panel{position:fixed;inset:0 0 0 auto;width:min(460px,100vw);z-index:20;transform:translateX(100%);transition:transform .25s var(--ease);box-shadow:-20px 0 40px rgba(37,37,61,.25)}
+  .panel{position:fixed;inset:0 0 0 auto;width:min(460px,100vw);z-index:20;transform:translateX(100%);transition:transform .2s var(--ease);box-shadow:0 8px 24px rgba(37,37,61,.10)}
   .hero.open .panel{transform:none}
   .panel-in{width:100%}
-  .scrim{position:fixed;inset:0;background:rgba(37,37,61,.5);z-index:19;opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+  .scrim{position:fixed;inset:0;background:rgba(37,37,61,.5);z-index:19;opacity:0;pointer-events:none;transition:opacity .2s var(--ease)}
   .hero.open .scrim{opacity:1;pointer-events:auto}
 }
 @media (max-width:860px){
@@ -263,26 +239,12 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 </style>
 </head>
 <body>
-<div class="hero" id="hero">
+<div class="hero sunrise" id="hero">
   <div class="hero-inner">
     <div class="mapcol">
       <div class="top">
         <small>All in One</small>
-        <div class="topr"><label class="lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><select id="langSel" aria-label="Idioma / Language"><option value="es">Español</option><option value="en">English</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="fr">Français</option><option value="it">Italiano</option></select><svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></label><span aria-label="Factorial"><svg class="logo" viewBox="0 0 3411 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path>
-<path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path>
-<path d="M3410.72 587.677H3322.85V98.8616H3410.72V587.677Z" fill="currentColor"></path>
-<path d="M3164.94 296.832V258.138H3251.45V587.677H3164.94V539.233C3140.94 570.115 3106.48 585.556 3063.02 585.556C3021.64 585.556 2978.84 569.48 2949.04 537.329C2919.65 504.755 2905.43 465.458 2905.43 418.501C2905.43 371.967 2919.65 331.944 2949.04 299.37C2978.84 266.796 3019.55 252.646 3060.94 252.646C3104.4 252.646 3140.94 265.95 3164.94 296.832ZM3016.46 482.757C3032.6 499.256 3053.09 507.505 3077.92 507.505C3102.76 507.505 3123.24 499.256 3139.38 482.757C3155.94 465.836 3164.94 444.261 3164.94 418.032C3164.94 391.804 3155.94 370.44 3139.38 353.942C3123.24 337.02 3102.76 328.56 3077.92 328.56C3053.09 328.56 3032.6 337.02 3016.46 353.942C3000.32 370.44 2991.93 391.804 2991.93 418.032C2991.93 444.261 3000.32 465.836 3016.46 482.757Z" fill="currentColor"></path>
-<path d="M2613.98 258.138V316.555C2621.12 296.23 2638.94 277.333 2649.06 270.5C2658.43 264.176 2679.93 252.646 2702.22 252.646V341.701C2677.41 338.242 2659.38 349.333 2641.5 363.26C2622.54 378.021 2614.34 398.936 2614.34 430.073V587.677H2526.46V258.138H2613.98Z" fill="currentColor"></path>
-<path d="M1725.72 587.677C1677.86 587.677 1637.84 571.602 1605.66 539.453C1573.89 507.303 1554.32 468.608 1554.32 421.23C1554.32 373.852 1573.89 333.02 1605.66 300.87C1637.84 268.721 1677.86 252.646 1725.72 252.646C1756.64 252.646 1784.8 260.049 1810.21 274.855C1835.62 289.66 1858.48 309.542 1871.61 334.5L1797.51 375.745C1791.15 362.631 1781.41 352.267 1768.28 344.653C1755.58 337.038 1741.18 333.231 1725.09 333.231C1700.52 333.231 1680.19 341.48 1664.1 357.978C1648.01 374.052 1638.45 394.78 1638.45 420.161C1638.45 444.697 1648.01 465.424 1664.1 482.345C1680.19 498.42 1700.52 506.457 1725.09 506.457C1741.6 506.457 1756.21 502.862 1768.92 495.67C1782.05 488.056 1795.37 477.692 1801.73 464.578L1872.88 505.188C1858.9 530.569 1839 550.663 1813.16 565.468C1787.75 580.274 1756.21 587.677 1725.72 587.677Z" fill="currentColor"></path>
-<path d="M1411.52 297.113V258.138H1499.4V587.676H1411.52V541.059C1387.14 572.138 1352.13 587.677 1307.99 587.677C1265.94 587.677 1222.46 571.499 1192.19 539.143C1162.34 506.362 1147.89 466.814 1147.89 419.558C1147.89 372.727 1162.34 332.449 1192.19 299.668C1222.46 266.886 1263.83 252.646 1305.87 252.646C1350.02 252.646 1387.14 266.035 1411.52 297.113ZM1260.69 484.223C1277.08 500.827 1297.9 509.129 1323.12 509.129C1348.35 509.129 1369.16 500.827 1385.56 484.223C1402.38 467.194 1411.52 445.482 1411.52 419.086C1411.52 392.691 1402.38 371.191 1385.56 354.587C1369.16 337.558 1348.35 329.043 1323.12 329.043C1297.9 329.043 1277.08 337.558 1260.69 354.587C1244.29 371.191 1235.77 392.691 1235.77 419.086C1235.77 445.482 1244.29 467.194 1260.69 484.223Z" fill="currentColor"></path>
-<path d="M1109.45 99.1553V188.027C1064.88 185.008 1043.79 210.216 1043.79 249.9V258.138H1109.45V347.255H1043.54V587.677H955.662V347.255H911.723V258.138H955.662V249.9C955.662 203.745 974.836 163.858 999.642 140.565C1024.87 116.841 1060.67 96.1359 1109.45 99.1553Z" fill="currentColor"></path>
-<path d="M2856 587.677H2768.12V258.138H2856V587.677Z" fill="currentColor"></path>
-<path d="M2861.49 148.292C2861.49 175.592 2839.36 197.723 2812.06 197.723C2784.76 197.723 2762.63 175.592 2762.63 148.292C2762.63 120.992 2784.76 98.8616 2812.06 98.8616C2839.36 98.8616 2861.49 120.992 2861.49 148.292Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M2312.26 587.677C2403.26 587.677 2477.03 513.907 2477.03 422.908C2477.03 331.908 2403.26 258.138 2312.26 258.138C2221.26 258.138 2147.49 331.908 2147.49 422.908C2147.49 513.907 2221.26 587.677 2312.26 587.677ZM2312.26 508.038C2359.28 508.038 2397.39 469.924 2397.39 422.908C2397.39 375.891 2359.28 337.777 2312.26 337.777C2265.25 337.777 2227.13 375.891 2227.13 422.908C2227.13 469.924 2265.25 508.038 2312.26 508.038Z" fill="currentColor"></path>
-<path d="M1916.82 450.492V203.823L2008.43 175.754V258.66H2098.9V345.113H2008.43C2008.43 375.054 2007.28 424.895 2007.28 448.249C2007.28 485.301 2030.06 500.6 2052.92 500.6C2075.77 500.6 2096.2 487.049 2096.2 487.049L2125.52 564.326C2125.52 564.326 2061.04 604.823 1996.89 579.154C1932.73 553.485 1916.82 504.277 1916.82 450.492Z" fill="currentColor"></path>
-</svg></span></div>
+        <div class="topr"><label class="lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><select id="langSel" aria-label="Idioma / Language"><option value="es">Español</option><option value="en">English</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="fr">Français</option><option value="it">Italiano</option></select><svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></label><span aria-label="Factorial"><svg class="logo" viewBox="0 0 2029 394" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2028.08 393.654H1956.77V1.6044e-05H2028.08V393.654Z" fill="currentColor"></path><path d="M1828.62 159.43V128.269H1898.82V393.654H1828.62V354.641C1809.14 379.51 1781.17 391.946 1745.91 391.946C1712.32 391.946 1677.58 379 1653.4 353.108C1629.55 326.875 1618.01 295.228 1618.01 257.413C1618.01 219.938 1629.55 187.706 1653.4 161.474C1677.58 135.241 1710.63 123.846 1744.22 123.846C1779.48 123.846 1809.14 134.56 1828.62 159.43ZM1708.12 309.16C1721.22 322.446 1737.84 329.09 1758 329.09C1778.15 329.09 1794.78 322.446 1807.88 309.16C1821.31 295.532 1828.62 278.158 1828.62 257.035C1828.62 235.913 1821.31 218.708 1807.88 205.422C1794.78 191.795 1778.15 184.981 1758 184.981C1737.84 184.981 1721.22 191.795 1708.12 205.422C1695.02 218.708 1688.21 235.913 1688.21 257.035C1688.21 278.158 1695.02 295.532 1708.12 309.16Z" fill="currentColor"></path><path d="M1381.48 128.269V175.313C1387.28 158.945 1401.74 143.727 1409.95 138.224C1417.55 133.132 1435 123.846 1453.09 123.846V195.564C1432.96 192.778 1418.32 201.71 1403.81 212.926C1388.43 224.813 1381.77 241.657 1381.77 266.732V393.654H1310.45V128.269H1381.48Z" fill="currentColor"></path><path d="M660.607 393.654C621.768 393.654 589.288 380.708 563.167 354.818C537.389 328.927 521.507 297.765 521.507 259.61C521.507 221.456 537.389 188.573 563.167 162.682C589.288 136.791 621.768 123.846 660.607 123.846C685.697 123.846 708.553 129.808 729.175 141.731C749.797 153.654 768.346 169.666 779.001 189.765L718.864 222.98C713.708 212.419 705.803 204.073 695.149 197.941C684.838 191.809 673.152 188.743 660.091 188.743C640.156 188.743 623.659 195.386 610.598 208.672C597.537 221.617 589.777 238.31 589.777 258.75C589.777 278.509 597.537 295.201 610.598 308.828C623.659 321.773 640.156 328.246 660.091 328.246C673.495 328.246 685.353 325.35 695.664 319.559C706.319 313.427 717.135 305.081 722.29 294.52L780.032 327.224C768.69 347.664 752.536 363.845 731.57 375.769C710.948 387.692 685.353 393.654 660.607 393.654Z" fill="currentColor"></path><path d="M405.617 159.657V128.269H476.934V393.653H405.617V356.111C385.826 381.14 357.419 393.654 321.591 393.654C287.47 393.654 252.182 380.625 227.615 354.569C203.389 328.169 191.665 296.32 191.665 258.264C191.665 220.55 203.389 188.113 227.615 161.714C252.182 135.314 285.753 123.846 319.874 123.846C355.702 123.846 385.826 134.628 405.617 159.657ZM283.205 310.34C296.512 323.712 313.402 330.397 333.875 330.397C354.348 330.397 371.238 323.712 384.545 310.34C398.193 296.626 405.617 279.141 405.617 257.884C405.617 236.627 398.193 219.313 384.545 205.942C371.238 192.228 354.348 185.37 333.875 185.37C313.402 185.37 296.512 192.228 283.205 205.942C269.897 219.313 262.982 236.627 262.982 257.884C262.982 279.141 269.897 296.626 283.205 310.34Z" fill="currentColor"></path><path d="M160.464 0.236596V71.8069C124.295 69.3753 107.179 89.6759 107.179 121.635V128.269H160.464V200.037H106.976V393.654H35.6586V200.037H0V128.269H35.6585V121.635C35.6585 84.4653 51.2199 52.3431 71.3516 33.5848C91.8244 14.479 120.883 -2.19503 160.464 0.236596Z" fill="currentColor"></path><path d="M1577.89 393.654H1506.58V128.269H1577.89V393.654Z" fill="currentColor"></path><path d="M1582.35 39.8077C1582.35 61.7929 1564.39 79.6154 1542.24 79.6154C1520.08 79.6154 1502.12 61.7929 1502.12 39.8077C1502.12 17.8225 1520.08 1.6044e-05 1542.24 1.6044e-05C1564.39 1.6044e-05 1582.35 17.8225 1582.35 39.8077Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M1136.62 393.654C1210.47 393.654 1270.34 334.245 1270.34 260.961C1270.34 187.678 1210.47 128.269 1136.62 128.269C1062.77 128.269 1002.9 187.678 1002.9 260.961C1002.9 334.245 1062.77 393.654 1136.62 393.654ZM1136.62 329.519C1174.77 329.519 1205.71 298.825 1205.71 260.961C1205.71 223.098 1174.77 192.404 1136.62 192.404C1098.46 192.404 1067.53 223.098 1067.53 260.961C1067.53 298.825 1098.46 329.519 1136.62 329.519Z" fill="currentColor"></path><path d="M815.691 283.176V84.5279L890.041 61.9231V128.689H963.461V198.312H890.041C890.041 222.424 889.111 262.562 889.111 281.369C889.111 311.208 907.597 323.529 926.146 323.529C944.694 323.529 961.271 312.616 961.271 312.616L985.069 374.848C985.069 374.848 932.739 407.462 880.675 386.79C828.61 366.118 815.691 326.49 815.691 283.176Z" fill="currentColor"></path></svg></span></div>
       </div>
       <h1 data-i18n="h1">One ya conoce tu empresa</h1>
       <p class="sub" data-i18n="sub">Todos los módulos de Factorial comparten el mismo dato. One trabaja encima de todos ellos, con tus permisos y tus políticas.</p>
@@ -291,8 +253,8 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
         <svg class="wires" id="wires" aria-hidden="true"></svg>
         <div class="col left" id="colL"></div>
         <div class="core">
-          <button class="onebtn" id="oneBtn" aria-label="Ver qué es One" data-i18n-aria="oneAria"><span class="disc"><svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg></span></button>
-          <span class="onelabel">One<small>AI Agent</small></span>
+          <button class="onebtn" id="oneBtn" aria-label="Ver qué es One" data-i18n-aria="oneAria"><span class="disc">One</span></button>
+          <span class="onelabel">AI Agent</span>
         </div>
         <div class="col right" id="colR"></div>
       </div>
@@ -331,10 +293,10 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 <section>
   <p class="eyebrow" data-i18n="s4e">One · Capacidad personal</p>
   <h2 class="st" data-i18n="s4t">IA para todo el equipo, sin perder el control</h2>
-  <p class="sl" data-i18n="s4d">Cada persona tiene su propio uso diario de IA, dentro de los permisos en los que ya confías. Elige una combinación de planes personales según el tipo de usuario.</p>
+  <p class="sl" data-i18n="s4d">Cada persona tiene su propio uso diario de IA, dentro de los permisos en los que ya confías. Elige una combinación de planes personales según el tipo de perfil.</p>
   <div class="tiers" data-i18n="tiers">
-    <div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluido en todos los bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Empleados</i></div><h4>Qué hace con One</h4><ul><li>Pregunta por políticas, saldos, nóminas y documentos, con la fuente.</li><li>Pide ausencias, gastos y tickets chateando.</li><li>Sigue cada solicitud desde la app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de uso vs Free</b><br>Para uso habitual.</p><h4>Recomendado para</h4><div class="who"><i>Empleados</i><i>Team leaders</i></div><h4>Qué hace con One</h4><ul><li>Todo lo de Free, con el doble de uso diario.</li><li>Para quien usa One a diario en su trabajo.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluido en todos los bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Toda la plantilla</i></div><h4>Qué hace con One</h4><ul><li>Pregunta por políticas, saldos, nóminas y documentos, con la fuente.</li><li>Pide ausencias, gastos y tickets chateando.</li><li>Sigue cada solicitud desde la app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de uso vs Free</b><br>Para uso habitual.</p><h4>Recomendado para</h4><div class="who"><i>Toda la plantilla</i><i>Team leaders</i></div><h4>Qué hace con One</h4><ul><li>Todo lo de Free, con el doble de uso diario.</li><li>Para quien usa One a diario en su trabajo.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorito</span></div><p class="usage"><b>x10 de uso vs Basic</b><br>Para flujos de trabajo exigentes.</p><h4>Recomendado para</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>Qué hace con One</h4><ul><li>Prepara 1:1 y consulta las analíticas de su equipo.</li><li>Aprueba ausencias, gastos y turnos con el contexto ya reunido.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 de uso vs Basic</b><br>Para power users.</p><h4>Recomendado para</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Qué hace con One</h4><ul><li>Crea cursos completos, procesa lotes de gastos y construye informes y rutinas.</li><li>Pensado para un uso intensivo de One en su área.</li></ul></div>
   </div>
@@ -342,7 +304,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
     <div class="prop"><span class="pic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2"/></svg></span><div data-i18n="p1"><b>Tus datos, bajo control</b><p>Cada persona solo ve lo que ya podía ver. One sigue exactamente tus permisos de Factorial: mismos roles, mismo acceso, nada nuevo expuesto.</p></div></div>
     <div class="prop"><span class="pic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.9-2.8 2.1 0 2.8 5.8 1.4 5.8 4.2 0 1.2-1.3 2.1-3 2.1-1.3 0-2.4-.6-2.9-1.5M12 6v1.8M12 16.2V18"/></svg></span><div data-i18n="p2"><b>Nadie se pasa del presupuesto</b><p>Cada persona tiene un uso diario según su plan personal. Si lo alcanza, One se pausa hasta el día siguiente. Sin recargas ni costes descontrolados.</p></div></div>
   </div>
-  <p class="flexmix" data-i18n="flex"><b>Tú eliges qué plan personal encaja con cada persona.</b> Ejemplo con 100 usuarios: 5 Max + 15 Plus + 30 Basic + 50 Free.</p>
+  <p class="flexmix" data-i18n="flex"><b>Tú eliges qué plan personal encaja con cada persona.</b> Ejemplo con 100 personas: 5 Max + 15 Plus + 30 Basic + 50 Free.</p>
 </section>
 
 <section>
@@ -360,7 +322,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 </section>
 
 <section>
-  <div class="cta">
+  <div class="cta sunrise">
     <h2 data-i18n="ctaT">¿Vemos tu ciclo completo con tus propios datos?</h2>
     <div class="ctaside">
       <p data-i18n="ctaD">Mapeamos tu plantilla, tu proceso de selección y tu política salarial, y te enseñamos el mismo flujo dentro de Factorial, con One trabajando en cada paso.</p>
@@ -1008,14 +970,14 @@ const EN = {
       <tr><td>Control</td><td>Opaque cost and actions.</td><td>You decide which agents run and see every action and what it cost.</td></tr>`,
     s4e: "One · Personal capacity",
     s4t: "Give everyone AI without giving up control",
-    s4d: "Every person gets their own daily AI usage, inside the permissions you already trust. Choose a mix of personal plans based on the type of user.",
-    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Included in every bundle.</b></p><h4>Recommended for</h4><div class="who"><i>Employees</i></div><h4>What they do with One</h4><ul><li>Ask about policies, balances, payslips and documents, with the source.</li><li>Request time off, expenses and tickets by chatting.</li><li>Track every request from the app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 usage vs Free</b><br>For regular use.</p><h4>Recommended for</h4><div class="who"><i>Employees</i><i>Team leaders</i></div><h4>What they do with One</h4><ul><li>Everything in Free, with twice the daily usage.</li><li>For people who use One every day in their work.</li></ul></div>
+    s4d: "Every person gets their own daily AI usage, inside the permissions you already trust. Choose a mix of personal plans based on the type of profile.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Included in every bundle.</b></p><h4>Recommended for</h4><div class="who"><i>Everyone</i></div><h4>What they do with One</h4><ul><li>Ask about policies, balances, payslips and documents, with the source.</li><li>Request time off, expenses and tickets by chatting.</li><li>Track every request from the app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 usage vs Free</b><br>For regular use.</p><h4>Recommended for</h4><div class="who"><i>Everyone</i><i>Team leaders</i></div><h4>What they do with One</h4><ul><li>Everything in Free, with twice the daily usage.</li><li>For people who use One every day in their work.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Favourite</span></div><p class="usage"><b>x10 usage vs Basic</b><br>For demanding workflows.</p><h4>Recommended for</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>What they do with One</h4><ul><li>Prepare 1:1s and check their team's analytics.</li><li>Approve time off, expenses and shifts with the context already gathered.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 usage vs Basic</b><br>For power users.</p><h4>Recommended for</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>What they do with One</h4><ul><li>Build full courses, process batches of expenses and create reports and routines.</li><li>Designed for intensive use of One in their area.</li></ul></div>`,
     p1: "<b>Your data stays in control</b><p>Everyone only sees what they already could. One follows your exact Factorial permissions: same roles, same access, nothing new exposed.</p>",
     p2: "<b>Nobody can overspend</b><p>Everyone gets a daily allowance based on their personal plan. Reach it, and One simply pauses until tomorrow. No top-ups, no runaway costs.</p>",
-    flex: "<b>You choose which personal plan fits each person.</b> Example with 100 seats: 5 Max + 15 Plus + 30 Basic + 50 Free.",
+    flex: "<b>You choose which personal plan fits each person.</b> Example with 100 people: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "What's next",
     s3d: "Every product is becoming an AI product. Scope and dates may change; we'll keep you posted.",
     road: `<div><span>Coming soon</span><b>AI 1:1s</b><p>One prepares and guides every 1:1 with the person's full history.</p></div>
@@ -1308,14 +1270,14 @@ const DE = {
       <tr><td>Kontrolle</td><td>Intransparente Kosten und Aktionen.</td><td>Du entscheidest, welche Agenten laufen, und siehst jede Aktion und was sie gekostet hat.</td></tr>`,
     s4e: "One · Persönliche Kapazität",
     s4t: "KI für alle, ohne die Kontrolle abzugeben",
-    s4d: "Jede Person bekommt ihre eigene tägliche KI-Nutzung, innerhalb der Berechtigungen, denen du schon vertraust. Wähle eine Mischung persönlicher Pläne je nach Nutzertyp.",
-    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>In jedem Bundle enthalten.</b></p><h4>Empfohlen für</h4><div class="who"><i>Mitarbeitende</i></div><h4>Was sie mit One machen</h4><ul><li>Fragen zu Richtlinien, Salden, Gehaltsabrechnungen und Dokumenten stellen, mit Quelle.</li><li>Abwesenheiten, Ausgaben und Tickets per Chat beantragen.</li><li>Jede Anfrage in der App verfolgen.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 Nutzung vs. Free</b><br>Für die regelmäßige Nutzung.</p><h4>Empfohlen für</h4><div class="who"><i>Mitarbeitende</i><i>Teamleads</i></div><h4>Was sie mit One machen</h4><ul><li>Alles aus Free, mit doppelter Tagesnutzung.</li><li>Für alle, die One täglich in ihrer Arbeit nutzen.</li></ul></div>
+    s4d: "Jede Person bekommt ihre eigene tägliche KI-Nutzung, innerhalb der Berechtigungen, denen du schon vertraust. Wähle eine Mischung persönlicher Pläne je nach Profil.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>In jedem Bundle enthalten.</b></p><h4>Empfohlen für</h4><div class="who"><i>Das ganze Team</i></div><h4>Was sie mit One machen</h4><ul><li>Fragen zu Richtlinien, Salden, Gehaltsabrechnungen und Dokumenten stellen, mit Quelle.</li><li>Abwesenheiten, Ausgaben und Tickets per Chat beantragen.</li><li>Jede Anfrage in der App verfolgen.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 Nutzung vs. Free</b><br>Für die regelmäßige Nutzung.</p><h4>Empfohlen für</h4><div class="who"><i>Das ganze Team</i><i>Teamleads</i></div><h4>Was sie mit One machen</h4><ul><li>Alles aus Free, mit doppelter Tagesnutzung.</li><li>Für alle, die One täglich in ihrer Arbeit nutzen.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorit</span></div><p class="usage"><b>x10 Nutzung vs. Basic</b><br>Für anspruchsvolle Workflows.</p><h4>Empfohlen für</h4><div class="who"><i>Teamleads</i><i>Manager</i><i>Admins</i></div><h4>Was sie mit One machen</h4><ul><li>1:1s vorbereiten und die Analytics des eigenen Teams einsehen.</li><li>Abwesenheiten, Ausgaben und Schichten mit bereits gesammeltem Kontext genehmigen.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 Nutzung vs. Basic</b><br>Für Power-User.</p><h4>Empfohlen für</h4><div class="who"><i>Manager</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Was sie mit One machen</h4><ul><li>Komplette Kurse erstellen, Ausgaben gesammelt verarbeiten sowie Berichte und Routinen aufbauen.</li><li>Für die intensive Nutzung von One im eigenen Bereich.</li></ul></div>`,
     p1: "<b>Deine Daten bleiben unter Kontrolle</b><p>Jede Person sieht nur, was sie schon sehen durfte. One folgt exakt deinen Factorial-Berechtigungen: gleiche Rollen, gleicher Zugriff, nichts Neues offengelegt.</p>",
     p2: "<b>Niemand überzieht das Budget</b><p>Jede Person hat ein tägliches Kontingent je nach persönlichem Plan. Ist es erreicht, pausiert One bis morgen. Keine Aufladungen, keine ausufernden Kosten.</p>",
-    flex: "<b>Du entscheidest, welcher persönliche Plan zu wem passt.</b> Beispiel mit 100 Nutzern: 5 Max + 15 Plus + 30 Basic + 50 Free.",
+    flex: "<b>Du entscheidest, welcher persönliche Plan zu wem passt.</b> Beispiel mit 100 Personen: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Was als Nächstes kommt",
     s3d: "Jedes Produkt wird zum KI-Produkt. Umfang und Termine können sich ändern; wir halten dich auf dem Laufenden.",
     road: `<div><span>Demnächst</span><b>KI-1:1s</b><p>One bereitet jedes 1:1 mit der gesamten Historie der Person vor und begleitet es.</p></div>
@@ -1569,14 +1531,14 @@ const PT = {
       <tr><td>Controlo</td><td>Custo e ações opacos.</td><td>Tu decides que agentes correm e vês cada ação e quanto custou.</td></tr>`,
     s4e: "One · Capacidade pessoal",
     s4t: "IA para toda a equipa, sem perder o controlo",
-    s4d: "Cada pessoa tem a sua própria utilização diária de IA, dentro das permissões em que já confias. Escolhe uma combinação de planos pessoais consoante o tipo de utilizador.",
-    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluído em todos os bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Colaboradores</i></div><h4>O que fazem com a One</h4><ul><li>Perguntam sobre políticas, saldos, recibos de vencimento e documentos, com a fonte.</li><li>Pedem ausências, despesas e tickets por chat.</li><li>Acompanham cada pedido na app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de utilização vs Free</b><br>Para uso regular.</p><h4>Recomendado para</h4><div class="who"><i>Colaboradores</i><i>Team leaders</i></div><h4>O que fazem com a One</h4><ul><li>Tudo o que o Free inclui, com o dobro da utilização diária.</li><li>Para quem usa a One todos os dias no trabalho.</li></ul></div>
+    s4d: "Cada pessoa tem a sua própria utilização diária de IA, dentro das permissões em que já confias. Escolhe uma combinação de planos pessoais consoante o tipo de perfil.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluído em todos os bundles.</b></p><h4>Recomendado para</h4><div class="who"><i>Toda a equipa</i></div><h4>O que fazem com a One</h4><ul><li>Perguntam sobre políticas, saldos, recibos de vencimento e documentos, com a fonte.</li><li>Pedem ausências, despesas e tickets por chat.</li><li>Acompanham cada pedido na app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 de utilização vs Free</b><br>Para uso regular.</p><h4>Recomendado para</h4><div class="who"><i>Toda a equipa</i><i>Team leaders</i></div><h4>O que fazem com a One</h4><ul><li>Tudo o que o Free inclui, com o dobro da utilização diária.</li><li>Para quem usa a One todos os dias no trabalho.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Favorito</span></div><p class="usage"><b>x10 de utilização vs Basic</b><br>Para fluxos de trabalho exigentes.</p><h4>Recomendado para</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>O que fazem com a One</h4><ul><li>Preparam 1:1 e consultam a análise da sua equipa.</li><li>Aprovam ausências, despesas e turnos com o contexto já reunido.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 de utilização vs Basic</b><br>Para power users.</p><h4>Recomendado para</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>O que fazem com a One</h4><ul><li>Criam cursos completos, processam lotes de despesas e constroem relatórios e rotinas.</li><li>Pensado para um uso intensivo da One na sua área.</li></ul></div>`,
     p1: "<b>Os teus dados, sob controlo</b><p>Cada pessoa só vê o que já podia ver. A One segue exatamente as tuas permissões da Factorial: mesmas funções, mesmo acesso, nada de novo exposto.</p>",
     p2: "<b>Ninguém gasta a mais</b><p>Cada pessoa tem uma utilização diária de acordo com o seu plano pessoal. Quando a atinge, a One pausa até ao dia seguinte. Sem carregamentos nem custos descontrolados.</p>",
-    flex: "<b>Tu escolhes que plano pessoal se ajusta a cada pessoa.</b> Exemplo com 100 utilizadores: 5 Max + 15 Plus + 30 Basic + 50 Free.",
+    flex: "<b>Tu escolhes que plano pessoal se ajusta a cada pessoa.</b> Exemplo com 100 pessoas: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "O que aí vem",
     s3d: "Todos os produtos se estão a tornar produtos de IA. O âmbito e as datas podem mudar; manter-te-emos informado.",
     road: `<div><span>Brevemente</span><b>1:1 com IA</b><p>A One prepara e orienta cada 1:1 com o histórico completo da pessoa.</p></div>
@@ -1830,14 +1792,14 @@ const FR = {
       <tr><td>Contrôle</td><td>Coûts et actions opaques.</td><td>Vous décidez quels agents tournent et voyez chaque action et ce qu’elle a coûté.</td></tr>`,
     s4e: "One · Capacité personnelle",
     s4t: "L’IA pour tous, sans perdre le contrôle",
-    s4d: "Chaque personne dispose de sa propre utilisation quotidienne de l’IA, dans le respect des autorisations que vous maîtrisez déjà. Choisissez une combinaison de plans personnels selon le type d’utilisateur.",
-    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Inclus dans tous les bundles.</b></p><h4>Recommandé pour</h4><div class="who"><i>Collaborateurs</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Posent leurs questions sur les politiques, soldes, fiches de paie et documents, avec la source.</li><li>Demandent absences, notes de frais et tickets par chat.</li><li>Suivent chaque demande depuis l’app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 d’utilisation vs Free</b><br>Pour un usage régulier.</p><h4>Recommandé pour</h4><div class="who"><i>Collaborateurs</i><i>Team leaders</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qu’inclut Free, avec deux fois plus d’utilisation quotidienne.</li><li>Pour ceux qui utilisent One chaque jour dans leur travail.</li></ul></div>
+    s4d: "Chaque personne dispose de sa propre utilisation quotidienne de l’IA, dans le respect des autorisations que vous maîtrisez déjà. Choisissez une combinaison de plans personnels selon le type de profil.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Inclus dans tous les bundles.</b></p><h4>Recommandé pour</h4><div class="who"><i>Toute l’équipe</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Posent leurs questions sur les politiques, soldes, fiches de paie et documents, avec la source.</li><li>Demandent absences, notes de frais et tickets par chat.</li><li>Suivent chaque demande depuis l’app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 d’utilisation vs Free</b><br>Pour un usage régulier.</p><h4>Recommandé pour</h4><div class="who"><i>Toute l’équipe</i><i>Team leaders</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Tout ce qu’inclut Free, avec deux fois plus d’utilisation quotidienne.</li><li>Pour ceux qui utilisent One chaque jour dans leur travail.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Favori</span></div><p class="usage"><b>x10 d’utilisation vs Basic</b><br>Pour les workflows exigeants.</p><h4>Recommandé pour</h4><div class="who"><i>Team leaders</i><i>Managers</i><i>Admins</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Préparent les 1:1 et consultent les analyses de leur équipe.</li><li>Approuvent absences, notes de frais et plannings avec le contexte déjà réuni.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 d’utilisation vs Basic</b><br>Pour les power users.</p><h4>Recommandé pour</h4><div class="who"><i>Managers</i><i>Admins</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Ce qu’ils font avec One</h4><ul><li>Créent des formations complètes, traitent les notes de frais par lots et construisent rapports et routines.</li><li>Conçu pour un usage intensif de One dans leur domaine.</li></ul></div>`,
     p1: "<b>Vos données restent sous contrôle</b><p>Chacun ne voit que ce qu’il pouvait déjà voir. One suit exactement vos autorisations Factorial : mêmes rôles, mêmes accès, rien de nouveau exposé.</p>",
     p2: "<b>Personne ne dépasse le budget</b><p>Chacun dispose d’une allocation quotidienne selon son plan personnel. Une fois atteinte, One se met en pause jusqu’au lendemain. Pas de recharges, pas de coûts incontrôlés.</p>",
-    flex: "<b>Vous choisissez le plan personnel adapté à chaque personne.</b> Exemple pour 100 utilisateurs : 5 Max + 15 Plus + 30 Basic + 50 Free.",
+    flex: "<b>Vous choisissez le plan personnel adapté à chaque personne.</b> Exemple pour 100 personnes : 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Prochainement",
     s3d: "Chaque produit devient un produit d’IA. Le périmètre et les dates peuvent évoluer ; nous vous tiendrons informé.",
     road: `<div><span>Bientôt</span><b>1:1 avec l’IA</b><p>One prépare et guide chaque 1:1 avec tout l’historique de la personne.</p></div>
@@ -2091,14 +2053,14 @@ const IT = {
       <tr><td>Controllo</td><td>Costi e azioni opachi.</td><td>Decidi tu quali agenti funzionano e vedi ogni azione e quanto è costata.</td></tr>`,
     s4e: "One · Capacità personale",
     s4t: "AI per tutti, senza perdere il controllo",
-    s4d: "Ogni persona ha il proprio utilizzo giornaliero di AI, all’interno dei permessi di cui già ti fidi. Scegli un mix di piani personali in base al tipo di utente.",
-    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluso in ogni bundle.</b></p><h4>Consigliato per</h4><div class="who"><i>Dipendenti</i></div><h4>Cosa fanno con One</h4><ul><li>Chiedono di policy, saldi, cedolini e documenti, con la fonte.</li><li>Richiedono assenze, spese e ticket in chat.</li><li>Seguono ogni richiesta dall’app.</li></ul></div>
-    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 di utilizzo vs Free</b><br>Per un uso regolare.</p><h4>Consigliato per</h4><div class="who"><i>Dipendenti</i><i>Team leader</i></div><h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Free, con il doppio dell’utilizzo giornaliero.</li><li>Per chi usa One ogni giorno nel proprio lavoro.</li></ul></div>
+    s4d: "Ogni persona ha il proprio utilizzo giornaliero di AI, all’interno dei permessi di cui già ti fidi. Scegli un mix di piani personali in base al tipo di profilo.",
+    tiers: `<div class="tier"><div class="tn"><b>Free</b></div><p class="usage"><b>Incluso in ogni bundle.</b></p><h4>Consigliato per</h4><div class="who"><i>Tutto il team</i></div><h4>Cosa fanno con One</h4><ul><li>Chiedono di policy, saldi, cedolini e documenti, con la fonte.</li><li>Richiedono assenze, spese e ticket in chat.</li><li>Seguono ogni richiesta dall’app.</li></ul></div>
+    <div class="tier"><div class="tn"><b>Basic</b></div><p class="usage"><b>x2 di utilizzo vs Free</b><br>Per un uso regolare.</p><h4>Consigliato per</h4><div class="who"><i>Tutto il team</i><i>Team leader</i></div><h4>Cosa fanno con One</h4><ul><li>Tutto ciò che c’è in Free, con il doppio dell’utilizzo giornaliero.</li><li>Per chi usa One ogni giorno nel proprio lavoro.</li></ul></div>
     <div class="tier fav"><div class="tn"><b>Plus</b><span>Preferito</span></div><p class="usage"><b>x10 di utilizzo vs Basic</b><br>Per flussi di lavoro impegnativi.</p><h4>Consigliato per</h4><div class="who"><i>Team leader</i><i>Manager</i><i>Admin</i></div><h4>Cosa fanno con One</h4><ul><li>Preparano gli 1:1 e consultano gli analytics del proprio team.</li><li>Approvano assenze, spese e turni con il contesto già raccolto.</li></ul></div>
     <div class="tier"><div class="tn"><b>Max</b></div><p class="usage"><b>x35 di utilizzo vs Basic</b><br>Per power user.</p><h4>Consigliato per</h4><div class="who"><i>Manager</i><i>Admin</i><i>Training Manager</i><i>Finance Manager</i></div><h4>Cosa fanno con One</h4><ul><li>Creano corsi completi, elaborano lotti di spese e creano report e routine.</li><li>Pensato per un uso intensivo di One nella propria area.</li></ul></div>`,
     p1: "<b>I tuoi dati restano sotto controllo</b><p>Ogni persona vede solo ciò che poteva già vedere. One segue esattamente i tuoi permessi Factorial: stessi ruoli, stessi accessi, niente di nuovo esposto.</p>",
     p2: "<b>Nessuno sfora il budget</b><p>Ogni persona ha un utilizzo giornaliero in base al proprio piano personale. Raggiunto il limite, One si mette in pausa fino al giorno dopo. Niente ricariche, niente costi fuori controllo.</p>",
-    flex: "<b>Scegli tu quale piano personale si adatta a ogni persona.</b> Esempio con 100 utenti: 5 Max + 15 Plus + 30 Basic + 50 Free.",
+    flex: "<b>Scegli tu quale piano personale si adatta a ogni persona.</b> Esempio con 100 persone: 5 Max + 15 Plus + 30 Basic + 50 Free.",
     s3t: "Cosa arriva",
     s3d: "Ogni prodotto sta diventando un prodotto AI. Ambito e date possono cambiare; ti terremo aggiornato.",
     road: `<div><span>Prossimamente</span><b>1:1 con l’AI</b><p>One prepara e guida ogni 1:1 con lo storico completo della persona.</p></div>
@@ -2148,7 +2110,6 @@ LONG.it = {
       tasks: ["Approva le spese conformi alla policy e ti lascia solo le eccezioni.", "Copre i turni chiamando chi può farli, seguendo le tue regole.", "Chiama i candidati che arrivano allo screening e ti lascia il report.", "Risolve a metà i ticket così chi li gestisce deve solo approvare."] }
 };
 
-const ISO = `<svg viewBox="0 0 714 714" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg>`;
 const HUB_ICONS = {
   talento:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
   tiempo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
@@ -2238,7 +2199,7 @@ const th = k => T() ? { ...HUBS[k], ...T().HUBS[k] } : HUBS[k];
 const U = k => (T() ? T().UI : UI_ES)[k];
 
 function chatHTML(list){
-  return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">${ISO}One</div>${c.a}</div>`).join('')}</div>`;
+  return `<div class="chat">${list.map(c=>`<div class="msg u">${c.q}</div><div class="msg o"><div class="who">One</div>${c.a}</div>`).join('')}</div>`;
 }
 function chipsHTML(ids){ return `<div class="chips">${ids.map(i=>`<button class="chip" type="button" data-go="${i}">${tm(i).name}</button>`).join('')}</div>`; }
 
