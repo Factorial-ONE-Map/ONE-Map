@@ -238,6 +238,29 @@ section p.sl{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0 0 36px}
 .btn:hover{color:var(--r140)}
 footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-size:12.5px;color:var(--ink-2)}
 
+/* ---------- NAVEGADOR DE SECCIONES (aparece al salir del mapa) ---------- */
+.secnav{position:fixed;z-index:15;opacity:0;pointer-events:none;transition:opacity .2s var(--ease)}
+.secnav.on{opacity:1;pointer-events:auto}
+.secnav a{display:flex;align-items:center;text-decoration:none;color:var(--ink-2);font-size:13px}
+.secnav a:hover{color:var(--midnight)}
+.secnav a.cur{color:var(--midnight);font-weight:500}
+@media (min-width:861px){
+  .secnav{right:14px;top:50%;transform:translateY(-50%);display:grid;gap:4px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:10px 12px}
+  .secnav a{flex-direction:row-reverse;justify-content:flex-start;gap:10px;padding:4px 2px}
+  .secnav .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3);flex:none;transition:transform .2s var(--ease),background .2s var(--ease)}
+  .secnav a.cur .dot{background:var(--red);transform:scale(1.35)}
+  .secnav .lb{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .2s var(--ease)}
+  .secnav:hover .lb,.secnav:focus-within .lb{max-width:160px}
+}
+@media (max-width:860px){
+  .secnav{top:0;left:0;right:0;display:flex;gap:6px;overflow-x:auto;background:#fff;border-bottom:1px solid var(--line);padding:10px 16px;scrollbar-width:none}
+  .secnav::-webkit-scrollbar{display:none}
+  .secnav .dot{display:none}
+  .secnav a{flex:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;white-space:nowrap}
+  .secnav a.cur{background:var(--red);border-color:var(--red);color:#fff}
+  section{scroll-margin-top:60px}
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:1100px){
   .hero.open .hero-inner{grid-template-columns:minmax(0,1fr) 0px}
@@ -291,13 +314,15 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
   <a class="scrollcue" id="scrollCue" href="#mas" aria-label="Seguir bajando" data-i18n-aria="cueAria"><span data-i18n="cue">Sigue bajando</span><span class="ar"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></span></a>
 </div>
 
+<nav class="secnav" id="secnav" aria-label="Secciones" data-i18n-aria="navAria"><a href="#hero" data-sec="hero"><span class="dot"></span><span class="lb" data-i18n="navMap">Mapa</span></a><a href="#mas" data-sec="mas"><span class="dot"></span><span class="lb" data-i18n="navStories">Historias</span></a><a href="#porque" data-sec="porque"><span class="dot"></span><span class="lb" data-i18n="navWhy">IA para empresas</span></a><a href="#planes" data-sec="planes"><span class="dot"></span><span class="lb" data-i18n="navPlans">Planes ONE</span></a><a href="#facts" data-sec="facts"><span class="dot"></span><span class="lb" data-i18n="navFacts">Cifras</span></a><a href="#viene" data-sec="viene"><span class="dot"></span><span class="lb" data-i18n="navNext">Lo que viene</span></a></nav>
+
 <section id="mas">
   <h2 class="st" data-i18n="s1t">El mismo dato, de principio a fin</h2>
   <p class="sl" data-i18n="s1d">Cuando cada módulo vive en una herramienta distinta, cada decisión empieza de cero. En Factorial, lo que se captura una vez lo usa el siguiente paso. Toca cualquier paso para abrirlo en el mapa.</p>
   <div class="stories" id="stories"></div>
 </section>
 
-<section>
+<section id="porque">
   <h2 class="st" data-i18n="s2t">Tus equipos ya usan IA. Que sea la tuya.</h2>
   <p class="sl" data-i18n="s2d">Lo que cambia no es la tecnología, es el contexto. Y con datos de personas, la confianza no es negociable.</p>
   <div class="cmpwrap">
@@ -314,7 +339,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
   </div>
 </section>
 
-<section>
+<section id="planes">
   <p class="eyebrow" data-i18n="s4e">ONE · Capacidad personal</p>
   <h2 class="st" data-i18n="s4t">IA para todo el equipo, sin perder el control</h2>
   <p class="sl" data-i18n="s4d">Cada persona tiene su propio uso diario de IA, dentro de los permisos en los que ya confías. Elige una combinación de planes personales según el tipo de perfil.</p>
@@ -333,7 +358,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 
 <section id="facts"></section>
 
-<section>
+<section id="viene">
   <h2 class="st" data-i18n="s3t">Lo que viene</h2>
   <p class="sl" data-i18n="s3d">Cada producto se está convirtiendo en un producto de IA. El alcance y las fechas pueden cambiar; te mantendremos al día.</p>
   <div class="road" data-i18n="road">
@@ -980,6 +1005,7 @@ const EN = {
     { t: "A broken laptop", d: "ONE message to ONE and one approval.", steps: ["You tell ONE and it opens the ticket.", "ONE checks there's no stock.", "It finds one that meets the policy.", "A person approves, it's bought and IT delivers it."] }
   ],
   UI: {
+    navMap: "Map", navStories: "Stories", navWhy: "AI for Business", navPlans: "ONE plans", navFacts: "Key figures", navNext: "What’s next", navAria: "Sections",
     allin: "All in ONE",
     solves: "What it solves", tryOne: "Try ONE",
     center: "The core", area: "Area", modules: "Modules", brings: "What it brings", withOne: "With ONE", connected: "Connected with",
@@ -1285,6 +1311,7 @@ const DE = {
     { t: "Ein kaputter Laptop", d: "Eine Nachricht an ONE und eine Freigabe.", steps: ["Sie sagen es ONE, und es öffnet das Ticket.", "ONE prüft, dass nichts auf Lager ist.", "Es findet ein Gerät, das der Richtlinie entspricht.", "Eine Person gibt frei, es wird gekauft und die IT liefert es aus."] }
   ],
   UI: {
+    navMap: "Karte", navStories: "Beispiele", navWhy: "KI für Unternehmen", navPlans: "ONE-Pläne", navFacts: "Zahlen", navNext: "Was kommt", navAria: "Abschnitte",
     allin: "All in ONE",
     solves: "Was es löst", tryOne: "ONE ausprobieren",
     center: "Der Kern", area: "Bereich", modules: "Module", brings: "Was es bringt", withOne: "Mit ONE", connected: "Verbunden mit",
@@ -1550,6 +1577,7 @@ const PT = {
     { t: "Um portátil avariado", d: "Uma mensagem ao ONE e uma aprovação.", steps: ["Basta pedir ao ONE para o ticket ser aberto.", "O ONE verifica que não há stock.", "Encontra um que cumpre a política.", "Uma pessoa aprova, é comprado e o IT entrega-o."] }
   ],
   UI: {
+    navMap: "Mapa", navStories: "Histórias", navWhy: "IA para empresas", navPlans: "Planos ONE", navFacts: "Números", navNext: "O que aí vem", navAria: "Secções",
     allin: "Tudo no ONE",
     center: "O núcleo", area: "Área", modules: "Módulos", brings: "O que traz", withOne: "Com o ONE", connected: "Ligado a",
     solves: "O que resolve", tryOne: "Experimente com o ONE",
@@ -1815,6 +1843,7 @@ const FR = {
     { t: "Un ordinateur portable en panne", d: "Un message à ONE et une validation.", steps: ["Vous le dites à ONE et il ouvre le ticket.", "ONE vérifie qu’il n’y a pas de stock.", "Il en trouve un qui respecte la politique.", "Un humain valide, il est acheté et l’IT le livre."] }
   ],
   UI: {
+    navMap: "Carte", navStories: "Cas d’usage", navWhy: "IA pour les entreprises", navPlans: "Offres ONE", navFacts: "Chiffres", navNext: "À venir", navAria: "Sections",
     allin: "All in ONE",
     solves: "Ce que ça résout", tryOne: "Essayez avec ONE",
     center: "Le socle", area: "Domaine", modules: "Modules", brings: "Ce que ça apporte", withOne: "Avec ONE", connected: "Connecté avec",
@@ -2080,6 +2109,7 @@ const IT = {
     { t: "Un portatile rotto", d: "Un messaggio a ONE e un’approvazione.", steps: ["Lo dici a ONE e apre il ticket.", "ONE verifica che non ci siano scorte.", "Ne trova uno conforme alla policy.", "Una persona approva, viene acquistato e l’IT lo consegna."] }
   ],
   UI: {
+    navMap: "Mappa", navStories: "Storie", navWhy: "AI per aziende", navPlans: "Piani ONE", navFacts: "Numeri", navNext: "In arrivo", navAria: "Sezioni",
     allin: "All in ONE",
     center: "Il cuore", area: "Area", modules: "Moduli", brings: "Come ti aiuta", solves: "Cosa risolve", tryOne: "Prova con ONE", withOne: "Con ONE", connected: "Connesso con",
     soon: "Cosa arriva", soonNote: "Ambito e date possono cambiare.", close: "Chiudi",
@@ -2876,6 +2906,15 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && hero.classList.contains('open')) closePanel(); });
 new ResizeObserver(() => drawWires()).observe(stage);
+const secnav = $('#secnav'), navLinks = [...secnav.querySelectorAll('a')];
+function updateNav(){
+  secnav.classList.toggle('on', hero.getBoundingClientRect().bottom < innerHeight * 0.35);
+  let cur = 'hero';
+  for (const a of navLinks) { const s = document.getElementById(a.dataset.sec); if (s && !s.hidden && s.getBoundingClientRect().top < innerHeight * 0.4) cur = a.dataset.sec; }
+  navLinks.forEach(a => { const on = a.dataset.sec === cur; a.classList.toggle('cur', on); if (on && innerWidth <= 860) secnav.scrollLeft = a.offsetLeft - 16; });
+}
+navLinks.forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.getElementById(a.dataset.sec).scrollIntoView({behavior:'smooth'}); }));
+addEventListener('scroll', updateNav, {passive:true}); addEventListener('resize', updateNav); updateNav();
 const cue = $('#scrollCue');
 cue.addEventListener('click', e => { e.preventDefault(); $('#mas').scrollIntoView({behavior:'smooth'}); });
 addEventListener('scroll', () => cue.classList.toggle('gone', scrollY > 80), {passive:true});
