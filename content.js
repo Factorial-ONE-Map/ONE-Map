@@ -178,7 +178,7 @@ const M = {
     ],
     one: [{ q: "¿Qué proyectos van por encima de presupuesto este mes?", a: "Cruza horas imputadas, coste laboral y gastos, y te explica dónde se desvía cada uno." }],
     why: "El coste de una hora sale del salario real de la persona y la hora sale del fichaje: nadie copia datos entre herramientas.",
-    links: ["control", "gastos", "compensacion", "fpa", "analiticas"]
+    links: ["control", "gastos", "compensacion", "fpa", "compras", "analiticas"]
   },
   fpa: {
     name: "Planificación financiera", hub: "finanzas",
@@ -215,7 +215,7 @@ const M = {
     ],
     one: [{ q: "Se me ha estropeado el portátil. Necesito uno nuevo.", a: "Abre el ticket, comprueba que no hay stock, encuentra uno en el marketplace y lo compra cuando una persona lo aprueba." }],
     why: "La compra empieza en un ticket, pasa por el presupuesto y termina en el inventario de la persona.",
-    links: ["tickets", "inventario", "marketplace", "software", "fpa"],
+    links: ["tickets", "inventario", "marketplace", "software", "fpa", "proyectos"],
     check: true
   },
   revision: {
@@ -228,7 +228,7 @@ const M = {
     ],
     one: [{ q: "Propón subidas para mi equipo según nuestra política.", a: "Cifras y justificación, ya contrastadas con el presupuesto. Tú apruebas." }],
     why: "Tú decides cuántos ciclos de evaluación cuentan para la elegibilidad: la subida refleja una tendencia, no una nota puntual. Y llega a nómina como variable validada.",
-    links: ["desempeno", "compensacion", "plantilla", "documentos", "analiticas"]
+    links: ["desempeno", "compensacion", "plantilla", "documentos", "politicas", "portal", "analiticas"]
   },
   politicas: {
     name: "Políticas", hub: "core",
@@ -240,7 +240,7 @@ const M = {
     ],
     one: [{ q: "¿Puedo trabajar dos semanas en remoto desde otro país?", a: "Responde a partir de tu política, muestra la fuente y solo enseña lo que esa persona puede ver." }],
     why: "Las preguntas rutinarias nunca llegan a la bandeja del responsable, y los mismos criterios aprueban gastos o ausencias.",
-    links: ["ausencias", "gastos", "control", "portal", "tickets"]
+    links: ["ausencias", "gastos", "control", "portal", "tickets", "revision"]
   },
   portal: {
     name: "Portal de empleado", hub: "core",
@@ -252,7 +252,7 @@ const M = {
     ],
     oneNote: "One está incluido para toda la plantilla, sin necesidad de formación. Cada persona pregunta lo que necesita y ve solo lo que su rol le permite.",
     why: "Todo lo que el empleado hace aquí entra directamente en el módulo correspondiente, sin formularios ni correos intermedios.",
-    links: ["ausencias", "gastos", "tickets", "documentos", "beneficios", "comunicaciones"]
+    links: ["ausencias", "gastos", "tickets", "documentos", "beneficios", "comunicaciones", "revision"]
   },
   onoff: {
     name: "On/Offboarding", hub: "core",

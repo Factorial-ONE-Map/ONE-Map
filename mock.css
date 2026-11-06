@@ -2,7 +2,7 @@
 .mock .proof{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
 .mock .proof span{border:1px solid rgba(255,255,255,.85);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:500}
 .mock .proof span::before{content:"✓ ";}
-.mock details.more{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.mock details.more{margin:18px 0 6px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0}
 .mock details.more summary{cursor:pointer;font-size:14.5px;font-weight:500;color:var(--r140);list-style:none}
 .mock details.more summary::after{content:" +"}
 .mock details.more[open] summary::after{content:" –"}

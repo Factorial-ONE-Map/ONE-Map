@@ -1,4 +1,6 @@
 /* MOCK · versión corta del mapa (solo para ver cómo quedaría) */
+/* idiomas: ES y EN viven aquí; DE, FR, IT, PT, PT-BR y PL vienen de mock-i18n.js (MOCK_TX). Si falta uno, sale en inglés. */
+const MX = (window.MOCK_TX || {})[lang] || null;
 (function () {
   const es = lang === 'es';
   const L = es ? {
@@ -16,6 +18,8 @@
     cards: [['It already has the context', 'Connected to your Factorial data from the first message. Nothing to paste.'], ['It sees what your role allows', 'Same permissions as in Factorial. Nothing new exposed.'], ['It acts, not just answers', 'Prepares, approves and automates. You decide the exceptions.']],
     explore: 'Keep exploring', links: [['Plans', 'Compare what each bundle includes', 'plans/index.html'], ['Connectors', 'The apps One already connects to', 'connectors/index.html']]
   };
+  if (MX) { const u = MX.ui; Object.assign(L, { sub: u.sub, proof: u.proof, hint: u.hint, more: u.more, why: u.why, cards: u.cards, explore: u.explore,
+    links: u.links.map(([a, b], i) => [a, b, L.links[i][2]]) }); }
   document.body.classList.add('mock');
   // hero: una frase + 3 pruebas
   const sub = document.querySelector('.sub'); sub.textContent = L.sub;
@@ -24,6 +28,7 @@
   // panel: descripción, vídeo, One y conexiones; el resto en «Más detalles»
   const orig = render;
   const T2 = es ? { why: 'Por qué Factorial', works: 'Funciona con', next: 'Lo que viene', soonTag: 'Pronto', watch: 'Míralo en acción' }
+                : MX ? { why: MX.ui.whyF, works: MX.ui.works, next: MX.ui.next, soonTag: MX.ui.soonTag, watch: MX.ui.watch }
                 : { why: 'Why Factorial', works: 'Works with', next: "What's next", soonTag: 'Soon', watch: 'See it in action' };
   render = function (key) {
     orig(key);
@@ -34,6 +39,9 @@
     const st = m.stats || (m.stat ? [m.stat] : null);
     let h = head + `<p class="lead vp">${m.lead}</p>`;
     if (st) h += `<div class="stats vp-stats">${st.map(s => `<div class="stat"><b>${s.n}</b><span>${s.t}</span></div>`).join('')}</div>`;
+    // «Más detalles» justo debajo de la propuesta de valor, antes del vídeo y de One
+    const vals = [...m.value, ...(mx.extra || [])];
+    h += `<details class="more"><summary>${L.more}</summary><h3>${U('brings')}</h3><ul class="vals">${vals.map(v => `<li>${v}</li>`).join('')}</ul>${m.oneNote && m.one ? `<p class="note" style="margin-top:12px">${m.oneNote}</p>` : ''}${m.one && m.one.length > 1 ? chatHTML(m.one.slice(1)) : ''}${m.special === 'analytics' ? analyticsExtra() : ''}</details>`;
     const vid = videoHTML(key);
     if (vid) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${vid.replace(/^<h3>.*?<\/h3>/, '')}</div>`;
     const one = (m.one ? chatHTML(m.one.slice(0, 1)) : '') + (m.oneNote && !m.one ? `<p class="note">${m.oneNote}</p>` : '') + (mx.try ? tryHTML(mx.try) : '');
@@ -41,8 +49,6 @@
     h += `<div class="p-why"><span class="eb">${T2.why}</span><p>${m.why}</p>` +
          (m.links && m.links.filter(shown).length ? `<span class="wk">${T2.works}</span>${chipsHTML(m.links)}` : '') + `</div>`;
     if (m.soon && m.soon.length) h += `<div class="p-sec p-next"><h3>${T2.next}</h3><ul>${m.soon.map(s => `<li><span>${T2.soonTag}</span>${s.replace(/\s*\((próximamente|coming soon|demnächst|em breve|bientôt|prossimamente|wkrótce)\)\.?/i, '')}</li>`).join('')}</ul><p class="disc-note">${U('soonNote')}</p></div>`;
-    const vals = [...m.value, ...(mx.extra || [])];
-    h += `<details class="more"><summary>${L.more}</summary><h3>${U('brings')}</h3><ul class="vals">${vals.map(v => `<li>${v}</li>`).join('')}</ul>${m.oneNote && m.one ? `<p class="note" style="margin-top:12px">${m.oneNote}</p>` : ''}${m.one && m.one.length > 1 ? chatHTML(m.one.slice(1)) : ''}${m.special === 'analytics' ? analyticsExtra() : ''}</details>`;
     panelIn.innerHTML = h; panelIn.scrollTop = 0;
     panelIn.querySelector('#closeBtn').addEventListener('click', closePanel);
     panelIn.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => select(b.dataset.go)));
@@ -59,7 +65,10 @@
       if (mode === 'keep' && !n.classList.contains('why') && !n.classList.contains('try')) keep.add(n);
     });
     const extra = kids.filter(n => !keep.has(n));
-    if (extra.length) { const d = document.createElement('details'); d.className = 'more'; d.innerHTML = `<summary>${L.more}</summary>`; extra.forEach(n => d.appendChild(n)); panelIn.appendChild(d); }
+    if (extra.length) { const d = document.createElement('details'); d.className = 'more'; d.innerHTML = `<summary>${L.more}</summary>`; extra.forEach(n => d.appendChild(n));
+      // también arriba en áreas y One: tras la frase principal (y su cifra o etiqueta, si las hay)
+      const anchor = panelIn.querySelector('.vp-stats') || panelIn.querySelector('.lead') || panelIn.querySelector('.ptag') || panelIn.querySelector('.p-head');
+      anchor.after(d); }
   }
   // historias en una línea
   // por qué One: 3 tarjetas en vez de tabla
@@ -154,8 +163,19 @@
       {"m": ["desempeno", "engagement"], "c": 3, "w": ["Mes 6", "Month 6"], "es": ["Su primer kudos, compartido en LinkedIn", "Objetivos claros, feedback todo el año y reconocimiento que se ve."], "en": ["Her first kudos, shared on LinkedIn", "Clear goals, feedback all year and recognition people can see."]},
       {"m": ["compensacion", "documentos"], "c": 3, "w": ["Día de cobro", "Payday"], "es": ["Cobra bien, a la primera", "La nómina llega validada a la app."], "en": ["Paid right, first time", "The payslip arrives validated in the app."]} ] }
   ];
+  // en DE/FR/IT/PT/PT-BR/PL, los huecos 'en' de cada perfil y paso se rellenan con ese idioma
+  if (MX) ROLES.forEach((r, i) => { const x = MX.roles[i];
+    r.en = { ...r.en, n: x.n, v: x.v, o: x.o, q: x.q, a: x.a };
+    r.story.who[1] = x.who; r.story.s[1] = x.s; r.story.ch[1] = x.ch;
+    r.steps.forEach((s, k) => { const y = x.steps[k]; s.w[1] = y.w; s.en = [y.t, y.d]; if (s.p) s.p[1] = y.p; }); });
+  const fill = (t, o) => t.replace(/\{(\w)\}/g, (_, k) => o[k]);
   const L = es ? { title: 'Tu empresa, conectada', sub: '¿Qué gana cada persona de tu empresa con Factorial? Elige un perfil: cada problema se resuelve con productos de varias áreas, trabajando juntos.', journey: 'Sus problemas, resueltos', ask: 'Pregúntale a One', play: 'Ver en el mapa', step: (i, n) => `${i} de ${n}`, areas: n => `${n} áreas conectadas`, follow: 'Una historia en Factorial' }
                  : { title: 'Your company, connected', sub: 'What does each person in your company get from Factorial? Pick a profile: every problem is solved by products from several areas, working together.', journey: 'Their problems, solved', ask: 'Ask One', play: 'See it on the map', step: (i, n) => `${i} of ${n}`, areas: n => `${n} areas connected`, follow: 'A story in Factorial' };
+  const X = es ? { seeSteps: n => `Ver los ${n} pasos`, aiTag: 'Llamadas con IA', every: 'Todos los productos', sample: 'Ejemplo con datos ficticios', seeAs: 'Míralo como', pause: 'Pausa', play: 'Reproducir', next: 'Siguiente' }
+    : { seeSteps: n => `See the ${n} steps`, aiTag: 'AI calls', every: 'Every product', sample: 'Example with fictional data', seeAs: 'See it as', pause: 'Pause', play: 'Play', next: 'Next' };
+  if (MX) { const u = MX.ui;
+    Object.assign(L, { title: u.title, sub: u.csub, journey: u.journey, ask: u.ask, play: u.play, step: (i, n) => fill(u.stepOf, { i, n }), areas: n => fill(u.areas, { n }), follow: u.follow });
+    Object.assign(X, { seeSteps: n => fill(u.seeSteps, { n }), aiTag: u.aiTag, every: u.every, sample: u.sample, seeAs: u.seeAs, pause: u.pause, play: u.playBtn, next: u.nextBtn }); }
   const tx = r => es ? r.es : r.en;
   const so = r => ({ who: r.story.who[es ? 0 : 1], s: r.story.s[es ? 0 : 1], ch: r.story.ch[es ? 0 : 1] });
   const stepsOf = r => r.steps.map(s => ({ ...s, m: s.all ? Object.keys(M).filter(shown) : s.m.filter(shown) })).filter(s => s.m.length);
@@ -171,8 +191,8 @@
     const hubs = new Set(st.flatMap(s => s.m.map(id => M[id].hub)));
     sec.querySelectorAll('.roles button').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.r === i)));
     view.innerHTML = `<div class="rv-l"><p class="rv-n">${so(r).who} · ${L.areas(hubs.size)}</p><h3>${t.v}</h3><p class="rv-story">${so(r).s}</p><ul class="rv-o">${t.o.map(x => `<li>${x}</li>`).join('')}</ul>
-      <button class="rv-play big" type="button">▶ ${L.play}</button><details class="rv-steps"><summary>${es ? `Ver los ${st.length} pasos` : `See the ${st.length} steps`}</summary><ol class="rv-p">${st.map((s, x) => { const [q, a] = es ? s.es : s.en; return `${x === 0 || st[x - 1].c !== s.c ? `<li class="chh">${so(r).ch[s.c]}</li>` : ''}<li><i class="sc-w">${s.w[es ? 0 : 1]}</i><b>${q}${s.tag ? ` <span class="aitag">${es ? 'Llamadas con IA' : 'AI calls'}</span>` : ''}</b>${s.p ? `<i class="sp">“${es ? s.p[0] : s.p[1]}”</i>` : ''}<span>${a}</span><div class="rv-m">${s.all ? `<span class="allchip">${es ? 'Todos los productos' : 'Every product'} · ${Object.keys(M).filter(shown).length}</span>` : s.m.map(id => `<button type="button" data-go="${id}"><em>${th(M[id].hub).name}</em>${tm(id).name}</button>`).join('')}${(s.apps || []).map(n => `<a class="app" href="connectors/index.html${location.search}"><em>MCP</em>${n}</a>`).join('')}</div></li>`; }).join('')}</ol></details></div>
-      <div class="rv-r"><div class="rv-chat"><p class="rv-lbl">${L.ask}</p><div class="msg u">${t.q}</div><div class="msg o"><div class="who">One</div>${t.a}${t.chart ? (() => { const x = LONG[lang].ax.c1; return `<div class="rv-chart"><p class="ct">${x[0]}</p>${bars([14,9,6,11,4], x[2], [12,31,40,22,46])}<p class="sample">${es ? 'Ejemplo con datos ficticios' : 'Example with fictional data'}</p></div>`; })() : ''}</div></div>
+      <button class="rv-play big" type="button">▶ ${L.play}</button><details class="rv-steps"><summary>${X.seeSteps(st.length)}</summary><ol class="rv-p">${st.map((s, x) => { const [q, a] = es ? s.es : s.en; return `${x === 0 || st[x - 1].c !== s.c ? `<li class="chh">${so(r).ch[s.c]}</li>` : ''}<li><i class="sc-w">${s.w[es ? 0 : 1]}</i><b>${q}${s.tag ? ` <span class="aitag">${X.aiTag}</span>` : ''}</b>${s.p ? `<i class="sp">“${es ? s.p[0] : s.p[1]}”</i>` : ''}<span>${a}</span><div class="rv-m">${s.all ? `<span class="allchip">${X.every} · ${Object.keys(M).filter(shown).length}</span>` : s.m.map(id => `<button type="button" data-go="${id}"><em>${th(M[id].hub).name}</em>${tm(id).name}</button>`).join('')}${(s.apps || []).map(n => `<a class="app" href="connectors/index.html${location.search}"><em>MCP</em>${n}</a>`).join('')}</div></li>`; }).join('')}</ol></details></div>
+      <div class="rv-r"><div class="rv-chat"><p class="rv-lbl">${L.ask}</p><div class="msg u">${t.q}</div><div class="msg o"><div class="who">One</div>${t.a}${t.chart ? (() => { const x = LONG[lang].ax.c1; return `<div class="rv-chart"><p class="ct">${x[0]}</p>${bars([14,9,6,11,4], x[2], [12,31,40,22,46])}<p class="sample">${X.sample}</p></div>`; })() : ''}</div></div>
       </div>`;
   }
   show(0);
@@ -187,8 +207,8 @@
     origDraw(); if (!lit) return;
     let d = ''; const hs = new Set();
     lit.forEach(id => { const h = M[id].hub, a = pillAnchor(id); const hb = rel(stage.querySelector(`[data-hub-btn="${h}"]`)); const left = HUBS[h].side === 'left'; hs.add(h); d += `<path class="flow" d="${curve(a.x, a.y, left ? hb.l : hb.r, hb.cy)}"/>`; });
-    const one = rel($('#oneBtn')); const R = one.w / 2;
-    hs.forEach(h => { const hb = rel(stage.querySelector(`[data-hub-btn="${h}"]`)); const left = HUBS[h].side === 'left'; const ex = left ? hb.r : hb.l, ang = Math.atan2(hb.cy - one.cy, ex - one.cx); d += `<path class="flow" d="${curve(ex, hb.cy, one.cx + Math.cos(ang) * R * 0.82, one.cy + Math.sin(ang) * R * 0.82)}"/>`; });
+    const one = rel($('#oneBtn')); const R = rel($('#oneBtn .disc')).w / 2;
+    hs.forEach(h => { const hb = rel(stage.querySelector(`[data-hub-btn="${h}"]`)); const left = HUBS[h].side === 'left'; const ex = left ? hb.r : hb.l, ang = Math.atan2(hb.cy - one.cy, ex - one.cx); d += `<path class="flow" d="${curve(ex, hb.cy, one.cx + Math.cos(ang) * R, one.cy + Math.sin(ang) * R)}"/>`; });
     wires.innerHTML += d;
   };
   function clear() { stage.querySelectorAll('.pill.active,.pill.linked,[data-hub-btn].linked,[data-hub-btn].active').forEach(n => n.classList.remove('active', 'linked')); }
@@ -199,7 +219,7 @@
     const r = ROLES[i], t = tx(r), st = stepsOf(r), y = so(r);
     if (!stay) hero.scrollIntoView({ behavior: 'smooth' }); stage.classList.add('focus');
     k = -1; const seen = new Set();
-    const ctrls = () => `<span class="sc-ctl"><button type="button" data-c="pause" aria-label="${paused ? 'Play' : 'Pause'}">${paused ? '▶' : '❚❚'}</button><button type="button" data-c="next" aria-label="Next">⏭</button></span>`;
+    const ctrls = () => `<span class="sc-ctl"><button type="button" data-c="pause" aria-label="${paused ? X.play : X.pause}">${paused ? '▶' : '❚❚'}</button><button type="button" data-c="next" aria-label="${X.next}">⏭</button></span>`;
     const dots = () => `<span class="sc-dots">${st.map((_, x) => `<i class="${x < k ? 'd' : x === k ? 'n' : ''}"></i>`).join('')}</span>`;
     const crumbs = c => `<span class="sc-ch">${y.ch.map((n, x) => `<em class="${x < c ? 'd' : x === c ? 'n' : ''}">${x < c ? '✓ ' : ''}${n}</em>`).join('<u>›</u>')}</span>`;
     const light = (cur) => { clear(); seen.forEach(id => stage.querySelector(`.pill[data-id="${id}"]`)?.classList.add('linked'));
@@ -223,7 +243,7 @@
     else { paused = !paused; if (paused) { clearTimeout(timer); b.textContent = '▶'; } else go(); } });
   document.addEventListener('click', e => { if (lit && !e.target.closest('.rv-play') && !e.target.closest('.heroroles') && !e.target.closest('.storycap')) stop(); }, true);
   const hr = document.createElement('div'); hr.className = 'heroroles';
-  hr.innerHTML = `<span>${es ? 'Míralo como' : 'See it as'}</span>` + ROLES.map((r, i) => `<button type="button" data-hr="${i}">▶ ${tx(r).n}</button>`).join('');
+  hr.innerHTML = `<span>${X.seeAs}</span>` + ROLES.map((r, i) => `<button type="button" data-hr="${i}">▶ ${tx(r).n}</button>`).join('');
   document.querySelector('.proof').after(hr);
   hr.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; show(+b.dataset.hr); play(+b.dataset.hr, true); hr.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); });
 })();
@@ -233,6 +253,7 @@
   const es = lang === 'es';
   const B = es ? { e: 'Factorial · RR. HH., Finanzas e IT', h: 'Toda tu empresa, en un solo sistema', s: 'RR. HH., Finanzas e IT sobre el mismo dato, con One, el agente de IA que trabaja en todos ellos.', p: ['Un solo dato, de principio a fin', 'IA con tus permisos', 'Datos en la UE'] }
                : { e: 'Factorial · HR, Finance and IT', h: 'Your whole company, in one system', s: 'HR, Finance and IT on the same data, with One, the AI agent that works across all of them.', p: ['One source of data, end to end', 'AI with your permissions', 'Data in the EU'] };
+  if (MX) Object.assign(B, { e: MX.ui.bannerE, h: MX.ui.bannerH, s: MX.ui.bannerS, p: MX.ui.bannerP });
   const apply = () => {
     document.querySelector('[data-i18n="allin"]').textContent = B.e;
     document.querySelector('h1').textContent = B.h;
