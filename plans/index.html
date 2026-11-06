@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Factorial · Planes One</title>
+<script>(function(){var t=new URLSearchParams(location.search).get("theme");try{if(t!=="dark"&&t!=="light")t=localStorage.getItem("onemap-theme")}catch(e){}if(t==="dark")document.documentElement.setAttribute("data-theme","dark")})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+<link rel="stylesheet" href="../site.css">
+<style>
+/* selector de planes */
+.pick{display:flex;flex-wrap:wrap;gap:10px}
+.pick button{appearance:none;cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:12px 16px;text-align:left;display:grid;gap:3px;min-width:150px;transition:border-color .15s,background .15s}
+.pick button b{font-size:16px;font-weight:500}
+.pick button span{font-size:12.5px;color:var(--ink-2)}
+.pick button:hover{border-color:var(--red)}
+.pick button[aria-pressed="true"]{border-color:var(--red);background:var(--r10)}
+.pick .sw{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:1px}
+.hint{font-size:13.5px;color:var(--ink-2);margin-top:12px}
+
+/* resumen de los planes elegidos */
+.sum{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+.sum .card{display:grid;gap:12px;align-content:start}
+.sum h3{font-size:22px;letter-spacing:-0.03em}
+.sum .count{font-size:14px;color:var(--ink-2)}
+.fam{display:flex;flex-wrap:wrap;gap:6px}
+.fam span{font-size:12.5px;border-radius:999px;padding:3px 10px;background:var(--ink-50);color:var(--ink-2)}
+.fam span.on{background:var(--r10);color:var(--r140);font-weight:500}
+.adds{font-size:14px;color:var(--ink-2)}
+.adds b{color:var(--ink);font-weight:500}
+
+/* tabla comparativa */
+.tools{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin:36px 0 12px}
+.switch{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
+.switch input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;margin:0;transition:background .15s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s var(--ease)}
+.switch input:checked{background:var(--red)}
+.switch input:checked::after{transform:translateX(16px)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--ink-2)}
+.tbl{border:1px solid var(--line);border-radius:20px;overflow:auto;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left}
+thead th{position:sticky;top:0;background:var(--panel);z-index:1;font-weight:500;font-size:14px}
+thead th.col{text-align:center;min-width:120px}
+tbody tr:last-child td{border-bottom:0}
+tr.famrow td{background:var(--ink-50);font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+td.mod a{text-decoration:none;color:var(--ink)}
+td.mod a:hover{color:var(--r140);text-decoration:underline}
+td.mod .es{font-size:11.5px;font-weight:500;color:var(--r140);background:var(--r10);border-radius:6px;padding:1px 6px;margin-left:6px}
+td.c{text-align:center}
+.yes{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff}
+.no{color:var(--ink-3)}
+tr.diff td.mod{box-shadow:inset 3px 0 0 var(--red)}
+.empty{padding:28px;text-align:center;color:var(--ink-2)}
+
+/* extras */
+.extras{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.extras h3{font-size:18px;letter-spacing:-0.02em;margin-bottom:10px}
+.extras ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.extras li b{display:block;font-weight:500}
+.extras li span{font-size:13.5px;color:var(--ink-2)}
+.extras .sub{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--r140);margin:14px 0 8px}
+@media (max-width:600px){ th,td{padding:9px 10px} thead th.col{min-width:92px} }
+</style>
+</head>
+<body>
+<header class="head sunrise">
+  <div class="head-in">
+    <div class="head-top">
+      <small id="t-eyebrow"></small>
+      <div class="head-tools">
+        <button class="tbtn" id="themeBtn" type="button" aria-label="Night mode" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+        <label class="tbtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><select id="langSel" aria-label="Idioma / Language"></select></label>
+      </div>
+    </div>
+    <div>
+      <h1 id="t-title"></h1>
+      <p class="lede" id="t-lede"></p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="blk">
+    <p class="eb" id="t-choose"></p>
+    <div class="pick" id="pick" role="group"></div>
+    <p class="hint" id="t-hint"></p>
+    <div class="sum" id="sum"></div>
+
+    <div class="tools">
+      <label class="switch"><input type="checkbox" id="onlyDiff"><span id="t-only"></span></label>
+      <div class="legend"><span><span class="yes" aria-hidden="true">✓</span> <span id="t-inc"></span></span><span><span class="no">—</span> <span id="t-notinc"></span></span></div>
+    </div>
+    <div class="tbl"><table id="tbl"></table></div>
+  </section>
+
+</main>
+<footer class="foot" id="t-foot"></footer>
+
+<script src="../content.js"></script>
+<script src="../site.js"></script>
+<script>
+/* ---------- DATOS: menú de producto (Factorial Product menu, noviembre 2026) ----------
+ * `map` es el id del módulo en el mapa (content.js) para el enlace y el nombre traducido.
+ * `b` son los bundles que lo incluyen. `es`: solo España (ES). */
+const BUNDLES = [
+  { id: 'core', name: 'Core', color: '#8F8FA0' },
+  { id: 'pe', name: 'People Essential', color: '#7CC4F2' },
+  { id: 'ps', name: 'People Scale', color: '#8FB4F5' },
+  { id: 'fin', name: 'Finance', color: '#7FC9B3' },
+  { id: 'it', name: 'IT', color: '#B7A6F2' },
+  { id: 'suite', name: 'Suite', color: '#FF355E' }
+];
+const ALL = BUNDLES.map(b => b.id);
+const FAMILIES = [
+  { id: 'core', hub: null, rows: [
+    { k: 'handbook', map: 'politicas', b: ALL }, { k: 'onoff', map: 'onoff', b: ALL }, { k: 'tickets', map: 'tickets', b: ALL },
+    { k: 'one', map: 'one', b: ALL }, { k: 'docs', map: 'documentos', b: ALL }, { k: 'sign', map: 'firma', b: ALL },
+    { k: 'routines', map: 'one', b: ALL }, { k: 'comms', map: 'comunicaciones', b: ALL }, { k: 'analytics', map: 'analiticas', b: ALL } ] },
+  { id: 'talent', hub: 'talento', rows: [
+    { k: 'space', map: null, b: ['ps','suite'] }, { k: 'trust', map: 'canal', b: ['ps','suite'] }, { k: 'ats', map: 'ats', b: ['ps','suite'] },
+    { k: 'engagement', map: 'engagement', b: ['ps','suite'] }, { k: 'perf', map: 'desempeno', b: ['ps','suite'] },
+    { k: 'training', map: 'formacion', b: ['ps','suite'] }, { k: 'lms', map: 'formacion', b: ['ps','suite'] } ] },
+  { id: 'time', hub: 'tiempo', rows: [
+    { k: 'absences', map: 'ausencias', b: ['pe','ps','fin','suite'] }, { k: 'tracking', map: 'control', b: ['pe','ps','fin','suite'] },
+    { k: 'shifts', map: 'turnos', b: ['ps','suite'] } ] },
+  { id: 'finance', hub: 'finanzas', rows: [
+    { k: 'projects', map: 'proyectos', b: ['ps','fin','suite'] }, { k: 'salreview', map: 'revision', b: ['ps','fin','suite'] },
+    { k: 'expenses', map: 'gastos', b: ['fin','suite'] }, { k: 'procurement', map: 'compras', b: ['fin','suite'] },
+    { k: 'headcount', map: 'plantilla', b: ['fin','suite'] } ] },
+  { id: 'it', hub: 'it', rows: [
+    { k: 'inventory', map: 'inventario', b: ['it','suite'] }, { k: 'saasvis', map: 'software', b: ['it','suite'] },
+    { k: 'saasprov', map: 'software', b: ['it','suite'] }, { k: 'mdm', map: 'mdm', b: ['it','suite'] } ] },
+  { id: 'payroll', hub: 'nomina', rows: [
+    { k: 'comp', map: 'compensacion', b: ['ps','fin','suite'] }, { k: 'benefits', map: 'beneficios', b: ['ps','fin','suite'], es: true },
+    { k: 'integrations', map: 'integraciones', b: [] }, { k: 'advance', map: 'anticipo', b: ['ps','fin','suite'], es: true } ] }
+];
+
+/* ---------- TEXTOS ---------- */
+const OWN = { /* filas que no tienen módulo propio en el mapa */
+  es: { core: 'Core AI', handbook: 'Manual del empleado', one: 'Agente One', routines: 'Rutinas', space: 'Gestión de espacios', training: 'Gestión de formación', lms: 'Contenido formativo (LMS)', saasvis: 'Visibilidad de SaaS', saasprov: 'Aprovisionamiento de SaaS' },
+  en: { core: 'Core AI', handbook: 'Handbook', one: 'One AI Agent', routines: 'Routines', space: 'Space management', training: 'Training management', lms: 'Learning content (LMS)', saasvis: 'SaaS visibility', saasprov: 'SaaS provisioning' },
+  de: { core: 'Core AI', handbook: 'Mitarbeiterhandbuch', one: 'One KI-Agent', routines: 'Routinen', space: 'Raummanagement', training: 'Schulungsmanagement', lms: 'Lerninhalte (LMS)', saasvis: 'SaaS-Transparenz', saasprov: 'SaaS-Bereitstellung' },
+  pt: { core: 'Core AI', handbook: 'Manual do colaborador', one: 'Agente One', routines: 'Rotinas', space: 'Gestão de espaços', training: 'Gestão de formação', lms: 'Conteúdo formativo (LMS)', saasvis: 'Visibilidade de SaaS', saasprov: 'Aprovisionamento de SaaS' },
+  'pt-br': { core: 'Core AI', handbook: 'Manual do colaborador', one: 'Agente One', routines: 'Rotinas', space: 'Gestão de espaços', training: 'Gestão de treinamentos', lms: 'Conteúdo de aprendizagem (LMS)', saasvis: 'Visibilidade de SaaS', saasprov: 'Provisionamento de SaaS' },
+  fr: { core: 'Core AI', handbook: 'Livret d’accueil', one: 'Agent One', routines: 'Routines', space: 'Gestion des espaces', training: 'Gestion des formations', lms: 'Contenus de formation (LMS)', saasvis: 'Visibilité SaaS', saasprov: 'Provisionnement SaaS' },
+  it: { core: 'Core AI', handbook: 'Manuale del dipendente', one: 'Agente One', routines: 'Routine', space: 'Gestione degli spazi', training: 'Gestione della formazione', lms: 'Contenuti formativi (LMS)', saasvis: 'Visibilità SaaS', saasprov: 'Provisioning SaaS' },
+  pl: { core: 'Core AI', handbook: 'Regulamin pracownika', one: 'Agent One', routines: 'Rutyny', space: 'Zarządzanie przestrzenią', training: 'Zarządzanie szkoleniami', lms: 'Treści szkoleniowe (LMS)', saasvis: 'Widoczność SaaS', saasprov: 'Udostępnianie SaaS' }
+};
+const TX = {
+  es: { eyebrow: 'Planes · Bundles', title: 'Elige y compara planes', lede: 'Selecciona dos o tres bundles y mira qué productos incluye cada uno. Toca cualquier producto para abrirlo en el mapa.', choose: 'Planes a comparar', hint: 'Puedes elegir hasta tres.', only: 'Mostrar solo las diferencias', inc: 'Incluido', notinc: 'No incluido', modules: n => `${n} productos`, adds: (a, b, n) => `<b>${a}</b> añade ${n} productos sobre ${b}`, same: 'Incluye los mismos productos', pickMore: 'Elige al menos dos planes para compararlos.', product: 'Producto',
+    extrasT: 'Más allá de los bundles', extrasD: 'Lo que se añade a cualquier plan.', ent: 'Enterprise pack', entI: [['Comunicaciones', 'Llamadas y grupos ilimitados'], ['Formación ilimitada', 'Contenido LMS ilimitado'], ['Compensación', 'Factorial Professionals']], local: 'Por mercado', spain: 'España', spainI: [['Ausencias', 'Integración con SILTRA'], ['Integraciones locales de nómina', '']], dach: 'DACH', dachI: [['Documentos', 'Firma electrónica cualificada (pronto en todos los mercados)']], oneT: 'One · Planes personales', oneI: [['Free', 'Incluido en todos los bundles'], ['Basic', 'Se contrata aparte'], ['Plus', 'Se contrata aparte'], ['Max', 'Se contrata aparte']], addT: 'Add-ons', addI: [['Integraciones', 'Se contratan aparte']], comboT: 'Combinaciones de bundles', comboD: 'Tres combinaciones disponibles', foot: 'Según el menú de producto de Factorial de noviembre de 2026. La disponibilidad puede variar por mercado.' },
+  en: { eyebrow: 'Plans · Bundles', title: 'Pick and compare plans', lede: 'Select two or three bundles and see which products each one includes. Tap any product to open it on the map.', choose: 'Plans to compare', hint: 'You can pick up to three.', only: 'Show only the differences', inc: 'Included', notinc: 'Not included', modules: n => `${n} products`, adds: (a, b, n) => `<b>${a}</b> adds ${n} products over ${b}`, same: 'Includes the same products', pickMore: 'Pick at least two plans to compare them.', product: 'Product',
+    extrasT: 'Beyond the bundles', extrasD: 'What you can add to any plan.', ent: 'Enterprise pack', entI: [['Communications', 'Unlimited calls and groups'], ['Unlimited trainings', 'Unlimited LMS content'], ['Compensation', 'Factorial Professionals']], local: 'By market', spain: 'Spain', spainI: [['Absences', 'SILTRA integration'], ['Local payroll integrations', '']], dach: 'DACH', dachI: [['Documents', 'Qualified electronic signature (soon in every market)']], oneT: 'One · Personal plans', oneI: [['Free', 'Included with every bundle'], ['Basic', 'Purchased separately'], ['Plus', 'Purchased separately'], ['Max', 'Purchased separately']], addT: 'Add-ons', addI: [['Integrations', 'Purchased separately']], comboT: 'Bundle combos', comboD: 'Three available bundle pairs', foot: 'Based on the Factorial product menu, November 2026. Availability can vary by market.' },
+  de: { eyebrow: 'Pläne · Bundles', title: 'Pläne auswählen und vergleichen', lede: 'Wählen Sie zwei oder drei Bundles und sehen Sie, welche Produkte jeweils enthalten sind. Tippen Sie auf ein Produkt, um es auf der Karte zu öffnen.', choose: 'Zu vergleichende Pläne', hint: 'Sie können bis zu drei auswählen.', only: 'Nur Unterschiede anzeigen', inc: 'Enthalten', notinc: 'Nicht enthalten', modules: n => `${n} Produkte`, adds: (a, b, n) => `<b>${a}</b> bietet ${n} Produkte mehr als ${b}`, same: 'Enthält dieselben Produkte', pickMore: 'Wählen Sie mindestens zwei Pläne zum Vergleichen.', product: 'Produkt',
+    extrasT: 'Über die Bundles hinaus', extrasD: 'Was Sie jedem Plan hinzufügen können.', ent: 'Enterprise-Paket', entI: [['Kommunikation', 'Unbegrenzte Anrufe und Gruppen'], ['Unbegrenzte Schulungen', 'Unbegrenzte LMS-Inhalte'], ['Vergütung', 'Factorial Professionals']], local: 'Nach Markt', spain: 'Spanien', spainI: [['Abwesenheiten', 'SILTRA-Integration'], ['Lokale Lohnintegrationen', '']], dach: 'DACH', dachI: [['Dokumente', 'Qualifizierte elektronische Signatur (bald in allen Märkten)']], oneT: 'One · Persönliche Pläne', oneI: [['Free', 'In jedem Bundle enthalten'], ['Basic', 'Separat erhältlich'], ['Plus', 'Separat erhältlich'], ['Max', 'Separat erhältlich']], addT: 'Add-ons', addI: [['Integrationen', 'Separat erhältlich']], comboT: 'Bundle-Kombinationen', comboD: 'Drei verfügbare Bundle-Paare', foot: 'Basierend auf dem Factorial-Produktmenü, November 2026. Die Verfügbarkeit kann je nach Markt variieren.' },
+  pt: { eyebrow: 'Planos · Bundles', title: 'Escolha e compare planos', lede: 'Selecione dois ou três bundles e veja que produtos inclui cada um. Toque em qualquer produto para o abrir no mapa.', choose: 'Planos a comparar', hint: 'Pode escolher até três.', only: 'Mostrar só as diferenças', inc: 'Incluído', notinc: 'Não incluído', modules: n => `${n} produtos`, adds: (a, b, n) => `<b>${a}</b> acrescenta ${n} produtos face a ${b}`, same: 'Inclui os mesmos produtos', pickMore: 'Escolha pelo menos dois planos para os comparar.', product: 'Produto',
+    extrasT: 'Para além dos bundles', extrasD: 'O que pode juntar a qualquer plano.', ent: 'Enterprise pack', entI: [['Comunicações', 'Chamadas e grupos ilimitados'], ['Formação ilimitada', 'Conteúdo LMS ilimitado'], ['Remuneração', 'Factorial Professionals']], local: 'Por mercado', spain: 'Espanha', spainI: [['Ausências', 'Integração SILTRA'], ['Integrações locais de salários', '']], dach: 'DACH', dachI: [['Documentos', 'Assinatura eletrónica qualificada (brevemente em todos os mercados)']], oneT: 'One · Planos pessoais', oneI: [['Free', 'Incluído em todos os bundles'], ['Basic', 'Adquirido à parte'], ['Plus', 'Adquirido à parte'], ['Max', 'Adquirido à parte']], addT: 'Add-ons', addI: [['Integrações', 'Adquiridas à parte']], comboT: 'Combinações de bundles', comboD: 'Três pares de bundles disponíveis', foot: 'Com base no menu de produto da Factorial, novembro de 2026. A disponibilidade pode variar por mercado.' },
+  'pt-br': { eyebrow: 'Planos · Bundles', title: 'Escolha e compare planos', lede: 'Selecione dois ou três bundles e veja quais produtos cada um inclui. Toque em qualquer produto para abri-lo no mapa.', choose: 'Planos para comparar', hint: 'Você pode escolher até três.', only: 'Mostrar só as diferenças', inc: 'Incluído', notinc: 'Não incluído', modules: n => `${n} produtos`, adds: (a, b, n) => `<b>${a}</b> acrescenta ${n} produtos em relação a ${b}`, same: 'Inclui os mesmos produtos', pickMore: 'Escolha pelo menos dois planos para comparar.', product: 'Produto',
+    extrasT: 'Além dos bundles', extrasD: 'O que você pode adicionar a qualquer plano.', ent: 'Enterprise pack', entI: [['Comunicação', 'Chamadas e grupos ilimitados'], ['Treinamentos ilimitados', 'Conteúdo de LMS ilimitado'], ['Remuneração', 'Factorial Professionals']], local: 'Por mercado', spain: 'Espanha', spainI: [['Ausências', 'Integração SILTRA'], ['Integrações locais de folha', '']], dach: 'DACH', dachI: [['Documentos', 'Assinatura eletrônica qualificada (em breve em todos os mercados)']], oneT: 'One · Planos individuais', oneI: [['Free', 'Incluído em todos os bundles'], ['Basic', 'Contratado à parte'], ['Plus', 'Contratado à parte'], ['Max', 'Contratado à parte']], addT: 'Add-ons', addI: [['Integrações', 'Contratadas à parte']], comboT: 'Combinações de bundles', comboD: 'Três pares de bundles disponíveis', foot: 'Com base no menu de produtos da Factorial, novembro de 2026. A disponibilidade pode variar por mercado.' },
+  fr: { eyebrow: 'Offres · Bundles', title: 'Choisissez et comparez les offres', lede: 'Sélectionnez deux ou trois bundles et voyez quels produits chacun inclut. Touchez un produit pour l’ouvrir sur la carte.', choose: 'Offres à comparer', hint: 'Vous pouvez en choisir jusqu’à trois.', only: 'Afficher uniquement les différences', inc: 'Inclus', notinc: 'Non inclus', modules: n => `${n} produits`, adds: (a, b, n) => `<b>${a}</b> ajoute ${n} produits par rapport à ${b}`, same: 'Inclut les mêmes produits', pickMore: 'Choisissez au moins deux offres pour les comparer.', product: 'Produit',
+    extrasT: 'Au-delà des bundles', extrasD: 'Ce que vous pouvez ajouter à n’importe quelle offre.', ent: 'Pack Enterprise', entI: [['Communication', 'Appels et groupes illimités'], ['Formations illimitées', 'Contenus LMS illimités'], ['Rémunération', 'Factorial Professionals']], local: 'Par marché', spain: 'Espagne', spainI: [['Absences', 'Intégration SILTRA'], ['Intégrations de paie locales', '']], dach: 'DACH', dachI: [['Documents', 'Signature électronique qualifiée (bientôt sur tous les marchés)']], oneT: 'One · Offres individuelles', oneI: [['Free', 'Inclus dans tous les bundles'], ['Basic', 'Acheté séparément'], ['Plus', 'Acheté séparément'], ['Max', 'Acheté séparément']], addT: 'Add-ons', addI: [['Intégrations', 'Achetées séparément']], comboT: 'Combinaisons de bundles', comboD: 'Trois paires de bundles disponibles', foot: 'D’après le menu produit Factorial de novembre 2026. La disponibilité peut varier selon le marché.' },
+  it: { eyebrow: 'Piani · Bundle', title: 'Scegli e confronta i piani', lede: 'Seleziona due o tre bundle e guarda quali prodotti include ciascuno. Tocca un prodotto per aprirlo sulla mappa.', choose: 'Piani da confrontare', hint: 'Puoi sceglierne fino a tre.', only: 'Mostra solo le differenze', inc: 'Incluso', notinc: 'Non incluso', modules: n => `${n} prodotti`, adds: (a, b, n) => `<b>${a}</b> aggiunge ${n} prodotti rispetto a ${b}`, same: 'Include gli stessi prodotti', pickMore: 'Scegli almeno due piani per confrontarli.', product: 'Prodotto',
+    extrasT: 'Oltre i bundle', extrasD: 'Cosa puoi aggiungere a qualsiasi piano.', ent: 'Enterprise pack', entI: [['Comunicazioni', 'Chiamate e gruppi illimitati'], ['Formazione illimitata', 'Contenuti LMS illimitati'], ['Retribuzione', 'Factorial Professionals']], local: 'Per mercato', spain: 'Spagna', spainI: [['Assenze', 'Integrazione SILTRA'], ['Integrazioni paghe locali', '']], dach: 'DACH', dachI: [['Documenti', 'Firma elettronica qualificata (presto in tutti i mercati)']], oneT: 'One · Piani personali', oneI: [['Free', 'Incluso in ogni bundle'], ['Basic', 'Acquistabile a parte'], ['Plus', 'Acquistabile a parte'], ['Max', 'Acquistabile a parte']], addT: 'Add-on', addI: [['Integrazioni', 'Acquistabili a parte']], comboT: 'Combinazioni di bundle', comboD: 'Tre coppie di bundle disponibili', foot: 'Basato sul menu prodotti di Factorial, novembre 2026. La disponibilità può variare in base al mercato.' },
+  pl: { eyebrow: 'Plany · Pakiety', title: 'Wybierz i porównaj plany', lede: 'Wybierz dwa lub trzy pakiety i zobacz, jakie produkty zawiera każdy z nich. Kliknij produkt, żeby otworzyć go na mapie.', choose: 'Plany do porównania', hint: 'Możesz wybrać maksymalnie trzy.', only: 'Pokaż tylko różnice', inc: 'W pakiecie', notinc: 'Poza pakietem', modules: n => `Produkty: ${n}`, adds: (a, b, n) => `<b>${a}</b> dodaje ${n} produktów względem ${b}`, same: 'Zawiera te same produkty', pickMore: 'Wybierz co najmniej dwa plany, żeby je porównać.', product: 'Produkt',
+    extrasT: 'Poza pakietami', extrasD: 'Co możesz dodać do dowolnego planu.', ent: 'Pakiet Enterprise', entI: [['Komunikacja', 'Nielimitowane połączenia i grupy'], ['Nielimitowane szkolenia', 'Nielimitowane treści LMS'], ['Wynagrodzenia', 'Factorial Professionals']], local: 'Według rynku', spain: 'Hiszpania', spainI: [['Nieobecności', 'Integracja z SILTRA'], ['Lokalne integracje płacowe', '']], dach: 'DACH', dachI: [['Dokumenty', 'Kwalifikowany podpis elektroniczny (wkrótce na wszystkich rynkach)']], oneT: 'One · Plany osobiste', oneI: [['Free', 'W każdym pakiecie'], ['Basic', 'Kupowany osobno'], ['Plus', 'Kupowany osobno'], ['Max', 'Kupowany osobno']], addT: 'Dodatki', addI: [['Integracje', 'Kupowane osobno']], comboT: 'Połączenia pakietów', comboD: 'Trzy dostępne pary pakietów', foot: 'Na podstawie menu produktów Factorial z listopada 2026. Dostępność może się różnić w zależności od rynku.' }
+};
+
+/* ---------- LÓGICA ---------- */
+const lang = SITE.lang, t = TX[lang] || TX.en, own = OWN[lang] || OWN.en;
+const I = { en: EN, de: DE, pt: PT, 'pt-br': BR, fr: FR, it: IT, pl: PL };
+const modName = r => own[r.k] || (I[lang] && I[lang].M[r.map] ? I[lang].M[r.map].name : (M[r.map] ? M[r.map].name : r.k));
+const famName = f => f.hub ? ((I[lang] && I[lang].HUBS[f.hub]) || HUBS[f.hub]).name : own.core;
+const rows = FAMILIES.flatMap(f => f.rows);
+const has = (b, r) => r.b.includes(b);
+const count = b => rows.filter(r => has(b, r)).length;
+const B = id => BUNDLES.find(x => x.id === id);
+
+document.documentElement.lang = lang;
+['eyebrow','title','lede','choose','hint','only','inc','notinc','extrasT','extrasD','foot'].forEach(k => { const n = document.getElementById('t-' + k); if (n) n.textContent = t[k]; });
+document.title = 'Factorial · ' + t.title;
+SITE.bar('plans/'); SITE.theme(document.getElementById('themeBtn')); SITE.langSelect(document.getElementById('langSel'));
+
+let sel = (() => { const q = new URLSearchParams(location.search).get('plans'); const v = (q || '').split(',').filter(B); return v.length ? v.slice(0, 3) : ['ps', 'fin']; })();
+const pick = document.getElementById('pick');
+pick.setAttribute('aria-label', t.choose);
+pick.innerHTML = BUNDLES.map(b => `<button type="button" data-id="${b.id}"><b><span class="sw" style="background:${b.color}"></span>${b.name}</b><span>${t.modules(count(b.id))}</span></button>`).join('');
+pick.addEventListener('click', e => {
+  const btn = e.target.closest('button'); if (!btn) return; const id = btn.dataset.id;
+  if (sel.includes(id)) sel = sel.filter(x => x !== id); else { sel.push(id); if (sel.length > 3) sel.shift(); }
+  const u = new URL(location.href); u.searchParams.set('plans', sel.join(',')); history.replaceState(null, '', u);
+  render();
+});
+document.getElementById('onlyDiff').addEventListener('change', render);
+
+function render() {
+  pick.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(sel.includes(b.dataset.id))));
+  const order = BUNDLES.map(b => b.id).filter(id => sel.includes(id));
+  // resumen
+  document.getElementById('sum').innerHTML = order.map(id => {
+    const others = order.filter(x => x !== id);
+    const fams = FAMILIES.map(f => `<span class="${f.rows.some(r => has(id, r)) ? 'on' : ''}">${famName(f)}</span>`).join('');
+    const adds = others.map(o => { const n = rows.filter(r => has(id, r) && !has(o, r)).length; return n ? `<p class="adds">${t.adds(B(id).name, B(o).name, n)}</p>` : ''; }).join('');
+    return `<div class="card"><h3><span class="sw" style="display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;background:${B(id).color}"></span>${B(id).name}</h3><p class="count">${t.modules(count(id))}</p><div class="fam">${fams}</div>${adds}</div>`;
+  }).join('');
+  // tabla
+  const only = document.getElementById('onlyDiff').checked;
+  const tb = document.getElementById('tbl');
+  if (order.length < 2) { tb.innerHTML = `<tbody><tr><td class="empty">${t.pickMore}</td></tr></tbody>`; return; }
+  let h = `<thead><tr><th scope="col">${t.product}</th>${order.map(id => `<th scope="col" class="col">${B(id).name}</th>`).join('')}</tr></thead><tbody>`;
+  FAMILIES.forEach(f => {
+    const list = f.rows.filter(r => !only || new Set(order.map(id => has(id, r))).size > 1);
+    if (!list.length) return;
+    h += `<tr class="famrow"><td colspan="${order.length + 1}">${famName(f)}</td></tr>`;
+    list.forEach(r => {
+      const diff = new Set(order.map(id => has(id, r))).size > 1;
+      const name = modName(r) + (r.es ? '<span class="es">ES</span>' : '');
+      const link = r.map ? `<a href="${SITE.mapLink(r.map)}">${name}</a>` : name;
+      h += `<tr class="${diff ? 'diff' : ''}"><td class="mod">${link}</td>${order.map(id => `<td class="c">${has(id, r) ? `<span class="yes" role="img" aria-label="${t.inc}">✓</span>` : `<span class="no" role="img" aria-label="${t.notinc}">—</span>`}</td>`).join('')}</tr>`;
+    });
+  });
+  tb.innerHTML = h + '</tbody>';
+}
+render();
+
+</script>
+</body>
+</html>

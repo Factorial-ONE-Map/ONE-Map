@@ -1,0 +1,718 @@
+<!doctype html><html><head><script>(function(){var t=new URLSearchParams(location.search).get("theme");try{if(t!=="dark"&&t!=="light")t=localStorage.getItem("onemap-theme")}catch(e){}if(t==="dark")document.documentElement.setAttribute("data-theme","dark")})();</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Factorial One Connectors</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400&display=swap">
+<style>
+/* Layout: red gradient hero band, then a white catalog workspace (filters + card grid), then Q&A. Left-aligned, Factorial brand. */
+:root {
+  --red: #FF355E;
+  --red-dark: #C60F35;
+  --red-weak: #FFE3EA;
+  --ink: #25253D;
+  --ink-2: #6C6C7D;
+  --ink-3: #8F8FA0;
+  --bg: #FFFFFF;
+  --bg-alt: #F6F6F8;
+  --surface: #FFFFFF;
+  --line: #E6E6EC;
+  --line-strong: #CFCFD8;
+  --live: #0B8A6A;
+  --live-bg: #E2F5EE;
+  --prog: #8A5A00;
+  --prog-bg: #FFF1D6;
+  --soon: #5A5A6E;
+  --soon-bg: #ECECEF;
+  --hero-fg: #FFFFFF;
+  --hero-ink: #25253D;
+  --font: 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --red-weak: #3A1D2A; --ink: #F1F1F5; --ink-2: #B4B4C2; --ink-3: #8F8FA0;
+    --bg: #17172A; --bg-alt: #1E1E33; --surface: #222239; --line: #33334D; --line-strong: #45455F;
+    --live: #5FD3AE; --live-bg: #123A33; --prog: #FFC155; --prog-bg: #3A2F14; --soon: #B4B4C2; --soon-bg: #2C2C44;
+    --hero-ink: #25253D; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --red-weak: #3A1D2A; --ink: #F1F1F5; --ink-2: #B4B4C2; --ink-3: #8F8FA0;
+  --bg: #17172A; --bg-alt: #1E1E33; --surface: #222239; --line: #33334D; --line-strong: #45455F;
+  --live: #5FD3AE; --live-bg: #123A33; --prog: #FFC155; --prog-bg: #3A2F14; --soon: #B4B4C2; --soon-bg: #2C2C44;
+  --hero-ink: #25253D; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.45; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (min-width: 720px) { .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); } }
+h1, h2, h3 { font-weight: 500; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid rgba(255,53,94,0.35); outline-offset: 2px; }
+
+/* Hero */
+.hero { overflow: hidden; background: linear-gradient(135deg, var(--red) 0%, var(--red) 60%, var(--red-dark) 100%); color: var(--hero-fg); }
+.hero .wrap { padding-block: 32px 56px; display: grid; gap: 40px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { height: 26px; width: auto; color: #fff; display: block; }
+.topbar .topbar-tag { font-size: 14px; font-weight: 300; opacity: .9; }
+.hero-grid { display: grid; gap: 40px; align-items: end; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1.6fr 1fr; } }
+.eyebrow { font-size: 15px; font-weight: 300; letter-spacing: 0.02em; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(40px, 6.4vw, 84px); line-height: 0.95; letter-spacing: -0.045em; }
+.hero .lede { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); font-weight: 300; max-width: 52ch; line-height: 1.4; }
+.stats { background: #fff; color: var(--hero-ink); border-radius: 20px; padding: 24px; display: grid; gap: 18px; }
+.stat { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; }
+.stat b { font-size: 44px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 15px; color: #3F3F55; }
+.stat + .stat { border-top: 1px solid #E6E6EC; padding-top: 18px; }
+.stat.red b { color: var(--red); }
+
+/* Sections */
+section.block { padding-block: 64px 8px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 28px; }
+.sec-head .eb { color: var(--ink-3); font-size: 14px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; }
+.sec-head h2 { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.03em; line-height: 1.05; }
+.sec-head p { color: var(--ink-2); max-width: 62ch; }
+
+.steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.step { border: 1px solid var(--line); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; background: var(--surface); }
+.step .n { font-family: var(--mono); font-size: 13px; color: var(--red); }
+.step h3 { font-size: 20px; letter-spacing: -0.02em; }
+.step p { color: var(--ink-2); font-size: 15px; }
+
+.prompts { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 16px; }
+.prompt { background: var(--bg-alt); border-radius: 20px; padding: 20px 22px; display: grid; gap: 8px; }
+.prompt .who { font-size: 13px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
+.prompt q { quotes: "\201C" "\201D"; font-size: 17px; line-height: 1.35; }
+.prompt q strong { color: var(--red); font-weight: 500; }
+
+/* Catalog */
+.catalog { padding-block: 72px 24px; }
+.controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 14px; border-bottom: 1px solid var(--line); display: grid; gap: 12px; }
+.controls > * { min-width: 0; }
+.row1 { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search { flex: 1 1 260px; min-width: 0; position: relative; }
+.search input { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: 11px 16px 11px 42px; }
+.search input::placeholder { color: var(--ink-3); }
+.search svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
+.seg { display: inline-flex; background: var(--bg-alt); border-radius: 999px; padding: 4px; gap: 2px; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.seg button { white-space: nowrap; flex: none; }
+@media (max-width: 600px) { .controls { position: static; } .seg button { padding: 8px 11px; font-size: 13.5px; } }
+.seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--ink-2); padding: 8px 14px; border-radius: 999px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: background .2s var(--ease), color .2s var(--ease); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(37,37,61,.12); }
+.seg .dot { width: 8px; height: 8px; border-radius: 50%; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+.chip { font: inherit; font-size: 14px; white-space: nowrap; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 7px 14px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: background .2s var(--ease), border-color .2s var(--ease); }
+.chip:hover { background: var(--bg-alt); }
+.chip .c { color: var(--ink-3); font-variant-numeric: tabular-nums; font-size: 13px; }
+.chip[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+.chip[aria-pressed="true"] .c { color: rgba(255,255,255,.8); }
+.result-line { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--ink-2); font-size: 14px; padding-top: 18px; }
+.result-line button { font: inherit; font-size: 14px; background: none; border: 0; color: var(--red); cursor: pointer; padding: 0; }
+
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); padding-top: 16px; }
+.card { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 18px; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; min-width: 0; }
+.card-top { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.mono { flex: none; width: 40px; height: 40px; border-radius: 12px; overflow: hidden; background: #fff; }
+.mono img, .orb i img, .run i img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.card h3 { font-size: 17px; letter-spacing: -0.02em; line-height: 1.2; overflow-wrap: anywhere; }
+.card .cat { font-size: 13px; color: var(--ink-3); }
+.card p { color: var(--ink-2); font-size: 14.5px; line-height: 1.45; }
+.pill { justify-self: start; font-size: 12.5px; font-weight: 500; border-radius: 999px; padding: 4px 10px; display: inline-flex; align-items: center; gap: 6px; }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pill.live { color: var(--live); background: var(--live-bg); }
+.pill.prog { color: var(--prog); background: var(--prog-bg); }
+.pill.soon { color: var(--soon); background: var(--soon-bg); }
+.empty { padding: 48px 0; color: var(--ink-2); }
+.empty h3 { font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+.more { margin-top: 28px; border-radius: 20px; background: var(--red-weak); padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; }
+.more b { font-weight: 500; font-size: 18px; }
+.more span { color: var(--ink-2); font-size: 15px; }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 860px; }
+details { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+summary { cursor: pointer; list-style: none; padding: 18px 22px; font-weight: 500; font-size: 17px; letter-spacing: -0.015em; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-weight: 300; font-size: 24px; line-height: 1; color: var(--red); flex: none; transition: transform .2s var(--ease); }
+details[open] summary::after { transform: rotate(45deg); }
+.ans { padding: 0 22px 20px; color: var(--ink-2); display: grid; gap: 10px; max-width: 70ch; }
+.ans ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+.faq-group { font-size: 20px; letter-spacing: -0.02em; margin: 8px 0 14px; }
+.faq + .faq-group { margin-top: 40px; }
+.faq-intro { color: var(--ink-2); margin: -6px 0 16px; max-width: 62ch; }
+.principles { margin-top: 32px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.principles div { border-radius: 20px; background: var(--red-weak); padding: 20px 22px; display: grid; gap: 6px; }
+.principles b { font-weight: 500; font-size: 17px; }
+.principles span { color: var(--ink-2); font-size: 15px; }
+
+/* Hub visual */
+.hub-wrap { display: grid; gap: 20px; justify-items: center; }
+.hub { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; }
+.ring { position: absolute; inset: 0; animation: spin 140s linear infinite; }
+.ring.inner { animation-direction: reverse; animation-duration: 110s; }
+.ring::before { content: ""; position: absolute; border-radius: 50%; border: 1px dashed rgba(255,255,255,.45); }
+.ring.outer::before { inset: 6%; }
+.ring.inner::before { inset: 25%; }
+.orb { position: absolute; left: 50%; top: 50%; }
+.orb > span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; background: #fff; color: #25253D; border-radius: 999px; padding: 6px 11px 6px 8px; font-size: 13px; font-weight: 500; box-shadow: 0 6px 18px rgba(80,0,20,.18); transform: translate(-50%,-50%); animation: spin 140s linear infinite reverse; }
+.ring.inner .orb > span { animation-duration: 110s; animation-direction: normal; }
+.orb i { width: 18px; height: 18px; border-radius: 6px; overflow: hidden; }
+.hub-core { position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; transform: translate(-50%,-50%); border-radius: 50%; background: #fff; color: var(--red); display: grid; place-items: center; align-content: center; gap: 4px; box-shadow: 0 0 0 10px rgba(255,255,255,.18), 0 0 0 22px rgba(255,255,255,.08); }
+.hub-core .iso { width: 44%; height: auto; }
+.hub-core span { font-size: 15px; font-weight: 500; color: #25253D; letter-spacing: -0.02em; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hub-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; max-width: 440px; background: #fff; color: #25253D; border-radius: 20px; padding: 16px; }
+.hub-stats div { display: grid; gap: 2px; padding-inline: 8px; }
+.hub-stats div + div { border-left: 1px solid #E6E6EC; }
+.hub-stats b { font-size: clamp(26px, 3vw, 34px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.hub-stats div:first-child b { color: var(--red); }
+.hub-stats span { font-size: 13px; color: #6C6C7D; }
+@media (max-width: 480px) { .orb > span { font-size: 11.5px; padding: 4px 9px 4px 5px; } .orb i { width: 15px; height: 15px; } }
+
+/* Demo chat */
+.demo { display: grid; gap: 16px; }
+.demo > * { min-width: 0; }
+@media (min-width: 900px) { .demo { grid-template-columns: 280px 1fr; align-items: start; } }
+.demo-tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+@media (min-width: 900px) { .demo-tabs { flex-direction: column; } }
+.demo-tab { font: inherit; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 16px; padding: 14px 16px; cursor: pointer; display: grid; gap: 4px; flex: none; min-width: 200px; transition: border-color .2s var(--ease), background .2s var(--ease); }
+.demo-tab small { color: var(--ink-3); font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; }
+.demo-tab span { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.demo-tab[aria-selected="true"] { border-color: var(--red); background: var(--red-weak); }
+.chat { background: var(--bg-alt); border-radius: 24px; padding: clamp(16px, 3vw, 28px); display: grid; gap: 14px; min-width: 0; min-height: 420px; align-content: start; }
+.chat-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--ink-3); }
+.chat-head .who { display: inline-flex; gap: 8px; align-items: center; color: var(--ink); font-weight: 500; font-size: 14px; }
+.chat-head .who b { width: 26px; height: 26px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; }
+.chat-head .who b .iso { width: 15px; height: 15px; }
+.bubble-user { justify-self: end; max-width: 80%; background: var(--ink); color: var(--bg); border-radius: 18px 18px 4px 18px; padding: 12px 16px; font-size: 15.5px; }
+.steps-run { display: flex; flex-wrap: wrap; gap: 8px; }
+.run { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px 6px 6px; color: var(--ink-2); }
+.run i { width: 20px; height: 20px; border-radius: 6px; overflow: hidden; background: #fff; }
+.run em { font-style: normal; color: var(--ink); font-weight: 500; }
+.run .ok { color: var(--live); font-size: 13px; }
+.bubble-one { background: var(--surface); border: 1px solid var(--line); border-radius: 18px 18px 18px 4px; padding: 16px 18px; display: grid; gap: 12px; font-size: 15px; min-width: 0; }
+.bubble-one p { color: var(--ink); }
+.tbl-wrap { overflow-x: auto; }
+.bubble-one table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+.bubble-one th { text-align: left; font-weight: 400; color: var(--ink-3); font-size: 12.5px; padding: 0 12px 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.bubble-one td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.bubble-one tr:last-child td { border-bottom: 0; }
+.tag { display: inline-block; font-size: 12px; background: var(--bg-alt); border-radius: 6px; padding: 2px 7px; font-family: var(--mono); }
+.next { display: flex; flex-wrap: wrap; gap: 8px; }
+.next span { font-size: 13px; border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 12px; color: var(--ink); }
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center; font-size: 14px; }
+.bar-row .track { height: 14px; border-radius: 7px; background: var(--bg-alt); overflow: hidden; }
+.bar-row .fill { height: 100%; border-radius: 7px; transform-origin: left; animation: grow .7s var(--ease) both; }
+.bar-row b { font-weight: 500; font-variant-numeric: tabular-nums; }
+@keyframes grow { from { transform: scaleX(0); } }
+.slackmsg { border-left: 3px solid var(--line-strong); padding: 4px 0 4px 14px; display: grid; gap: 6px; }
+.slackmsg .ch { font-size: 12.5px; color: var(--ink-3); }
+.slackmsg .ln { display: flex; gap: 8px; align-items: center; font-size: 14.5px; }
+.av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; color: #fff; flex: none; }
+.sample { font-size: 12px; color: var(--ink-3); }
+.fade-in { animation: fadeUp .35s var(--ease) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } }
+
+/* Areas */
+.statusbar { display: grid; gap: 12px; margin-bottom: 24px; }
+.sb-track { display: flex; height: 18px; border-radius: 9px; overflow: hidden; gap: 3px; }
+.sb-track button { border: 0; padding: 0; cursor: pointer; transition: filter .2s var(--ease); }
+.sb-track button:hover { filter: brightness(1.08); }
+.sb-legend { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px; color: var(--ink-2); }
+.sb-legend b { color: var(--ink); font-weight: 500; font-size: 22px; letter-spacing: -0.03em; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.sb-legend span { display: inline-flex; align-items: baseline; gap: 2px; }
+.sb-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 8px; align-self: center; }
+.areas { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.area { font: inherit; color: inherit; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 20px; cursor: pointer; display: grid; gap: 14px; transition: border-color .2s var(--ease), transform .2s var(--ease); }
+.area:hover { border-color: var(--red); transform: translateY(-2px); }
+.area-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.area h3 { font-size: 18px; letter-spacing: -0.02em; }
+.area .num { font-size: 36px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: var(--red); font-variant-numeric: tabular-nums; }
+.mini { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; background: var(--bg-alt); }
+.faces { display: flex; flex-wrap: wrap; gap: 6px; }
+.faces span { font-size: 12.5px; background: var(--bg-alt); border-radius: 999px; padding: 4px 10px; color: var(--ink-2); }
+.area .go { font-size: 13.5px; color: var(--red); }
+@media (prefers-reduced-motion: reduce) { .ring, .orb > span, .fill, .fade-in { animation: none !important; } }
+footer { margin-top: 80px; background: var(--bg-alt); }
+footer .wrap { padding-block: 40px; display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; }
+footer .logo { color: var(--red); height: 22px; }
+footer p { color: var(--ink-2); font-size: 14px; max-width: 60ch; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<style>
+.sitebar{display:flex;align-items:center;gap:4px;padding:10px 12px 0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.sitebar::-webkit-scrollbar{display:none}
+.sitebar a{flex:none;font-size:14px;font-weight:500;line-height:1;color:var(--sb-ink,#6C6C7D);text-decoration:none;padding:9px 14px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s}
+.sitebar a:hover{background:var(--sb-hover,#F6F6F8);color:var(--sb-ink-strong,#25253D)}
+.sitebar a[aria-current="page"]{background:#FF355E;color:#fff}
+:root[data-theme="dark"]{--sb-ink:#B4B4C2;--sb-hover:#22223A;--sb-ink-strong:#F1F1F5}
+body{margin:0}
+</style>
+<nav class="sitebar" id="sitebar" aria-label="Factorial One"><a href="../index.html" data-page="index.html"><span>One Map</span></a><a href="../connectors/index.html" data-page="connectors/index.html" aria-current="page"><span>Connectors</span></a><a href="../plans/index.html" data-page="plans/index.html"><span>Plans</span></a></nav>
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <svg class="logo" aria-label="Factorial" role="img" viewBox="0 0 3411 714" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path><path d="M3410.72 587.677H3322.85V98.8616H3410.72V587.677Z" fill="currentColor"></path><path d="M3164.94 296.832V258.138H3251.45V587.677H3164.94V539.233C3140.94 570.115 3106.48 585.556 3063.02 585.556C3021.64 585.556 2978.84 569.48 2949.04 537.329C2919.65 504.755 2905.43 465.458 2905.43 418.501C2905.43 371.967 2919.65 331.944 2949.04 299.37C2978.84 266.796 3019.55 252.646 3060.94 252.646C3104.4 252.646 3140.94 265.95 3164.94 296.832ZM3016.46 482.757C3032.6 499.256 3053.09 507.505 3077.92 507.505C3102.76 507.505 3123.24 499.256 3139.38 482.757C3155.94 465.836 3164.94 444.261 3164.94 418.032C3164.94 391.804 3155.94 370.44 3139.38 353.942C3123.24 337.02 3102.76 328.56 3077.92 328.56C3053.09 328.56 3032.6 337.02 3016.46 353.942C3000.32 370.44 2991.93 391.804 2991.93 418.032C2991.93 444.261 3000.32 465.836 3016.46 482.757Z" fill="currentColor"></path><path d="M2613.98 258.138V316.555C2621.12 296.23 2638.94 277.333 2649.06 270.5C2658.43 264.176 2679.93 252.646 2702.22 252.646V341.701C2677.41 338.242 2659.38 349.333 2641.5 363.26C2622.54 378.021 2614.34 398.936 2614.34 430.073V587.677H2526.46V258.138H2613.98Z" fill="currentColor"></path><path d="M1725.72 587.677C1677.86 587.677 1637.84 571.602 1605.66 539.453C1573.89 507.303 1554.32 468.608 1554.32 421.23C1554.32 373.852 1573.89 333.02 1605.66 300.87C1637.84 268.721 1677.86 252.646 1725.72 252.646C1756.64 252.646 1784.8 260.049 1810.21 274.855C1835.62 289.66 1858.48 309.542 1871.61 334.5L1797.51 375.745C1791.15 362.631 1781.41 352.267 1768.28 344.653C1755.58 337.038 1741.18 333.231 1725.09 333.231C1700.52 333.231 1680.19 341.48 1664.1 357.978C1648.01 374.052 1638.45 394.78 1638.45 420.161C1638.45 444.697 1648.01 465.424 1664.1 482.345C1680.19 498.42 1700.52 506.457 1725.09 506.457C1741.6 506.457 1756.21 502.862 1768.92 495.67C1782.05 488.056 1795.37 477.692 1801.73 464.578L1872.88 505.188C1858.9 530.569 1839 550.663 1813.16 565.468C1787.75 580.274 1756.21 587.677 1725.72 587.677Z" fill="currentColor"></path><path d="M1411.52 297.113V258.138H1499.4V587.676H1411.52V541.059C1387.14 572.138 1352.13 587.677 1307.99 587.677C1265.94 587.677 1222.46 571.499 1192.19 539.143C1162.34 506.362 1147.89 466.814 1147.89 419.558C1147.89 372.727 1162.34 332.449 1192.19 299.668C1222.46 266.886 1263.83 252.646 1305.87 252.646C1350.02 252.646 1387.14 266.035 1411.52 297.113ZM1260.69 484.223C1277.08 500.827 1297.9 509.129 1323.12 509.129C1348.35 509.129 1369.16 500.827 1385.56 484.223C1402.38 467.194 1411.52 445.482 1411.52 419.086C1411.52 392.691 1402.38 371.191 1385.56 354.587C1369.16 337.558 1348.35 329.043 1323.12 329.043C1297.9 329.043 1277.08 337.558 1260.69 354.587C1244.29 371.191 1235.77 392.691 1235.77 419.086C1235.77 445.482 1244.29 467.194 1260.69 484.223Z" fill="currentColor"></path><path d="M1109.45 99.1553V188.027C1064.88 185.008 1043.79 210.216 1043.79 249.9V258.138H1109.45V347.255H1043.54V587.677H955.662V347.255H911.723V258.138H955.662V249.9C955.662 203.745 974.836 163.858 999.642 140.565C1024.87 116.841 1060.67 96.1359 1109.45 99.1553Z" fill="currentColor"></path><path d="M2856 587.677H2768.12V258.138H2856V587.677Z" fill="currentColor"></path><path d="M2861.49 148.292C2861.49 175.592 2839.36 197.723 2812.06 197.723C2784.76 197.723 2762.63 175.592 2762.63 148.292C2762.63 120.992 2784.76 98.8616 2812.06 98.8616C2839.36 98.8616 2861.49 120.992 2861.49 148.292Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M2312.26 587.677C2403.26 587.677 2477.03 513.907 2477.03 422.908C2477.03 331.908 2403.26 258.138 2312.26 258.138C2221.26 258.138 2147.49 331.908 2147.49 422.908C2147.49 513.907 2221.26 587.677 2312.26 587.677ZM2312.26 508.038C2359.28 508.038 2397.39 469.924 2397.39 422.908C2397.39 375.891 2359.28 337.777 2312.26 337.777C2265.25 337.777 2227.13 375.891 2227.13 422.908C2227.13 469.924 2265.25 508.038 2312.26 508.038Z" fill="currentColor"></path><path d="M1916.82 450.492V203.823L2008.43 175.754V258.66H2098.9V345.113H2008.43C2008.43 375.054 2007.28 424.895 2007.28 448.249C2007.28 485.301 2030.06 500.6 2052.92 500.6C2075.77 500.6 2096.2 487.049 2096.2 487.049L2125.52 564.326C2125.52 564.326 2061.04 604.823 1996.89 579.154C1932.73 553.485 1916.82 504.277 1916.82 450.492Z" fill="currentColor"></path></svg>
+      <span class="topbar-tag">One connectors</span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Connectors for Factorial One</p>
+        <h1>Your company doesn’t live in one tool. Neither does One.</h1>
+        <p class="lede">Connect the apps your team already uses. One combines them with your Factorial data, so every answer comes with the full picture.</p>
+      </div>
+      <div class="hub-wrap">
+        <div class="hub" id="hub" aria-hidden="true">
+          <div class="ring outer" id="ring-outer"></div>
+          <div class="ring inner" id="ring-inner"></div>
+          <div class="hub-core"><svg class="iso" viewBox="0 0 714 714" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg><span>One</span></div>
+        </div>
+        <div class="hub-stats" aria-label="Catalog summary">
+          <div><b id="s-live">0</b><span>live today</span></div>
+          <div><b id="s-soon">0</b><span>in the works</span></div>
+          <div><b>500+</b><span>on the roadmap</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb">How it works</span>
+        <h2>Set up in minutes. Your permissions, nothing more.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><h3>An admin installs the connector</h3><p>From the Connectors section in Factorial. Anyone on the team can browse the catalog and request one, and their admin gets notified.</p></div>
+        <div class="step"><span class="n">02</span><h3>Each person signs in with their own account</h3><p>One click, through the app’s own secure sign-in (OAuth). One sees only what that person can already see in that tool.</p></div>
+        <div class="step"><span class="n">03</span><h3>Ask One</h3><p>Ask in plain language from the One chat. One calls the app only when the question needs it, and every action is traceable to the person who asked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb">See it in action</span>
+        <h2>One question. Factorial plus the tools you already use.</h2>
+        <p>Pick an example to see how One pulls from Factorial and a connected app in the same answer.</p>
+      </div>
+      <div class="demo">
+        <div class="demo-tabs" role="tablist" aria-label="Examples" id="demo-tabs"></div>
+        <div class="chat" id="chat" aria-live="polite"></div>
+      </div>
+      <div class="sec-head" style="margin-top:48px">
+        <h3 class="faq-group" style="margin:0">More things teams ask</h3>
+      </div>
+      <div class="prompts">
+        <div class="prompt"><span class="who">Design</span><q>Create a <strong>Canva</strong> welcome card for everyone starting in November.</q></div>
+        <div class="prompt"><span class="who">Docs</span><q>Translate our remote work policy into German with <strong>DeepL</strong>.</q></div>
+        <div class="prompt"><span class="who">HR &amp; knowledge</span><q>Compare our handbook in <strong>Notion</strong> with the policies in Factorial and list what’s out of sync.</q></div>
+        <div class="prompt"><span class="who">Finance planning</span><q>Compare headcount cost in Factorial with the plan in <strong>Abacum</strong> for this quarter.</q></div>
+        <div class="prompt"><span class="who">Managers</span><q>Prepare my team’s review notes using their closed <strong>Jira</strong> tickets and their goals in Factorial.</q></div>
+        <div class="prompt"><span class="who">Sales ops</span><q>Which new hires in Sales still have no <strong>HubSpot</strong> owner assigned?</q></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalog">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb">Catalog</span>
+        <h2>Find your apps</h2>
+        <p>Filter by status or by area, or search by name.</p>
+      </div>
+      <div class="controls">
+        <div class="row1">
+          <label class="search" for="q">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Search apps, e.g. HubSpot, Jira, Stripe" autocomplete="off" aria-label="Search apps">
+          </label>
+          <div class="seg" role="group" aria-label="Status" id="seg"></div>
+        </div>
+        <div class="chips" role="group" aria-label="Category" id="chips"></div>
+      </div>
+      <div class="result-line"><span id="count" aria-live="polite"></span><button id="reset" type="button" hidden>Clear filters</button></div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden><h3>No apps match that search</h3><p>Try another name or clear the filters. If an app your team needs isn’t listed yet, tell your Factorial contact. New connectors are added every month.</p></div>
+      <div class="more"><b>Don’t see your tool?</b><span>500+ more apps are on the roadmap. Tell us which ones matter to your team.</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eb">Q&amp;A</span>
+        <h2>Questions teams ask before connecting</h2>
+        <p>How connectors work, and how One keeps your data within the permissions you already have.</p>
+      </div>
+      <h3 class="faq-group">Getting started</h3>
+      <div class="faq">
+        <details open><summary>What is a connector?</summary><div class="ans"><p>A connector links One, Factorial’s AI agent, to another app your company uses, like Slack, Jira or HubSpot. You can then find information and complete tasks across those tools from the One chat, without switching applications.</p><p>Connectors use MCP (Model Context Protocol), an open standard that lets AI assistants like One communicate with external applications and services. For example, you could ask One to:</p><ul><li>Find information from a project in Jira.</li><li>Summarize Slack conversations you have access to.</li><li>Retrieve customer information from your connected CRM.</li><li>Perform supported actions across connected tools, subject to your permissions.</li></ul></div></details>
+        <details><summary>Who sets it up?</summary><div class="ans"><p>A Factorial admin installs the connector for the company from the Connectors section. Then each person connects their own account with one click.</p><p>Anyone on the team can browse the catalog and request a connector. Their admin is notified and can install it.</p></div></details>
+        <details><summary>What do I need to use connectors?</summary><div class="ans"><p>Connectors are available to every company with Factorial One enabled. You also need an account in the app you want to connect.</p></div></details>
+        <details><summary>What do “In progress” and “Coming soon” mean?</summary><div class="ans"><ul><li><strong>Live</strong>: available to connect today.</li><li><strong>In progress</strong>: actively being built. Google (Gmail, Calendar, Drive) and Microsoft (Teams, Calendar, 365 Copilot) are next in line.</li><li><strong>Coming soon</strong>: on the roadmap. Your Factorial contact can share the latest timing.</li></ul></div></details>
+        <details><summary>Our tool isn’t listed. Can we request it?</summary><div class="ans"><p>Yes. More than 500 apps are on the roadmap, and customer demand helps decide what comes next. Share the tools your team relies on with your Factorial contact.</p></div></details>
+        <details><summary>We built our own internal tool or MCP server. Can One connect to it?</summary><div class="ans"><p>Not yet, but it’s on our roadmap for Q4 2026. Many companies now run their own internal tools, data platforms or AI agents. Soon you’ll be able to connect your own MCP server to One, so the answers One gives can combine Factorial with the systems your team built in-house.</p><p>Until then, One connects to the official, verified connectors in the catalog above. Your Factorial contact can share the latest timing.</p></div></details>
+      </div>
+
+      <h3 class="faq-group">Security, privacy and permissions</h3>
+      <p class="faq-intro">One respects your existing permissions. Connecting a new tool does not give One unrestricted access to your company’s data.</p>
+      <div class="faq">
+        <details><summary>What information can a connector access?</summary><div class="ans"><p>Only information that the person who connected it is authorized to access. Two permission boundaries apply:</p><ul><li><strong>Factorial permissions:</strong> One respects the access permissions configured in Factorial.</li><li><strong>External app permissions:</strong> each connector works with the permissions of the person who signed in to it.</li></ul><p>For example, if you connect your Slack account, One can’t access private channels or conversations your Slack account can’t view. Information you’re authorized to access and share through One may be sent to the connected service when you use it.</p></div></details>
+        <details><summary>Does connecting a tool give One extra permissions?</summary><div class="ans"><p>No. Connecting a tool doesn’t grant One additional permissions in Factorial or in the external app. One works within the existing access controls of both. If you can’t view something or perform an action yourself, connecting a tool doesn’t override that.</p></div></details>
+        <details><summary>Can a connector access other people’s information?</summary><div class="ans"><p>Not automatically. Each connector signs in as the person who connected it and works within that person’s permissions.</p><ul><li>Someone connecting their CRM account only sees the CRM data their account can retrieve.</li><li>A manager may see more, based on their existing role.</li><li>Nobody gains access to restricted information just by asking One.</li></ul></div></details>
+        <details><summary>Does connecting my account give others access to it?</summary><div class="ans"><p>No. Connecting an app with your own credentials doesn’t give anyone else access to that account. Each person signs in with their own credentials and permissions, unless a connector has been specifically set up to use a shared or service account.</p></div></details>
+        <details><summary>Is our company’s data shared with the connected service?</summary><div class="ans"><p>When you use a connector, the information needed to fulfil your request is exchanged between One and that service. For example, if you ask One to create a task in a project management tool, the details of that task are sent to it.</p><ul><li>Connecting a service doesn’t transfer all your company’s data.</li><li>What’s exchanged depends on the connector’s capabilities and the actions you take.</li><li>The external service’s own data handling and retention policies apply.</li></ul><p>Connect only services you trust, and review their privacy and security policies.</p></div></details>
+        <details><summary>Where is data processed? Can it leave the EU?</summary><div class="ans"><p>Factorial’s connector infrastructure is hosted in the European Union. Data residency also depends on the external services you connect: if a service is hosted outside the EU, information shared with it may be processed outside the EU.</p><p>Review each provider’s hosting location, privacy policy and data processing terms before enabling a connection.</p></div></details>
+        <details><summary>Can One make changes or act on my behalf?</summary><div class="ans"><p>Some connectors are read-only. Others support actions such as creating or updating records. What’s available depends on the connector and on the permissions the external service grants you. One can only take an action when you have permission to take it yourself, and every action is traceable to the person who asked. Each card in the catalog above describes what One can do with that app.</p></div></details>
+        <details><summary>Are connectors secure and reliable?</summary><div class="ans"><p>We only offer official, verified connectors that are reviewed against our security requirements before they’re made available in One. We don’t support unverified or unofficial MCP servers.</p><ul><li><strong>Access control:</strong> connectors can’t grant access beyond what the connected person already has.</li><li><strong>Reliability:</strong> we prioritize trusted integrations for a stable experience.</li><li><strong>Transparency:</strong> you stay in control of which services you connect to One.</li></ul></div></details>
+        <details><summary>Who is responsible for the security of external services?</summary><div class="ans"><p>Security is shared:</p><ul><li><strong>Factorial and One</strong> enforce their own access controls and permissions.</li><li><strong>External providers</strong> are responsible for the security, infrastructure and data handling of their services.</li><li><strong>Your organization</strong> chooses trusted providers, reviews their permissions and makes sure use follows internal security and compliance policies.</li></ul></div></details>
+        <details><summary>What are the best practices for using connectors securely?</summary><div class="ans"><ul><li><strong>Connect trusted services</strong> from reputable providers.</li><li><strong>Review permissions</strong>: know what information and actions each connector can reach.</li><li><strong>Apply least-privilege access</strong>: grant only what the use case needs.</li><li><strong>Check data residency</strong>: see where providers host and process information.</li><li><strong>Follow company policies</strong> for security and privacy.</li><li><strong>Review connections regularly</strong> and remove the ones you no longer need.</li></ul></div></details>
+      </div>
+
+      <div class="principles">
+        <div><b>Your access stays your access.</b><span>One can’t use a connector to give you permissions you don’t already have.</span></div>
+        <div><b>You choose what to connect.</b><span>Each service is chosen and signed in to by people on your team, within your organization’s policies.</span></div>
+        <div><b>Transparency matters.</b><span>External providers may process information, including outside the EU, so review their practices before use.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo" aria-label="Factorial" role="img" viewBox="0 0 3411 714" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.1 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path><path d="M3410.72 587.677H3322.85V98.8616H3410.72V587.677Z" fill="currentColor"></path><path d="M3164.94 296.832V258.138H3251.45V587.677H3164.94V539.233C3140.94 570.115 3106.48 585.556 3063.02 585.556C3021.64 585.556 2978.84 569.48 2949.04 537.329C2919.65 504.755 2905.43 465.458 2905.43 418.501C2905.43 371.967 2919.65 331.944 2949.04 299.37C2978.84 266.796 3019.55 252.646 3060.94 252.646C3104.4 252.646 3140.94 265.95 3164.94 296.832ZM3016.46 482.757C3032.6 499.256 3053.09 507.505 3077.92 507.505C3102.76 507.505 3123.24 499.256 3139.38 482.757C3155.94 465.836 3164.94 444.261 3164.94 418.032C3164.94 391.804 3155.94 370.44 3139.38 353.942C3123.24 337.02 3102.76 328.56 3077.92 328.56C3053.09 328.56 3032.6 337.02 3016.46 353.942C3000.32 370.44 2991.93 391.804 2991.93 418.032C2991.93 444.261 3000.32 465.836 3016.46 482.757Z" fill="currentColor"></path><path d="M2613.98 258.138V316.555C2621.12 296.23 2638.94 277.333 2649.06 270.5C2658.43 264.176 2679.93 252.646 2702.22 252.646V341.701C2677.41 338.242 2659.38 349.333 2641.5 363.26C2622.54 378.021 2614.34 398.936 2614.34 430.073V587.677H2526.46V258.138H2613.98Z" fill="currentColor"></path><path d="M1725.72 587.677C1677.86 587.677 1637.84 571.602 1605.66 539.453C1573.89 507.303 1554.32 468.608 1554.32 421.23C1554.32 373.852 1573.89 333.02 1605.66 300.87C1637.84 268.721 1677.86 252.646 1725.72 252.646C1756.64 252.646 1784.8 260.049 1810.21 274.855C1835.62 289.66 1858.48 309.542 1871.61 334.5L1797.51 375.745C1791.15 362.631 1781.41 352.267 1768.28 344.653C1755.58 337.038 1741.18 333.231 1725.09 333.231C1700.52 333.231 1680.19 341.48 1664.1 357.978C1648.01 374.052 1638.45 394.78 1638.45 420.161C1638.45 444.697 1648.01 465.424 1664.1 482.345C1680.19 498.42 1700.52 506.457 1725.09 506.457C1741.6 506.457 1756.21 502.862 1768.92 495.67C1782.05 488.056 1795.37 477.692 1801.73 464.578L1872.88 505.188C1858.9 530.569 1839 550.663 1813.16 565.468C1787.75 580.274 1756.21 587.677 1725.72 587.677Z" fill="currentColor"></path><path d="M1411.52 297.113V258.138H1499.4V587.676H1411.52V541.059C1387.14 572.138 1352.13 587.677 1307.99 587.677C1265.94 587.677 1222.46 571.499 1192.19 539.143C1162.34 506.362 1147.89 466.814 1147.89 419.558C1147.89 372.727 1162.34 332.449 1192.19 299.668C1222.46 266.886 1263.83 252.646 1305.87 252.646C1350.02 252.646 1387.14 266.035 1411.52 297.113ZM1260.69 484.223C1277.08 500.827 1297.9 509.129 1323.12 509.129C1348.35 509.129 1369.16 500.827 1385.56 484.223C1402.38 467.194 1411.52 445.482 1411.52 419.086C1411.52 392.691 1402.38 371.191 1385.56 354.587C1369.16 337.558 1348.35 329.043 1323.12 329.043C1297.9 329.043 1277.08 337.558 1260.69 354.587C1244.29 371.191 1235.77 392.691 1235.77 419.086C1235.77 445.482 1244.29 467.194 1260.69 484.223Z" fill="currentColor"></path><path d="M1109.45 99.1553V188.027C1064.88 185.008 1043.79 210.216 1043.79 249.9V258.138H1109.45V347.255H1043.54V587.677H955.662V347.255H911.723V258.138H955.662V249.9C955.662 203.745 974.836 163.858 999.642 140.565C1024.87 116.841 1060.67 96.1359 1109.45 99.1553Z" fill="currentColor"></path><path d="M2856 587.677H2768.12V258.138H2856V587.677Z" fill="currentColor"></path><path d="M2861.49 148.292C2861.49 175.592 2839.36 197.723 2812.06 197.723C2784.76 197.723 2762.63 175.592 2762.63 148.292C2762.63 120.992 2784.76 98.8616 2812.06 98.8616C2839.36 98.8616 2861.49 120.992 2861.49 148.292Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M2312.26 587.677C2403.26 587.677 2477.03 513.907 2477.03 422.908C2477.03 331.908 2403.26 258.138 2312.26 258.138C2221.26 258.138 2147.49 331.908 2147.49 422.908C2147.49 513.907 2221.26 587.677 2312.26 587.677ZM2312.26 508.038C2359.28 508.038 2397.39 469.924 2397.39 422.908C2397.39 375.891 2359.28 337.777 2312.26 337.777C2265.25 337.777 2227.13 375.891 2227.13 422.908C2227.13 469.924 2265.25 508.038 2312.26 508.038Z" fill="currentColor"></path><path d="M1916.82 450.492V203.823L2008.43 175.754V258.66H2098.9V345.113H2008.43C2008.43 375.054 2007.28 424.895 2007.28 448.249C2007.28 485.301 2030.06 500.6 2052.92 500.6C2075.77 500.6 2096.2 487.049 2096.2 487.049L2125.52 564.326C2125.52 564.326 2061.04 604.823 1996.89 579.154C1932.73 553.485 1916.82 504.277 1916.82 450.492Z" fill="currentColor"></path></svg>
+    <p>Catalog updated <span id="updated">October 2026</span>. Connector availability can change as apps are added. Ask your Factorial contact for a demo with your own tools.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // [name, category, description, status]  status: L = live, P = in progress, S = coming soon
+  const DATA = [
+    ["Notion","Productivity","Let One find, write and update your Notion pages and databases.","L"],
+    ["Atlassian","Engineering","Let One search, create and update your Jira issues and Confluence pages.","L"],
+    ["Linear","Engineering","Let One track, create and update your Linear issues and projects.","L"],
+    ["Canva","Design","Let One find your designs or start new ones from your conversation.","L"],
+    ["Miro","Productivity","Let One read your Miro boards and add to them as you work.","L"],
+    ["Airtable","Data","Let One look up and update the records in your Airtable bases.","L"],
+    ["Trello","Productivity","Let One review, create and move the cards on your Trello boards.","L"],
+    ["Granola","Productivity","Let One search and summarize the meeting notes in your Granola account.","L"],
+    ["Modjo","Sales","Let One search your Modjo calls, deals and accounts, and read their transcripts.","L"],
+    ["Amplitude","Data","Let One find and read the charts, dashboards and metrics in your Amplitude projects.","L"],
+    ["Stripe","Finance","Let One look up the customers, payments and invoices in your Stripe account.","L"],
+    ["PayPal","Finance","Let One look up the payments, invoices and disputes in your PayPal account.","L"],
+    ["SlidesGPT","Productivity","Let One turn your conversation into a slide deck with SlidesGPT.","L"],
+    ["Excalidraw","Design","Let One sketch diagrams of what you describe in Excalidraw, and share them.","L"],
+    ["Shutterstock","Design","Let One find stock images, video and music on Shutterstock for what you are making.","L"],
+    ["Primo","Productivity","Let One look up and update the resources you manage in Primo.","L"],
+    ["Firecrawl","Data","Let One read public web pages through Firecrawl and pull out the part you need.","L"],
+    ["Context7","Engineering","Let One look up current documentation and code examples for programming libraries in Context7.","L"],
+    ["Twilio","Engineering","Let One search Twilio’s documentation and API reference.","L"],
+    ["Superset","Engineering","Let One check what your coding agents are running in Superset and what waits for review.","L"],
+    ["Abacum","Finance","Let One look up and summarize the plans, forecasts and financial data in your Abacum.","L"],
+    ["Slack","Communication","Let One read and post in your Slack channels, while Factorial keeps Time off in sync.","L"],
+    ["Adobe Workfront","Productivity","Let One find, create and update your Adobe Workfront projects, tasks, plans and approvals.","L"],
+    ["Ahrefs","Marketing","Let One research keywords, backlinks and rankings for your sites in Ahrefs.","L"],
+    ["Apollo.io","Sales","Let One find, enrich and update your Apollo contacts, accounts and sequences.","L"],
+    ["Articulate","Learning","Let One draft training outlines and find your courses in Articulate.","S"],
+    ["Asana","Productivity","Let One find, create and update your Asana tasks and projects.","S"],
+    ["Ashby","Recruiting","Let One find candidates, prepare interviews and move applications forward in Ashby.","L"],
+    ["Atlar","Finance","Let One look up your Atlar balances, transactions, payments and cash forecasts.","S"],
+    ["Attio","Sales","Let One look up and update your Attio records, lists, notes and tasks.","L"],
+    ["Avalara AvaTax","Finance","Let One calculate tax, look up transactions and check nexus in your Avalara AvaTax account.","L"],
+    ["Avalara E-Invoicing","Finance","Let One find your e-invoices, check their status and explain why one failed in Avalara.","L"],
+    ["Box","Documents","Let One find, read, upload and organize your Box files and folders.","S"],
+    ["Brex","Finance","Let One look up your Brex expenses, cards and bills, and update expense details.","L"],
+    ["Calendly","Productivity","Let One check your availability, share booking links and manage your Calendly meetings.","L"],
+    ["Campfire","Finance","Let One look up your Campfire accounts, transactions and financial statements.","L"],
+    ["Carta","Finance","Let One look up and update your cap table, investors and fundraising relationships in Carta.","L"],
+    ["ChartMogul","Finance","Let One look up and summarize your ChartMogul revenue metrics, customers and pipeline.","L"],
+    ["Circleback","Productivity","Let One search and summarize your Circleback meetings, transcripts and emails.","L"],
+    ["Clay","Sales","Let One find and enrich the companies and contacts you prospect with Clay.","L"],
+    ["ClickHouse","Data","Let One query your ClickHouse Cloud databases and look up your services, backups and costs.","L"],
+    ["ClickUp","Productivity","Let One find, create and update your ClickUp tasks, docs and time entries.","L"],
+    ["Close","Sales","Let One find, create and update your Close leads, contacts and opportunities.","L"],
+    ["Cloverleaf","HR","Let One look up your team’s personality insights and start coaching plans in Cloverleaf.","L"],
+    ["Coursera","Learning","Let One find Coursera courses and videos for a skill and help you practice it.","S"],
+    ["Craft","Productivity","Let One find, write and organize your Craft documents, tasks and collections.","L"],
+    ["Datadog","Engineering","Let One search your Datadog logs, metrics and incidents, and build monitors and dashboards.","L"],
+    ["Datarails FinanceOS","Finance","Let One look up and summarize the consolidated financial data in your Datarails FinanceOS.","S"],
+    ["DeepL","Productivity","Let One translate and polish your text and documents with DeepL, using your glossaries.","L"],
+    ["Dext","Finance","Let One look up and summarize your clients’ bookkeeping, tax and workflow data in Dext.","L"],
+    ["Digits","Finance","Let One look up and summarize the transactions and finances in your Digits ledger.","L"],
+    ["DocuSeal","Documents","Let One send documents for signature and track them in DocuSeal.","S"],
+    ["Docusign","Documents","Let One track, prepare and update your Docusign envelopes, agreements and workflows.","S"],
+    ["Drata","Compliance","Let One find, create and update your Drata controls, evidence, risks and vendors.","L"],
+    ["Dropbox","Documents","Let One find, read and organize your Dropbox files and folders.","S"],
+    ["Embat","Finance","Let One look up your cash, debt, payments and accounting in Embat.","L"],
+    ["Exa","Data","Let One search the web and read pages through Exa.","L"],
+    ["Fathom","Productivity","Let One find, read and summarize your Fathom meeting recordings and transcripts.","L"],
+    ["Fellow","Productivity","Let One search your Fellow meetings and summarize their notes, transcripts and action items.","L"],
+    ["Figma","Design","Let One read your Figma designs and create new files, diagrams and designs from your conversation.","S"],
+    ["Fireflies","Productivity","Let One find, read and share your Fireflies meeting notes and transcripts.","L"],
+    ["FreshBooks","Finance","Let One look up your FreshBooks invoices, expenses, clients and financial reports.","L"],
+    ["GitHub","Engineering","Let One find, create and update your GitHub issues, pull requests and code.","S"],
+    ["Gmail","Communication","Let One search and read your Gmail threads, draft replies and organize them with labels.","P"],
+    ["GoCardless","Finance","Let One look up your GoCardless payments and customers and create payments or refunds after you confirm.","L"],
+    ["Google Calendar","Productivity","Let One check your Google Calendar, find free time and create or update events.","P"],
+    ["Google Drive","Documents","Let One find and read your Google Drive files and create new ones.","P"],
+    ["Gusto","HR","Let One look up your Gusto payroll and people data and update payrolls and employee records.","L"],
+    ["Hyperline","Finance","Let One look up, create and update your Hyperline customers, subscriptions and invoices.","L"],
+    ["HubSpot","Sales","Let One search, create and update your HubSpot contacts, companies, deals and tickets.","L"],
+    ["Ironclad","Documents","Let One search your contracts and track their obligations in Ironclad.","S"],
+    ["iubenda","Compliance","Let One create and update the privacy policies, cookie banners and terms for your sites in iubenda.","L"],
+    ["Jotform","Productivity","Let One find, create and edit your Jotform forms and review their submissions.","L"],
+    ["JustCall","Communication","Let One look up your JustCall calls and contacts, send texts, and update call notes.","L"],
+    ["Kahoot!","Learning","Let One create and update quizzes in your Kahoot! workspaces.","L"],
+    ["Klaviyo","Marketing","Let One report on your Klaviyo campaigns and flows, and draft campaigns and update profiles.","L"],
+    ["LawVu","Documents","Let One find, create and update your LawVu matters, contracts and tasks.","L"],
+    ["Lucid","Productivity","Let One find, summarize and create your Lucidchart diagrams and Lucidspark boards.","L"],
+    ["MailerLite","Marketing","Let One manage your MailerLite subscribers and groups and draft and schedule your campaigns.","L"],
+    ["Mandrill","Communication","Let One check your Mandrill account, look into failed sends and work with your email templates.","L"],
+    ["Mercury","Finance","Let One look up your Mercury accounts, balances, transactions and statements.","L"],
+    ["Metaview","Recruiting","Let One search your Metaview interview notes and reports and manage your outreach sequences.","L"],
+    ["Metricool","Marketing","Let One check your Metricool social media analytics and schedule or update posts for your brands.","L"],
+    ["Microsoft 365 Copilot","General","Let One ask Microsoft 365 Copilot to find information in your company’s files, emails, chats and sites.","P"],
+    ["Microsoft Calendar","Productivity","Let One check, schedule and update events in your Outlook calendar.","P"],
+    ["Microsoft Teams","Communication","Let One read and send messages in your Microsoft Teams chats and channels.","P"],
+    ["Mixpanel","Data","Let One query your Mixpanel product analytics and build and update your dashboards.","L"],
+    ["Monday","Productivity","Let One find, create and update the items, boards and docs in your monday.com workspaces.","S"],
+    ["Navan","Finance","Let One look up, review and approve your Navan expenses, cards and trips.","L"],
+    ["Otter.ai","Productivity","Let One search and read your Otter.ai meeting transcripts and summaries.","L"],
+    ["Otto","Productivity","Let One search, book and cancel your business flights and hotels in Otto.","L"],
+    ["Outreach","Sales","Let One search, create and enroll your Outreach accounts, prospects and sequences.","L"],
+    ["PandaDoc","Documents","Let One find, create and send your PandaDoc documents and track who has signed.","L"],
+    ["Pipedrive","Sales","Let One search, create and update your Pipedrive deals, contacts and activities.","S"],
+    ["Pitch","Productivity","Let One create, edit and share your Pitch presentations and see who viewed them.","S"],
+    ["PostHog","Data","Let One analyze and update your product analytics, feature flags and experiments in PostHog.","L"],
+    ["Process Street","Productivity","Let One look up, start and update your Process Street workflows, tasks and data sets.","L"],
+    ["Productive","Productivity","Let One find, create and update your Productive projects, tasks, time entries and budgets.","L"],
+    ["Pylon","Customer support","Let One find, create and update your Pylon support issues and accounts.","L"],
+    ["Qonto","Finance","Let One look up your Qonto transactions and invoices and create invoices, quotes and cards.","S"],
+    ["Ramp","Finance","Let One look up your Ramp spend and update transactions, reimbursements and cards.","L"],
+    ["Read AI","Productivity","Let One find and summarize your Read AI meeting reports.","L"],
+    ["Resend","Communication","Let One send email and manage your contacts, broadcasts and domains in Resend.","L"],
+    ["Rillet","Finance","Let One look up and update your ledger, invoices and bills in Rillet.","L"],
+    ["Robin","Productivity","Let One find and book your desks and plan your office space in Robin.","L"],
+    ["Salesforce","Sales","Let One look up, create and update your Salesforce records and run admin tasks.","S"],
+    ["Sentry","Engineering","Let One find, analyze and update your Sentry issues and projects.","L"],
+    ["Shopify","Commerce","Let One look up and update the orders, products and customers in your Shopify store.","S"],
+    ["SignNow","Documents","Let One prepare, send and track your SignNow documents for signature.","L"],
+    ["Snowflake","Data","Let One query and search your company data in Snowflake.","S"],
+    ["Supabase","Engineering","Let One query your databases and manage your projects in Supabase.","L"],
+    ["Superhuman Mail","Communication","Let One search your email and calendar, draft and send replies, and schedule meetings in Superhuman.","L"],
+    ["Tabs","Finance","Let One look up your Tabs contracts, invoices, payments and revenue reports.","L"],
+    ["Tally","Productivity","Let One create and update your Tally forms and read their submissions.","L"],
+    ["Teamtailor","Recruiting","Let One find, create and update your Teamtailor jobs, candidates and applications.","L"],
+    ["Todoist","Productivity","Let One find, add and update your Todoist tasks and projects.","L"],
+    ["Typeform","Productivity","Let One create and update your forms and analyze their responses in Typeform.","S"],
+    ["Udemy Business","Learning","Let One search your Udemy Business catalog for courses, lectures and learning paths.","L"],
+    ["UptimeRobot","Engineering","Let One check and update your monitors, incidents and status pages in UptimeRobot.","L"],
+    ["Vercel","Engineering","Let One check and manage your projects, deployments and domains in Vercel.","S"],
+    ["Webex","Communication","Let One schedule your meetings and pull their summaries and transcripts in Webex.","S"],
+    ["Webflow","Marketing","Let One find, update and publish the pages and CMS content on your Webflow sites.","L"],
+    ["Whimsical","Design","Let One create and edit your flowcharts, mind maps, wireframes and docs in Whimsical.","L"],
+    ["Wix","Marketing","Let One look up and update the content and business data on your Wix sites.","L"],
+    ["WordPress.com","Marketing","Let One find, write and update the posts, pages and comments on your WordPress.com sites.","L"],
+    ["Workable","Recruiting","Let One find candidates, move them through your pipeline and handle requisitions in Workable.","L"],
+    ["Xero","Finance","Let One look up your Xero invoices, bills, contacts and financial reports.","S"],
+    ["Zapier","Automation","Let One run actions in the apps you have connected to Zapier.","L"],
+    ["Zoho Books","Finance","Let One look up and create invoices, orders and expenses in your Zoho Books.","L"],
+    ["Zoho CRM","Sales","Let One search, create and update your Zoho CRM leads, contacts and deals.","L"],
+    ["Zoho Desk","Customer support","Let One find, create and reply to your Zoho Desk tickets.","L"],
+    ["Zoom","Communication","Let One search and summarize your Zoom meetings, recordings and docs.","S"],
+    ["ZoomInfo","Sales","Let One find and research companies and contacts in ZoomInfo.","S"]
+  ].map(([name, cat, desc, st]) => ({ name, cat, desc, st }))
+   .sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
+
+  const STATUS = { L: { label: "Live", cls: "live" }, P: { label: "In progress", cls: "prog" }, S: { label: "Coming soon", cls: "soon" } };
+  const LOGO = {
+    "Notion": "notion.svg", "Atlassian": "atlassian.png", "Linear": "linear.png", "Canva": "canva.png",
+    "Miro": "miro.png", "Airtable": "airtable.png", "Trello": "trello.png", "Granola": "granola.png",
+    "Modjo": "modjo.png", "Amplitude": "amplitude.png", "Stripe": "stripe.png", "PayPal": "paypal.png",
+    "SlidesGPT": "slidesgpt.png", "Excalidraw": "excalidraw.png", "Shutterstock": "shutterstock.png",
+    "Primo": "primo.png", "Firecrawl": "firecrawl.png", "Context7": "context7.png", "Twilio": "twilio.png",
+    "Superset": "superset.png", "Abacum": "abacum.png", "Slack": "slack.png",
+    "Adobe Workfront": "adobe_workfront.png", "Ahrefs": "ahrefs.png", "Apollo.io": "apollo.png",
+    "Articulate": "articulate.png", "Asana": "asana.png", "Ashby": "ashby.png", "Atlar": "atlar.png",
+    "Attio": "attio.png", "Avalara AvaTax": "avalara_avatax.png", "Avalara E-Invoicing": "avalara_elr.png",
+    "Box": "box.png", "Brex": "brex.png", "Calendly": "calendly.png", "Campfire": "campfire.png",
+    "Carta": "carta.png", "ChartMogul": "chartmogul.png", "Circleback": "circleback.png", "Clay": "clay.png",
+    "ClickHouse": "clickhouse.png", "ClickUp": "clickup.png", "Close": "close.png", "Cloverleaf": "cloverleaf.png",
+    "Coursera": "coursera.png", "Craft": "craft.png", "Datadog": "datadog.png",
+    "Datarails FinanceOS": "datarails.png", "DeepL": "deepl.png", "Dext": "dext.png", "Digits": "digits.png",
+    "DocuSeal": "docuseal.png", "Docusign": "docusign.png", "Drata": "drata.png", "Dropbox": "dropbox.png",
+    "Embat": "embat.png", "Exa": "exa.png", "Fathom": "fathom.png", "Fellow": "fellow.png", "Figma": "figma.png",
+    "Fireflies": "fireflies.png", "FreshBooks": "freshbooks.png", "GitHub": "github.png", "Gmail": "gmail.png",
+    "GoCardless": "gocardless.png", "Google Calendar": "google_calendar.png", "Google Drive": "google_drive.png",
+    "Gusto": "gusto.png", "Hyperline": "hyperline.png", "HubSpot": "hubspot.png", "Ironclad": "ironclad.png",
+    "iubenda": "iubenda.png", "Jotform": "jotform.png", "JustCall": "justcall.png", "Kahoot!": "kahoot.svg",
+    "Klaviyo": "klaviyo.png", "LawVu": "lawvu.png", "Lucid": "lucid.png", "MailerLite": "mailerlite.png",
+    "Mandrill": "mandrill.png", "Mercury": "mercury.png", "Metaview": "metaview.png", "Metricool": "metricool.png",
+    "Microsoft 365 Copilot": "microsoft_365_copilot.png", "Microsoft Calendar": "microsoft_calendar.svg",
+    "Microsoft Teams": "microsoft_teams.svg", "Mixpanel": "mixpanel.png", "Monday": "monday.png",
+    "Navan": "navan.png", "Otter.ai": "otter.png", "Otto": "otto.png", "Outreach": "outreach.png",
+    "PandaDoc": "pandadoc.png", "Pipedrive": "pipedrive.png", "Pitch": "pitch.png", "PostHog": "posthog.png",
+    "Process Street": "process_street.png", "Productive": "productive.png", "Pylon": "pylon.png",
+    "Qonto": "qonto.png", "Ramp": "ramp.png", "Read AI": "read_ai.png", "Resend": "resend.png",
+    "Rillet": "rillet.png", "Robin": "robin.png", "Salesforce": "salesforce.png", "Sentry": "sentry.png",
+    "Shopify": "shopify.png", "SignNow": "signnow.png", "Snowflake": "snowflake.png", "Supabase": "supabase.png",
+    "Superhuman Mail": "superhuman.png", "Tabs": "tabs.png", "Tally": "tally.png", "Teamtailor": "teamtailor.png",
+    "Todoist": "todoist.png", "Typeform": "typeform.png", "Udemy Business": "udemy_business.png",
+    "UptimeRobot": "uptimerobot.png", "Vercel": "vercel.png", "Webex": "webex.png", "Webflow": "webflow.png",
+    "Whimsical": "whimsical.png", "Wix": "wix.png", "WordPress.com": "wordpress.png", "Workable": "workable.png",
+    "Xero": "xero.png", "Zapier": "zapier.png", "Zoho Books": "zoho_books.png", "Zoho CRM": "zoho_crm.png",
+    "Zoho Desk": "zoho_desk.png", "Zoom": "zoom.png", "ZoomInfo": "zoominfo.png", "Factorial": "factorial.svg"
+  };
+  const logo = (n) => `<img src="logos/${LOGO[n]}" alt="" loading="lazy">`;
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  const state = { q: "", st: "all", cat: "All" };
+  try { const saved = JSON.parse(localStorage.getItem("one-connectors-filters") || "null"); if (saved) Object.assign(state, { st: saved.st || "all", cat: saved.cat || "All" }); } catch (e) {}
+  const save = () => { try { localStorage.setItem("one-connectors-filters", JSON.stringify({ st: state.st, cat: state.cat })); } catch (e) {} };
+
+  const nLive = DATA.filter(d => d.st === "L").length;
+  document.getElementById("s-live").textContent = nLive;
+  document.getElementById("s-soon").textContent = DATA.length - nLive;
+
+  const seg = document.getElementById("seg");
+  const SEGS = [["all", "All", null], ["L", "Live", "var(--live)"], ["P", "In progress", "var(--prog)"], ["S", "Coming soon", "var(--soon)"]];
+  seg.innerHTML = SEGS.map(([k, l, c]) => `<button type="button" data-st="${k}">${c ? `<span class="dot" style="background:${c}"></span>` : ""}${l}</button>`).join("");
+  seg.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; state.st = b.dataset.st; save(); render(); });
+
+  const cats = [...new Set(DATA.map(d => d.cat))].sort((a, b) => DATA.filter(d => d.cat === b).length - DATA.filter(d => d.cat === a).length || a.localeCompare(b));
+  const chips = document.getElementById("chips");
+  chips.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; state.cat = b.dataset.cat; save(); render(); });
+
+  const q = document.getElementById("q");
+  q.addEventListener("input", () => { state.q = q.value.trim().toLowerCase(); render(); });
+  document.getElementById("reset").addEventListener("click", () => { state.q = ""; q.value = ""; state.st = "all"; state.cat = "All"; save(); render(); });
+
+  const grid = document.getElementById("grid");
+  function matches(d, ignoreCat) {
+    if (state.st !== "all" && d.st !== state.st) return false;
+    if (!ignoreCat && state.cat !== "All" && d.cat !== state.cat) return false;
+    if (state.q && !(d.name + " " + d.cat + " " + d.desc).toLowerCase().includes(state.q)) return false;
+    return true;
+  }
+  function render() {
+    seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.st === state.st)));
+    const pool = DATA.filter(d => matches(d, true));
+    const visibleCats = cats.filter(c => pool.some(d => d.cat === c));
+    if (state.cat !== "All" && !visibleCats.includes(state.cat)) { state.cat = "All"; save(); }
+    chips.innerHTML = ["All", ...visibleCats].map(c => {
+      const n = c === "All" ? pool.length : pool.filter(d => d.cat === c).length;
+      return `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${c === state.cat}">${esc(c)} <span class="c">${n}</span></button>`;
+    }).join("");
+    const list = DATA.filter(d => matches(d, false));
+    grid.innerHTML = list.map(d => `
+      <article class="card">
+        <div class="card-top"><div class="mono" aria-hidden="true">${logo(d.name)}</div><div style="min-width:0"><h3>${esc(d.name)}</h3><div class="cat">${esc(d.cat)}</div></div></div>
+        <p>${esc(d.desc)}</p>
+        <span class="pill ${STATUS[d.st].cls}">${STATUS[d.st].label}</span>
+      </article>`).join("");
+    document.getElementById("empty").hidden = list.length > 0;
+    const filtered = state.q || state.st !== "all" || state.cat !== "All";
+    document.getElementById("reset").hidden = !filtered;
+    document.getElementById("count").textContent = filtered ? `Showing ${list.length} of ${DATA.length} apps` : `${DATA.length} apps · ${nLive} live today`;
+  }
+
+  // ---------- Hero hub ----------
+  const byName = Object.fromEntries(DATA.map(d => [d.name, d]));
+  const orbit = (id, names, r, offset) => {
+    const el = document.getElementById(id);
+    el.innerHTML = names.map((n, i) => {
+      const a = (i / names.length) * Math.PI * 2 + offset;
+      const x = 50 + r * Math.cos(a), y = 50 + r * Math.sin(a);
+      return `<div class="orb" style="left:${x}%;top:${y}%"><span><i>${logo(n)}</i>${esc(n === "Atlassian" ? "Jira" : n)}</span></div>`;
+    }).join("");
+  };
+  orbit("ring-outer", ["Slack","HubSpot","Notion","Stripe","Canva","DeepL","Miro","Linear","Zapier","Modjo"], window.innerWidth < 520 ? 37 : 44, -Math.PI / 2);
+  orbit("ring-inner", ["Atlassian","Abacum","Airtable","Calendly","Granola"], window.innerWidth < 520 ? 22 : 25, -Math.PI / 2 + 0.6);
+
+  // ---------- Demo chat ----------
+  const ISO = `<svg class="iso" aria-hidden="true" viewBox="0 0 714 714" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M581.784 634.362C520.414 684.16 442.192 714 357 714C271.808 714 193.586 684.16 132.216 634.362C193.586 584.563 271.808 554.723 357 554.723C442.192 554.723 520.414 584.563 581.784 634.362Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M130.258 548.192C86.6807 496.565 60.4154 429.85 60.4154 357C60.4154 193.201 193.201 60.4154 357 60.4154C520.799 60.4154 653.585 193.201 653.585 357C653.585 429.85 627.319 496.565 583.742 548.192C598.735 557.56 613.105 567.827 626.773 578.918L632.744 583.763C683.513 522.099 714 443.11 714 357C714 159.834 554.166 0 357 0C159.834 0 0 159.834 0 357C0 443.11 30.487 522.099 81.2561 583.763L87.227 578.918C100.895 567.827 115.265 557.56 130.258 548.192Z" fill="currentColor"></path><path d="M488.815 346.015C488.815 418.815 429.8 477.831 357 477.831C284.2 477.831 225.185 418.815 225.185 346.015C225.185 273.216 284.2 214.2 357 214.2C429.8 214.2 488.815 273.216 488.815 346.015Z" fill="currentColor"></path></svg>`;
+  const ico = (n) => `<i>${logo(n)}</i>`;
+  const SCEN = [
+    { app: "HubSpot", area: "Sales", title: "First deals by new reps",
+      q: "Which new sales reps have closed their first HubSpot deal?",
+      runs: [["Factorial", "People who joined Sales since 1 Sep"], ["HubSpot", "Closed-won deals by owner"]],
+      a: `<p>3 of the 5 people who joined Sales since September have closed their first deal.</p>
+        <div class="tbl-wrap"><table><thead><tr><th>Rep</th><th>Started</th><th>First deal</th><th>Amount</th></tr></thead><tbody>
+        <tr><td>Marta Ruiz</td><td>8 Sep</td><td>Hotel Miramar</td><td>€4,800</td></tr>
+        <tr><td>Tom Becker</td><td>15 Sep</td><td>Kanzlei Vogt</td><td>€3,200</td></tr>
+        <tr><td>Giulia Conti</td><td>22 Sep</td><td>Studio Lume</td><td>€2,950</td></tr></tbody></table></div>
+        <p>Still waiting on a first win: Inès Laurent and Pedro Alves.</p>
+        <div class="next"><span>Post a shout-out in #team-sales</span><span>Draft a check-in with Inès and Pedro</span></div>` },
+    { app: "Atlassian", area: "Projects", title: "Tickets owned by people on leave",
+      q: "Which Jira tickets are assigned to people on leave next week?",
+      runs: [["Factorial", "Approved time off, 2–6 Nov"], ["Atlassian", "Open Jira issues by assignee"]],
+      a: `<p>2 people are off next week with 4 open tickets between them.</p>
+        <div class="tbl-wrap"><table><thead><tr><th>Ticket</th><th>Summary</th><th>Assignee</th><th>Off</th></tr></thead><tbody>
+        <tr><td><span class="tag">WEB-412</span></td><td>Checkout redirect loop</td><td>Lucas Moreau</td><td>2–6 Nov</td></tr>
+        <tr><td><span class="tag">WEB-398</span></td><td>Update cookie banner copy</td><td>Lucas Moreau</td><td>2–6 Nov</td></tr>
+        <tr><td><span class="tag">APP-77</span></td><td>Push notification opt-in</td><td>Sara Nunes</td><td>4–6 Nov</td></tr>
+        <tr><td><span class="tag">APP-81</span></td><td>Release notes for 3.2</td><td>Sara Nunes</td><td>4–6 Nov</td></tr></tbody></table></div>
+        <div class="next"><span>Suggest who can pick them up</span><span>Post a heads-up in Slack</span></div>` },
+    { app: "Stripe", area: "Finance", title: "Revenue against payroll",
+      q: "Compare our Stripe revenue this quarter with total payroll cost.",
+      runs: [["Stripe", "Payments, 1 Oct to today"], ["Factorial", "Payroll cost, same period"]],
+      a: `<p>Quarter to date, revenue covers payroll 1.5 times.</p>
+        <div class="bars">
+          <div class="bar-row"><span>Stripe revenue</span><div class="track"><div class="fill" style="width:100%;background:var(--red)"></div></div><b>€412k</b></div>
+          <div class="bar-row"><span>Payroll cost</span><div class="track"><div class="fill" style="width:65%;background:var(--ink)"></div></div><b>€268k</b></div>
+        </div>
+        <p>Payroll is up 6% on last quarter after the two hires in Support. Revenue is up 9%.</p>
+        <div class="next"><span>Break payroll down by team</span><span>Turn this into a monthly routine</span></div>` },
+    { app: "Slack", area: "Communication", title: "Who’s off this Friday",
+      q: "Post on Slack’s #team-sales who’s off this Friday.",
+      runs: [["Factorial", "Time off on Fri 30 Oct, Sales team"], ["Slack", "Message posted to #team-sales"]],
+      a: `<p>Done. Here’s what I posted:</p>
+        <div class="slackmsg"><span class="ch">#team-sales</span>
+          <div class="ln">Heads-up for Friday 30 Oct. Out of office:</div>
+          <div class="ln"><span class="av" style="background:#07A2AD">ER</span>Elena Ríos · full day</div>
+          <div class="ln"><span class="av" style="background:#4A4A6A">JK</span>Jonas Keller · afternoon</div>
+        </div>` }
+  ];
+  const tabs = document.getElementById("demo-tabs"), chat = document.getElementById("chat");
+  tabs.innerHTML = SCEN.map((s, i) => `<button type="button" role="tab" class="demo-tab" id="tab-${i}" aria-selected="${i === 0}" data-i="${i}"><small>${esc(s.area)} · ${esc(s.app === "Atlassian" ? "Jira" : s.app)}</small><span>${esc(s.title)}</span></button>`).join("");
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timers = [];
+  function showScen(i, animate) {
+    timers.forEach(clearTimeout); timers = [];
+    tabs.querySelectorAll(".demo-tab").forEach(b => b.setAttribute("aria-selected", String(+b.dataset.i === i)));
+    const s = SCEN[i];
+    chat.innerHTML = `<div class="chat-head"><span class="who"><b>${ISO}</b>One</span><span class="sample">Example with sample data</span></div>
+      <div class="bubble-user">${esc(s.q)}</div><div class="steps-run" id="runs"></div><div id="ans"></div>`;
+    const runs = chat.querySelector("#runs"), ans = chat.querySelector("#ans");
+    const stepHtml = (r) => `<span class="run fade-in">${ico(r[0])}<em>${esc(r[0] === "Atlassian" ? "Jira" : r[0])}</em>${esc(r[1])}<span class="ok">✓</span></span>`;
+    const final = () => { ans.className = "bubble-one fade-in"; ans.innerHTML = s.a; };
+    if (!animate || reduce) { runs.innerHTML = s.runs.map(stepHtml).join(""); final(); return; }
+    s.runs.forEach((r, k) => timers.push(setTimeout(() => runs.insertAdjacentHTML("beforeend", stepHtml(r)), 350 + k * 450)));
+    timers.push(setTimeout(final, 350 + s.runs.length * 450 + 250));
+  }
+  tabs.addEventListener("click", (e) => { const b = e.target.closest(".demo-tab"); if (b) showScen(+b.dataset.i, true); });
+  showScen(0, false);
+
+  // ---------- Areas ----------
+  const goCatalog = () => document.getElementById("catalog").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  render();
+})();
+</script>
+
+<script>/* menú del sitio: los enlaces conservan idioma y versión partner */
+(function(){var p=new URLSearchParams(location.search);document.querySelectorAll('#sitebar a').forEach(function(a){var u=new URL(a.getAttribute('href'),location.href);['lang','for'].forEach(function(k){if(p.get(k))u.searchParams.set(k,p.get(k))});a.href=u.pathname+u.search});})();</script>
+</body></html>
