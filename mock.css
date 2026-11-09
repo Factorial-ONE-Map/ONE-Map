@@ -84,9 +84,10 @@
 .mock .proof span{font-size:13px;padding:4px 11px}
 /* todo el banner y el mapa caben en la pantalla (escritorio): el mapa se ajusta a la altura disponible */
 @media (min-width:1101px){
-  .mock .hero{height:calc(100vh - 2 * var(--frame) - 42px);min-height:560px}
-  .mock .hero-inner{min-height:0;height:100%}
-  .mock .mapcol{padding-top:clamp(12px,2.2vh,28px);padding-bottom:clamp(8px,1.4vh,20px);height:100%;min-height:0}
+  /* la altura de la pantalla es un mínimo, no un tope: si el mapa no cabe, la tarjeta crece y nada se corta */
+  .mock .hero{height:auto;min-height:max(560px,calc(100vh - 2 * var(--frame) - 42px))}
+  .mock .hero-inner{min-height:inherit;height:auto}
+  .mock .mapcol{padding-top:clamp(12px,2.2vh,28px);padding-bottom:clamp(8px,1.4vh,20px);height:auto;min-height:0}
   .mock h1{font-size:clamp(26px,4.6vh,48px);margin:clamp(4px,.8vh,10px) 0}
   .mock .sub{font-size:clamp(14px,1.9vh,18px);margin:0 0 clamp(4px,.8vh,10px)}
   .mock .proof{margin:0}
