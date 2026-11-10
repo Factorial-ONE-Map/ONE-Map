@@ -101,7 +101,8 @@
   .mock .hubbtn .ic{width:clamp(20px,2.7vh,24px);height:clamp(20px,2.7vh,24px)}
   .mock .onebtn{width:clamp(96px,17vh,168px)}
   .mock .scrollcue{display:none}
-  .mock .panel-in{height:100%}
+  /* el panel no estira la tarjeta: ocupa la altura del mapa y se desplaza por dentro (abrir «Más detalles» no mueve la araña) */
+  .mock .panel-in{position:absolute;inset:0;height:auto;width:auto}
 }
 .mock .rv-chart{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
 .mock .rv-chart .ct{font-size:13px;font-weight:500;margin:0 0 4px;color:var(--ink)}
