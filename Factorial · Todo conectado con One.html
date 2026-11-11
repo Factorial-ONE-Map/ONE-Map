@@ -389,7 +389,7 @@ const HUBS = {
   talento: { name: "Talento", side: "left", lead: "Del puesto que planificas a la subida que defiendes. Cada decisión de talento parte de la anterior, no de cero.", one: "Cuantos más productos de talento tienes, más contexto tiene ONE: lee evaluaciones, candidaturas, cursos y encuestas a la vez." },
   tiempo: { name: "Tiempo", side: "left", lead: "Fichajes, turnos y ausencias sobre el mismo calendario, y cada hora lista para nómina y proyectos.", one: "ONE cubre turnos, responde saldos y vigila incidencias de fichaje mientras aún son pequeñas." },
   finanzas: { name: "Finanzas", side: "left", lead: "RR. HH. y Finanzas trabajan con los mismos números: plantilla, gastos, compras, proyectos y presupuesto.", one: "ONE aprueba lo que cumple la política y te deja solo las excepciones." },
-  core: { name: "Core HR", side: "right", lead: "La base de todo: personas, documentos, políticas y la app de cada empleado. Lo que se captura aquí lo usan todos los módulos.", one: "ONE conoce tus políticas, responde con la fuente y resuelve solicitudes antes de que lleguen a una persona." },
+  core: { name: "Core", side: "right", lead: "La base de todo: personas, documentos, políticas y la app de cada empleado. Lo que se captura aquí lo usan todos los módulos.", one: "ONE conoce tus políticas, responde con la fuente y resuelve solicitudes antes de que lleguen a una persona." },
   it: { name: "IT", side: "right", lead: "Dispositivos, software e inventario ligados a la persona que los usa, desde el primer día hasta el último.", one: "ONE investiga el ticket, comprueba el stock y prepara la compra para que una persona solo tenga que aprobar." },
   nomina: { name: "Nómina", side: "right", lead: "Cada cambio que afecta al sueldo llega a nómina validado, desde el fichaje hasta la subida salarial.", one: "ONE detecta variables pendientes y lo que no cuadra antes de que se calcule la nómina." }
 };
@@ -720,7 +720,7 @@ const M = {
       "Stock visible antes de comprar."
     ],
     oneNote: "Cuando llega un ticket, ONE comprueba el inventario antes de proponer una compra.",
-    why: "El inventario sabe quién es quién porque comparte el dato de personas con Core HR.",
+    why: "El inventario sabe quién es quién porque comparte el dato de personas con Core.",
     links: ["tickets", "compras", "marketplace", "mdm", "onoff"]
   },
   software: {
@@ -825,7 +825,7 @@ const EN = {
     talento: { name: "Talent", lead: "From the role you plan to the raise you defend. Every talent decision builds on the last one, not from scratch.", one: "The more talent products you have, the more context ONE has: it reads reviews, applications, courses and surveys at once." },
     tiempo: { name: "Time", lead: "Clock-ins, shifts and absences on the same calendar, with every hour ready for payroll and projects.", one: "ONE covers shifts, answers balance questions and catches clock-in issues while they're still small." },
     finanzas: { name: "Finance", lead: "HR and Finance work with the same numbers: headcount, expenses, purchases, projects and budget.", one: "ONE approves what meets the policy and leaves you only the exceptions." },
-    core: { name: "Core HR", lead: "The foundation: people, documents, policies and every employee's app. What's captured here is used by every module.", one: "ONE knows your policies, answers with the source and resolves requests before they reach a person." },
+    core: { name: "Core", lead: "The foundation: people, documents, policies and every employee's app. What's captured here is used by every module.", one: "ONE knows your policies, answers with the source and resolves requests before they reach a person." },
     it: { name: "IT", lead: "Devices, software and inventory tied to the person who uses them, from their first day to their last.", one: "ONE investigates the ticket, checks stock and prepares the purchase so a person only has to approve." },
     nomina: { name: "Payroll", lead: "Every change that affects pay reaches payroll validated, from clock-in to salary raise.", one: "ONE spots pending variables and anything that doesn't add up before payroll is calculated." }
   },
@@ -965,7 +965,7 @@ const EN = {
       lead: "What equipment each person has, with its history.",
       value: ["Equipment assignment and return per person.", "Built into onboarding and offboarding.", "Stock visible before buying."],
       oneNote: "When a ticket comes in, ONE checks inventory before proposing a purchase.",
-      why: "Inventory knows who's who because it shares people data with Core HR." },
+      why: "Inventory knows who's who because it shares people data with Core." },
     software: { name: "Software management",
       lead: "Which tools the company uses, who has access and what they cost.",
       value: ["Inventory of apps and licenses.", "Access granted and revoked as people join and leave.", "License spend visible to Finance."],
@@ -1076,7 +1076,7 @@ const LONG = {
     ${chatHTML([{ q: "Cada día 25, avísame de las variables de nómina pendientes.", a: "Crea la rutina, revisa lo que falta antes del cierre y te lo envía con quién tiene que actuar." }])}`,
     routines: `<h3>Rutinas con información siempre al día</h3>
   <ul class="rt">
-    <li><span class="when">Lunes, 9:00</span><span>Rotación por departamento, con la tendencia explicada<span class="src">Core HR · Analíticas</span></span></li>
+    <li><span class="when">Lunes, 9:00</span><span>Rotación por departamento, con la tendencia explicada<span class="src">Core · Analíticas</span></span></li>
     <li><span class="when">Laborables, 18:00</span><span>Personas con menos de 4 fichajes hoy<span class="src">Control horario</span></span></li>
     <li><span class="when">Día 25</span><span>Variables de nómina pendientes antes del cierre<span class="src">Compensación · Turnos · Gastos</span></span></li>
     <li><span class="when">Primer día del mes</span><span>Formaciones obligatorias pendientes por centro<span class="src">Formación y LMS</span></span></li>
@@ -1084,7 +1084,7 @@ const LONG = {
   </ul>
   <p class="disc-note">Cualquier informe de Analíticas se puede programar como rutina desde el chat de ONE. Las rutinas consumen créditos de ONE.</p>`,
     ax: { t: "Ejemplos de informes ya conectados",
-      c1: ["Rotación y compromiso por departamento", "Core HR + Engagement · rotación (barras) y eNPS (línea)", ["Tiendas","Ops","Ventas","Soporte","Tech"]],
+      c1: ["Rotación y compromiso por departamento", "Core + Engagement · rotación (barras) y eNPS (línea)", ["Tiendas","Ops","Ventas","Soporte","Tech"]],
       c2: ["Calidad de contratación por fuente", "Selección + Desempeño · permanencia a 1 año", ["Referidos","LinkedIn","Web empleo","Portales"]],
       c3: ["Coste de plantilla: real frente a previsto", "Plantilla + Revisión salarial + Compensación", ["E","F","M","A","M","J"], "Real", "Previsto"],
       c4: ["Absentismo y horas extra por centro", "Ausencias + Control horario + Turnos", ["Madrid","Barcelona","Valencia","Sevilla"], "Absentismo %", "Horas extra"],
@@ -1107,7 +1107,7 @@ const LONG = {
     ${chatHTML([{ q: "Every 25th, alert me about pending payroll variables.", a: "Creates the routine, reviews what's missing before close and sends it to you with who needs to act." }])}`,
     routines: `<h3>Routines with always up-to-date information</h3>
   <ul class="rt">
-    <li><span class="when">Monday, 9:00</span><span>Turnover by department, with the trend explained<span class="src">Core HR · Analytics</span></span></li>
+    <li><span class="when">Monday, 9:00</span><span>Turnover by department, with the trend explained<span class="src">Core · Analytics</span></span></li>
     <li><span class="when">Weekdays, 18:00</span><span>People with fewer than 4 clock-ins today<span class="src">Time tracking</span></span></li>
     <li><span class="when">The 25th</span><span>Pending payroll variables before close<span class="src">Compensation · Shifts · Expenses</span></span></li>
     <li><span class="when">First day of the month</span><span>Pending mandatory training by location<span class="src">Training & LMS</span></span></li>
@@ -1115,7 +1115,7 @@ const LONG = {
   </ul>
   <p class="disc-note">Any Analytics report can be scheduled as a routine from the ONE chat. Routines use ONE credits.</p>`,
     ax: { t: "Examples of reports already connected",
-      c1: ["Turnover and engagement by department", "Core HR + Engagement · turnover (bars) and eNPS (line)", ["Stores","Ops","Sales","Support","Tech"]],
+      c1: ["Turnover and engagement by department", "Core + Engagement · turnover (bars) and eNPS (line)", ["Stores","Ops","Sales","Support","Tech"]],
       c2: ["Quality of hire by source", "Recruitment + Performance · 1-year retention", ["Referrals","LinkedIn","Careers site","Job boards"]],
       c3: ["Headcount cost: actual vs. planned", "Headcount + Salary review + Compensation", ["J","F","M","A","M","J"], "Actual", "Planned"],
       c4: ["Absenteeism and overtime by location", "Time off + Time tracking + Shifts", ["Madrid","Barcelona","Valencia","Seville"], "Absenteeism %", "Overtime"],
@@ -1397,7 +1397,7 @@ const PT = {
     talento: { name: "Talento", lead: "Do cargo planeado ao aumento proposto, cada decisão de talento assenta na anterior, em vez de começar do zero.", one: "Quantos mais módulos de talento estiverem ativos, mais contexto tem o ONE: analisa avaliações, candidaturas, formações e inquéritos em simultâneo." },
     tiempo: { name: "Tempo", lead: "Registos de ponto, turnos e ausências no mesmo calendário, com cada hora pronta para o processamento salarial e os projetos.", one: "O ONE cobre turnos, responde a dúvidas sobre saldos e apanha falhas no ponto enquanto ainda são pequenas." },
     finanzas: { name: "Finanças", lead: "RH e Finanças trabalham com os mesmos números: efetivos, despesas, compras, projetos e orçamento.", one: "O ONE aprova o que cumpre a política e deixa-lhe só as exceções." },
-    core: { name: "Core HR", lead: "A base: pessoas, documentos, políticas e a app de cada colaborador. O que se regista aqui é usado por todos os módulos.", one: "O ONE conhece as suas políticas, responde com a fonte e resolve pedidos antes de chegarem a uma pessoa." },
+    core: { name: "Core", lead: "A base: pessoas, documentos, políticas e a app de cada colaborador. O que se regista aqui é usado por todos os módulos.", one: "O ONE conhece as suas políticas, responde com a fonte e resolve pedidos antes de chegarem a uma pessoa." },
     it: { name: "IT", lead: "Dispositivos, software e inventário associados a quem os usa, do primeiro ao último dia.", one: "O ONE investiga o ticket, verifica o stock e prepara a compra para que só falte aprovar." },
     nomina: { name: "Salários", lead: "Cada alteração que afeta a remuneração chega validada ao processamento salarial, do registo de ponto ao aumento.", one: "O ONE deteta variáveis pendentes e tudo o que não bate certo antes de o processamento ser calculado." }
   },
@@ -1537,7 +1537,7 @@ const PT = {
       lead: "Que equipamento tem cada pessoa, com o seu histórico.",
       value: ["Atribuição e devolução de equipamento por pessoa.", "Integrado no onboarding e offboarding.", "Stock visível antes de comprar."],
       oneNote: "Quando chega um ticket, o ONE verifica o inventário antes de propor uma compra.",
-      why: "O inventário sabe quem é quem porque partilha os dados de pessoas com o Core HR." },
+      why: "O inventário sabe quem é quem porque partilha os dados de pessoas com o Core." },
     software: { name: "Gestão de software",
       lead: "Que ferramentas usa a empresa, quem tem acesso e quanto custam.",
       value: ["Inventário de apps e licenças.", "Acessos concedidos e revogados à medida que as pessoas entram e saem.", "Gasto em licenças visível para as Finanças."],
@@ -1640,7 +1640,7 @@ LONG.pt = {
     ${chatHTML([{ q: "Todos os dias 25, avisa-me das variáveis salariais pendentes.", a: "Basta criar a rotina: o ONE verifica o que falta antes do fecho e envia a lista de pendentes com os respetivos responsáveis." }])}`,
     routines: `<h3>Rotinas com informação sempre atualizada</h3>
   <ul class="rt">
-    <li><span class="when">Segunda-feira, 9:00</span><span>Rotatividade por departamento, com a tendência explicada<span class="src">Core HR · Analítica</span></span></li>
+    <li><span class="when">Segunda-feira, 9:00</span><span>Rotatividade por departamento, com a tendência explicada<span class="src">Core · Analítica</span></span></li>
     <li><span class="when">Dias úteis, 18:00</span><span>Pessoas com menos de 4 registos de ponto hoje<span class="src">Registo de ponto</span></span></li>
     <li><span class="when">Dia 25</span><span>Variáveis salariais pendentes antes do fecho<span class="src">Remuneração · Turnos · Despesas</span></span></li>
     <li><span class="when">Primeiro dia do mês</span><span>Formação obrigatória pendente por localização<span class="src">Formação & LMS</span></span></li>
@@ -1648,7 +1648,7 @@ LONG.pt = {
   </ul>
   <p class="disc-note">Qualquer relatório de Analítica pode ser agendado como rotina a partir do chat do ONE. As rotinas usam créditos ONE.</p>`,
     ax: { t: "Exemplos de relatórios já ligados",
-      c1: ["Rotatividade e engagement por departamento", "Core HR + Engagement · rotatividade (barras) e eNPS (linha)", ["Lojas","Operações","Vendas","Suporte","Tecnologia"]],
+      c1: ["Rotatividade e engagement por departamento", "Core + Engagement · rotatividade (barras) e eNPS (linha)", ["Lojas","Operações","Vendas","Suporte","Tecnologia"]],
       c2: ["Qualidade da contratação por fonte", "Recrutamento + Desempenho · retenção a 1 ano", ["Indicações","LinkedIn","Site de carreiras","Portais de emprego"]],
       c3: ["Custo de efetivos: real vs. planeado", "Efetivos + Revisão salarial + Remuneração", ["J","F","M","A","M","J"], "Real", "Planeado"],
       c4: ["Absentismo e horas extra por localização", "Ausências + Registo de ponto + Turnos", ["Madrid","Barcelona","Valência","Sevilha"], "Absentismo %", "Horas extra"],
@@ -1663,7 +1663,7 @@ const FR = {
     talento: { name: "Talent", lead: "Du poste que vous planifiez à l’augmentation que vous défendez. Chaque décision talent s’appuie sur la précédente, sans repartir de zéro.", one: "Plus vous utilisez de produits talents, plus ONE a de contexte : il lit en même temps évaluations, candidatures, formations et enquêtes." },
     tiempo: { name: "Temps", lead: "Pointages, plannings et absences sur le même calendrier, avec chaque heure prête pour la paie et les projets.", one: "ONE couvre les plannings, répond aux questions sur les soldes et repère les anomalies de pointage quand elles sont encore minimes." },
     finanzas: { name: "Finance", lead: "RH et Finance travaillent avec les mêmes chiffres : effectifs, notes de frais, achats, projets et budget.", one: "ONE valide ce qui respecte la politique et ne vous laisse que les exceptions." },
-    core: { name: "Core HR", lead: "Le socle : les personnes, les documents, les politiques et l’appli de chaque collaborateur. Ce qui est saisi ici sert à tous les modules.", one: "ONE connaît vos politiques, répond en citant la source et traite les demandes avant qu’elles n’arrivent à un humain." },
+    core: { name: "Core", lead: "Le socle : les personnes, les documents, les politiques et l’appli de chaque collaborateur. Ce qui est saisi ici sert à tous les modules.", one: "ONE connaît vos politiques, répond en citant la source et traite les demandes avant qu’elles n’arrivent à un humain." },
     it: { name: "IT", lead: "Équipements, logiciels et inventaire rattachés à la personne qui les utilise, de son premier jour à son dernier.", one: "ONE analyse le ticket, vérifie le stock et prépare l’achat : il ne reste plus qu’à valider." },
     nomina: { name: "Paie", lead: "Chaque changement qui touche la rémunération arrive validé en paie, du pointage à l’augmentation.", one: "ONE repère les variables en attente et tout ce qui ne colle pas avant le calcul de la paie." }
   },
@@ -1803,7 +1803,7 @@ const FR = {
       lead: "Quel équipement a chaque personne, avec son historique.",
       value: ["Attribution et restitution du matériel par personne.", "Intégré à l’onboarding et à l’offboarding.", "Stock visible avant d’acheter."],
       oneNote: "Quand un ticket arrive, ONE vérifie l’inventaire avant de proposer un achat.",
-      why: "L’inventaire sait qui est qui car il partage les données des personnes avec Core HR." },
+      why: "L’inventaire sait qui est qui car il partage les données des personnes avec Core." },
     software: { name: "Gestion de SaaS",
       lead: "Quels outils utilise l’entreprise, qui y a accès et combien ils coûtent.",
       value: ["Inventaire des applications et des licences.", "Accès accordés et retirés au fil des arrivées et des départs.", "Dépenses de licences visibles pour la Finance."],
@@ -1906,7 +1906,7 @@ LONG.fr = {
     ${chatHTML([{ q: "Chaque 25, alerte-moi sur les variables de paie en attente.", a: "Crée la routine, vérifie ce qui manque avant la clôture et vous l’envoie avec les personnes qui doivent agir." }])}`,
     routines: `<h3>Des routines toujours à jour</h3>
   <ul class="rt">
-    <li><span class="when">Lundi, 9:00</span><span>Turnover par département, avec la tendance expliquée<span class="src">Core HR · Analyses & Rapports</span></span></li>
+    <li><span class="when">Lundi, 9:00</span><span>Turnover par département, avec la tendance expliquée<span class="src">Core · Analyses & Rapports</span></span></li>
     <li><span class="when">Jours ouvrés, 18:00</span><span>Personnes avec moins de 4 pointages aujourd’hui<span class="src">Suivi du temps</span></span></li>
     <li><span class="when">Le 25</span><span>Variables de paie en attente avant la clôture<span class="src">Compensation · Plannings · Dépenses</span></span></li>
     <li><span class="when">Premier jour du mois</span><span>Formations obligatoires en attente par site<span class="src">Formations & LMS</span></span></li>
@@ -1914,7 +1914,7 @@ LONG.fr = {
   </ul>
   <p class="disc-note">Tout rapport Analyses & Rapports peut être programmé comme routine depuis le chat ONE. Les routines consomment des crédits ONE.</p>`,
     ax: { t: "Exemples de rapports déjà connectés",
-      c1: ["Turnover et engagement par département", "Core HR + Engagement · turnover (barres) et eNPS (courbe)", ["Magasins","Ops","Ventes","Support","Tech"]],
+      c1: ["Turnover et engagement par département", "Core + Engagement · turnover (barres) et eNPS (courbe)", ["Magasins","Ops","Ventes","Support","Tech"]],
       c2: ["Qualité du recrutement par source", "Recrutement + Performance · rétention à 1 an", ["Cooptation","LinkedIn","Site carrières","Job boards"]],
       c3: ["Coût des effectifs : réel vs prévu", "Planification des effectifs + Révision salariale + Compensation", ["J","F","M","A","M","J"], "Réel", "Prévu"],
       c4: ["Absentéisme et heures supplémentaires par site", "Congés & Absences + Suivi du temps + Plannings", ["Paris","Lyon","Marseille","Lille"], "Absentéisme %", "Heures sup."],
@@ -1929,7 +1929,7 @@ const IT = {
     talento: { name: "Talent", lead: "Dal ruolo che pianifichi all’aumento che sostieni. Ogni decisione sul talento parte dalla precedente, non da zero.", one: "Più prodotti di talento usi, più contesto ha ONE: legge valutazioni, candidature, corsi e sondaggi allo stesso tempo." },
     tiempo: { name: "Tempo", lead: "Timbrature, turni e assenze sullo stesso calendario, con ogni ora pronta per paghe e progetti.", one: "ONE copre i turni, risponde alle domande sui saldi e intercetta i problemi di timbratura quando sono ancora piccoli." },
     finanzas: { name: "Finanza", lead: "HR e Finanza lavorano con gli stessi numeri: organico, spese, acquisti, progetti e budget.", one: "ONE approva ciò che rispetta la policy e ti lascia solo le eccezioni." },
-    core: { name: "Core HR", lead: "Le fondamenta: persone, documenti, policy e l’app di ogni dipendente. Ciò che inserisci qui lo usa ogni modulo.", one: "ONE conosce le tue policy, risponde citando la fonte e risolve le richieste prima che arrivino a una persona." },
+    core: { name: "Core", lead: "Le fondamenta: persone, documenti, policy e l’app di ogni dipendente. Ciò che inserisci qui lo usa ogni modulo.", one: "ONE conosce le tue policy, risponde citando la fonte e risolve le richieste prima che arrivino a una persona." },
     it: { name: "IT", lead: "Dispositivi, software e inventario legati alla persona che li usa, dal primo all’ultimo giorno.", one: "ONE indaga sul ticket, controlla le scorte e prepara l’acquisto: a una persona resta solo da approvare." },
     nomina: { name: "Busta paga", lead: "Ogni modifica che incide sulla retribuzione arriva alle paghe già validata, dalla timbratura all’aumento di stipendio.", one: "ONE individua le variabili in sospeso e tutto ciò che non torna prima del calcolo del cedolino." }
   },
@@ -2069,7 +2069,7 @@ const IT = {
       lead: "Quali attrezzature ha ogni persona, con il suo storico.",
       value: ["Assegnazione e restituzione delle attrezzature per persona.", "Integrato in onboarding e offboarding.", "Scorte visibili prima di acquistare."],
       oneNote: "Quando arriva un ticket, ONE controlla l’inventario prima di proporre un acquisto.",
-      why: "L’inventario sa chi è chi perché condivide i dati delle persone con Core HR." },
+      why: "L’inventario sa chi è chi perché condivide i dati delle persone con Core." },
     software: { name: "Gestione SaaS",
       lead: "Quali strumenti usa l’azienda, chi ha accesso e quanto costano.",
       value: ["Inventario di app e licenze.", "Accessi concessi e revocati quando le persone entrano ed escono.", "Spesa per le licenze visibile alla Finanza."],
@@ -2171,7 +2171,7 @@ LONG.it = {
     ${chatHTML([{ q: "Ogni 25 del mese, avvisami delle variabili di paga in sospeso.", a: "Crea la routine, controlla cosa manca prima della chiusura e te lo invia con chi deve intervenire." }])}`,
     routines: `<h3>Routine con informazioni sempre aggiornate</h3>
   <ul class="rt">
-    <li><span class="when">Lunedì, 9:00</span><span>Turnover per reparto, con l’andamento spiegato<span class="src">Core HR · Analytics & Report</span></span></li>
+    <li><span class="when">Lunedì, 9:00</span><span>Turnover per reparto, con l’andamento spiegato<span class="src">Core · Analytics & Report</span></span></li>
     <li><span class="when">Giorni feriali, 18:00</span><span>Persone con meno di 4 timbrature oggi<span class="src">Rilevazione presenze</span></span></li>
     <li><span class="when">Il 25</span><span>Variabili di paga in sospeso prima della chiusura<span class="src">Retribuzione · Turni · Spese</span></span></li>
     <li><span class="when">Primo giorno del mese</span><span>Formazione obbligatoria in sospeso per sede<span class="src">Formazione & LMS</span></span></li>
@@ -2179,7 +2179,7 @@ LONG.it = {
   </ul>
   <p class="disc-note">Qualsiasi report di Analytics può essere pianificato come routine dalla chat di ONE. Le routine usano crediti ONE.</p>`,
     ax: { t: "Esempi di report già connessi",
-      c1: ["Turnover e coinvolgimento per reparto", "Core HR + Coinvolgimento · turnover (barre) ed eNPS (linea)", ["Negozi","Ops","Vendite","Supporto","Tech"]],
+      c1: ["Turnover e coinvolgimento per reparto", "Core + Coinvolgimento · turnover (barre) ed eNPS (linea)", ["Negozi","Ops","Vendite","Supporto","Tech"]],
       c2: ["Qualità dell’assunzione per canale", "ATS e assunzioni + Performance & Obiettivi · retention a 1 anno", ["Segnalazioni","LinkedIn","Sito carriere","Portali di lavoro"]],
       c3: ["Costo dell’organico: effettivo vs. pianificato", "Pianificazione dell’organico + Revisione salariale + Retribuzione", ["G","F","M","A","M","G"], "Effettivo", "Pianificato"],
       c4: ["Assenteismo e straordinari per sede", "Assenze + Rilevazione presenze + Turni", ["Milano","Roma","Torino","Bologna"], "Assenteismo %", "Straordinari"],

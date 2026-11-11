@@ -207,7 +207,7 @@ window.MOCK_TX = {
      "Entscheidungen auf Basis aktueller Daten"
     ],
     "q": "Erstelle mir einen Bericht zu Fluktuation und Engagement nach Abteilung und schick ihn mir jeden Montag.",
-    "a": "Erledigt: Der Bericht verknüpft Core HR und Engagement, ist gespeichert und kommt jeden Montag bei Ihnen an, mit erklärtem Trend.",
+    "a": "Erledigt: Der Bericht verknüpft Core und Engagement, ist gespeichert und kommt jeden Montag bei Ihnen an, mit erklärtem Trend.",
     "who": "Carlos, CEO",
     "s": "Eine Woche an der Unternehmensspitze, ohne einen einzigen Bericht anzufordern.",
     "ch": [
@@ -650,7 +650,7 @@ window.MOCK_TX = {
      "Des décisions sur des données en temps réel"
     ],
     "q": "Crée-moi un rapport de turnover et d’engagement par département et envoie-le-moi chaque lundi.",
-    "a": "C’est fait : le rapport croise Core HR et Engagement, il est enregistré et vous arrive chaque lundi avec la tendance expliquée.",
+    "a": "C’est fait : le rapport croise Core et Engagement, il est enregistré et vous arrive chaque lundi avec la tendance expliquée.",
     "who": "Carlos, CEO",
     "s": "Une semaine à diriger l’entreprise sans demander un seul rapport.",
     "ch": [
@@ -1093,7 +1093,7 @@ window.MOCK_TX = {
      "Decisioni su dati in tempo reale"
     ],
     "q": "Creami un report su turnover e coinvolgimento per reparto e mandamelo ogni lunedì.",
-    "a": "Fatto: il report incrocia Core HR e Coinvolgimento, è salvato e ti arriva ogni lunedì con l’andamento spiegato.",
+    "a": "Fatto: il report incrocia Core e Coinvolgimento, è salvato e ti arriva ogni lunedì con l’andamento spiegato.",
     "who": "Carlos, CEO",
     "s": "Una settimana alla guida dell’azienda senza chiedere un solo report.",
     "ch": [
@@ -1536,7 +1536,7 @@ window.MOCK_TX = {
      "Decisões com dados em tempo real"
     ],
     "q": "Cria-me um relatório de rotatividade e engagement por departamento e envia-mo todas as segundas-feiras.",
-    "a": "Feito: o relatório cruza Core HR e Engagement, fica guardado e chega-lhe todas as segundas-feiras com a tendência explicada.",
+    "a": "Feito: o relatório cruza Core e Engagement, fica guardado e chega-lhe todas as segundas-feiras com a tendência explicada.",
     "who": "Carlos, CEO",
     "s": "Uma semana a gerir a empresa sem pedir um único relatório.",
     "ch": [
@@ -1979,7 +1979,7 @@ window.MOCK_TX = {
      "Decisões com dados em tempo real"
     ],
     "q": "Monte um relatório de turnover e engajamento por departamento e me envie toda segunda-feira.",
-    "a": "Pronto: o relatório cruza Core HR e Engajamento, fica salvo e chega a você toda segunda-feira, com a tendência explicada.",
+    "a": "Pronto: o relatório cruza Core e Engajamento, fica salvo e chega a você toda segunda-feira, com a tendência explicada.",
     "who": "Carlos, CEO",
     "s": "Uma semana à frente da empresa sem pedir um único relatório.",
     "ch": [
@@ -2422,7 +2422,7 @@ window.MOCK_TX = {
      "Decyzje na bieżących danych"
     ],
     "q": "Przygotuj mi raport rotacji i zaangażowania według działów i wysyłaj go w każdy poniedziałek.",
-    "a": "Gotowe: raport łączy Core HR i Zaangażowanie, jest zapisany i trafia do Ciebie w każdy poniedziałek z wyjaśnionym trendem.",
+    "a": "Gotowe: raport łączy Core i Zaangażowanie, jest zapisany i trafia do Ciebie w każdy poniedziałek z wyjaśnionym trendem.",
     "who": "Carlos, CEO",
     "s": "Tydzień zarządzania firmą bez proszenia o ani jeden raport.",
     "ch": [
