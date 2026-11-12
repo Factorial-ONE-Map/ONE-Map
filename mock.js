@@ -32,7 +32,7 @@ const MX = (window.MOCK_TX || {})[lang] || null;
                 : { why: 'Why Factorial', works: 'Works with', next: "What's next", soonTag: 'Soon', watch: 'See it in action' };
   render = function (key) {
     orig(key);
-    if (key === 'one' || key.startsWith('hub:')) return legacy();
+    if (key === 'one' || key.startsWith('hub:')) { legacy(); if (key === 'one' && window.oneVideosAllHTML) panelIn.insertAdjacentHTML('beforeend', oneVideosAllHTML(lang)); return; }
     // panel de módulo: 1 propuesta de valor + cifra · 2 vídeo · 3 con One · 4 por qué Factorial · 5 lo que viene · más detalles
     const m = tm(key), mx = (MODX[lang] || {})[key] || {};
     const head = panelIn.querySelector('.p-head').outerHTML;
@@ -42,8 +42,14 @@ const MX = (window.MOCK_TX || {})[lang] || null;
     // «Más detalles» justo debajo de la propuesta de valor, antes del vídeo y de One
     const vals = [...m.value, ...(mx.extra || [])];
     h += `<details class="more"><summary>${L.more}</summary><h3>${U('brings')}</h3><ul class="vals">${vals.map(v => `<li>${v}</li>`).join('')}</ul>${m.oneNote && m.one ? `<p class="note" style="margin-top:12px">${m.oneNote}</p>` : ''}${m.one && m.one.length > 1 ? chatHTML(m.one.slice(1)) : ''}${m.special === 'analytics' ? analyticsExtra() : ''}</details>`;
+    // Vídeos (one-videos.js): en español, «Míralo en acción» son los casos de uso de One de Bernat, incrustados
+    // (si el módulo no tiene, queda el vídeo del producto). En el resto de idiomas, el vídeo del producto y,
+    // aparte, tarjetas con los casos de uso en su idioma.
     const vid = videoHTML(key);
-    if (vid) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${vid.replace(/^<h3>.*?<\/h3>/, '')}</div>`;
+    const ovEs = lang === 'es' && window.oneVideosEmbedHTML ? oneVideosEmbedHTML(key, lang) : '';
+    if (ovEs) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${ovEs}</div>`;
+    else if (vid) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${vid.replace(/^<h3>.*?<\/h3>/, '')}</div>`;
+    if (lang !== 'es' && window.oneVideosHTML) h += oneVideosHTML(key, lang);
     const one = (m.one ? chatHTML(m.one.slice(0, 1)) : '') + (m.oneNote && !m.one ? `<p class="note">${m.oneNote}</p>` : '') + (mx.try ? tryHTML(mx.try) : '');
     if (one) h += `<div class="p-sec"><h3>${U('withOne')}</h3>${one}</div>`;
     h += `<div class="p-why"><span class="eb">${T2.why}</span><p>${m.why}</p>` +
