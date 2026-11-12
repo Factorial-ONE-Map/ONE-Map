@@ -42,7 +42,7 @@ In Spanish, "Míralo en acción" in each module panel plays the matching videos 
 | 01 | Branded deck from your data | `analiticas` |
 | 02 | Late arrivals to signed warnings | `control`, `firma` |
 | 03 | Gender pay gap by role | `compensacion`, `analiticas` |
-| 04 | Your payslip explained | `compensacion`, `documentos` (French uses English) |
+| 04 | Your payslip explained | `compensacion`, `documentos` |
 | 05 | Find a free meeting room | One panel only (Spaces isn't on the map) |
 | 06 | Onboarding course from a deck | `formacion`, `onoff` |
 | 07 | Shift changes from a whiteboard photo | `turnos` |

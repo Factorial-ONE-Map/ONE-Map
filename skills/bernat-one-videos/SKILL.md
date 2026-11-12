@@ -17,7 +17,7 @@ Use this skill to drop the right video link (and playlist) into a pitch deck, de
 2. **Pick the videos** whose products match the products or pains in the deck (see the catalog below). Prefer 1–3 videos per deck; do not paste all 10 unless asked.
 3. **Place them**: on the slide for that product, add a "See ONE do it" link/button with the video URL. In interactive HTML decks, use a button or clickable card; in .pptx, a hyperlinked text or shape.
 4. **Close the deck** with the playlist link for that language ("See all 10 use cases").
-5. **Gaps**: if a video is missing in the chosen language, use the English version and tell the user which one fell back.
+5. **Gaps**: if a video is missing in the chosen language, use the English version and tell the user which one fell back. (Days 03 and 04 were re-uploaded in November 2026; their links use the new `vid_…/view` addresses.)
 6. Never invent or alter a URL. Copy them exactly from the tables below.
 
 ## Catalog: use case → product
@@ -57,8 +57,8 @@ Quick lookup by domain:
 ### English (en)
 - 01 Branded deck from your data: https://www.tella.tv/video/day-01-branded-deck-from-your-data-en-2ndxbzay
 - 02 Late arrivals to signed warnings: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-en-bfckboyw
-- 03 Gender pay gap by role: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-en-7c2f3wql
-- 04 Your payslip explained: https://www.tella.tv/video/day-04-your-payslip-explained-en-7v4o4x3x
+- 03 Gender pay gap by role: https://www.tella.tv/video/vid_cmwdmqacf02jh02ns4fwu9in8/view
+- 04 Your payslip explained: https://www.tella.tv/video/vid_cmwdmqj2u014h02mibmiu2cje/view
 - 05 Find a free meeting room: https://www.tella.tv/video/day-05-find-a-free-meeting-room-en-514sd70u
 - 06 Onboarding course from a deck: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-en-dbcxcd8z
 - 07 Shift changes from a whiteboard photo: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-en-f0g5f6s5
@@ -69,8 +69,8 @@ Quick lookup by domain:
 ### Spanish (es)
 - 01: https://www.tella.tv/video/day-01-branded-deck-from-your-data-es-ei5w2rkz
 - 02: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-es-33br3dsx
-- 03: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-es-e09n7qqo
-- 04: https://www.tella.tv/video/day-04-your-payslip-explained-es-hop3axcj
+- 03: https://www.tella.tv/video/vid_cmwdmqxpr00gy02nzbkuicnci/view
+- 04: https://www.tella.tv/video/vid_cmwdmr95o01rs02nx7vqy33rh/view
 - 05: https://www.tella.tv/video/day-05-find-a-free-meeting-room-es-61y8cskj
 - 06: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-es-4gw1c8v0
 - 07: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-es-7dfzammq
@@ -81,8 +81,8 @@ Quick lookup by domain:
 ### French (fr)
 - 01: https://www.tella.tv/video/day-01-branded-deck-from-your-data-fr-24yu43wy
 - 02: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-fr-6tufe4vm
-- 03: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-fr-5coeemaz
-- 04: NOT AVAILABLE in French → use English: https://www.tella.tv/video/day-04-your-payslip-explained-en-7v4o4x3x (tell the user)
+- 03: https://www.tella.tv/video/vid_cmwdmrlq3033w02ns40epa2ev/view
+- 04: https://www.tella.tv/video/vid_cmwdmrtym036k02ns4gks40z1/view
 - 05: https://www.tella.tv/video/day-05-find-a-free-meeting-room-fr-au4a07uq
 - 06: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-fr-3dj40tba
 - 07: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-fr-1ojc99wr
@@ -93,8 +93,8 @@ Quick lookup by domain:
 ### Italian (it)
 - 01: https://www.tella.tv/video/day-01-branded-deck-from-your-data-it-1zw53z2x
 - 02: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-it-12zk5umu
-- 03: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-it-hxnrg7fh
-- 04: https://www.tella.tv/video/day-04-your-payslip-explained-it-24mwhrfl
+- 03: https://www.tella.tv/video/vid_cmwdmsc2q02c402l86pt11c8s/view
+- 04: https://www.tella.tv/video/vid_cmwdmsrji03fn02nsdtskagdy/view
 - 05: https://www.tella.tv/video/day-05-find-a-free-meeting-room-it-ba4iesxy
 - 06: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-it-6ifs06ik
 - 07: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-it-35mg29je
@@ -105,8 +105,8 @@ Quick lookup by domain:
 ### Portuguese (pt)
 - 01: https://www.tella.tv/video/day-01-branded-deck-from-your-data-pt-h0ygdtcx
 - 02: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-pt-9fra32b7
-- 03: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-pt-126g22j0
-- 04: https://www.tella.tv/video/day-04-your-payslip-explained-pt-bzhx53ko
+- 03: https://www.tella.tv/video/vid_cmwdmt0zn03hd02nsgisnef5n/view
+- 04: https://www.tella.tv/video/vid_cmwdmtahp01x402nx1lb8gyfr/view
 - 05: https://www.tella.tv/video/day-05-find-a-free-meeting-room-pt-95rzf87g
 - 06: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-pt-9r287ar1
 - 07: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-pt-36s7hm9k
@@ -117,8 +117,8 @@ Quick lookup by domain:
 ### German (de)
 - 01: https://www.tella.tv/video/day-01-branded-deck-from-your-data-de-0pr41nt5
 - 02: https://www.tella.tv/video/day-02-late-arrivals-to-signed-warnings-de-da7vc443
-- 03: https://www.tella.tv/video/day-03-gender-pay-gap-by-role-de-6yme37p2
-- 04: https://www.tella.tv/video/day-04-your-payslip-explained-de-graj45bf
+- 03: https://www.tella.tv/video/vid_cmwdmpog3029s02ns3k5vc0h1/view
+- 04: https://www.tella.tv/video/vid_cmwdmq0rl02gb02nsh3c98k6m/view
 - 05: https://www.tella.tv/video/day-05-find-a-free-meeting-room-de-1ng49sj5
 - 06: https://www.tella.tv/video/day-06-onboarding-course-from-a-deck-de-6vuq486h
 - 07: https://www.tella.tv/video/day-07-shift-changes-from-a-whiteboard-photo-de-7zhf148r
