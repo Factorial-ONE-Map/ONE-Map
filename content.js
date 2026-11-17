@@ -12,7 +12,7 @@ const HUBS = {
 };
 
 const ORDER = {
-  talento: ["desempeno", "formacion", "biblioteca", "engagement", "ats", "cultura"],
+  talento: ["desempeno", "formacion", "biblioteca", "formacionia", "engagement", "ats", "cultura"],
   tiempo: ["control", "turnos", "ausencias"],
   finanzas: ["plantilla", "proyectos", "gastos", "compras", "revision"],
   core: ["politicas", "portal", "comunicaciones", "onoff", "documentos", "canal", "analiticas", "tickets"],
@@ -323,6 +323,18 @@ const M = {
     links: ["onoff", "compras", "mdm", "gastos", "cumplimiento"],
     check: true
   },
+  /* Programa de Adopción de IA (Carmen Madrazo): solo en español e inglés, ver HIDE */
+  formacionia: { name: "Programa de Adopción de IA para empresas",
+      hub: "talento",
+      tag: "Formación en IA",
+      lead: "Formación para todos tus equipos para que pasen de preguntar a delegar trabajo a la IA.",
+      stats: [{"n":"<10 %","t":"de los empleados utilizan la IA de manera productiva para sus empresas"}],
+      value: ["Programa estructurado de 8 semanas, con fechas y objetivos claros.","Tutoriales prácticos, masterclasses y entregables semanales.","Con tutores: para dudas y feedback de entregables y proyecto final.","2 h/semana, compatible con el trabajo diario.","Más de 35 tutoriales por departamento.","Masterclasses en directo con expertos en IA.","Reporting semanal de progreso para la empresa.","Herramientas vistas: Claude, ChatGPT, Gemini, Copilot y One.","12 meses de acceso al contenido.","3 meses de One Basic para toda la plantilla."],
+      oneNote: "Incluye 3 meses de One Basic para que toda tu plantilla se ponga al día con la IA.",
+      video: {"t":"Ejemplo de tutorial práctico","yt":"B2pqTNj-49w"},
+      cta: {"t":"Ver el programa completo →","href":"campus/index.html"},
+      tools: {"t":"Herramientas vistas","list":"ChatGPT · Gemini · Copilot · Claude · Factorial One"},
+      links: ["formacion","biblioteca"] },
   marketplace: {
     name: "Marketplace de IT", hub: "it",
     lead: "Un catálogo para pedir dispositivos y equipos sin buscar proveedor.",
@@ -480,6 +492,15 @@ const EN = {
         value: ["Unlimited access to the full catalog for every employee, with courses from vetted, specialist publishers.", "Topics from data protection and harassment prevention to cybersecurity, leadership, tech and AI skills.", "Filter by topic, language, level and duration: the same course for every country, in each person's language.", "Library courses and your own LMS courses in one catalog, with a certificate of completion for every course.", "Assign mandatory training and see who's done it in your existing training reports.", "Employees request courses or self-enroll, on web and mobile."],
         oneNote: "One can search the catalog and recommend courses for you.",
         why: "Replace a separate course provider, and its contract, with one catalog in Factorial: assigned and tracked where training already lives." },
+    formacionia: { name: "AI Adoption Program for companies",
+      tag: "AI training · Spain only",
+      lead: "Training for all your teams, so they go from asking AI questions to delegating work to it. Available only for customers in Spain.",
+      stats: [{"n":"<10%","t":"of employees use AI productively for their company"}],
+      value: ["A structured 8-week program, with clear dates and goals.","Hands-on tutorials, masterclasses and weekly assignments.","With tutors: for questions and feedback on assignments and the final project.","2 h a week, compatible with day-to-day work.","35+ tutorials per department.","Live masterclasses with AI experts.","Weekly progress reporting for the company.","Tools covered: Claude, ChatGPT, Gemini, Copilot and One.","12 months of access to the content.","3 months of One Basic for the whole workforce."],
+      oneNote: "Includes 3 months of One Basic so your whole workforce gets up to speed with AI.",
+      video: {"t":"Example of a hands-on tutorial","yt":"B2pqTNj-49w"},
+      cta: {"t":"See the full program (in Spanish) →","href":"campus/index.html"},
+      tools: {"t":"Tools covered","list":"ChatGPT · Gemini · Copilot · Claude · Factorial One"} },
     canal: { name: "Trust channel",
       lead: "A channel for anyone to report wrongdoing confidentially, anonymously too.",
       value: ["Confidential reports, with the option to stay anonymous.", "Case tracking with access restricted to whoever handles it.", "Helps you comply with whistleblower protection rules."],
@@ -3099,7 +3120,7 @@ FACTS.pl.sec = { t: "Bezpieczeństwo i zgodność",
   items: ["Dane przechowywane w UE (AWS Frankfurt).", "Zgodność z RODO: Factorial może działać jako administrator lub podmiot przetwarzający, z umową powierzenia (DPA) i inspektorem ochrony danych.", "Zgodność z unijnym AI Act: Twoje dane nigdy nie służą do trenowania modeli dla innych klientów.", "One widzi i robi tylko to, na co pozwala rola każdej osoby.", "Logowanie przez SSO (Google, Microsoft, LinkedIn) i domyślnie MFA.", "Kwartalne przeglądy dostępów i ciągły monitoring."] };
 
 /* módulos que no se ofrecen en cada mercado: no aparecen en el mapa ni en los paneles */
-const HIDE = { pl: ['beneficios', 'anticipo', 'marketplace'], 'pt-br': ['beneficios', 'anticipo'], en: ['beneficios', 'anticipo'], de: ['beneficios', 'anticipo'], fr: ['beneficios'], it: ['beneficios', 'anticipo'] };
+const HIDE = { pl: ['beneficios', 'anticipo', 'marketplace', 'formacionia'], 'pt-br': ['beneficios', 'anticipo', 'formacionia'], pt: ['formacionia'], en: ['beneficios', 'anticipo'], de: ['beneficios', 'anticipo', 'formacionia'], fr: ['beneficios', 'formacionia'], it: ['beneficios', 'anticipo', 'formacionia'] };
 
 /* Textos de la página en español que usa el creador de pitch (deck/). En el mapa, el español sale del HTML de index.html: si cambias allí un título, cámbialo también aquí. */
 const UI_ES_PAGE = {

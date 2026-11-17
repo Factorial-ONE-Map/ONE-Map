@@ -50,9 +50,13 @@ const MX = (window.MOCK_TX || {})[lang] || null;
     if (ovEs) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${ovEs}</div>`;
     else if (vid) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3>${vid.replace(/^<h3>.*?<\/h3>/, '')}</div>`;
     if (lang !== 'es' && window.oneVideosHTML) h += oneVideosHTML(key, lang);
+    // vídeo de YouTube y botón a una página propia del módulo (p. ej. el Programa de Adopción de IA)
+    if (m.video) h += `<div class="p-sec p-vid"><h3>${T2.watch}</h3><p class="yt-t">${m.video.t}</p><div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${m.video.yt}" title="${m.video.t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>`;
+    if (m.cta) h += `<a class="p-cta" href="${m.cta.href}" target="_blank" rel="noopener">${m.cta.t}</a>`;
     const one = (m.one ? chatHTML(m.one.slice(0, 1)) : '') + (m.oneNote && !m.one ? `<p class="note">${m.oneNote}</p>` : '') + (mx.try ? tryHTML(mx.try) : '');
     if (one) h += `<div class="p-sec"><h3>${U('withOne')}</h3>${one}</div>`;
-    h += `<div class="p-why"><span class="eb">${T2.why}</span><p>${m.why}</p>` +
+    if (m.tools) h += `<div class="p-sec p-tools"><h3>${m.tools.t}</h3><p>${m.tools.list}</p></div>`;
+    h += `<div class="p-why">${m.why ? `<span class="eb">${T2.why}</span><p>${m.why}</p>` : ''}` +
          (m.links && m.links.filter(shown).length ? `<span class="wk">${T2.works}</span>${chipsHTML(m.links)}` : '') + `</div>`;
     if (m.soon && m.soon.length) h += `<div class="p-sec p-next"><h3>${T2.next}</h3><ul>${m.soon.map(s => `<li><span>${T2.soonTag}</span>${s.replace(/\s*\((próximamente|coming soon|demnächst|em breve|bientôt|prossimamente|wkrótce)\)\.?/i, '')}</li>`).join('')}</ul><p class="disc-note">${U('soonNote')}</p></div>`;
     panelIn.innerHTML = h; panelIn.scrollTop = 0;

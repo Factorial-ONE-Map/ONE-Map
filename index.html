@@ -735,7 +735,7 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawWires)
 window.addEventListener('load', () => {
   drawWires();
   const k = decodeURIComponent(location.hash.slice(1));
-  if (k && (k === 'one' || M[k] || (k.startsWith('hub:') && HUBS[k.slice(4)]))) select(k);
+  if (k && (k === 'one' || (M[k] && shown(k)) || (k.startsWith('hub:') && HUBS[k.slice(4)]))) select(k);
 });
 </script>
 <script src="one-videos.js"></script>

@@ -1,0 +1,598 @@
+<!doctype html>
+<meta charset="utf-8"><style data-dc-design-system-vars>@layer{:root{--f-radical-red:#ff355e;--f-r140:#c60f35;--f-r40:#ffaebf;--f-moonlight:#d2d9f9;--f-sunbeam:#ffc155;--f-frost-white:#ffffff;--f-m20:#e3e3ef;--f-midnight:#25253d;--f-ink-900:#25253d;--f-ink-700:#3f3f55;--f-ink-500:#6c6c7d;--f-ink-400:#8f8fa0;--f-ink-300:#aeaeb8;--f-ink-200:#d4d4dc;--f-ink-100:#e3e3ef;--f-ink-50:#f6f6f8;--f-bg:#ffffff;--f-bg-alt:#fafafc;--f-bg-brand:#ff355e;--f-fg-primary:#25253d;--f-fg-secondary:#6c6c7d;--f-fg-muted:#aeaeb8;--f-fg-inverse:#ffffff;--f-accent:#ff355e;--f-accent-pressed:#c60f35;--f-accent-weak:#ffaebf;--f-border:#e3e3ef;--f-border-strong:#cfcfd8;--f-border-focus:#ff355e;--f-shadow-xs:0 1px 2px rgba(37,37,61,0.06);--f-shadow-sm:0 2px 6px rgba(37,37,61,0.08);--f-shadow-md:0 8px 24px rgba(37,37,61,0.10);--f-shadow-focus:0 0 0 3px rgba(255,53,94,0.25);--f-space-1:4px;--f-space-2:8px;--f-space-3:12px;--f-space-4:16px;--f-space-5:20px;--f-space-6:24px;--f-space-7:32px;--f-space-8:40px;--f-space-9:48px;--f-space-10:64px;--f-space-11:80px;--f-space-12:120px;--f-slide-margin:80px;--f-slide-eyebrow-gap:30px;--f-slide-title-gap:45px;--f-slide-element-gap:60px;--f-radius-sm:6px;--f-radius-card:20px;--f-radius-pill:999px;--f-weight-light:300;--f-weight-regular:400;--f-weight-medium:500;--f-weight-title:500;--f-weight-bold:700;--f-tracking-display:-0.05em;--f-tracking-eyebrow:-0.05em;--f-tracking-heading:-0.03em;--f-tracking-h3:-0.02em;--f-tracking-body:-0.01em;--f-tracking-flat:0;--font-sans:"DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;--font-display:"DM Sans", ui-sans-serif, system-ui, sans-serif;--font-mono:"DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;--font-product:"Inter", ui-sans-serif, system-ui, sans-serif;--text-f-display:500 160px/0.9 var(--font-display);--text-f-h1:500 56px/1.05 var(--font-sans);--text-f-h2:500 40px/1.1 var(--font-sans);--text-f-h3:500 28px/1.2 var(--font-sans);--text-f-body-lg:400 20px/1.4 var(--font-sans);--text-f-body:400 16px/1.5 var(--font-sans);--text-f-body-sm:400 14px/1.45 var(--font-sans);--text-f-caption:400 12px/1.4 var(--font-sans);--text-f-cover-title:500 342.67px/0.9 var(--font-sans);--text-f-slide-eyebrow:300 28px/0.8 var(--font-sans);--text-f-slide-title:500 141.33px/0.9 var(--font-sans);--text-f-slide-body:400 40px/1.3 var(--font-sans);--text-f-title:500 133.33px/0.95 var(--font-sans);--text-f-subtitle:400 66.67px/1.2 var(--font-sans);--text-f-text:400 28px/1.45 var(--font-sans);--text-f-link:400 24px/1.3 var(--font-sans);--text-f-mono:400 14px/1.4 var(--font-mono);}}</style>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Programa de Adopción de IA · Factorial Campus</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&amp;family=DM+Mono:wght@400&amp;display=swap">
+<style>
+body{margin:0;background:#FFFFFF;color:#25253D;font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#FF355E}a:hover{color:#C60F35}
+*{box-sizing:border-box}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-left:16px;padding-right:16px}
+@media (min-width:720px){.wrap{padding-left:40px;padding-right:40px}}
+.sitebar{display:flex;align-items:center;gap:4px;padding:10px 12px;overflow-x:auto;scrollbar-width:none;background:#FFFFFF}
+.sitebar a{flex:none;font-size:14px;font-weight:500;line-height:1;color:#6C6C7D;text-decoration:none;padding:9px 14px;border-radius:999px;white-space:nowrap}
+.sitebar a:hover{background:#F6F6F8;color:#25253D}
+.sitebar a[aria-current="page"]{background:#FF355E;color:#FFFFFF}
+.sunrise{position:relative;overflow:hidden;background:linear-gradient(125deg,#FFC155 0%,#FF355E 20%,#FF355E 80%,#D2D9F9 100%);color:#FFFFFF}
+.sunrise::after{content:"";position:absolute;inset:0;background-image:url(./assets/5fda75dafa7759f1632b1df451e5984e.png);opacity:.07;mix-blend-mode:overlay;pointer-events:none}
+.sunrise > *{position:relative;z-index:1}
+.hl{background:linear-gradient(90deg,#FFC155 0%,#FF355E 52%,#D2D9F9 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-grid{display:grid;gap:40px;align-items:end}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.5fr 1fr}}
+.hbox{display:grid;gap:16px;justify-items:start;color:#FFFFFF}
+.hb-chips{display:flex;flex-wrap:wrap;gap:10px}
+.hb-chip{display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;color:#FF355E;border-radius:999px;padding:9px 16px;font-size:16px;font-weight:500;letter-spacing:-0.01em}
+.hb-chip svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hb-tools{display:flex;flex-wrap:wrap;gap:10px}
+.hb-tools span{width:60px;height:60px;border-radius:16px;background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center}
+.hb-tools img{width:40px;height:40px;border-radius:10px;object-fit:contain;display:block}
+.hb-list{list-style:none;margin:0;padding:22px 24px;display:grid;gap:12px;width:100%;border-radius:20px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.4)}
+.hb-list li{display:flex;align-items:center;gap:12px;font-size:17px;line-height:1.3}
+.hb-ck{width:24px;height:24px;flex:none;fill:#FFFFFF;stroke:#FF355E;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hb-ck circle{stroke:none}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;background:#FFFFFF;color:#25253D;border-radius:20px;overflow:hidden}
+.stat{padding:20px 22px;border-top:1px solid #E3E3EF;display:grid;gap:4px}
+.stat:nth-child(-n+2){border-top:0}
+.stat:nth-child(odd){border-right:1px solid #E3E3EF}
+.stat.wide{grid-column:1 / -1;border-right:0}
+.split{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.split{grid-template-columns:1fr 1fr}}
+.g4{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g5{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.weeks{display:grid;gap:0;border:1px solid #E3E3EF;border-radius:20px;overflow:hidden}
+.week{display:grid;grid-template-columns:72px 1fr;gap:4px 20px;padding:18px 22px;border-top:1px solid #E3E3EF;align-items:baseline}
+.week:first-child{border-top:0}
+@media (min-width:820px){.week{grid-template-columns:72px 1fr 1fr}}
+.week.final{background:#FFF0F3}
+.wk-n{font-family:'DM Mono',monospace;font-size:13px;color:#FF355E;padding-top:3px}
+.wk-t{display:grid;gap:4px}
+.wk-t b{font-size:17px;font-weight:500;letter-spacing:-0.01em}
+.wk-t p{font-size:14.5px;color:#6C6C7D;line-height:1.45}
+.wk-d{font-size:15px;color:#4A4A60;line-height:1.4}
+.wk-d::before{content:"Entregable · ";color:#8F8FA0}
+.wk-head{display:none}
+@media (min-width:820px){.week{align-items:start}.wk-d::before{content:none}.wk-head{display:grid;background:#F6F6F8;padding-top:12px;padding-bottom:12px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:#8F8FA0}.wk-head + .week{border-top:1px solid #E3E3EF}}
+.one-cta{border-radius:20px;padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px}
+.one-cta .one-ic{flex:none;width:72px;height:72px;border-radius:20px;background:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,37,61,0.10)}
+.one-cta .one-ic img{width:44px;height:44px;display:block}
+.one-cta .one-tx{flex:1 1 380px;display:grid;gap:8px;min-width:0}
+.depts{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.dept ul{margin:0;padding-left:18px;display:grid;gap:8px;color:#4A4A60;font-size:15px;line-height:1.4}
+.dept li::marker{color:#FF355E}
+details{border:1px solid #E3E3EF;border-radius:16px;background:#FFFFFF}
+summary{cursor:pointer;list-style:none;padding:18px 22px;font-weight:500;font-size:17px;letter-spacing:-0.015em;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:300;font-size:24px;line-height:1;color:#FF355E;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+.photo{display:block;width:100%;height:auto;aspect-ratio:987 / 568;object-fit:cover;border-radius:20px}
+.promo{position:sticky;top:0;z-index:20;background:#FF355E;color:#FFFFFF;box-shadow:0 2px 6px rgba(37,37,61,0.08)}
+.promo a{color:#FFFFFF;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.promo a:hover{color:#FFFFFF;text-decoration-color:rgba(255,255,255,0.6)}
+.secnav{display:flex;flex-wrap:wrap;gap:10px}
+.secnav a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:1px solid #CFCFD8;border-radius:999px;color:#25253D;text-decoration:none;font-size:15px;font-weight:500;letter-spacing:-0.01em;background:#FFFFFF}
+.secnav a:hover{background:#F6F6F8;border-color:#25253D;color:#25253D}
+.secnav a span{font-family:'DM Mono',monospace;font-size:12px;font-weight:400;color:#FF355E}
+section[id],footer[id]{scroll-margin-top:72px}
+.tools{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.tool{border:1px solid #E3E3EF;border-radius:20px;padding:36px 20px 28px;display:grid;justify-items:center;align-content:center;gap:18px;min-height:200px;text-align:center;background:#FFFFFF}
+.tool img{width:72px;height:72px;border-radius:16px;display:block}
+.tool b{font-size:19px;font-weight:500;letter-spacing:-0.02em}
+.tool.one{border-color:#FF355E;position:relative}
+.mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.mq + .mq{margin-top:16px}
+.mq-track{display:flex;width:max-content;animation:mq-left 70s linear infinite}
+.mq.rev .mq-track{animation-name:mq-right;animation-duration:64s}
+.mq:hover .mq-track{animation-play-state:paused}
+.mq-group{display:flex;gap:16px;padding-right:16px}
+@keyframes mq-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mq-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}.mq{overflow-x:auto}}
+.mq-card{flex:none;width:300px;min-height:100px;background:#F6F6F8;border-radius:20px;padding:18px 20px;display:flex;gap:14px;align-items:center}
+.mq-ic{flex:none;width:44px;height:44px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(37,37,61,0.06);display:flex;align-items:center;justify-content:center}
+.mq-ic img{width:24px;height:24px;border-radius:6px;display:block}
+.mq-tx{display:grid;gap:6px;min-width:0}
+.mq-meta{display:flex;align-items:center;gap:8px;font-size:13px;color:#6C6C7D}
+.tg{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;border-radius:6px;padding:3px 7px}
+.tg.a{background:#E3E3EF;color:#25253D}
+.tg.g{background:#FFE3EA;color:#C60F35}
+.tg.u{background:#FF355E;color:#FFFFFF}
+.mq-tx b{font-size:16px;font-weight:500;letter-spacing:-0.01em;line-height:1.3;color:#25253D}
+.cr-btn{width:44px;height:44px;border-radius:50%;border:1px solid #E3E3EF;background:#FFFFFF;color:#25253D;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.cr-btn:hover{background:#F6F6F8}
+.cr-btn.dark{background:#25253D;border-color:#25253D;color:#FFFFFF}
+.cr-btn.dark:hover{background:#3A3A55}
+.cr-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:8px;padding-left:max(16px,calc((100% - 1200px) / 2 + 40px));padding-right:max(16px,calc((100% - 1200px) / 2 + 40px));scroll-padding-left:max(16px,calc((100% - 1200px) / 2 + 40px))}
+.cr-track::-webkit-scrollbar{display:none}
+.cr-track:focus-visible{outline:3px solid rgba(255,53,94,0.35);outline-offset:4px}
+.cr-card{flex:0 0 min(400px,86%);scroll-snap-align:start;min-height:620px;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:32px;background:radial-gradient(60% 40% at 85% 85%,rgba(255,53,94,0.12),transparent 70%),radial-gradient(50% 35% at 15% 95%,rgba(255,53,94,0.06),transparent 70%),#F6F6F8}
+.cr-top{display:grid;gap:20px;align-content:start}
+.cr-top h3{font-size:clamp(40px,4.4vw,56px);font-weight:500;letter-spacing:-0.05em;line-height:1;margin:16px 0 4px}
+.cr-pill{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:#FFFFFF;border-radius:999px;padding:6px 12px 6px 8px;font-size:12px;color:#4A4A60;white-space:nowrap;max-width:100%}
+.cr-icons{display:inline-flex;gap:2px;flex:none}
+.cr-icons img{width:16px;height:16px;border-radius:4px;display:block}
+.cr-list{list-style:none;margin:0;padding:20px 0 0;border-top:1px solid #E3E3EF;display:grid;gap:12px}
+.cr-list li{position:relative;padding-left:34px;font-size:17px;color:#25253D;line-height:22px}
+.cr-list li::before{content:"";position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:#FFE3EA}
+.cr-list li::after{content:"";position:absolute;left:8px;top:5px;width:5px;height:9px;border:solid #FF355E;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.chat{margin-top:auto;background:#FFFFFF;border-radius:16px;box-shadow:0 8px 24px rgba(37,37,61,0.10);padding:16px;display:grid;gap:12px;font-size:13.5px;line-height:1.4}
+.chat-h{display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid #E3E3EF}
+.chat-h img{width:18px;height:18px;border-radius:5px}
+.chat-h b{font-weight:500;font-size:14px}
+.chat-tag{margin-left:auto;background:#FFE3EA;color:#C60F35;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:500}
+.chat-u{justify-self:end;max-width:85%;background:#F1F1F5;border-radius:14px;padding:10px 14px;color:#25253D}
+.chat-a{display:grid;gap:6px;color:#25253D}
+.chat-a ul,.chat-a ol{margin:0;padding-left:18px;display:grid;gap:4px}
+.chat-a b{font-weight:500}
+.chat-f{color:#6C6C7D}
+.incl{display:grid;gap:16px}
+@media (min-width:900px){.incl{grid-template-columns:repeat(12,minmax(0,1fr))}.incl .w7{grid-column:span 7}.incl .w5{grid-column:span 5}}
+.icard{border-radius:20px;overflow:hidden;background:#FFFFFF;border:1px solid #E3E3EF;display:grid;grid-template-rows:auto 1fr}
+.icard img{display:block;width:100%;height:240px;object-fit:cover}
+.icard div{padding:24px 26px 28px;display:grid;gap:8px;align-content:start}
+.icard b{font-size:19px;font-weight:500;letter-spacing:-0.02em}
+.icard p{font-size:15px;color:#6C6C7D;line-height:1.5}
+html{scroll-behavior:smooth}
+@media (max-width:600px){.promo .wrap{padding-top:8px !important;padding-bottom:8px !important;gap:6px 12px !important}.promo-sub{display:none}.promo-ed{font-size:15px !important}.promo a{font-size:14px !important}}
+</style>
+</helmet>
+
+<div style="width: 100%">
+
+<nav class="sitebar" aria-label="Secciones"><a href="https://factorial-one-map.github.io/ONE-Map/index.html">One Map</a><a href="https://factorial-one-map.github.io/ONE-Map/connectors/index.html">Connectors</a><a href="https://factorial-one-map.github.io/ONE-Map/plans/index.html">Plans</a><a href="#top" aria-current="page">Formación en IA</a></nav>
+
+<header id="top" class="sunrise">
+<div class="wrap" style="padding-top: 32px; padding-bottom: 64px; display: grid; gap: 56px">
+<div class="promo" role="region" aria-label="Plazas abiertas">
+
+</div><div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; align-items: center; gap: 20px">
+<img src="./assets/4f14cae7c7258ffd1831016c348dd5ff.png" alt="Factorial Campus" style="height: 40px; width: auto; display: block">
+<span style="width: 1px; height: 28px; background: rgba(255,255,255,0.5)"></span>
+<img src="./assets/e3aaa636ae7550438bc65ed50fb78dbc.png" alt="UDIA" style="height: 26px; width: auto; display: block">
+</div>
+
+</div>
+<div class="hero-grid">
+<div>
+
+<h1 style="font-size: 56px; font-weight: 500; line-height: 1.05; letter-spacing: -1.68px; font-style: normal; font-family: &quot;DM Sans&quot;, ui-sans-serif, system-ui, -apple-system, sans-serif">Formación de IA para empresas. De 0 a adopción en semanas.</h1>
+<p style="margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); font-weight: 300; line-height: 1.4; max-width: 50ch">8 semanas para que tus equipos no solo aprendan IA, sino que la usen en su trabajo diario.</p>
+
+</div>
+<div class="hbox" aria-label="El programa en cifras">
+<div class="hb-chips">
+<span class="hb-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>Enero 2027</span></span>
+<span class="hb-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M2 20h20"></path></svg>100% online</span>
+</div>
+<div class="hb-tools">
+<span><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span>
+<span><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span>
+<span><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span>
+<span><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span>
+<span><img src="./assets/f38fc7ba3facbfbfa0465668ccfeebbc.png" alt="Factorial One"></span>
+</div>
+<ul class="hb-list">
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>8 semanas de programa</span></li>
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>1–2 h por semana</span></li>
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>+100 vídeos y recursos</span></li>
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>+35 tutoriales por departamento</span></li>
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>1 tutor de seguimiento</span></li>
+<li><svg class="hb-ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-6"></path></svg><span>Reporting semanal para la empresa</span></li>
+</ul>
+</div>
+</div>
+</div>
+</header>
+
+<div style="border-bottom: 1px solid #E3E3EF">
+<nav class="wrap secnav" aria-label="Ir a una sección" style="padding-top: 24px; padding-bottom: 24px">
+<a href="#programa"><span>01</span>El programa</a>
+<a href="#herramientas"><span>02</span>Herramientas</a>
+<a href="#casos"><span>03</span>Casos de uso</a>
+<a href="#tutores"><span>04</span>Tutores</a>
+<a href="#semanas"><span>05</span>Semana a semana</a>
+<a href="#profesores"><span>06</span>Profesores</a>
+<a href="#faq"><span>?</span>Preguntas frecuentes</a>
+</nav>
+</div>
+
+<main>
+
+<section id="programa" class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div style="display: grid; gap: 12px; margin-bottom: 40px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">01 · El programa</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; max-width: 22ch">De preguntar a la IA a <span class="hl">delegarle trabajo</span>.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5; max-width: 62ch">Un programa estructurado en cuatro fases, cada una con un objetivo claro. Tus equipos trabajan con tareas reales de su departamento, no con ejercicios de laboratorio.</p>
+</div>
+
+<div class="g4">
+<div style="border: 1px solid #E3E3EF; border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start">
+<span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">Fase 1 · semana 1</span>
+<h3 style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em">Descubrir</h3>
+<p style="font-size: 15px; color: #6C6C7D; line-height: 1.45">Detecta dónde la IA te aporta valor y prioriza tus primeras oportunidades para trabajar las próximas semanas.</p>
+</div>
+<div style="border: 1px solid #E3E3EF; border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start">
+<span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">Fase 2 · semanas 2–3</span>
+<h3 style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em">Aprender</h3>
+<p style="font-size: 15px; color: #6C6C7D; line-height: 1.45">Los fundamentales: prompts, privacidad y contexto. Además, crea tus primeros asistentes, agentes y automatizaciones.</p>
+</div>
+<div style="border: 1px solid #E3E3EF; border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start">
+<span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">Fase 3 · semanas 4–7</span>
+<h3 style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em">Aplicar</h3>
+<p style="font-size: 15px; color: #6C6C7D; line-height: 1.45">Resuelve tareas reales de comunicación, análisis de datos, cuadros de mandos,&nbsp; creación de documentos y operaciones.</p>
+</div>
+<div style="border: 1px solid #FF355E; border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start">
+<span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">Fase 4 · semana 8</span>
+<h3 style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em">Adoptar</h3>
+<p style="font-size: 15px; color: #6C6C7D; line-height: 1.45">Toma todo lo aprendido y aplícalo. Deja un caso implantado en tu equipo y un plan para escalarlo en el <b>proyecto final.</b><br></p>
+</div>
+</div>
+
+<div class="split" style="margin-top: 64px">
+<img class="photo" src="./assets/72700d562b22a6ef73745a36cbbeb9ab.jpg" alt="Dos personas trabajando juntas en un portátil">
+<div style="display: grid; gap: 20px">
+<h3 style="font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15">Así es una semana</h3>
+<p style="font-size: 16px; color: #6C6C7D; line-height: 1.5">Cada persona avanza cuando le encaja. Lo único fijo es la masterclass en directo de los martes.</p>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 14px">
+<li style="display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: baseline"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">01</span><span style="font-size: 16px; line-height: 1.45"><b style="font-weight: 500">Aprende</b> con píldoras en vídeo, cuando quieras.</span></li>
+<li style="display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: baseline"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">02</span><span style="font-size: 16px; line-height: 1.45"><b style="font-weight: 500">Practica</b> con ejercicios de tu día a día.</span></li>
+<li style="display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: baseline"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">03</span><span style="font-size: 16px; line-height: 1.45"><b style="font-weight: 500">Conecta</b> en la masterclass en directo del martes.</span></li>
+<li style="display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: baseline"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">04</span><span style="font-size: 16px; line-height: 1.45"><b style="font-weight: 500">Pregunta</b> a tu tutor todas tus dudas.</span></li>
+<li style="display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: baseline"><span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #FF355E">05</span><span style="font-size: 16px; line-height: 1.45"><b style="font-weight: 500">Entrega</b> un resultado útil cada viernes.</span></li>
+</ol>
+</div>
+</div>
+
+</section>
+
+<section id="herramientas" class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div style="display: grid; gap: 12px; margin-bottom: 32px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">02 · Herramientas</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">Todas las herramientas <span class="hl">más relevantes</span> del mercado.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5; max-width: 62ch">Tus equipos aprenden con las mismas herramientas que ya usa tu empresa, con criterios de uso seguro y privacidad en cada caso.</p>
+</div>
+<div class="tools">
+<div class="tool"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><b>ChatGPT</b></div>
+<div class="tool"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><b>Gemini</b></div>
+<div class="tool"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><b>Copilot</b></div>
+<div class="tool"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""><b>Claude</b></div>
+<div class="tool one"><span style="position: absolute; top: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #FF355E; color: #FFFFFF; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 500">Incluido en el curso</span><img src="./assets/f38fc7ba3facbfbfa0465668ccfeebbc.png" alt=""><b>Factorial One</b></div>
+</div>
+<div class="one-cta sunrise" style="margin-top: 16px">
+<span class="one-ic"><img src="./assets/f38fc7ba3facbfbfa0465668ccfeebbc.png" alt="Factorial One"></span>
+<div class="one-tx">
+<span style="justify-self: start; background: #FFFFFF; color: #FF355E; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase">Incluido en el curso</span>
+<b style="font-size: clamp(20px, 2vw, 26px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2">¿Sin licencias de IA de pago? Empieza igual, con Factorial One.</b>
+<p style="font-size: 16px; line-height: 1.5; max-width: 64ch">Cada persona tiene acceso a One durante todo el curso para aprender y practicar desde el primer día, sin coste extra en licencias.</p>
+</div>
+</div>
+</section>
+
+<section id="ejercicios" style="padding-top: 88px; padding-bottom: 24px">
+<div class="wrap" style="display: grid; gap: 12px; margin-bottom: 36px">
+
+</div>
+<div class="mq">
+<div class="mq-track">
+<div class="mq-group">
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>RR. HH.</span><b>Asistente para selección de candidatos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Ventas</span><b>Automatización del seguimiento comercial.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Marketing</span><b>Agente de análisis de competencia.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Finanzas</span><b>Asistente para el cierre mensual.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente de seguimiento de proyectos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Operaciones</span><b>Asistente de procedimientos internos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Soporte</span><b>Agente para rescatar cuentas en riesgo.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente para preparar los 1:1.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Marketing</span><b>Asistente de briefing creativo.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>RR. HH.</span><b>Agente de primera criba de candidatos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Ventas</span><b>Asistente de propuestas comerciales.</b></span></div>
+</div>
+<div class="mq-group" aria-hidden="true">
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>RR. HH.</span><b>Asistente para selección de candidatos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Ventas</span><b>Automatización del seguimiento comercial.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Marketing</span><b>Agente de análisis de competencia.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Finanzas</span><b>Asistente para el cierre mensual.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente de seguimiento de proyectos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Operaciones</span><b>Asistente de procedimientos internos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Soporte</span><b>Agente para rescatar cuentas en riesgo.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente para preparar los 1:1.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Marketing</span><b>Asistente de briefing creativo.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>RR. HH.</span><b>Agente de primera criba de candidatos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Ventas</span><b>Asistente de propuestas comerciales.</b></span></div>
+</div>
+</div>
+</div>
+<div class="mq rev">
+<div class="mq-track">
+<div class="mq-group">
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Finanzas</span><b>Agente de detección de anomalías.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>IT</span><b>Asistente para explicar incidencias.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Soporte</span><b>Automatización para reactivar conversaciones.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Ventas</span><b>Agente para priorizar el pipeline.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>RR. HH.</span><b>Asistente para crear cursos desde un PDF.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt="Gemini"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Operaciones</span><b>Asistente de manuales operativos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Marketing</span><b>Agente guardián de marca.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt="ChatGPT"></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente para convertir decisiones en planes.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt="Copilot"></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Finanzas</span><b>Automatización de facturas pendientes.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt="Claude"></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Producto</span><b>Agente de análisis de feedback.</b></span></div>
+</div>
+<div class="mq-group" aria-hidden="true">
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Finanzas</span><b>Agente de detección de anomalías.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>IT</span><b>Asistente para explicar incidencias.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Soporte</span><b>Automatización para reactivar conversaciones.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Ventas</span><b>Agente para priorizar el pipeline.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>RR. HH.</span><b>Asistente para crear cursos desde un PDF.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Operaciones</span><b>Asistente de manuales operativos.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Marketing</span><b>Agente guardián de marca.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg a">Asistente</span>Dirección</span><b>Asistente para convertir decisiones en planes.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg u">Automatización</span>Finanzas</span><b>Automatización de facturas pendientes.</b></span></div>
+<div class="mq-card"><span class="mq-ic"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span><span class="mq-tx"><span class="mq-meta"><span class="tg g">Agente</span>Producto</span><b>Agente de análisis de feedback.</b></span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="casos" style="padding-top: 88px; padding-bottom: 24px">
+<div class="wrap" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 36px">
+<div style="display: grid; gap: 12px; max-width: 640px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">03 · Casos de uso</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05"></h2><h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">La misma formación, <span class="hl">ejercicios prácticos para cada equipo</span>.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5">Cada departamento aprende a crear asistentes, agentes y automatizaciones para sus tareas habituales.</p>
+<p style="font-size: 15px; color: #8F8FA0; line-height: 1.5">Estos son solo algunos ejemplos. Si falta algo de tu operativa, lo añadimos al bloque de tu equipo.</p>
+</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="font-size: 16px; color: #6C6C7D; font-variant-numeric: tabular-nums; margin-right: 8px"><b data-cr-idx="" style="font-weight: 500; color: #C60F35">{{idxLabel}}</b> / 07</span>
+<button type="button" class="cr-btn" aria-label="Anterior" onClick="{{prev}}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg></button>
+<button type="button" class="cr-btn dark" aria-label="Siguiente" onClick="{{next}}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+</div>
+</div>
+
+<div class="cr-track" ref="{{setTrack}}" onScroll="{{onTrackScroll}}" tabindex="0" aria-label="Casos de uso por departamento">
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>RR. HH.</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Criba de candidatos</li><li>Dudas de la plantilla</li><li>Cursos desde un PDF</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><b>ChatGPT</b></div>
+<p class="chat-u">Ordena estos CV para el puesto de Account Executive.</p>
+<div class="chat-a"><p>Estos tres encajan mejor:</p><ol><li>CV 12 · 5 años en ventas SaaS</li><li>CV 07 · experiencia con pymes</li><li>CV 03 · revisar: poca experiencia en cierre</li></ol></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Ventas</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Preparar reuniones</li><li>Emails de seguimiento</li><li>Propuestas</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><b>Gemini</b></div>
+<p class="chat-u">Prepárame la reunión de mañana con Grupo Alba.</p>
+<div class="chat-a"><ul><li><b>Contexto:</b> quieren conectar CRM y ERP.</li><li><b>Riesgo:</b> el presupuesto se cierra en enero.</li><li><b>Siguiente paso:</b> demo con su equipo de IT.</li></ul></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Finanzas</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Cierre de mes</li><li>Anomalías en datos</li><li>Informes de KPIs</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><b>Copilot</b><span class="chat-tag">Excel · Gastos octubre</span></div>
+<p class="chat-u">¿Hay algo raro en los gastos de este mes?</p>
+<div class="chat-a"><p>Hay dos gastos que parecen duplicados:</p><ul><li>Hotel Madrid · 14/10</li><li>Taxi aeropuerto · 21/10</li></ul><p class="chat-f">¿Los resalto en la hoja?</p></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Dirección</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Preparar 1:1</li><li>Resumen semanal</li><li>Decisiones pendientes</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""><b>Claude</b></div>
+<p class="chat-u">Con mis notas del mes, prepárame el 1:1 con Laura.</p>
+<div class="chat-a"><ul><li><b>Logros:</b> lo que ha sacado adelante este mes.</li><li><b>Bloqueo:</b> espera datos de Finanzas.</li><li><b>Pregunta:</b> ¿qué necesita de ti?</li></ul></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Marketing</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Informe de competidores</li><li>Guardián de marca</li><li>Briefing creativo</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><b>ChatGPT</b></div>
+<p class="chat-u">¿Qué han movido esta semana nuestros competidores?</p>
+<div class="chat-a"><p>Esta semana, tres movimientos:</p><ul><li>Nueva tarifa para pymes</li><li>Campaña de IA en LinkedIn</li><li>Webinar el jueves</li></ul></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Soporte</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Cuentas en riesgo</li><li>Reactivar conversaciones</li><li>Casos complejos</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""><b>Claude</b></div>
+<p class="chat-u">¿Qué cuentas tienen riesgo de baja este mes?</p>
+<div class="chat-a"><p>3 de 48 cuentas en riesgo:</p><ul><li>Tickets sin resolver</li><li>Sin accesos desde septiembre</li><li>Ha pedido una baja parcial</li></ul></div>
+</div>
+</article>
+
+<article class="cr-card">
+<div class="cr-top">
+<h3>Operaciones</h3>
+<span class="cr-pill"><span class="cr-icons"><img src="./assets/d1fe8e57c498fae36f9503ed5a018c55.png" alt=""><img src="./assets/7a3bdefa32adf2401044026d5b17b1ea.png" alt=""><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><img src="./assets/46f164d076d21200fefb38e7af618332.png" alt=""></span>Aplicado a vuestras herramientas de IA</span>
+<ul class="cr-list"><li>Procedimientos internos</li><li>Manuales operativos</li><li>Detectar bloqueos</li></ul>
+</div>
+<div class="chat">
+<div class="chat-h"><img src="./assets/13b251e12ff8098160488f9ccf77c582.png" alt=""><b>Copilot</b><span class="chat-tag">Word · Manual de procesos</span></div>
+<p class="chat-u">¿Cómo doy de alta a un proveedor nuevo?</p>
+<div class="chat-a"><ol><li>Pide datos fiscales y cuenta bancaria.</li><li>Súbelos a la ficha de proveedores.</li><li>Finanzas lo aprueba en 48 h.</li></ol></div>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="tutores" class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div class="split">
+<div style="display: grid; gap: 24px">
+<div style="display: grid; gap: 12px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">04 · Tutores</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">Avanza con&nbsp;<span class="hl">nuestros tutores</span>.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5; max-width: 52ch">Cada persona tiene seguimiento. Es lo que hace que el <b>programa se termine y que lo aprendido se quede.</b></p>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid #E3E3EF">
+<li style="padding: 16px 0; border-bottom: 1px solid #E3E3EF; display: grid; gap: 4px"><b style="font-size: 17px; font-weight: 500">Dudas resueltas por chat</b><span style="font-size: 15px; color: #6C6C7D">Directamente en la plataforma, sin esperar a la siguiente sesión.</span></li>
+<li style="padding: 16px 0; border-bottom: 1px solid #E3E3EF; display: grid; gap: 4px"><b style="font-size: 17px; font-weight: 500">Feedback semanal en cada entregable</b><span style="font-size: 15px; color: rgb(108, 108, 125)">Comentarios concretos cada semana para mejorar el siguiente.</span></li>
+<li style="padding: 16px 0; border-bottom: 1px solid #E3E3EF; display: grid; gap: 4px"><b style="font-size: 17px; font-weight: 500">Corrección del proyecto final</b><span style="font-size: 15px; color: #6C6C7D">El tutor revisa y valora el caso que cada persona lleva a su equipo.</span></li>
+<li style="padding: 16px 0; border-bottom: 1px solid #E3E3EF; display: grid; gap: 4px"><b style="font-size: 17px; font-weight: 500">Informe de seguimiento semanal para la empresa</b><span style="font-size: 15px; color: rgb(108, 108, 125)">Quién avanza, qué entrega y dónde hay que empujar.</span></li>
+</ul>
+</div>
+<img class="photo" src="./assets/f9cea0d688cf25b7adaa115d8bfd78bd.jpg" alt="Una alumna conversa con su tutora en el chat de la plataforma">
+</div>
+</section>
+
+<section id="semanas" class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div style="display: grid; gap: 12px; margin-bottom: 32px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">05 · Semana a semana</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">El detalle de cada semana, <span class="hl">tutoriales prácticos y entregable</span>.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5; max-width: 62ch">Un tema por semana y un entregable que se puede usar al día siguiente.</p>
+</div>
+<div class="weeks">
+<div class="week wk-head" aria-hidden="true"><span></span><span>Qué aprendes</span><span>Qué entregas</span></div>
+<div class="week"><span class="wk-n">Sem. 01</span><div class="wk-t"><b>Tu oportunidad con la IA</b><p>Qué puede hacer la IA hoy y dónde te ahorra más tiempo en tu puesto.</p></div><span class="wk-d">Mapa de oportunidades con IA</span></div>
+<div class="week"><span class="wk-n">Sem. 02</span><div class="wk-t"><b>Trabajar con IA de forma profesional</b><p>Prompts, privacidad y contexto: cómo pedirle las cosas a la IA y revisar lo que devuelve con criterio.</p></div><span class="wk-d">Flujo de trabajo documentado y probado</span></div>
+<div class="week"><span class="wk-n">Sem. 03</span><div class="wk-t"><b>Asistentes, agentes y automatización</b><p>En qué se diferencian, cuándo conviene cada uno y cómo crear el primero.</p></div><span class="wk-d">Diseño de un asistente o automatización</span></div>
+<div class="week"><span class="wk-n">Sem. 04</span><div class="wk-t"><b>Comunicación: Email, reuniones y calendario</b><p>Redactar, resumir y organizar emails, reuniones y agenda en menos tiempo.</p></div><span class="wk-d">Sistema de comunicación asistida por IA</span></div>
+<div class="week"><span class="wk-n">Sem. 05</span><div class="wk-t"><b>Análisis de datos y cuadros de mandos</b><p>Sacar conclusiones de tus datos y montar cuadros de mando sin ser analista.</p></div><span class="wk-d">Análisis con conclusiones y recomendaciones</span></div>
+<div class="week"><span class="wk-n">Sem. 06</span><div class="wk-t"><b>Generación de informes y documentos</b><p>Informes y documentos generados a partir de tus fuentes, listos para compartir.</p></div><span class="wk-d">Sistema de generación de documentos</span></div>
+<div class="week"><span class="wk-n">Sem. 07</span><div class="wk-t"><b>Productividad y operaciones</b><p>Delegar tareas repetitivas y diseñar tu primer agente.</p></div><span class="wk-d">Diseño de un agente</span></div>
+<div class="week final"><span class="wk-n">Sem. 08</span><div class="wk-t"><b>Proyecto final: lleva la IA a tu equipo</b><p>Un caso real implantado en tu equipo, con un plan para que se use de verdad.</p></div><span class="wk-d" style="color: #25253D">Proyecto final: Caso completo listo para implantar en tu empresa</span></div>
+</div>
+
+</section>
+
+<section id="profesores" class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div style="display: grid; gap: 12px; margin-bottom: 32px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">06 · Profesores</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">Expertos en IA, <span class="hl">en directo</span>.</h2>
+<p style="font-size: 18px; color: #6C6C7D; line-height: 1.5; max-width: 62ch">Las masterclasses de los martes las imparten profesionales de fuera de Factorial, para ampliar contenido. Estos son ejemplos de algunos de nuestros expertos.</p>
+</div>
+<div class="g4">
+<figure style="margin: 0; display: grid; gap: 14px; align-content: start">
+<img src="./assets/f0bdb1b63d7ad963405d61ac36554303.jpg" alt="Nerea L. Mingueza" style="width: 100%; aspect-ratio: 456 / 533; object-fit: cover; border-radius: 20px; display: block">
+<figcaption style="display: grid; gap: 4px"><b style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">Nerea L. Mingueza</b><span style="font-size: 14px; color: #FF355E">Co-founder de Lumi Labs</span><span style="font-size: 14px; color: #6C6C7D; line-height: 1.4">Doctora en Computación y divulgadora de IA responsable.</span></figcaption>
+</figure>
+<figure style="margin: 0; display: grid; gap: 14px; align-content: start">
+<img src="./assets/065d9c880f9e16cc4c915e32ee662629.jpg" alt="David Vivancos" style="width: 100%; aspect-ratio: 456 / 533; object-fit: cover; border-radius: 20px; display: block">
+<figcaption style="display: grid; gap: 4px"><b style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">David Vivancos</b><span style="font-size: 14px; color: #FF355E">MindBigData · Qubic</span><span style="font-size: 14px; color: #6C6C7D; line-height: 1.4">Autor de 7 libros y más de 28.000 horas investigando IA general.</span></figcaption>
+</figure>
+<figure style="margin: 0; display: grid; gap: 14px; align-content: start">
+<img src="./assets/dd90671bd6c3198c3366853442711507.jpg" alt="Federico D'Alessio" style="width: 100%; aspect-ratio: 456 / 533; object-fit: cover; border-radius: 20px; display: block">
+<figcaption style="display: grid; gap: 4px"><b style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">Federico D'Alessio</b><span style="font-size: 14px; color: #FF355E">Talent Leader · Barcelona</span><span style="font-size: 14px; color: #6C6C7D; line-height: 1.4">Creador de TalentSignal y Mike, IA para recruiting.</span></figcaption>
+</figure>
+<figure style="margin: 0; display: grid; gap: 14px; align-content: start">
+<img src="./assets/2aad77b576a1c56fdab2aa6732c04f77.jpg" alt="Patricia Vadillo" style="width: 100%; aspect-ratio: 456 / 533; object-fit: cover; border-radius: 20px; display: block">
+<figcaption style="display: grid; gap: 4px"><b style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">Patricia Vadillo</b><span style="font-size: 14px; color: #FF355E">Directora académica · Factorial Campus</span><span style="font-size: 14px; color: #6C6C7D; line-height: 1.4">Profesora y responsable del contenido del programa.</span></figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="wrap" style="padding-top: 88px; padding-bottom: 24px">
+<div style="display: grid; gap: 12px; margin-bottom: 28px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">Incluido</p>
+<h2 style="font-size: clamp(30px, 3.6vw, 44px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">Una formación diseñada <span class="hl">de principio a fin</span>.</h2>
+</div>
+<div class="incl">
+<div class="icard w7"><img src="./assets/fc07af8f08de62263eed62bcda6dc9c6.jpg" alt=""><div><b>Acceso durante 12 meses</b><p>Aunque la formación dura 8 semanas, tus equipos siguen teniendo acceso durante 12 meses al contenido, plantillas y recursos del programa.</p></div></div>
+<div class="icard w5"><img src="./assets/2ab1d574cb91db75c813ede83d0f3c90.jpg" alt=""><div><b>Aplicado al trabajo real</b><p>Los ejercicios parten de tareas, fuentes y situaciones reales de equipo, no de ejemplos genéricos de IA.</p></div></div>
+<div class="icard w5"><img src="./assets/d0063d08bd664533aaf0edc022be82cf.jpg" alt=""><div><b>Aprende a usar IA de forma segura</b><p>Criterios de privacidad, seguridad y revisión humana desde el primer módulo.</p></div></div>
+<div class="icard w7"><img src="./assets/1535209161529a8c764d3039f5d9ef94.jpg" alt=""><div><b>Uses la herramienta que uses</b><p>La formación enseña principios, workflows y buenas prácticas que puedes aplicar en ChatGPT, Gemini, Copilot, Claude o One.</p></div></div>
+</div>
+<p style="margin-top: 20px; font-size: 15px; color: #6C6C7D">Además: biblioteca de prompts, peer learning con otros equipos y certificado de Factorial Campus al terminar.</p>
+</section>
+
+<section id="faq" class="wrap" style="padding-top: 88px; padding-bottom: 96px">
+<div style="display: grid; gap: 12px; margin-bottom: 28px">
+<p style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: #8F8FA0">Preguntas frecuentes</p>
+<h2 style="font-size: clamp(26px, 3vw, 36px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05">Lo que suelen preguntar los equipos</h2>
+</div>
+<div style="display: grid; gap: 10px; max-width: 860px">
+<details><summary>¿Cuánto tiempo requiere?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Entre 1 y 2 horas por semana. El contenido se consume cuando quieras; lo único con hora fija es la masterclass en directo del martes.</p></details>
+<details><summary>¿Para quién es?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Para cualquier persona de cualquier departamento. No hace falta perfil técnico: los casos están pensados para el trabajo diario de cada área.</p></details>
+<details><summary>¿Qué herramientas necesitamos?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Las que ya usáis. Trabajamos con ChatGPT, Gemini, Copilot, Claude y Factorial One sobre vuestro stack real.</p></details>
+<details><summary>¿Es seguro para los datos de mi empresa?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Cada caso incluye criterios de uso seguro y buenas prácticas de privacidad, para que tus equipos sepan qué compartir con la IA y qué no.</p></details>
+<details><summary>¿Cómo sé si mi equipo avanza?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Recibes un informe de seguimiento con quién avanza, qué entrega y dónde hay que empujar.</p></details>
+<details><summary>¿Qué pasa al terminar?</summary><p style="padding: 0 22px 20px; color: #4A4A60; line-height: 1.5">Cada persona sale con un caso implantado, un plan de adopción a 30 días, el certificado de Factorial Campus y 12 meses de acceso a la plataforma.</p></details>
+</div>
+</section>
+
+</main>
+
+<footer id="inscripcion" class="sunrise">
+<div class="wrap" style="padding-top: 72px; padding-bottom: 56px; display: grid; gap: 48px">
+<p style="font-size: clamp(32px, 4.6vw, 64px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; max-width: 18ch">Inscribe tu equipo para la próxima edición.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<div style="display: flex; align-items: center; gap: 20px">
+<img src="./assets/4f14cae7c7258ffd1831016c348dd5ff.png" alt="Factorial Campus" style="height: 36px; width: auto; display: block">
+<span style="width: 1px; height: 26px; background: rgba(255,255,255,0.5)"></span>
+<img src="./assets/e3aaa636ae7550438bc65ed50fb78dbc.png" alt="UDIA" style="height: 24px; width: auto; display: block">
+</div>
+<span style="font-size: 14px; font-weight: 300">Programa de Adopción de IA · Edición enero 2027</span>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6400}}'>
+class Component extends DCLogic {
+renderVals() {
+const i = (this.state && this.state.i) || 0;
+return {
+idxLabel: String(i + 1).padStart(2, '0'),
+setTrack: (el) => { this.track = el; },
+prev: () => this.go(-1),
+next: () => this.go(1),
+onTrackScroll: () => this.sync()
+};
+}
+step() {
+const t = this.track; if (!t) return 424;
+const c = t.querySelector('.cr-card');
+return c ? c.getBoundingClientRect().width + 24 : 424;
+}
+go(d) {
+if (this.track) this.track.scrollBy({ left: d * this.step(), behavior: 'smooth' });
+}
+sync() {
+const t = this.track; if (!t) return;
+const i = Math.max(0, Math.min(6, Math.round(t.scrollLeft / this.step())));
+if (i !== ((this.state && this.state.i) || 0)) this.setState({ i: i });
+}
+}
+</script>
+</body>
+</html>

@@ -192,3 +192,11 @@
 .mock .panel .ovx{margin:14px 0 0;display:grid;gap:6px}
 .mock .panel .ovx figcaption{font-size:13px;font-weight:500;color:var(--ink-2)}
 .mock .panel .ovf{border:0;background:#000}
+
+/* Programa de Adopción de IA: vídeo de YouTube y botón a la página del programa */
+.mock .yt-t{margin:0 0 8px;font-size:14px;color:var(--ink-2)}
+.mock .yt{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+.mock .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.mock .p-cta{display:inline-flex;align-items:center;margin:14px 0 4px;padding:11px 18px;border-radius:999px;background:var(--red);color:#fff;font-weight:500;font-size:15px;text-decoration:none}
+.mock .p-cta:hover{filter:brightness(1.08)}
+.mock .p-tools p{margin:0;font-size:15px}
