@@ -88,6 +88,14 @@ h1{font-weight:500;font-size:clamp(36px,4.6vw,66px);line-height:.95;margin:14px 
 .onebtn:hover{transform:scale(1.03)}
 .onebtn.active .disc{box-shadow:0 0 0 4px rgba(255,255,255,.6)}
 .core .onelabel{font-size:15px;font-weight:500}
+.core .onelabel{order:-1}
+/* módulos que cuelgan de One: mismo aspecto que los botones de área (Finanzas, Nómina…) */
+.stage{padding-bottom:120px}
+.stage > .pill.onepill{position:absolute;right:calc(50% + 170px);bottom:56px;z-index:4;background:#fff;color:var(--midnight);border:0;padding:7px 16px 7px 8px;font-size:15px;font-weight:500;gap:9px}
+.stage > .pill.onepill::before{display:none}
+.stage > .pill.onepill:hover,.stage > .pill.onepill.linked,.stage > .pill.onepill.active{background:#fff;color:var(--midnight)}
+.stage > .pill.onepill .ic{width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
+.stage > .pill.onepill .ic svg{width:14px;height:14px}
 
 @media (prefers-reduced-motion: no-preference){
   .wires .flow{stroke-dasharray:6 6;animation:flow 1.2s linear infinite}
@@ -274,7 +282,10 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
   .hero{--frame:8px}
   .stage{grid-template-columns:1fr;gap:28px}
   .stage svg.wires{display:none}
-  .core{order:-1;flex-direction:row;justify-content:flex-start}
+  .core{order:-1;display:grid;grid-template-columns:auto 1fr;align-items:center;justify-items:start}
+  .core .onelabel{order:0}
+  .stage{padding-bottom:4px}
+  .stage > .pill.onepill{position:static;transform:none;order:-1;justify-self:start;margin-top:-14px}
   .onebtn{width:96px}
   .col{gap:24px}
   .group,.col.right .group{flex-direction:column;align-items:flex-start;gap:10px}
@@ -465,6 +476,12 @@ function buildMap(){
     }
   }
   $('#oneBtn').addEventListener('click', () => select('one'));
+  // módulos que salen directamente de One (ONE_MODS), debajo de su etiqueta
+  for (const id of ONE_MODS) {
+    const b = el('button', {class:'pill onepill', 'data-id':id, type:'button'}, `<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></span><span class="nm">${M[id].name}</span>`);
+    b.addEventListener('click', () => select(id));
+    stage.appendChild(b);
+  }
 }
 
 function rel(node){
@@ -474,6 +491,7 @@ function rel(node){
 function curve(x1,y1,x2,y2){ const dx=(x2-x1)*0.5; return `M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`; }
 function pillAnchor(id){
   const n = stage.querySelector(`.pill[data-id="${id}"]`); const p = rel(n);
+  if (M[id].hub === 'one') return { x: p.r, y: p.cy };
   const left = HUBS[M[id].hub].side === 'left';
   return { x: left ? p.r : p.l, y: p.cy };
 }
@@ -494,10 +512,14 @@ function drawWires(){
     for (const id of ORDER[h].filter(shown)) { const a = pillAnchor(id); d += `<path class="base" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`; }
     d += `<path class="base" d="${hubOut[h]}"/>`;
   }
+  // módulos de One: curva del borde derecho del botón (abajo a la izquierda) a la base del círculo de One
+  const oneLink = id => { const a = pillAnchor(id); return `M${a.x},${a.y} C${one.cx},${a.y} ${one.cx},${a.y} ${one.cx},${one.cy + R}`; };
+  for (const id of ONE_MODS.filter(shown)) d += `<path class="base" d="${oneLink(id)}"/>`;
   const flowIds = (!current ? [] : current === 'one' ? Object.keys(M)
     : current.startsWith('hub:') ? ORDER[current.slice(4)] : [current, ...M[current].links]).filter(shown);
   const flowHubs = new Set();
   for (const id of flowIds) {
+    if (M[id].hub === 'one') { d += `<path class="flow" d="${oneLink(id)}"/>`; continue; }
     const h = M[id].hub, a = pillAnchor(id); flowHubs.add(h);
     d += `<path class="flow" d="${curve(a.x,a.y,hubIn[h].x,hubIn[h].y)}"/>`;
   }
@@ -602,7 +624,7 @@ function render(key){
     h += `<h3>${U('withOne')}</h3><p class="note">${hub.one}</p>${x && x.ask ? tryHTML(x.ask) : ''}
     <h3>${U('modules')}</h3><div class="modlist">${ORDER[k].filter(shown).map(i=>`<button type="button" data-go="${i}"><b>${tm(i).name}</b><span>${tm(i).lead}</span></button>`).join('')}</div>`;
   } else {
-    const m = tm(key), hub = th(m.hub), mx = (MODX[lang] || {})[key] || {};
+    const m = tm(key), hub = m.hub === 'one' ? { name: 'One' } : th(m.hub), mx = (MODX[lang] || {})[key] || {};
     h = `<div class="p-head"><div><p class="p-cat"><b>${hub.name}</b></p><h2>${m.name}</h2>${m.tag?`<span class="tag">${m.tag}</span>`:''}</div>${close}</div>
     <p class="lead">${m.lead}</p>
     <h3>${U('brings')}</h3><ul class="vals">${[...m.value, ...(mx.extra || [])].map(v=>`<li>${v}</li>`).join('')}</ul>`;
@@ -636,7 +658,7 @@ function mark(key){
   stage.querySelector(`.pill[data-id="${key}"]`).classList.add('active');
   M[key].links.forEach(i => stage.querySelector(`.pill[data-id="${i}"]`).classList.add('linked'));
   // las áreas de los módulos conectados también se resaltan
-  [key, ...M[key].links].forEach(i => stage.querySelector(`[data-hub-btn="${M[i].hub}"]`).classList.add('linked'));
+  [key, ...M[key].links].forEach(i => M[i].hub === 'one' ? $('#oneBtn').classList.add('active') : stage.querySelector(`[data-hub-btn="${M[i].hub}"]`).classList.add('linked'));
 }
 
 let lastFocus = null;
@@ -679,7 +701,7 @@ function applyLang(){
   document.title = U('title');
   document.querySelectorAll('[data-i18n]').forEach(n => n.innerHTML = T() ? T().UI[n.dataset.i18n] : STATIC_ES[n.dataset.i18n]);
   document.querySelectorAll('[data-i18n-aria]').forEach(n => n.setAttribute('aria-label', T() ? T().UI[n.dataset.i18nAria] : STATIC_ES['aria:'+n.dataset.i18nAria]));
-  stage.querySelectorAll('.pill').forEach(b => { b.textContent = tm(b.dataset.id).name; b.style.display = shown(b.dataset.id) ? '' : 'none'; });
+  stage.querySelectorAll('.pill').forEach(b => { (b.querySelector('.nm') || b).textContent = tm(b.dataset.id).name; b.style.display = shown(b.dataset.id) ? '' : 'none'; });
   if (current && M[current] && !shown(current)) closePanel();
   stage.querySelectorAll('[data-hub-btn]').forEach(b => b.lastChild.textContent = th(b.dataset.hubBtn).name);
   $('#langSel').value = lang;

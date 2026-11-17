@@ -12,13 +12,15 @@ const HUBS = {
 };
 
 const ORDER = {
-  talento: ["desempeno", "formacion", "biblioteca", "formacionia", "engagement", "ats", "cultura"],
+  talento: ["desempeno", "formacion", "biblioteca", "engagement", "ats", "cultura"],
   tiempo: ["control", "turnos", "ausencias"],
   finanzas: ["plantilla", "proyectos", "gastos", "compras", "revision"],
   core: ["politicas", "portal", "comunicaciones", "onoff", "documentos", "canal", "analiticas", "tickets"],
   it: ["mdm", "seguridad", "inventario", "software", "marketplace", "cumplimiento"],
   nomina: ["beneficios", "compensacion", "integraciones", "anticipo"]
 };
+/* módulos que cuelgan directamente de One, no de un área (salen debajo de One en el mapa) */
+const ONE_MODS = ["formacionia"];
 
 const M = {
   desempeno: {
@@ -324,8 +326,8 @@ const M = {
     check: true
   },
   /* Programa de Adopción de IA (Carmen Madrazo): solo en español e inglés, ver HIDE */
-  formacionia: { name: "Programa de Adopción de IA para empresas",
-      hub: "talento",
+  formacionia: { name: "Programa de Adopción de IA",
+      hub: "one",
       tag: "Formación en IA",
       lead: "Formación para todos tus equipos para que pasen de preguntar a delegar trabajo a la IA.",
       stats: [{"n":"<10 %","t":"de los empleados utilizan la IA de manera productiva para sus empresas"}],
@@ -492,7 +494,7 @@ const EN = {
         value: ["Unlimited access to the full catalog for every employee, with courses from vetted, specialist publishers.", "Topics from data protection and harassment prevention to cybersecurity, leadership, tech and AI skills.", "Filter by topic, language, level and duration: the same course for every country, in each person's language.", "Library courses and your own LMS courses in one catalog, with a certificate of completion for every course.", "Assign mandatory training and see who's done it in your existing training reports.", "Employees request courses or self-enroll, on web and mobile."],
         oneNote: "One can search the catalog and recommend courses for you.",
         why: "Replace a separate course provider, and its contract, with one catalog in Factorial: assigned and tracked where training already lives." },
-    formacionia: { name: "AI Adoption Program for companies",
+    formacionia: { name: "AI Adoption Program",
       tag: "AI training · Spain only",
       lead: "Training for all your teams, so they go from asking AI questions to delegating work to it. Available only for customers in Spain.",
       stats: [{"n":"<10%","t":"of employees use AI productively for their company"}],
