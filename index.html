@@ -329,7 +329,7 @@ footer{padding:0 clamp(20px,5vw,80px) 40px;max-width:1280px;margin:0 auto;font-s
 <link rel="stylesheet" href="mock.css">
 </head>
 <body>
-<nav class="sitebar" id="sitebar" aria-label="Factorial One"><a href="index.html" data-page="index.html" aria-current="page"><span data-i18n="sbMap">Mapa One</span></a><a href="connectors/index.html" data-page="connectors/index.html"><span data-i18n="sbConn">Conectores</span></a><a href="plans/index.html" data-page="plans/index.html"><span data-i18n="sbPlans">Planes</span></a></nav>
+<nav class="sitebar" id="sitebar" aria-label="Factorial One"><a href="index.html" data-page="index.html" aria-current="page"><span data-i18n="sbMap">Mapa One</span></a><a href="connectors/index.html" data-page="connectors/index.html"><span data-i18n="sbConn">Conectores</span></a><a href="plans/index.html" data-page="plans/index.html"><span data-i18n="sbPlans">Planes</span></a><a href="campus/index.html" data-campus><span>Formación en IA</span></a></nav>
 <div class="hero sunrise" id="hero">
   <div class="hero-inner">
     <div class="mapcol">
@@ -684,7 +684,7 @@ function applyLang(){
   stage.querySelectorAll('[data-hub-btn]').forEach(b => b.lastChild.textContent = th(b.dataset.hubBtn).name);
   $('#langSel').value = lang;
   document.querySelectorAll('a.connlink').forEach(a => a.href = connHref());
-  document.querySelectorAll('#sitebar a').forEach(a => { const q = new URLSearchParams(); if (lang !== 'es') q.set('lang', lang); if (PARTNER) q.set('for', 'partner'); const s = q.toString(); a.href = a.dataset.page + (s ? '?' + s : '') || './'; });
+  document.querySelectorAll('#sitebar a').forEach(a => { if (a.hasAttribute('data-campus')) { a.hidden = lang !== 'es'; return; } const q = new URLSearchParams(); if (lang !== 'es') q.set('lang', lang); if (PARTNER) q.set('for', 'partner'); const s = q.toString(); a.href = a.dataset.page + (s ? '?' + s : '') || './'; });
   buildStories();
   renderFacts();
   if (current) { render(current); mark(current); }

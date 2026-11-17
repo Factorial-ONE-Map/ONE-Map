@@ -34,6 +34,8 @@
         if (p === current) a.setAttribute('aria-current', 'page');
         nav.appendChild(a);
       });
+      /* Formación en IA (Programa de Adopción de IA): solo existe en español */
+      if (lang === 'es') { var c = document.createElement('a'); c.href = '../campus/index.html'; c.textContent = 'Formación en IA'; nav.appendChild(c); }
       document.body.insertBefore(nav, document.body.firstChild);
     },
     /* selector de idioma: recarga la página con ?lang= */
