@@ -209,9 +209,9 @@ function render() {
     return `<div class="card"><h3><span class="sw" style="display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;background:${B(id).color}"></span>${B(id).name}</h3><p class="count">${t.modules(count(id))}</p><div class="fam">${fams}</div>${adds}</div>`;
   }).join('');
   // tabla
-  const only = document.getElementById('onlyDiff').checked;
+  const only = document.getElementById('onlyDiff').checked && order.length > 1;
   const tb = document.getElementById('tbl');
-  if (order.length < 2) { tb.innerHTML = `<tbody><tr><td class="empty">${t.pickMore}</td></tr></tbody>`; return; }
+  if (!order.length) { tb.innerHTML = `<tbody><tr><td class="empty">${t.pickMore}</td></tr></tbody>`; return; }
   let h = `<thead><tr><th scope="col">${t.product}</th>${order.map(id => `<th scope="col" class="col">${B(id).name}</th>`).join('')}</tr></thead><tbody>`;
   FAMILIES.forEach(f => {
     const list = f.rows.filter(r => !only || new Set(order.map(id => has(id, r))).size > 1);
