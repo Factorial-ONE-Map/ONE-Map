@@ -109,6 +109,7 @@ const BUNDLES = [
   { id: 'pe', name: 'People Essential', color: '#7CC4F2' },
   { id: 'ps', name: 'People Scale', color: '#8FB4F5' },
   { id: 'fin', name: 'Finance', color: '#7FC9B3' },
+  { id: 'pf', name: 'People+Finance', color: 'linear-gradient(90deg,#8FB4F5 50%,#7FC9B3 50%)' },
   { id: 'it', name: 'IT', color: '#B7A6F2' },
   { id: 'suite', name: 'Suite', color: '#FF355E' }
 ];
@@ -136,6 +137,9 @@ const FAMILIES = [
     { k: 'comp', map: 'compensacion', b: ['ps','fin','suite'] }, { k: 'benefits', map: 'beneficios', b: ['ps','fin','suite'], es: true },
     { k: 'integrations', map: 'integraciones', b: [] }, { k: 'advance', map: 'anticipo', b: ['ps','fin','suite'], es: true } ] }
 ];
+
+/* People+Finance = todo lo de People Scale más todo lo de Finance */
+FAMILIES.forEach(f => f.rows.forEach(r => { if (!r.b.includes('pf') && (r.b.includes('ps') || r.b.includes('fin'))) r.b.push('pf'); }));
 
 /* ---------- TEXTOS ---------- */
 const OWN = { /* filas que no tienen módulo propio en el mapa */
