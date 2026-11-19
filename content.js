@@ -12,10 +12,10 @@ const HUBS = {
 };
 
 const ORDER = {
-  talento: ["desempeno", "formacion", "biblioteca", "engagement", "ats", "cultura"],
+  talento: ["desempeno", "formacion", "biblioteca", "engagement", "ats", "cultura", "canal"],
   tiempo: ["control", "turnos", "ausencias"],
   finanzas: ["plantilla", "proyectos", "gastos", "compras", "revision"],
-  core: ["politicas", "portal", "comunicaciones", "onoff", "documentos", "canal", "analiticas", "tickets"],
+  core: ["politicas", "portal", "comunicaciones", "onoff", "documentos", "analiticas", "tickets"],
   it: ["mdm", "seguridad", "inventario", "software", "marketplace", "cumplimiento"],
   nomina: ["beneficios", "compensacion", "integraciones", "anticipo"]
 };
@@ -108,7 +108,7 @@ const M = {
       why: "Sustituye a un proveedor de cursos externo, y su contrato, con un único catálogo en Factorial: se asigna y se sigue donde ya vive la formación.",
       links: ["formacion", "desempeno", "onoff", "cumplimiento", "analiticas"] },
   canal: {
-    name: "Canal seguro", hub: "core",
+    name: "Canal seguro", hub: "talento",
     lead: "Un canal para que cualquiera pueda informar de una irregularidad de forma confidencial, también anónima.",
     value: [
       "Comunicaciones confidenciales, con opción de anonimato.",
